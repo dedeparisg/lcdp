@@ -1,0 +1,91 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block content_block_name %}{% endblock %}
+
+{% if event.id is defined and event.id is not null %}
+    {% set pageTitle = "Edition d'un événement" %}
+{% else %}
+    {% set pageTitle = "Nouvel événement" %}
+{% endif %}
+        
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li>Gestion de contenus</li>
+    <li><a href="{{ path('lcdp_admin_events') }}">Evénements</a></li>
+    <li class="active">{{ pageTitle }}</li>
+{% endblock %}
+        
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title"> <i class="fa fa-pencil"></i> {{ pageTitle }} </div>
+                        </div>
+                        <div class="panel-body">
+                            {{ form_start(form, {'attr' : {'class': 'form-horizontal'}}) }}
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        {{ form_label(form.title, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(form.section, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.section, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(form.startDate, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(form.endDate, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.endDate, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(form.intro, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.intro, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        {{ form_label(form.content, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.content, {'attr': {'class': 'form-control wysiwyg'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_rest(form) }}
+                                        <span class="col-lg-2 control-label">&nbsp;</span>
+                                        <div class="col-md-9">
+                                            <input class="btn btn btn-primary" type="submit" value="Enregistrer" />
+                                        </div>
+                                    </div>
+                                </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
+            'back_list_url' : path('lcdp_admin_events'),
+            'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Event', 'id': event.id}),
+            'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Event', 'id': event.id}),
+            'page' : event
+        }%}
+    </div>
+{% endblock %}
+    

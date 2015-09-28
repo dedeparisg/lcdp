@@ -1,0 +1,200 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    #translator:      { fallback: "%locale%" }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:
+        - LcdpAdminBundle
+        - LcdpCommonBundle
+        - LcdpFrontBundle
+    filters:
+        cssrewrite: ~
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+parameters:
+    # Les différentes sections du site
+    ref_sections:
+        1: Général
+        Asssociation:
+            11: Soirées
+            12: Sorties
+            13: Voyages
+        Danse:
+            21: Actualités
+            22: Soirées
+        Football:
+            31: Actualités
+            32: Soirées
+            33: Résultats
+
+    # Les lables des différentes sections du site
+    ref_sections_label:
+        1: Général
+        11: Asssociation - Soirées
+        12: Asssociation - Sorties
+        13: Asssociation - Voyages
+        21: Danse - Actualités
+        22: Danse - Soirées
+        31: Football - Actualités
+        32: Football - Soirées
+        32: Football - Résultats
+
+    # Les routes associées aux sections du site
+    ref_sections_routing:
+        1: news
+        11: assoc_soiree
+        12: assoc_sortie
+        13: assoc_voyage
+        21: danse_news
+        22: danse_soiree
+        23: danse_events
+        31: foot_news
+        32: foot_soiree
+        33: foot_resultat
+        33: foot_events
+
+
+
+    ref_members_sections:
+        1: Bureau
+        Danse:
+            11: Danse
+            12: Professeur
+        Football:
+            21: Football
+            22: Entraineur
+
+    ref_members_sections_label:
+        1: Bureau
+        11: Danse
+        12: Danse (Prof)
+        21: Football
+        22: Football (Entraineur)
+
+    ref_members_categories:
+        Bureau:
+            1: Directeur
+            2: Directeur associé
+            3: Comptable
+        Danse:
+            11: "- 10 ans"
+            12: "- 13 ans"
+            13: "- 16 ans"
+            14: "- 18 ans"
+            15: "- 30 ans"
+            16: "+ 30 ans"
+            17: "TC"
+        Football:
+            21: "Equipe 1"
+            22: "Equipe 2"
+
+    ref_members_categories_label:
+        1: Directeur
+        2: Directeur associé
+        3: Comptable
+        11: "- 10 ans"
+        12: "- 13 ans"
+        13: "- 16 ans"
+        14: "- 18 ans"
+        15: "- 30 ans"
+        16: "+ 30 ans"
+        17: "TC"
+        21: "Equipe 1"
+        22: "Equipe 2"
+
+
+    ref_album_sections:
+        Asssociation:
+            11: Soirées
+            12: Sorties
+            13: Voyages
+        Danse:
+            21: Championnats
+            22: Soirées
+        Football:
+            31: Matchs
+            32: Soirées
+
+    ref_album_sections_label:
+        11: Asssociation - Soirées
+        12: Asssociation - Sorties
+        13: Asssociation - Voyages
+        21: Danse - Championnats
+        22: Danse - Soirées
+        31: Football - Matchs
+        32: Football - Soirées
+
+
+
+    pagination_front_home_news: 50
+    pagination_front_home_events: 5
+
+
+
+    filestore:
+            paths:
+                store: %kernel.root_dir%/../web/store
+            urls:
+                store: /store
+            fix_extensions: false
+            active_extensions_control: true
+            allowed_extensions: [JPG, JPEG, jpg, jpeg, png, gif] #[pdf, doc, docx, xls, odt]
+            file_types:
+                ADMINISTRATIVE_FILE: {folder: "administrative", encrypt: true}
+                USER_AVATAR: {folder: "pictures", allowed_extensions: [jpg, jpeg]}
+                APPLICATION_FILE: {folder: "application"}
+
+#    file_encryptor: #Uniquement si le module d’encryption est activé
+#            key: %encryption_key%
+#            tmp_dir: /tmp

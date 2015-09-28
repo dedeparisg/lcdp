@@ -1,0 +1,11 @@
+lcdp_front:
+    resource: "@LcdpFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
+lcdp_common:
+    resource: "@LcdpCommonBundle/Resources/config/routing.yml"
+    prefix:   /
+
+lcdp_admin:
+    resource: "@LcdpAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin

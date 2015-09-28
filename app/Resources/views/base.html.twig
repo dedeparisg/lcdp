@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Le club des paquerêttes{% endblock %}</title>
+        
+        {% block stylesheets %}
+            {% stylesheets filter="cssrewrite"
+                'bundles/lcdpfront/css/*'
+            %}
+                <link rel="stylesheet" href="{{ asset_url }}" media="all"/>
+            {% endstylesheets %}
+        {% endblock %}
+        
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        
+        {% block javascripts %}
+            {% javascripts 
+                '@LcdpCommonBundle/Resources/public/js/jquery-1.10.2.min.js' 
+                '@LcdpFrontBundle/Resources/public/js/*' 
+            %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,21 @@
+{% for content in news|default() %}
+    <article id="post-338" class="post-338 post type-post status-publish format-standard hentry category-india clearfix blog-style">
+        <header class="entry-header">
+            <h2 class="entry-title"><a href="" title="" rel="bookmark">{{ content.title }}</a></h2>
+        </header>
+        <div class="entry-summary clearfix">
+            <a href="{{ path(ref_sections_routing[content.section], {'slug': content.slug|default()}) }}" title="{{ content.title }}">
+                <img width="160" height="90" src="{{ content.image }}" class="alignleft blog-thumb blog wp-post-image" alt="{{ content.title }}" />
+            </a>
+            {{ content.intro|nl2br }}
+            <a href="{{ path(ref_sections_routing[content.section], {'slug': content.slug|default()}) }}" class="btn small continue-reading alignright"><span>Lire la suite →</span></a>
+        </div>
+        <footer class="home entry-meta">
+            <div class="entry-meta alignleft">
+                Publié le <span class="date"><time class="entry-date" datetime="2011-03-18T20:57:57+00:00" pubdate="pubdate">{{ content.publicatedAt | date }}</time></a></span>
+                <span class="author"><a href="" rel="author">{{ content.author|default() }}</a></span>
+            </div>
+        </footer>
+        <div class="clear"></div>
+    </article>
+{% endfor %}

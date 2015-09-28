@@ -1,0 +1,24 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block content %}
+    <a href="{{ path('lcdp_admin_page') }}">
+        <div class="bloc_20">Gestion des pages statique</div>
+    </a>
+    
+    <a href="{{ path('lcdp_admin_news') }}">
+        <div class="bloc_20">Gestions des actualités</div>
+    </a>
+    
+    <a href="{{ path('lcdp_admin_events') }}">
+        <div class="bloc_20">Gestions des événements</div>
+    </a>
+    
+    <a href="{{ path('lcdp_admin_videos') }}">
+        <div class="bloc_20">Gestions des vidéos</div>
+    </a>
+    
+    <a href="{{ path('lcdp_admin_albums') }}">
+        <div class="bloc_20">Gestion des albums photos</div>
+    </a>
+{% endblock %}
+    

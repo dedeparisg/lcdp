@@ -1,0 +1,109 @@
+lcdp_admin_homepage:
+    pattern:  /
+    defaults: { _controller: LcdpAdminBundle:Admin:index }
+
+logout:
+    pattern:   /logout
+    defaults:  { _controller: LcdpAdminBundle:Security:logout }
+
+login:
+    pattern:   /login
+    defaults:  { _controller: LcdpAdminBundle:Security:login }
+
+login_check:
+    pattern:   /login_check
+
+lcdp_admin_profile_list:
+    pattern:  /profile/liste
+    defaults: { _controller: LcdpAdminBundle:User:profileList }
+
+lcdp_admin_users:
+    pattern:  /utilisateurs
+    defaults: { _controller: LcdpAdminBundle:User:userList }
+
+lcdp_admin_members:
+    pattern:  /membres
+    defaults: { _controller: LcdpAdminBundle:Member:memberList }
+
+lcdp_admin_member_edit:
+    pattern:  /membres/edition/{id}
+    defaults: { _controller: LcdpAdminBundle:Member:memberEdit, id: null }
+    requirements:
+        id: "\d+"
+
+lcdp_admin_newsletter:
+    pattern:  /newsletter
+    defaults: { _controller: LcdpAdminBundle:Newsletter:index }
+
+lcdp_admin_parameters:
+    pattern:  /parametrages
+    defaults: { _controller: LcdpAdminBundle:Admin:config }
+
+lcdp_admin_content_index:
+    pattern:  /contenu
+    defaults: { _controller: LcdpAdminBundle:Content:index }
+
+lcdp_admin_page:
+    pattern:  /pages
+    defaults: { _controller: LcdpAdminBundle:Content:pageList }
+
+lcdp_admin_page_edit:
+    pattern:  /page/edition/{id}
+    defaults: { _controller: LcdpAdminBundle:Content:pageEdit, id: null }
+    requirements:
+        id: "\d+"
+
+lcdp_admin_news:
+    pattern:  /actualites
+    defaults: { _controller: LcdpAdminBundle:Content:newsList }
+
+lcdp_admin_news_edit:
+    pattern:  /actualite/edition/{id}
+    defaults: { _controller: LcdpAdminBundle:Content:newsEdit, id: null }
+    requirements:
+        id: "\d+"
+
+lcdp_admin_events:
+    pattern:  /evenements
+    defaults: { _controller: LcdpAdminBundle:Content:eventsList }
+
+lcdp_admin_event_edit:
+    pattern:  /evenement/edition/{id}
+    defaults: { _controller: LcdpAdminBundle:Content:eventsEdit, id: null }
+    requirements:
+        id: "\d+"
+
+lcdp_admin_content_soft_delete:
+    pattern:  /suppression/{content}/{id}
+    defaults: { _controller: LcdpAdminBundle:Content:softDelete, id: null }
+    requirements:
+        id: "\d+"
+        content: Page|News|Member|Event|Album
+
+lcdp_admin_content_publish_content:
+    pattern:  /publication/{status}/{content}/{id}
+    defaults: { _controller: LcdpAdminBundle:Content:publishContent, id: null }
+    requirements:
+        id: "\d+"
+        status: 0|1
+        content: Page|News|Member|Event|Album
+
+lcdp_admin_videos:
+    pattern:  /videos
+    defaults: { _controller: LcdpAdminBundle:Content:videosList }
+
+lcdp_admin_albums:
+    pattern:  /albums
+    defaults: { _controller: LcdpAdminBundle:Content:albumsList }
+
+lcdp_admin_album_edit:
+    pattern:  /albums/edition/{id}
+    defaults: { _controller: LcdpAdminBundle:Content:albumsEdit, id: null }
+    requirements:
+        id: "\d+"
+
+lcdp_admin_album_edita:
+    pattern:  /albums/edition/test/{id}
+    defaults: { _controller: LcdpAdminBundle:Content:aTestEdit, id: null }
+    requirements:
+        id: "\d+"

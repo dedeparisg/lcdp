@@ -1,0 +1,67 @@
+{% extends "LcdpFrontBundle::layout.html.twig" %}
+
+{% block content %}
+    <div id="left">
+        <div id="content" role="main">
+            <div class="div-content">{% set aa = 'Les dernières actualités & <p>salut</p>' %}
+            {% autoescape  'html' %}
+                {{ aa |raw|e |striptags}}
+            {% endautoescape %}
+            </div>
+            <div class="clear"></div>
+            <div id="blog-wrapper" class="div-content clearfix">
+                {% include 'LcdpFrontBundle:Components:news_listing.html.twig' %}
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div id="sidebar-container">
+            <div id="sidebar" class="clearfix">
+                <aside class="wsb widget-mas">
+                    <div class="div-content">
+                        <aside id="swift-random-posts-3" class="widget widget_random_posts" style="display: block;">
+                            <p class="widget-title">Prochain évenements</p>
+                            <ul class="thumb-list">
+                                {% include 'LcdpFrontBundle:Components:events_listing.html.twig' %}
+                            </ul>
+                            <a href="{{ path('all_events') }}" class="btn small continue-reading alignright"><span>Voir tous les évenements →</span></a>
+                        </aside>
+                    </div>
+                </aside>
+
+                <div id="sticky-sticky-wrapper" class="sticky-wrapper" style="height: 1891px;">
+                    <div id="sticky" class="" style="">
+                        <aside class="wsb widget-mas">
+                            <div class="div-content">
+                                <aside id="swift-tabs-widget-2" class="widget widget_swift_tabs" style="display: block;">
+                                    <div id="tabs-widget" class="shortcode-tabs clearfix default ui-tabs ui-widget ui-widget-content ui-corner-all">
+                                        <ul class="tab_titles ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+                                            <li class="nav-tab ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="tabs-widget-tab-1" aria-labelledby="ui-id-1" aria-selected="true"><a href="http://demos.swiftthemes.com/#tabs-widget-tab-1" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">Photos</a></li>
+                                            <li class="nav-tab ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs-widget-tab-2" aria-labelledby="ui-id-2" aria-selected="false"><a href="http://demos.swiftthemes.com/#tabs-widget-tab-2" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">Vidéos</a></li>
+                                        </ul>
+                                        <div class="tab ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-widget-tab-1" aria-labelledby="ui-id-1" role="tabpanel" aria-expanded="true" aria-hidden="false">
+                                            <ul>
+                                                <li class="clearfix">
+                                                    <img alt="" src="" class="avatar avatar-32 photo grav-hashed grav-hijack" height="32" width="32" id="grav-d303f791ab12a0c104a024af488eca9f-0">
+                                                </li>
+                                                <li class="clearfix">
+                                                    <img alt="" src="" class="avatar avatar-32 photo grav-hashed grav-hijack" height="32" width="32" id="grav-69c28932f4ab94b99e27e1b418ed32f5-0">
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="tab ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-widget-tab-2" aria-labelledby="ui-id-2" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+                                            <ul>
+                                                <li><a href="" title=""></a></li>
+                                                <li><a href="" title=""></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="fix"></div>
+                                    </div>
+                                </aside>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

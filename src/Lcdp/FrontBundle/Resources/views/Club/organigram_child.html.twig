@@ -1,0 +1,33 @@
+{% set content %}
+    {% spaceless %}
+        <div>
+            <div class="content">
+                <div class="img">
+                    {% if person.picture is empty %}
+                        {% set imgUrl = asset('bundles/lcdpcommon/images/empty_profil_' ~ person.sexe ~ '.gif') %}
+                    {% else %}
+                        {% set imgUrl = asset('bundles/lcdpcommon/images/empty_profil_' ~ person.sexe ~ '.gif') %}
+                    {% endif %}
+                    <img src="{{ imgUrl }}" width="50" height="50" title="{{ person.firstName|title ~ " " ~ person.lastName|title }}" />
+                </div>
+                <div class="desc">
+                    <div>{{ person.firstName|title ~ " " ~ person.lastName|title }}</div>
+                    <div>{{ person.function|default() }}</div>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endset %}
+
+
+{# On ajoute la personne à l'organigramme #}
+data.addRows([
+    [{v:'{{id}}', f:'{{content|raw}}'}, '{{ parent }}']
+]);
+
+{# On affiche le level inférieur de l'organigramme #}
+{% if person.children is defined and person.children is not empty %}
+    {% for id1,person1 in person.children %}
+        {% include 'LcdpFrontBundle:Club:organigram_child.html.twig' with {'person' : person1, 'id' : id1, 'parent' : id, 'key' : (key+1) }%}
+    {% endfor%}
+{% endif %}

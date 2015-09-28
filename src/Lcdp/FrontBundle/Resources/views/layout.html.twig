@@ -1,0 +1,33 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+    <div id="wrapper" class="clearfix">
+        <div id="header-container">
+            <header id="header" class="clearfix">
+                <div id="branding-container">
+                    <div id="branding" class="clearfix hybrid">
+                        <div class="div-content clearfix">
+                            <hgroup class="alignleft">
+                                <h1 id="site-title">
+                                    <a href="{{ path('homepage') }}" title="Le club des paquerêttes" rel="Page d'acceuil">
+                                        <img src="{{ asset('bundles/lcdpcommon/images/logo/LCDP_degrade.png') }}" alt="Le club des paquerêttes" title="Page d'accueil" />
+                                    </a>
+                                </h1>
+                                <h2 id="site-description">Le club des paquerêttes</h2>
+                            </hgroup>
+                            <div id="header-ad" class="alignright">
+                                <div class="alignright" style="width:440px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                {% include 'LcdpFrontBundle:Components:menu.html.twig' %}
+            </header>
+        </div>
+        <div id="main" class="hybrid">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

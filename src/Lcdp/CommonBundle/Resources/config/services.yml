@@ -1,0 +1,7 @@
+services :
+  lcdp.filestore:
+    class: Webnet\Bundle\SwissArmyBundle\Service\FilestoreService
+    arguments: ["%filestore%"]
+    calls:
+        - [setAntivirus, ["@?sirh.antivirus"]] # Pour activer le contrôle antivirus
+        - [setFileEncryptor, ["@?sirh.file.encryptor.tripledes"]] # Pour activer le module d’encryption

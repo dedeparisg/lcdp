@@ -1,0 +1,62 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block content_block_name %}{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li><a href="{{ path('lcdp_admin_members') }}">Membres</a></li>
+    {% if member.id is defined and member.id is not null %}
+        <li class="active">Edition d'un membre</li>
+    {% else %}
+        <li class="active">Nouveau membre</li>
+    {% endif %}
+{% endblock %}
+        
+{% block content %}
+    {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
+        'back_list_url' : path('lcdp_admin_members'),
+        'page' : member
+    }%}
+
+    <article class="colonne_centre_gray">
+        {{ form_start(form) }}
+            <fieldset>
+                <div>
+                    {{ form_label(form.lastName) }}
+                    {{ form_widget(form.lastName) }}
+                </div>
+                <div>
+                    {{ form_label(form.firstName) }}
+                    {{ form_widget(form.firstName) }}
+                </div>
+                <div>
+                    {{ form_label(form.birthday) }}
+                    {{ form_widget(form.birthday) }}
+                </div>
+                <div>
+                    {{ form_label(form.licenceNum) }}
+                    {{ form_widget(form.licenceNum) }}
+                </div>
+                <div>
+                    {{ form_label(form.section) }}
+                    {{ form_widget(form.section) }}
+                </div>
+                <div>
+                    {{ form_label(form.category) }}
+                    {{ form_widget(form.category) }}
+                </div>
+                <div>
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+                </div>
+                <div>
+                    {{ form_rest(form) }}
+                    <input type="submit" value="Enregistrer" />
+                </div>
+            </fieldset>
+        {{ form_end(form) }}
+    </article>
+
+    <div class="clear"></div>
+{% endblock %}
+    

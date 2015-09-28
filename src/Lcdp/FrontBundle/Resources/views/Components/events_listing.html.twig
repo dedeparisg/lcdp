@@ -1,0 +1,9 @@
+{% for event in events %}
+    <li>
+        <a href="{{ path(ref_sections_routing[event.section], {'slug': event.slug|default('tt')}) }}" title="{{ event.title }}"><img width="36" height="36" src="" class="alignleft thumb wp-post-image" alt=""></a>
+        <a href="{{ path(ref_sections_routing[event.section], {'slug': event.slug|default('tt')}) }}" title="{{ event.title }}">{{ event.title }}</a>
+        <br />
+        <span class="meta"> du <time class="entry-date" datetime="2007-09-04T09:41:51+00:00">{{ event.startDate|date }}</time> au <time class="entry-date" datetime="2007-09-04T09:41:51+00:00">{{ event.endDate|date }}</time></span>
+        <div class="clear"></div>
+    </li>
+{% endfor %}
