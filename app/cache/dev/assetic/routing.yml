@@ -2,4 +2,4 @@ _assetic:
     resource: .
     type: assetic
 _app:
-    resource: /var/www/lcdp/app/config/routing_dev.yml
+    resource: /var/www/lcdp-dev/app/config/routing_dev.yml

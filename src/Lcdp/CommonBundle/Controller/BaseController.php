@@ -121,7 +121,7 @@ class BaseController extends Controller
      *
      * @author André Tapia <contact@andretapia.com>
      */
-    protected function createAccessDeniedException($message = 'Accès non autorisé !')
+    public function createAccessDeniedException($message = 'Accès non autorisé !')
     {
         return new AccessDeniedHttpException($message);
     }
