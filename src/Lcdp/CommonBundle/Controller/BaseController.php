@@ -112,17 +112,5 @@ class BaseController extends Controller
     {
         return $this->container->getParameter($param);
     }
-
-    /**
-     * Raccourci pour renvoyer une 403
-     *
-     * @param  string $message Message d'erreur à afficher
-     * @return \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
-     *
-     * @author André Tapia <contact@andretapia.com>
-     */
-    public function createAccessDeniedException($message = 'Accès non autorisé !')
-    {
-        return new AccessDeniedHttpException($message);
-    }
 }
+

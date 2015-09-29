@@ -1,0 +1,28 @@
+{% extends "LcdpFrontBundle::layout.html.twig" %}
+
+{% block content %}
+    <div id="left">
+        <div id="content" role="main">
+            <div class="clear"></div>
+            <div id="blog-wrapper" class="div-content clearfix">
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div id="sidebar-container">
+            <div id="sidebar" class="clearfix">
+                <aside class="wsb widget-mas">
+                    <div class="div-content">
+                        <aside id="swift-random-posts-3" class="widget widget_random_posts" style="display: block;">
+                            <p class="widget-title">Prochain évenements</p>
+                            <ul class="thumb-list">
+                                {% include 'LcdpFrontBundle:Components:events_listing.html.twig' %}
+                            </ul>
+                            <a href="{{ path('all_events') }}" class="btn small continue-reading alignright"><span>Voir tous les évenements ?</span></a>
+                        </aside>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+    
