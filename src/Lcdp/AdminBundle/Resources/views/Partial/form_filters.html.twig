@@ -8,30 +8,11 @@
         </div>
 
         <div class="panel-body">
-            {{ form_start(form, {attr: {novalidate: 'novalidate', 'class': 'form-horizontal'}})}}
-
-                <div class="left-side">
-                    <div class="form-group">
-                        {{ form_label(form.title) }}
-                        {{ form_widget(form.title) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.isPublished) }}
-                        {{ form_widget(form.isPublished) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.canBeDeleted) }}
-                        {{ form_widget(form.canBeDeleted) }}
-                    </div>
-                </div>
-
-                <div class="right-side">
-                    <div class="form-group">
-                        {{ form_label(form.section) }}
-                        {{ form_widget(form.section) }}
-                    </div>
-                </div>
-
+            {{ form_start(form, {attr: {novalidate: 'novalidate'}})}}
+                {{ form_row(form.title) }}
+                {{ form_row(form.isPublished) }}
+                {{ form_row(form.canBeDeleted) }}
+                {{ form_row(form.section) }}
                 {{ form_rest(form)}}
 
                 <input type="submit" class="btn btn-primary btn-sm" value="Filtrer"/>

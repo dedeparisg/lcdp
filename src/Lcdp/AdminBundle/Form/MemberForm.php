@@ -4,18 +4,13 @@ namespace Lcdp\AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author André Tapia <contact@andretapia.com>
  */
 class MemberForm extends AbstractType
 {
-
-    public function __construct()
-    {
-    }
-
     /**
      * Cree ou edite un intitulé de poste
      *
@@ -95,7 +90,10 @@ class MemberForm extends AbstractType
         );
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -105,6 +103,9 @@ class MemberForm extends AbstractType
         );
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'member_form';

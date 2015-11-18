@@ -4,7 +4,7 @@ namespace Lcdp\AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author André Tapia <contact@andretapia.com>
@@ -20,7 +20,7 @@ class FiltersForm extends AbstractType
      * Cree ou edite un intitulé de poste
      *
      * @param FormBuilderInterface $builder
-     * @param array                $options
+     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -28,9 +28,7 @@ class FiltersForm extends AbstractType
             'title',
             null,
             array(
-                'label' => "Intitulé : ",
-                'label_attr' => array('class' => 'col-lg-1 control-label'),
-                'attr' => array('class' => 'col-lg-2'),
+                'label' => "Intitulé : "
             )
         );
 
@@ -39,8 +37,6 @@ class FiltersForm extends AbstractType
             'choice',
             array(
                 'label' => "Section : ",
-                'label_attr' => array('class' => 'col-lg-1 control-label'),
-                'attr' => array('class' => 'col-lg-2'),
                 'choices' => $options['sections'],
                 'expanded' => false,
                 'multiple' => true
@@ -52,8 +48,6 @@ class FiltersForm extends AbstractType
             'choice',
             array(
                 'label' => "Status : ",
-                'label_attr' => array('class' => 'col-lg-1 control-label'),
-                'attr' => array('class' => 'col-lg-2'),
                 'choices' => array('1' => 'Publié', '0' => 'Non publié'),
                 'empty_value' => '- Sélectionner -'
             )
@@ -64,19 +58,27 @@ class FiltersForm extends AbstractType
             'choice',
             array(
                 'label' => "Peut être suppimé : ",
-                'label_attr' => array('class' => 'col-lg-1 control-label'),
-                'attr' => array('class' => 'col-lg-2'),
                 'choices' => array('1' => 'oui', '0' => 'non'),
                 'empty_value' => '- Sélectionner -'
             )
         );
     }
 
-public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array('sections' => null));
+        $resolver->setDefaults(
+            array(
+                'sections' => null
+            )
+        );
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'filters_form';

@@ -28,6 +28,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'bootstrap_3_layout.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -104,8 +107,6 @@ parameters:
         33: foot_resultat
         33: foot_events
 
-
-
     ref_members_sections:
         1: Bureau
         Danse:
@@ -153,7 +154,6 @@ parameters:
         21: "Equipe 1"
         22: "Equipe 2"
 
-
     ref_album_sections:
         Asssociation:
             11: Soirées
@@ -175,12 +175,8 @@ parameters:
         31: Football - Matchs
         32: Football - Soirées
 
-
-
     pagination_front_home_news: 50
     pagination_front_home_events: 5
-
-
 
     filestore:
             paths:

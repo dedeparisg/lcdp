@@ -4,18 +4,13 @@ namespace Lcdp\AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author André Tapia <contact@andretapia.com>
  */
 class MemberFiltersForm extends AbstractType
 {
-
-    public function __construct()
-    {
-    }
-
     /**
      * Cree ou edite un intitulé de poste
      *
@@ -29,8 +24,6 @@ class MemberFiltersForm extends AbstractType
             'text',
             array(
                 'label' => "Nom ou prénom : ",
-                'label_attr' => array('class' => 'col-lg-1 control-label'),
-                'attr' => array('class' => 'col-lg-2'),
             )
         );
 
@@ -39,8 +32,6 @@ class MemberFiltersForm extends AbstractType
             'text',
             array(
                 'label' => "Numéro de licence : ",
-                'label_attr' => array('class' => 'col-lg-1 control-label'),
-                'attr' => array('class' => 'col-lg-2'),
             )
         );
 
@@ -52,8 +43,6 @@ class MemberFiltersForm extends AbstractType
                 'choices' => $options['sections'],
                 'expanded' => false,
                 'multiple' => true,
-                'label_attr' => array('class' => 'col-lg-1 control-label'),
-                'attr' => array('class' => 'col-lg-1'),
             )
         );
 
@@ -65,13 +54,14 @@ class MemberFiltersForm extends AbstractType
                 'choices' => $options['categories'],
                 'expanded' => false,
                 'multiple' => true,
-                'label_attr' => array('class' => 'col-lg-1 control-label'),
-                'attr' => array('class' => 'col-lg-1'),
             )
         );
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -81,6 +71,9 @@ class MemberFiltersForm extends AbstractType
         );
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'member_filters_form';
