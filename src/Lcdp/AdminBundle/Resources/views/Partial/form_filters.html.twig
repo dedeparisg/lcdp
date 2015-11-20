@@ -1,22 +1,26 @@
 <div class="col-md-12">
     <div class="panel">
         <div class="panel-heading">
-            <div class="panel-title"> <i class="fa fa-flask"></i> {{ filter_title }}</div>
+            <div class="panel-title"><i class="fa fa-flask"></i> {{ filter_title }}</div>
             <div class="right">
                 <a class="btn btn-default" href="{{ filter_url }}">{{ filter_button }}</a>
             </div>
         </div>
 
         <div class="panel-body">
-            {{ form_start(form, {attr: {novalidate: 'novalidate'}})}}
+            {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+            <div class="col-xs-12 col-sm-6">
                 {{ form_row(form.title) }}
                 {{ form_row(form.isPublished) }}
                 {{ form_row(form.canBeDeleted) }}
+            </div>
+            <div class="col-xs-12 col-sm-6">
                 {{ form_row(form.section) }}
-                {{ form_rest(form)}}
+            </div>
+            {{ form_rest(form) }}
 
-                <input type="submit" class="btn btn-primary btn-sm" value="Filtrer"/>
-            {{ form_end(form)}}
+            <input type="submit" class="btn btn-primary btn-sm" value="Filtrer"/>
+            {{ form_end(form) }}
         </div>
     </div>
 </div>

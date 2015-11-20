@@ -2,13 +2,13 @@
  * Website: AdminDesigns.com
  * Last Updated: 01/01/14
  * Copyright (c) 2013 Admin Designs
------------------------------------------------------   
+-----------------------------------------------------
    Table of Contents
 -----------------------------------------------------
  -- Shared Styles
  -- Class Helpers
  -- Typography
- -- Primary Components 
+ -- Primary Components
  	a. Header
  	c. SideBar
 	b. Topbar/Breadcrumbs
@@ -28,16 +28,16 @@
 	d. Tabs
 	e. Accordions
 	f. Modals
- -- Widgets 
+ -- Widgets
     a. Table
 	b. Chat
 	c. Messenger
 	d. Calendar
 	e. Timeline
- -- Color System	
+ -- Color System
  -- Layout Settings
  -- For Demonstration ONLY Styles
- 
+
 ----------------------------------------------------*/
 
 /* --------------------------------------
@@ -78,15 +78,16 @@ body {
     -webkit-box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.33) inset;
     box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.33) inset;
 }
-/* Bootstraps ".container" class has been changed to a fluid full 
- * width container. It's also used as the primary wrapper for 
- * our page content. To maintain typical bootstrap usability 
- * we apply the wrapper styles only to the direct child of #content. 
+/* Bootstraps ".container" class has been changed to a fluid full
+ * width container. It's also used as the primary wrapper for
+ * our page content. To maintain typical bootstrap usability
+ * we apply the wrapper styles only to the direct child of #content.
  * This insures it's only used once and can again be used elsewhere */
 .container { width: 100% }
 #content > .container {
     max-width: 1665px !important;
-    padding: 35px 35px 50px 45px;
+    /*padding: 35px 35px 50px 45px;*/
+    padding: 10px 15px 50px 20px;
 }
 
 /* ---------------------------------------
@@ -216,7 +217,7 @@ hr.tall { margin: 55px 0 }
 /* ---------------------------------------
    ANIMATIONS
 ----------------------------------------*/
-/* used in conjuction with "data-animate" 
+/* used in conjuction with "data-animate"
  * attr to create a delayed page animation
  * read docs for more info on proper use*/
 .animated-delay { opacity: 0 }
@@ -584,11 +585,11 @@ ul.sidebar-nav ul.sub-nav li span {
 	min-width: 15px;
 	min-height: 15px;
 	float: left;
-	
+
 }
 ul.sidebar-nav ul.sub-nav > li > a:hover .glyphicons { color: #d9534f }
 
-/* SIDE MENU COLLAPSED STATE 
+/* SIDE MENU COLLAPSED STATE
  * Activated via JS. A ".sidebar-collapsed" class is added to
  * #sidebar on click. The styles below essentially just mimic
  * the media-query based styles found in responsive.css
@@ -749,33 +750,33 @@ label.error {
    and their associated classes
 ----------------------------------------------*/
 
-/* Some font libraries have large file sizes. 
- * We optionally can attach .wf-loading to the 
- * body tag and have the fonts only visible after 
+/* Some font libraries have large file sizes.
+ * We optionally can attach .wf-loading to the
+ * body tag and have the fonts only visible after
  * they are fully loaded or cached. Prevents rough
  * icon flash and is currently used only on index.html */
 .wf-loading .glyphicons,
 .wf-loading .glyphicon,
 .wf-loading .imoon,
-.wf-loading .fa { 
+.wf-loading .fa {
 	opacity: 0 !important;
 }
 
-/* Icons */ 
+/* Icons */
 .glyphicons,.glyphicon,
-.imoon, .fa { 
+.imoon, .fa {
 	opacity: 1;
 	transition: opacity 0.3s ease-in;
    -moz-transition: opacity 0.3s ease-in;
    -webkit-transition: opacity 0.3s ease-in;
 }
- 
-/* Buttons with Icons 
+
+/* Buttons with Icons
 * Cross browser problems were creating problems when
 * an icon was given a larger font size than its sibling
 * text. To fix Line height, vertical align, and top
 * positioning have been redefined */
-.btn .glyphicons, .btn .glyphicon { 
+.btn .glyphicons, .btn .glyphicon {
 	top: -1px;
 	vertical-align: middle;
 	line-height: 0;
@@ -848,7 +849,7 @@ i.field-icon-right {
 .btn-warning.btn-gradient { background-color: #f28900 }
 .btn-danger.btn-gradient { background-color: #d3332e }
 .btn-default.btn-gradient { background-color: #f0f0f0 }
-/* Adds a custom "Alert"(purple) button to 
+/* Adds a custom "Alert"(purple) button to
  * the Bootstrap button lineup */
 .btn-alert { background-color: #7857ca }
 .btn-alert.btn-gradient { background-color: #5d3ab5 }
@@ -863,10 +864,10 @@ i.field-icon-right {
     background-image: -webkit-linear-gradient(top, rgba(255,255,255, 0.45) 1%,rgba(255,255,255,0.15) 100%);
     background-image: linear-gradient(to bottom, rgba(255,255,255, 0.45) 1%,rgba(255,255,255,0.15) 100%);
 }
-/* Button Gradients 
- * Gradients are created using a transparent gradient 
- * overlay. This way you can transform any element 
- * with a background color into a gradient without 
+/* Button Gradients
+ * Gradients are created using a transparent gradient
+ * overlay. This way you can transform any element
+ * with a background color into a gradient without
  * having to use additional colors */
 .btn-gradient {
     background-repeat: repeat-x;
@@ -1172,10 +1173,10 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
 .hero-plan .pricing-plan a.btn { margin: 40px 0 20px }
 
 /* ---------------------------------------------
-   PANELS 
- -----------------------------------------------   
+   PANELS
+ -----------------------------------------------
    Bootstrap Panels are a vital element in this
-   Theme. Reading the Stardom Docs to better 
+   Theme. Reading the Stardom Docs to better
    understand this component is recommended
  ----------------------------------------------*/
 /* Overflow is hidden by default. Helper class to reverse */
@@ -1258,7 +1259,7 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
     line-height: 22px;
 }
 /* PANEL ADDON - MENU */
-/* Typically placed under the panel header 
+/* Typically placed under the panel header
  * and used to hold buttons or menus */
 .panel-menu {
     padding: 10px 13px;
@@ -1285,9 +1286,9 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
     margin: 40px 3.5% 100px;
     padding: 0;
 }
-/* Sidemenu and content are both floated. 
- * to create equal heights we expand the sidemenu 
- * with padding and allow its parent container 
+/* Sidemenu and content are both floated.
+ * to create equal heights we expand the sidemenu
+ * with padding and allow its parent container
  * to catch the overflow */
 .panel-sidemenu {
     position: relative;
@@ -1336,7 +1337,7 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
     background: #e2e2e2;
 }
 /* Sidemenu is hidden on small devices */
-@media (max-width: 1000px) { 
+@media (max-width: 1000px) {
     .panel-sidemenu { display: none }
     .panel-sidemenu + .panel-body {
         width: 93%;
@@ -1344,7 +1345,7 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
     }
 }
 /* PANEL ADDON - BODY SEARCHBAR */
-/* Useful anywhere but in this theme it is 
+/* Useful anywhere but in this theme it is
  * only used or seen inside a panel body */
 .search-widget { position: relative }
 #search-widget {
@@ -1390,7 +1391,7 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
     border-bottom-left-radius: 3px;
 }
 /* Mildly styles a font awesome based icon group
- * used in occasionaly in panel heading. Look at 
+ * used in occasionaly in panel heading. Look at
  * message widget on index.html for example */
 .mini-action-icons i.fa {
     position: relative;
@@ -1502,7 +1503,7 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
 /* TAB NAVIGATION ICONS */
 .nav-tabs li i.fa { font-size: 14px }
 .nav-tabs li i.fa.fa-caret-down { font-size: 12px }
-/* open state for dropdown menus in nav 
+/* open state for dropdown menus in nav
  * containers. Also a direct bootstrap override */
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     color: #428bca;
@@ -1612,7 +1613,7 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
 .well-tabs li:first-child {
 	margin-left: 0;
 }
-.well-tabs li a { 
+.well-tabs li a {
 	background: #f0f0f0;
 	border-radius: 4px;
 	border: 1px solid #DDD;
@@ -1626,7 +1627,7 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
 	background-color: #FFF;
 }
 /* Same style but inversed colors */
-.well-tabs-inverse li a { 
+.well-tabs-inverse li a {
 	background: transparent;
 	border-radius: 4px;
 	border: 1px solid #ddd;
@@ -1771,7 +1772,7 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
 /* Modal sizes - element always requires
  * default ".modal-dialog" class */
 .modal-dialog-sm { width: auto }
-@media screen and (min-width: 768px) { 
+@media screen and (min-width: 768px) {
     .modal-dialog { padding-top: 50px }
     .modal-dialog-sm { width: 425px }
 }
@@ -1876,7 +1877,7 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
 
 /* ---------------------------------------------
    CHAT WIDGET
- -----------------------------------------------   
+ -----------------------------------------------
    Created with Panels. Activate by adding
    ".chat-panel" to panel wrapper (".panel")
  ----------------------------------------------*/
@@ -1912,8 +1913,8 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
 /* ---------------------------------------------
    MESSENGER WIDGET
 ------------------------------------------------
-   Not to be confused with the comments widget. 
-   unlike the comments Widget this has a listing 
+   Not to be confused with the comments widget.
+   unlike the comments Widget this has a listing
    of online and offline site users.
 ----------------------------------------------*/
 /* Messenger user list table */
@@ -2049,7 +2050,7 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
     background-repeat: repeat-x;
     background-image: -webkit-linear-gradient(top, #FFFFFF 1%, #F1F1F1 100%);
     background-image: linear-gradient(to bottom, #FFFFFF 1%, #F1F1F1 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80ffffff',endColorstr='#00f1f1f1',GradientType=0);	
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80ffffff',endColorstr='#00f1f1f1',GradientType=0);
 	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 .timeline-widget .media {
@@ -2137,13 +2138,13 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
 .ui-rangeSlider.slider-orange .ui-rangeSlider-bar { background-color: #ff802c }
 .ui-rangeSlider.slider-yellow .ui-rangeSlider-bar { background-color: #efcf1d }
 /********************************************************
-/* NOTE: Colors past this point use a much larger and 
-* different naming system. These colors are only used on 
+/* NOTE: Colors past this point use a much larger and
+* different naming system. These colors are only used on
 * vital theme elements to prevent unnecessary CSS bloat.
 * But they still allow for unparralleled customization.
 */
 
-/* Flat Colors - TEXT/ICONS FORM 
+/* Flat Colors - TEXT/ICONS FORM
 * Uses a single "color" style which makes them perfect
 * to use on ANY element requiring a color, such as icons!
 */
@@ -2193,8 +2194,8 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
 .text-light { color: #ffffff }
 .text-alert { color: #7857ca }
 /* FLAT COLORS - .BTN FORM
-* These elements were designed to function using only the 
-* background-color style which makes it perfectly acceptable 
+* These elements were designed to function using only the
+* background-color style which makes it perfectly acceptable
 * to use them on any element which requires a background.
 * They have only been given "btn" names to conform to typical
 * bootstrap html styling. Feel free to change them!
@@ -2242,9 +2243,9 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
 .btn-light3 { background-color: #e5e5e5 }
 .btn-light2 { background-color: #f0f0f0 }
 .btn-light { background-color: #ffffff }
-/* GRADIENT COLORS - .BTN FORM  
+/* GRADIENT COLORS - .BTN FORM
 * These elements were designed to function using only the
-* background-color style which makes it perfectly acceptable 
+* background-color style which makes it perfectly acceptable
 * to use them on any element which requires a background.
 * They have only been given "btn" names to conform to typical
 * bootstrap html styling. Feel free to change them!
@@ -2288,7 +2289,7 @@ label .checker, label .radio, .form-horizontal label .checker, .form-horizontal 
 /* COLOR MODIFICATIONS SPECIFICALLY FOR BUTTONS
 * Any variations to buttons were placed below so that
 * the above classes contain only color styles. This
-* allows the styles to be used on any element rather 
+* allows the styles to be used on any element rather
 * than just "Text" or "Buttons" as their name suggest
 */
 .btn-creme { border-color: #f5c348 }
@@ -2348,7 +2349,7 @@ body.hidden-breadcrumbs #topbar { display: none }
 body.hidden-searchbar #sidebar-search { display: none }
 /* fixed elements */
 #sidebar.affix, #topbar.affix { position: fixed }
-/* give top padding to an element if its sibling is fixed 
+/* give top padding to an element if its sibling is fixed
  * this compensates for the change in height */
 header.navbar-fixed-top + #main { padding-top: 50px }
 #topbar.affix + .container { padding-top: 87px }
@@ -2387,9 +2388,9 @@ body.boxed-layout #sidebar:after {
 }
 body.sidebar-collapsed #sidebar:before { width: 40px }
 body.boxed-layout.sidebar-collapsed #sidebar:after { width: 40px }
-@media (max-width: 1450px) { 
+@media (max-width: 1450px) {
     body.boxed-layout #sidebar:after { width: 210px }
 }
-@media (max-width: 1200px) { 
+@media (max-width: 1200px) {
     body.boxed-layout #sidebar:after { width: 40px }
 }

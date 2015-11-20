@@ -7,7 +7,7 @@
 {% else %}
     {% set pageTitle = "Nouvelle page" %}
 {% endif %}
-        
+
 {% block breadcrumb %}
     <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
     <li>Gestion de contenus</li>
@@ -27,38 +27,32 @@
                         </div>
                         <div class="panel-body">
                             {{ form_start(form, {'attr' : {'class': 'form-horizontal'}}) }}
+
+                                {{ form_row(form.title) }}
                                 <div class="form-group">
-                                    <div class="form-group">
-                                        {{ form_label(form.title, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
-                                        <div class="col-md-9">
-                                            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
-                                        </div>
+                                    {{ form_label(form.section, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
+                                    <div class="col-md-9">
+                                        {{ form_widget(form.section, {'attr': {'class': 'form-control'}}) }}
                                     </div>
-                                    <div class="form-group">
-                                        {{ form_label(form.section, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
-                                        <div class="col-md-9">
-                                            {{ form_widget(form.section, {'attr': {'class': 'form-control'}}) }}
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.intro, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
+                                    <div class="col-md-9">
+                                        {{ form_widget(form.intro, {'attr': {'class': 'form-control'}}) }}
                                     </div>
-                                    <div class="form-group">
-                                        {{ form_label(form.intro, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
-                                        <div class="col-md-9">
-                                            {{ form_widget(form.intro, {'attr': {'class': 'form-control'}}) }}
-                                        </div>
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.content, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
+                                    <div class="col-md-9">
+                                        {{ form_widget(form.content, {'attr': {'class': 'form-control wysiwyg'}}) }}
                                     </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form_label(form.content, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
-                                        <div class="col-md-9">
-                                            {{ form_widget(form.content, {'attr': {'class': 'form-control wysiwyg'}}) }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        {{ form_rest(form) }}
-                                        <span class="col-lg-2 control-label">&nbsp;</span>
-                                        <div class="col-md-9">
-                                            <input class="btn btn btn-primary" type="submit" value="Enregistrer" />
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_rest(form) }}
+                                    <span class="col-lg-2 control-label">&nbsp;</span>
+                                    <div class="col-md-9">
+                                        <input class="btn btn btn-primary" type="submit" value="Enregistrer" />
                                     </div>
                                 </div>
                             {{ form_end(form) }}
@@ -67,13 +61,12 @@
                 </div>
             </div>
         </div>
-        
+
         {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
             'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Page', 'id': page.id}),
             'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Page', 'id': page.id}),
             'page' : page
         }%}
     </div>
-    
+
 {% endblock %}
-    
