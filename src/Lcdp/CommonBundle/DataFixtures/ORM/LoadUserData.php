@@ -52,7 +52,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $this->createUser($manager, 'cron@unapei.com', 'cron@unapei.com', 'Cr0nP4s$word#2015', User::ROLE_USER, 'Cron', 'Cron', array());
         $this->createUser($manager, 'admin', 'dev.andre.tapia@gmail.com', 'admin', User::ROLE_ADMIN, 'Administrateur', 'LCDP', array(Profile::ADMIN));
 
-        // Lancement uniquement en environnement de dev
+        // Si on est pas en environnement de developpement, on coupe le traitement
         if (!in_array($this->container->get('kernel')->getEnvironment(), array('dev'))) {
             $manager->flush();
             return $this;
@@ -90,7 +90,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         // On va récupérer les profiles à lui affecter
         foreach ($profileTitles as $profileTitle) {
             if (!isset($this->profiles[$profileTitle])) {
-                $this->profiles[$profileTitle] = $manager->getRepository("UnapeiCoreBundle:Profile")->findOneBy(array('title' => $profileTitle));
+                $this->profiles[$profileTitle] = $manager->getRepository("LcdpCommonBundle:Profile")->findOneBy(array('title' => $profileTitle));
             }
 
             $user->addProfile($this->profiles[$profileTitle]);

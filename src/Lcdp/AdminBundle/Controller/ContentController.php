@@ -18,6 +18,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ContentController extends BaseController
 {
+    /**
+     * Page de connexion
+     */
     public function indexAction()
     {
         return $this->render('LcdpAdminBundle:Content:index.html.twig');
@@ -26,19 +29,15 @@ class ContentController extends BaseController
     /**
      * Permet de lister les pages statiques que l'on peut éditer
      *
+     * @param Request $request Composant request
+     * @return array
+     *
      * @Template
      * @author André Tapia <contact@andretapia.com>
      */
     public function pageListAction(Request $request)
     {
-        $form = $this->createForm(
-            new FiltersForm(),
-            null,
-            array(
-                'sections' => $this->getParameter('ref_sections')
-            )
-        );
-
+        $form = $this->createForm(new FiltersForm(), null, array('sections' => $this->getParameter('ref_sections')));
         $form->handleRequest($request);
 
         $pages = $this->getRepository('Page')->getList($request->get('filters_form'));
@@ -53,7 +52,10 @@ class ContentController extends BaseController
     /**
      * Permet d'éditer une page statique
      *
-     * @param integer $id Identifiant de la page à éditer
+     * @param Request $request Composant request
+     * @param integer $id      Identifiant de la page à éditer
+     * @return array
+     *
      * @Template
      *
      * @author André Tapia <contact@andretapia.com>
@@ -103,6 +105,9 @@ class ContentController extends BaseController
     /**
      * Permet de lister les news
      *
+     * @param Request $request Composant request
+     * @return array
+     *
      * @Template
      * @author André Tapia <contact@andretapia.com>
      */
@@ -130,7 +135,10 @@ class ContentController extends BaseController
     /**
      * Permet d'éditer une actualité
      *
-     * @param integer $id Identifiant de l'actualité
+     * @param Request $request Composant request
+     * @param integer $id      Identifiant de l'actualité
+     * @return array
+     *
      * @Template
      *
      * @author André Tapia <contact@andretapia.com>
@@ -168,7 +176,8 @@ class ContentController extends BaseController
             // On génère l'uid du fichier
             $uid = $this->get('lcdp.filestore')->generateUniqueId(strtolower($file['file']->getClientOriginalExtension()));
             // On ajoute le média dans le filestore
-            $this->get('lcdp.filestore')->addMedia($file['file'], $uid, strtolower($file['file']->getClientOriginalExtension()));
+            $this->get('lcdp.filestore')->addMedia($file['file'], $uid,
+                strtolower($file['file']->getClientOriginalExtension()));
             $news->setImage($uid);
 
             // On s'occupe des données saisie
@@ -192,6 +201,9 @@ class ContentController extends BaseController
 
     /**
      * Permet de lister les événements
+     *
+     * @param Request $request Composant request
+     * @return array
      *
      * @Template
      * @author André Tapia <contact@andretapia.com>
@@ -220,7 +232,10 @@ class ContentController extends BaseController
     /**
      * Permet d'éditer un événement
      *
-     * @param integer $id Identifiant de l'actualité
+     * @param Request $request Composant request
+     * @param integer $id      Identifiant de l'actualité
+     * @return array
+     *
      * @Template
      *
      * @author André Tapia <contact@andretapia.com>
@@ -272,8 +287,9 @@ class ContentController extends BaseController
     /**
      * Permet de supprimer un contenu qui peut être supprimé (Page ou News)
      *
-     * @param string $content Type du contenu
-     * @param integer $id     Identifiant de la page à supprimer
+     * @param string  $content Type du contenu
+     * @param integer $id      Identifiant de la page à supprimer
+     * @return array
      *
      * @author André Tapia <contact@andretapia.com>
      */
@@ -298,9 +314,10 @@ class ContentController extends BaseController
     /**
      * Permet de publier un contenu (Page ou News)
      *
-     * @param boolean $status Status de la publication
-     * @param string $content Type du contenu
-     * @param integer $id     Identifiant de la page à supprimer
+     * @param boolean $status  Status de la publication
+     * @param string  $content Type du contenu
+     * @param integer $id      Identifiant de la page à supprimer
+     * @return array
      *
      * @author André Tapia <contact@andretapia.com>
      */
@@ -314,16 +331,20 @@ class ContentController extends BaseController
 
         $page->setIsPublished($status);
         $page->setModifiedAt(new DateTime());
-        $page->setPublicatedAt(($status) ? new DateTime(): null);
+        $page->setPublicatedAt(($status) ? new DateTime() : null);
         $this->persist($page, true);
 
         $this->successFlash("Le contenu vient d'être " . (($status) ? 'publié' : 'dépublié') . " !");
 
-        return $this->redirect($this->generateUrl('lcdp_admin_' . strtolower($content) .'_edit', array('id' => $page->getId())));
+        return $this->redirect(
+            $this->generateUrl('lcdp_admin_' . strtolower($content) . '_edit', array('id' => $page->getId()))
+        );
     }
 
     /**
      * Permet de liste les vidéos
+     *
+     * @return array
      *
      * @Template
      * @author André Tapia <contact@andretapia.com>
@@ -339,6 +360,8 @@ class ContentController extends BaseController
 
     /**
      * Permet de liste les albums
+     *
+     * @return array
      *
      * @Template
      * @author André Tapia <contact@andretapia.com>
@@ -367,6 +390,10 @@ class ContentController extends BaseController
     /**
      * Permet d'éditer album
      *
+     * @param Request $request Composant request
+     * @param integer $id      Identifiant de l'album à éditer
+     * @return array
+     *
      * @Template
      * @author André Tapia <contact@andretapia.com>
      */
@@ -386,9 +413,7 @@ class ContentController extends BaseController
         $form = $this->createForm(
             new AlbumForm(),
             $album,
-            array(
-                'sections' => $this->getParameter('ref_album_sections')
-            )
+            array('sections' => $this->getParameter('ref_album_sections'))
         );
 
         $form['section']->setData($album->getSection());

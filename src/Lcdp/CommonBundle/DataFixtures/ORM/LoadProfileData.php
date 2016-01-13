@@ -28,8 +28,8 @@ class LoadProfileData implements FixtureInterface, OrderedFixtureInterface
     /**
      * Crée un profile utilisateur à partir des informations fournies
      *
-     * @param $manager   Manager d'entités
-     * @param $title     Nom du profil
+     * @param $manager Manager d'entités
+     * @param $title   Nom du profil
      *
      * @return RefProfile
      */

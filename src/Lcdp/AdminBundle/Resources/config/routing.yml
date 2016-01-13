@@ -13,14 +13,6 @@ login:
 login_check:
     pattern:   /login_check
 
-lcdp_admin_profile_list:
-    pattern:  /profile/liste
-    defaults: { _controller: LcdpAdminBundle:User:profileList }
-
-lcdp_admin_users:
-    pattern:  /utilisateurs
-    defaults: { _controller: LcdpAdminBundle:User:userList }
-
 lcdp_admin_members:
     pattern:  /membres
     defaults: { _controller: LcdpAdminBundle:Member:memberList }

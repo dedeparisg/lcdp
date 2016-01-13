@@ -90,7 +90,7 @@ class LoadProfilePermissionData implements FixtureInterface, OrderedFixtureInter
 
         // On va charger l'objet "profile" si besoin
         if (!isset($this->profiles[$profileTitle])) {
-            $this->profiles[$profileTitle] = $manager->getRepository("UnapeiCoreBundle:Profile")->findOneBy(array('title' => $profileTitle));
+            $this->profiles[$profileTitle] = $manager->getRepository("LcdpCommonBundle:Profile")->findOneBy(array('title' => $profileTitle));
         }
 
         $this->createProfilePermissionAllowed($manager, $profileTitle, $permissions);
@@ -171,7 +171,7 @@ class LoadProfilePermissionData implements FixtureInterface, OrderedFixtureInter
     {
         if (empty($this->permissions)) {
             foreach (Permission::getAllPermissions() as $permissionTitle) {
-                $this->permissions[$permissionTitle] = $manager->getRepository("UnapeiCoreBundle:Permission")->findOneBy(array('title' => $permissionTitle));
+                $this->permissions[$permissionTitle] = $manager->getRepository("LcdpCommonBundle:Permission")->findOneBy(array('title' => $permissionTitle));
             }
         }
 

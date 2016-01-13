@@ -3,14 +3,21 @@
 namespace Lcdp\AdminBundle\Controller;
 
 use \Lcdp\CommonBundle\Controller\BaseController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class SecurityController extends BaseController
 {
-    public function loginAction()
+    /**
+     * Fonction de login
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function loginAction(Request $request)
     {
-        $request = $this->getRequest();
         $session = $request->getSession();
+
         // get the login error if there is one
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
@@ -24,7 +31,10 @@ class SecurityController extends BaseController
             'error'         => $error,
         ));
     }
-    
+
+    /**
+     * Fonction de logout
+     */
     public function logoutAction()
     {
         // The security layer will intercept this request

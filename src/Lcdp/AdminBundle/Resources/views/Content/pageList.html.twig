@@ -5,16 +5,16 @@
     <li>Gestion de contenus</li>
     <li class="active">Pages statiques</li>
 {% endblock %}
-    
+
 {% block content %}
-    
+
     <div class="row">
         {% include 'LcdpAdminBundle:Partial:form_filters.html.twig' with {
             'filter_title': 'Gestion des pages statiques',
             'filter_url': path('lcdp_admin_page_edit'),
             'filter_button': 'Ajouter une page'
         } %}
-        
+
         <div class="clear"></div>
 
         <div class="col-md-12">
@@ -34,7 +34,7 @@
                         <tr class="{% if loop.index % 2 %}odd{% endif %}">
                             <td>{{ page.title }}</td>
                             <td>{{ refSectionsLabel[page.section] }}</td>
-                            <td>{{ page.isPublished }}</td>
+                            <td>{% if page.isPublished %}Oui{% else %}Non{% endif %}</td>
                             <td>{{ page.publicatedAt|date('d-m-Y \\à H:i:s') }}</td>
                             <td>
                                 <a href="{{ path('lcdp_admin_page_edit', {'id': page.id}) }}">
@@ -56,4 +56,3 @@
     </div>
 
 {% endblock %}
-    

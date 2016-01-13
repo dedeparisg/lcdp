@@ -41,7 +41,7 @@ class Profile
      * Permissions et droits associés des utilisateurs liés à ce profil
      * @var ArrayCollection $permissions
      *
-     * @ORM\OneToMany(targetEntity="\Lcdp\Commonbundle\Entity\ProfilePermission", mappedBy="profile", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="Lcdp\CommonBundle\Entity\ProfilePermission", mappedBy="profile", cascade={"all"})
      */
     private $permissions;
 
@@ -49,7 +49,7 @@ class Profile
      * Utilisateurs utilisant ce profil de droit
      * @var ArrayCollection $users
      *
-     * @ORM\ManyToMany(targetEntity="\Lcdp\Commonbundle\Entity\User", mappedBy="profiles")
+     * @ORM\ManyToMany(targetEntity="Lcdp\CommonBundle\Entity\User", mappedBy="profiles")
      */
     private $users;
 
@@ -92,10 +92,10 @@ class Profile
     /**
      * Add permissions
      *
-     * @param \Lcdp\Commonbundle\Entity\ProfilePermission $permissions
+     * @param Lcdp\CommonBundle\Entity\ProfilePermission $permissions
      * @return Profile
      */
-    public function addPermission(\Lcdp\Commonbundle\Entity\ProfilePermission $permissions)
+    public function addPermission(Lcdp\CommonBundle\Entity\ProfilePermission $permissions)
     {
         $this->permissions[] = $permissions;
 
@@ -105,9 +105,9 @@ class Profile
     /**
      * Remove permissions
      *
-     * @param \Lcdp\Commonbundle\Entity\ProfilePermission $permissions
+     * @param Lcdp\CommonBundle\Entity\ProfilePermission $permissions
      */
-    public function removePermission(\Lcdp\Commonbundle\Entity\ProfilePermission $permissions)
+    public function removePermission(Lcdp\CommonBundle\Entity\ProfilePermission $permissions)
     {
         $this->permissions->removeElement($permissions);
     }
@@ -125,10 +125,10 @@ class Profile
     /**
      * Add users
      *
-     * @param \Lcdp\Commonbundle\Entity\User $users
+     * @param Lcdp\CommonBundle\Entity\User $users
      * @return Profile
      */
-    public function addUser(\Lcdp\Commonbundle\Entity\User $users)
+    public function addUser(Lcdp\CommonBundle\Entity\User $users)
     {
         $this->users[] = $users;
 
@@ -138,9 +138,9 @@ class Profile
     /**
      * Remove users
      *
-     * @param \Lcdp\Commonbundle\Entity\User $users
+     * @param Lcdp\CommonBundle\Entity\User $users
      */
-    public function removeUser(\Lcdp\Commonbundle\Entity\User $users)
+    public function removeUser(Lcdp\CommonBundle\Entity\User $users)
     {
         $this->users->removeElement($users);
     }

@@ -168,7 +168,7 @@ class User implements AdvancedUserInterface
      * Profil de l'utilisateur
      * @var Profile $profiles
      *
-     * @ORM\ManyToMany(targetEntity="Lcdp\Commonbundle\Entity\Profile", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Lcdp\CommonBundle\Entity\Profile", inversedBy="users")
      * @ORM\JoinTable(name="app_user_profile")
      */
     private $profiles;
@@ -676,7 +676,7 @@ class User implements AdvancedUserInterface
      * @param \Lcdp\CommonBundle\Entity\Profile $profiles
      * @return User
      */
-    public function addProfile(\Lcdp\Commonbundle\Entity\Profile $profiles)
+    public function addProfile(\Lcdp\CommonBundle\Entity\Profile $profiles)
     {
         $this->profiles[] = $profiles;
 
@@ -686,9 +686,9 @@ class User implements AdvancedUserInterface
     /**
      * Remove profiles
      *
-     * @param \Lcdp\Commonbundle\Entity\Profile $profiles
+     * @param \Lcdp\CommonBundle\Entity\Profile $profiles
      */
-    public function removeProfile(\Lcdp\Commonbundle\Entity\Profile $profiles)
+    public function removeProfile(\Lcdp\CommonBundle\Entity\Profile $profiles)
     {
         $this->profiles->removeElement($profiles);
     }

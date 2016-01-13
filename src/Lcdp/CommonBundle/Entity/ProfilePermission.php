@@ -24,7 +24,7 @@ class ProfilePermission
     /**
      * Profil de droit
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Lcdp\Commonbundle\Entity\Profile", inversedBy="permissions")
+     * @ORM\ManyToOne(targetEntity="Lcdp\CommonBundle\Entity\Profile", inversedBy="permissions")
      * @ORM\JoinColumn(name="profile_id", referencedColumnName="id", nullable=false)
      */
     private $profile;
@@ -32,7 +32,7 @@ class ProfilePermission
     /**
      * Permission
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Lcdp\Commonbundle\Entity\Permission")
+     * @ORM\ManyToOne(targetEntity="Lcdp\CommonBundle\Entity\Permission")
      * @ORM\JoinColumn(name="permission_id", referencedColumnName="id", nullable=false)
      */
     private $permission;
@@ -193,10 +193,10 @@ class ProfilePermission
     /**
      * Set profile
      *
-     * @param \Lcdp\Commonbundle\Entity\Profile $profile
+     * @param \Lcdp\CommonBundle\Entity\Profile $profile
      * @return ProfilePermission
      */
-    public function setProfile(\Lcdp\Commonbundle\Entity\Profile $profile)
+    public function setProfile(\Lcdp\CommonBundle\Entity\Profile $profile)
     {
         $this->profile = $profile;
 
@@ -206,7 +206,7 @@ class ProfilePermission
     /**
      * Get profile
      *
-     * @return \Lcdp\Commonbundle\Entity\Profile
+     * @return \Lcdp\CommonBundle\Entity\Profile
      */
     public function getProfile()
     {
@@ -216,10 +216,10 @@ class ProfilePermission
     /**
      * Set permission
      *
-     * @param \Lcdp\Commonbundle\Entity\Permission $permission
+     * @param \Lcdp\CommonBundle\Entity\Permission $permission
      * @return ProfilePermission
      */
-    public function setPermission(\Lcdp\Commonbundle\Entity\Permission $permission)
+    public function setPermission(\Lcdp\CommonBundle\Entity\Permission $permission)
     {
         $this->permission = $permission;
 
@@ -229,7 +229,7 @@ class ProfilePermission
     /**
      * Get permission
      *
-     * @return \Lcdp\Commonbundle\Entity\Permission
+     * @return \Lcdp\CommonBundle\Entity\Permission
      */
     public function getPermission()
     {

@@ -12,4 +12,4 @@ echo "..."
 
 echo "Lancement des fixtures"
 echo "..."
-./app/console doctrine:fixtures:load
+./app/console doctrine:fixtures:load --append

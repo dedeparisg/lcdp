@@ -6,6 +6,13 @@ lcdp_common:
     resource: "@LcdpCommonBundle/Resources/config/routing.yml"
     prefix:   /
 
+lcdp_admin_annotation:
+    resource: "@LcdpAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
+
 lcdp_admin:
     resource: "@LcdpAdminBundle/Resources/config/routing.yml"
     prefix:   /admin
+
+
