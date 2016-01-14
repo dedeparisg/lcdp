@@ -6,74 +6,69 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="ibox red-border">
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-xs-12 col-md-2 m-b">
-                            <a class="btn btn-primary col-lg-12 word-wrap" href="{{ path('users_new') }}">{{ 'lg.person.common.new'|trans }}</a>
-                        </div>
-                        <div class="col-xs-12 col-md-10">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h5>{{ 'lg.common.filter-results'|trans }}</h5>
-                                </div>
-
-                                {{ form_start(form, {'method': 'POST', 'action': path('lcdp_admin_users'), 'attr': {'novalidate': 'novalidate', 'class': 'filters-form'}}) }}
-                                <div id="users-filter" class="panel-body">
-                                    <div class="row m-b full-width-child">
-                                        {{ form_row(form.firstname, {'attr': {'inputSize': 10, 'labelSize': 2}}) }}
-                                    </div>
-                                    <div class="row m-b full-width-child">
-                                        {{ form_row(form.lastname, {'attr': {'inputSize': 10, 'labelSize': 2}}) }}
-                                    </div>
-                                    {#{% include "UnapeiCoreBundle:Component:filterButtons.html.twig" %}#}
-                                </div>
-                                {{ form_end(form) }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                <tr class="gray">
-                                    <th>Nom</th>
-                                    <th>Prénom</th>
-                                    <th>Profil</th>
-                                    <th>Compte actif</th>
-                                    <th>Edit.</th>
-                                    <th>Supp.</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for page in pages|default() %}
-                                    <tr class="{% if loop.index % 2 %}odd{% endif %}">
-                                        <td>{{ page.title }}</td>
-                                        <td>{{ refSectionsLabel[page.section] }}</td>
-                                        <td>{% if page.isPublished %}Oui{% else %}Non{% endif %}</td>
-                                        <td>{{ page.publicatedAt|date('d-m-Y \\à H:i:s') }}</td>
-                                        <td>
-                                            <a href="{{ path('lcdp_admin_page_edit', {'id': page.id}) }}">
-                                                <img src="{{ asset('bundles/lcdpadmin/images/picto_editer.png') }}" title="Editer la page"/>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            {% if page.canBeDeleted%}
-                                                <a href="{{ path('lcdp_admin_content_soft_delete', {'content': 'Page','id': page.id}) }}" onclick="return confirm('Souhaitez-vous supprimer cette page ?');">
-                                                    <img src="{{ asset('bundles/lcdpadmin/images/picto_supprimer.png') }}" title="Supprimer la page" class="hand" />
-                                                </a>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title"><i class="fa fa-flask"></i> Gestion des utilisateurs</div>
+                <div class="right">
+                    <a class="btn btn-default" href="{{ path("lcdp_admin_users_new") }}">Ajouter un utilisateur</a>
                 </div>
             </div>
+
+            <div class="panel-body">
+                {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+                <div class="col-xs-12 col-sm-6">
+                    {{ form_row(form.firstname) }}
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    {{ form_row(form.lastname) }}
+                </div>
+                {{ form_rest(form) }}
+
+                <input type="submit" class="btn btn-primary btn-sm" value="Filtrer"/>
+                {{ form_end(form) }}
+            </div>
         </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr class="gray">
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Profil</th>
+                <th>Compte actif</th>
+                <th>Edit.</th>
+                <th>Supp.</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for page in pages|default() %}
+                <tr class="{% if loop.index % 2 %}odd{% endif %}">
+                    <td>{{ page.title }}</td>
+                    <td>{{ refSectionsLabel[page.section] }}</td>
+                    <td>{% if page.isPublished %}Oui{% else %}Non{% endif %}</td>
+                    <td>{{ page.publicatedAt|date('d-m-Y \\à H:i:s') }}</td>
+                    <td>
+                        <a href="{{ path('lcdp_admin_page_edit', {'id': page.id}) }}">
+                            <img src="{{ asset('bundles/lcdpadmin/images/picto_editer.png') }}" title="Editer la page"/>
+                        </a>
+                    </td>
+                    <td>
+                        {% if page.canBeDeleted %}
+                            <a href="{{ path('lcdp_admin_content_soft_delete', {'content': 'Page','id': page.id}) }}"
+                               onclick="return confirm('Souhaitez-vous supprimer cette page ?');">
+                                <img src="{{ asset('bundles/lcdpadmin/images/picto_supprimer.png') }}"
+                                     title="Supprimer la page" class="hand"/>
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

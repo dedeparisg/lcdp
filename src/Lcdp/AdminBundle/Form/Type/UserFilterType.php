@@ -54,6 +54,6 @@ class UserFilterType extends AbstractType
      */
     public function getName()
     {
-        return 'lcdp_user_filter';
+        return 'filters_form';
     }
 }

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -29,28 +30,35 @@ class UserController extends BaseController
      * @Secure(roles="UNAPEI_USER_INFOS_READ")
      * @Template()
      *
+     * @param Request $request La requete courante
+     *
      * @return array
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $form = $this->createForm(new UserFilterType());
 
+        $form->handleRequest($request);
+
+        $users = $this->getRepository('User')->getList($request->get('filters_form'));
+
         return array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'users' => $users
         );
     }
 
     /**
      * Ajout / Edition d'un utilisateur
      *
-     * @Route("/users/new", name="users_new")
-     * @Route("/users/{id}/edit", name="users_edit", requirements={"id": "\d+"})
+     * @Route("/users/new", name="lcdp_admin_users_new")
+     * @Route("/users/{id}/edit", name="lcdp_admin_users_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      * @Secure(roles="UNAPEI_USER_INFOS_UPDATE")
      * @Template()
      *
-     * @param Request $request      Requête courante
-     * @param mixed $id             Identifiant de l'utilisateur
+     * @param Request $request Requête courante
+     * @param mixed   $id      Identifiant de l'utilisateur
      * @return array
      */
     public function editAction(Request $request, $id = null)
@@ -65,7 +73,7 @@ class UserController extends BaseController
             new UserType(),
             $user,
             array(
-                'validation_groups' => $isNew ?  array('registration') : array('Default'),
+                'validation_groups' => $isNew ? array('registration') : array('Default'),
                 'userPermissions' => $request->getSession()->get('userPermissions'),
                 'isNew' => $isNew
             )
@@ -85,8 +93,10 @@ class UserController extends BaseController
 
         return array(
             'form' => $form->createView(),
-            'perimeter' => $this->getRepository('LcdpCommonBundle:OrganizationalEntity')->childrenHierarchy(null, false),
-            'graphPermission' => $this->getRepository('LcdpCommonBundle:GraphPermission')->childrenHierarchy(null, false),
+            'perimeter' => $this->getRepository('LcdpCommonBundle:OrganizationalEntity')->childrenHierarchy(null,
+                false),
+            'graphPermission' => $this->getRepository('LcdpCommonBundle:GraphPermission')->childrenHierarchy(null,
+                false),
             'isNew' => $isNew,
             'isPerimeter' => $isPerimeter,
             'profileConditions' => json_encode(
