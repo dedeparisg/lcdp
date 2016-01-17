@@ -42,29 +42,19 @@
                 <th>Profil</th>
                 <th>Compte actif</th>
                 <th>Edit.</th>
-                <th>Supp.</th>
             </tr>
             </thead>
             <tbody>
-            {% for page in pages|default() %}
+            {% for user in users|default() %}
                 <tr class="{% if loop.index % 2 %}odd{% endif %}">
-                    <td>{{ page.title }}</td>
-                    <td>{{ refSectionsLabel[page.section] }}</td>
-                    <td>{% if page.isPublished %}Oui{% else %}Non{% endif %}</td>
-                    <td>{{ page.publicatedAt|date('d-m-Y \\à H:i:s') }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.profileTitle }}</td>
+                    <td>{% if user.locked %}Oui{% else %}Non{% endif %}</td>
                     <td>
-                        <a href="{{ path('lcdp_admin_page_edit', {'id': page.id}) }}">
+                        <a href="{{ path('lcdp_admin_users_edit', {'id': user.id}) }}">
                             <img src="{{ asset('bundles/lcdpadmin/images/picto_editer.png') }}" title="Editer la page"/>
                         </a>
-                    </td>
-                    <td>
-                        {% if page.canBeDeleted %}
-                            <a href="{{ path('lcdp_admin_content_soft_delete', {'content': 'Page','id': page.id}) }}"
-                               onclick="return confirm('Souhaitez-vous supprimer cette page ?');">
-                                <img src="{{ asset('bundles/lcdpadmin/images/picto_supprimer.png') }}"
-                                     title="Supprimer la page" class="hand"/>
-                            </a>
-                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

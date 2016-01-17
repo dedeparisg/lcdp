@@ -81,7 +81,7 @@ class MemberController extends BaseController
             $member->setCategory($formData['category']);
 
             $this->persist($member, true);
-            $this->successFlash();
+            $this->addFlashMessage('success');
 
             return $this->redirect($this->generateUrl('lcdp_admin_member_edit', array('id' => $member->getId())));
         }

@@ -91,7 +91,7 @@ class ContentController extends BaseController
             $page->setSection($formData['section']);
 
             $this->persist($page, true);
-            $this->successFlash();
+            $this->addFlashMessage('success');
 
             return $this->redirect($this->generateUrl('lcdp_admin_page_edit', array('id' => $page->getId())));
         }
@@ -187,7 +187,7 @@ class ContentController extends BaseController
             $news->setSlug($this->get('lcdp.utils.service')->generateSlug('News', $news));
 
             $this->persist($news, true);
-            $this->successFlash();
+            $this->addFlashMessage('success');
 
             return $this->redirect($this->generateUrl('lcdp_admin_news_edit', array('id' => $news->getId())));
         }
@@ -273,7 +273,7 @@ class ContentController extends BaseController
             $event->setSlug($this->get('lcdp.utils.service')->generateSlug('Event', $event));
 
             $this->persist($event, true);
-            $this->successFlash();
+            $this->addFlashMessage('success');
 
             return $this->redirect($this->generateUrl('lcdp_admin_event_edit', array('id' => $event->getId())));
         }
@@ -427,7 +427,7 @@ class ContentController extends BaseController
             $album->setSlug($this->get('lcdp.utils.service')->generateSlug('Album', $album));
 
             $this->persist($album, true);
-            $this->successFlash();
+            $this->addFlashMessage('success');
 
             return $this->redirect($this->generateUrl('lcdp_admin_album_edit', array('id' => $album->getId())));
         }

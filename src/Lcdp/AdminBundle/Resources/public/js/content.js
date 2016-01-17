@@ -1,3 +1,3 @@
-$(function(){
-    $('.wysiwyg').redactor();
-});
+//$(function(){
+//    $('.wysiwyg').redactor();
+//});

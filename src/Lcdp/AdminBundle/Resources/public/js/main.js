@@ -19,9 +19,9 @@ $('#sidebar-menu .sidebar-nav a.accordion-toggle').click(function (e) {
                         // We now open the targeted menu item.
         $(this).removeClass('collapsed');
         $(MenuUrl).slideDown('fast', function () {
-            // after the animation we apply the "menu-open" class. 
+            // after the animation we apply the "menu-open" class.
                                 // The animation leaves an inline "display:block" style.
-                                // We remove this as it interferes with media queries 
+                                // We remove this as it interferes with media queries
             $(MenuUrl).addClass('menu-open').attr('style', '');
         });
     } else {
@@ -32,7 +32,7 @@ $('#sidebar-menu .sidebar-nav a.accordion-toggle').click(function (e) {
     }
 });
 
-
-$(function(){
-    $('.wysiwyg').redactor();
-});
+//
+//$(function(){
+//    $('.wysiwyg').redactor();
+//});

@@ -91,19 +91,22 @@ class BaseController extends Controller
     }
 
     /**
-     * Raccourci pour le message flash en cas d'enregistement réussi
+     * Raccourci afin d'ajouter un message flash
      *
-     * @author André Tapia <contact@andretapia.com>
+     * @param string $type    Type du message flash
+     * @param string $message Message
+     *
+     * @author André Tapia <atapia@webnet.fr>
      */
-    protected function successFlash($message = 'Enregistrement effectué !')
+    protected function addFlashMessage($type, $message = 'Enregistrement effectué !')
     {
-        $this->getSession()->getFlashBag()->add('success', $message);
+        $this->get('session')->getFlashBag()->add($type, $message);
     }
 
     /**
      * Fonction Helper de récupération des parametres
      *
-     * @param string    Nom du paramétre
+     * @param string $param Nom du paramétre
      * @return mixed Valeur du parametre présent dans le fichier de conf
      *
      * @author André Tapia <contact@andretapia.com>

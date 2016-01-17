@@ -1,7 +1,16 @@
 services :
-  lcdp.filestore:
-    class: Webnet\Bundle\SwissArmyBundle\Service\FilestoreService
-    arguments: ["%filestore%"]
-    calls:
-        - [setAntivirus, ["@?sirh.antivirus"]] # Pour activer le contrôle antivirus
-        - [setFileEncryptor, ["@?sirh.file.encryptor.tripledes"]] # Pour activer le module d’encryption
+    lcdp.filestore:
+        class: Webnet\Bundle\SwissArmyBundle\Service\FilestoreService
+        arguments: ["%filestore%"]
+        calls:
+            - [setAntivirus, ["@?sirh.antivirus"]] # Pour activer le contrôle antivirus
+            - [setFileEncryptor, ["@?sirh.file.encryptor.tripledes"]] # Pour activer le module d’encryption
+
+    # Gestionnaire d'utilisateurs
+    lcdp.common.users:
+        class: Lcdp\CommonBundle\Service\UserService
+        arguments: [@doctrine.orm.entity_manager, @security.password_encoder, @lcdp.export.csv, @translator]
+
+    # Gère les exports en CSV
+    lcdp.export.csv:
+        class: Lcdp\CommonBundle\Service\ExportCsvService

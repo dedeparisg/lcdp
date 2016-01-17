@@ -3,6 +3,7 @@
 namespace Lcdp\AdminBundle\Controller;
 
 use Lcdp\AdminBundle\Form\Type\UserFilterType;
+use Lcdp\AdminBundle\Form\Type\UserType;
 use \Lcdp\CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -64,9 +65,9 @@ class UserController extends BaseController
     public function editAction(Request $request, $id = null)
     {
         if ($isNew = is_null($id)) {
-            $user = $this->get('unapei.core.users')->getEmptyUser();
+            $user = $this->get('lcdp.common.users')->getEmptyUser();
         } else {
-            $user = $this->get('unapei.core.users')->getUser($id);
+            $user = $this->get('lcdp.common.users')->getUser($id);
         }
 
         $form = $this->createForm(
@@ -80,33 +81,17 @@ class UserController extends BaseController
         );
         $form->get('locked')->setData($user->getLocked() ? 1 : 0);
 
-        //Vérifier les profile avec périmètre ou personne
-        $isPerimeter = $this->get('unapei.core.users')->isProfilePerimeter($user);
-
         if ($form->handleRequest($request)) {
             if ($form->isValid()) {
-                $this->get('unapei.core.users')->createorUpdateUser($user);
-                $this->addFlashMessage('success', $this->trans('lg.common.success.save'));
-                return $this->redirectToRoute('users_edit', array('id' => $user->getId()));
+                $this->get('lcdp.common.users')->createorUpdateUser($user);
+                $this->addFlashMessage('success');
+                return $this->redirectToRoute('lcdp_admin_users_edit', array('id' => $user->getId()));
             }
         }
 
         return array(
             'form' => $form->createView(),
-            'perimeter' => $this->getRepository('LcdpCommonBundle:OrganizationalEntity')->childrenHierarchy(null,
-                false),
-            'graphPermission' => $this->getRepository('LcdpCommonBundle:GraphPermission')->childrenHierarchy(null,
-                false),
-            'isNew' => $isNew,
-            'isPerimeter' => $isPerimeter,
-            'profileConditions' => json_encode(
-                array(
-                    'csv' => Profile::canManageExportCsv(),
-                    'others' => array(Profile::ANALYSIS),
-                    'profilePerimeter' => Profile::getAllProfilePerimeter(),
-                    'profilePerson' => Profile::getAllProfilePerson()
-                )
-            )
+            'isNew' => $isNew
         );
     }
 }

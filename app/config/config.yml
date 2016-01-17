@@ -72,6 +72,12 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+#Editeur WYSIWYG
+stfalcon_tinymce:
+    include_jquery:       false
+    tinymce_jquery:       false
+    use_callback_tinymce_init:  false
+
 parameters:
     # Les différentes sections du site
     ref_sections:
