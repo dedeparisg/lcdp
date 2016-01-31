@@ -54,7 +54,7 @@ class EventForm extends AbstractType
             'textarea',
             array(
                 'label' => "* Contenu : ",
-                'attr' => array('class' => 'tinymce')
+                'attr' => array('class' => 'tinymce','data-theme' => 'advanced')
             )
         );
 
