@@ -30,17 +30,6 @@ class AlbumForm extends AbstractType
         );
 
         $builder->add(
-            'section',
-            'choice',
-            array(
-                'choices' => $options['sections'],
-                'label' => "* Section : ",
-                'mapped' => false,
-                'empty_value' => '- Sélectionner -'
-            )
-        );
-
-        $builder->add(
             'content',
             null,
             array(
@@ -66,9 +55,7 @@ class AlbumForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
-                'sections' => null
-            )
+            array()
         );
     }
 

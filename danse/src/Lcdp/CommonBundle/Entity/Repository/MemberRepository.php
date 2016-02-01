@@ -34,10 +34,6 @@ class MemberRepository extends EntityRepository
                 $query->andWhere('m.licenceNum LIKE :licenceNum');
                 $query->setParameter('licenceNum', '%' . $filters['licenceNum'] . '%');
             }
-            if (isset($filters['section']) && !empty($filters['section'])) {
-                $query->andWhere('m.section IN (:section)');
-                $query->setParameter('section', $filters['section']);
-            }
             if (isset($filters['category']) && !empty($filters['category'])) {
                 $query->andWhere('m.category IN (:category)');
                 $query->setParameter('category', $filters['category']);

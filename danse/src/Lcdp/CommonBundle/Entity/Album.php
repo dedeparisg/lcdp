@@ -48,13 +48,6 @@ class Album
     protected $date;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="section", type="smallint", nullable=false)
-     */
-    protected $section;
-
-    /**
      * @var \Boolean
      *
      * @ORM\Column(name="is_published", type="boolean", nullable=false)
@@ -206,29 +199,6 @@ class Album
     public function getDate()
     {
         return $this->date;
-    }
-
-    /**
-     * Set section
-     *
-     * @param integer $section
-     * @return Album
-     */
-    public function setSection($section)
-    {
-        $this->section = $section;
-
-        return $this;
-    }
-
-    /**
-     * Get section
-     *
-     * @return integer
-     */
-    public function getSection()
-    {
-        return $this->section;
     }
 
     /**

@@ -37,14 +37,13 @@ class ContentController extends BaseController
      */
     public function pageListAction(Request $request)
     {
-        $form = $this->createForm(new FiltersForm(), null, array('sections' => $this->getParameter('ref_sections')));
+        $form = $this->createForm(new FiltersForm());
         $form->handleRequest($request);
 
         $pages = $this->getRepository('Page')->getList($request->get('filters_form'));
 
         return array(
             'pages' => $pages,
-            'refSectionsLabel' => $this->getParameter('ref_sections_label'),
             'form' => $form->createView()
         );
     }
@@ -73,22 +72,12 @@ class ContentController extends BaseController
             throw $this->createAccessDeniedException();
         }
 
-        $form = $this->createForm(
-            new PageForm(),
-            $page,
-            array(
-                'sections' => $this->getParameter('ref_sections')
-            )
-        );
-
-        $form['section']->setData($page->getSection());
+        $form = $this->createForm(new PageForm(), $page);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $formData = $request->get('page_form');
             $this->modifiedAt = new DateTime();
-            $page->setSection($formData['section']);
 
             $this->persist($page, true);
             $this->addFlashMessage('success');
@@ -113,13 +102,7 @@ class ContentController extends BaseController
      */
     public function newsListAction(Request $request)
     {
-        $form = $this->createForm(
-            new FiltersForm(),
-            null,
-            array(
-                'sections' => $this->getParameter('ref_sections')
-            )
-        );
+        $form = $this->createForm(new FiltersForm());
 
         $form->handleRequest($request);
 
@@ -127,7 +110,6 @@ class ContentController extends BaseController
 
         return array(
             'pages' => $pages,
-            'refSectionsLabel' => $this->getParameter('ref_sections_label'),
             'form' => $form->createView()
         );
     }
@@ -157,17 +139,7 @@ class ContentController extends BaseController
             throw $this->createAccessDeniedException();
         }
 
-        $form = $this->createForm(
-            new NewsForm(),
-            $news,
-            array(
-                'sections' => $this->getParameter('ref_sections')
-            )
-        );
-
-        $form['section']->setData($news->getSection());
-
-        $form->handleRequest($request);
+        $form = $this->createForm(new NewsForm(), $news);
 
         if ($form->isValid()) {
 
@@ -181,9 +153,7 @@ class ContentController extends BaseController
             $news->setImage($uid);
 
             // On s'occupe des données saisie
-            $formData = $request->get('news_form');
             $this->modifiedAt = new DateTime();
-            $news->setSection($formData['section']);
             $news->setSlug($this->get('lcdp.utils.service')->generateSlug('News', $news));
 
             $this->persist($news, true);
@@ -210,13 +180,7 @@ class ContentController extends BaseController
      */
     public function eventsListAction(Request $request)
     {
-        $form = $this->createForm(
-            new FiltersForm(),
-            null,
-            array(
-                'sections' => $this->getParameter('ref_sections')
-            )
-        );
+        $form = $this->createForm(new FiltersForm());
 
         $form->handleRequest($request);
 
@@ -224,7 +188,6 @@ class ContentController extends BaseController
 
         return array(
             'events' => $events,
-            'refSectionsLabel' => $this->getParameter('ref_sections_label'),
             'form' => $form->createView()
         );
     }
@@ -254,22 +217,12 @@ class ContentController extends BaseController
             throw $this->createAccessDeniedException();
         }
 
-        $form = $this->createForm(
-            new EventForm(),
-            $event,
-            array(
-                'sections' => $this->getParameter('ref_sections')
-            )
-        );
-
-        $form['section']->setData($event->getSection());
+        $form = $this->createForm(new EventForm(), $event);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $formData = $request->get('news_form');
             $this->modifiedAt = new DateTime();
-            $event->setSection($formData['section']);
             $event->setSlug($this->get('lcdp.utils.service')->generateSlug('Event', $event));
 
             $this->persist($event, true);
@@ -368,13 +321,7 @@ class ContentController extends BaseController
      */
     public function albumsListAction(Request $request)
     {
-        $form = $this->createForm(
-            new FiltersForm(),
-            null,
-            array(
-                'sections' => $this->getParameter('ref_album_sections')
-            )
-        );
+        $form = $this->createForm(new FiltersForm());
 
         $form->handleRequest($request);
 
@@ -382,7 +329,6 @@ class ContentController extends BaseController
 
         return array(
             'albums' => $albums,
-            'refAlbumSectionsLabel' => $this->getParameter('ref_album_sections_label'),
             'form' => $form->createView()
         );
     }
@@ -410,20 +356,13 @@ class ContentController extends BaseController
             throw $this->createAccessDeniedException();
         }
 
-        $form = $this->createForm(
-            new AlbumForm(),
-            $album,
-            array('sections' => $this->getParameter('ref_album_sections'))
-        );
-
-        $form['section']->setData($album->getSection());
+        $form = $this->createForm(new AlbumForm(), $album);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $formData = $request->get('album_form');
             $this->modifiedAt = new DateTime();
-            $album->setSection($formData['section']);
             $album->setSlug($this->get('lcdp.utils.service')->generateSlug('Album', $album));
 
             $this->persist($album, true);

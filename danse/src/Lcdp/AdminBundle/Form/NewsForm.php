@@ -35,17 +35,6 @@ class NewsForm extends AbstractType
         );
 
         $builder->add(
-            'section',
-            'choice',
-            array(
-                'choices' => $options['sections'],
-                'label' => "* Section : ",
-                'mapped' => false,
-                'empty_value' => '- Sélectionner -'
-            )
-        );
-
-        $builder->add(
             'intro',
             null,
             array(
@@ -79,7 +68,6 @@ class NewsForm extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'sections' => null
             )
         );
     }

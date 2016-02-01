@@ -22,7 +22,6 @@
                 <thead>
                     <tr class="gray">
                         <th>Titre</th>
-                        <th>Section</th>
                         <th>Publié</th>
                         <th>Date de publication</th>
                         <th>Edit.</th>
@@ -33,7 +32,6 @@
                     {% for page in pages %}
                         <tr class="{% if loop.index % 2 %}odd{% endif %}">
                             <td>{{ page.title }}</td>
-                            <td>{{ refSectionsLabel[page.section] }}</td>
                             <td>{% if page.isPublished %}Oui{% else %}Non{% endif %}</td>
                             <td>{{ page.publicatedAt|date('d-m-Y \\à H:i:s') }}</td>
                             <td>

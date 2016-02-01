@@ -93,33 +93,6 @@ stfalcon_tinymce:
              image_advtab: true
 
 parameters:
-    # Les différentes sections du site
-    ref_sections:
-        1: Général
-        Asssociation:
-            11: Soirées
-            12: Sorties
-            13: Voyages
-        Danse:
-            21: Actualités
-            22: Soirées
-        Football:
-            31: Actualités
-            32: Soirées
-            33: Résultats
-
-    # Les lables des différentes sections du site
-    ref_sections_label:
-        1: Général
-        11: Asssociation - Soirées
-        12: Asssociation - Sorties
-        13: Asssociation - Voyages
-        21: Danse - Actualités
-        22: Danse - Soirées
-        31: Football - Actualités
-        32: Football - Soirées
-        32: Football - Résultats
-
     # Les routes associées aux sections du site
     ref_sections_routing:
         1: news
@@ -133,22 +106,6 @@ parameters:
         32: foot_soiree
         33: foot_resultat
         33: foot_events
-
-    ref_members_sections:
-        1: Bureau
-        Danse:
-            11: Danse
-            12: Professeur
-        Football:
-            21: Football
-            22: Entraineur
-
-    ref_members_sections_label:
-        1: Bureau
-        11: Danse
-        12: Danse (Prof)
-        21: Football
-        22: Football (Entraineur)
 
     ref_members_categories:
         Bureau:
@@ -180,27 +137,6 @@ parameters:
         17: "TC"
         21: "Equipe 1"
         22: "Equipe 2"
-
-    ref_album_sections:
-        Asssociation:
-            11: Soirées
-            12: Sorties
-            13: Voyages
-        Danse:
-            21: Championnats
-            22: Soirées
-        Football:
-            31: Matchs
-            32: Soirées
-
-    ref_album_sections_label:
-        11: Asssociation - Soirées
-        12: Asssociation - Sorties
-        13: Asssociation - Voyages
-        21: Danse - Championnats
-        22: Danse - Soirées
-        31: Football - Matchs
-        32: Football - Soirées
 
     pagination_front_home_news: 50
     pagination_front_home_events: 5

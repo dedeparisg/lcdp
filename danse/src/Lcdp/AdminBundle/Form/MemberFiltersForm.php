@@ -36,17 +36,6 @@ class MemberFiltersForm extends AbstractType
         );
 
         $builder->add(
-            'section',
-            'choice',
-            array(
-                'label' => "Section : ",
-                'choices' => $options['sections'],
-                'expanded' => false,
-                'multiple' => true,
-            )
-        );
-
-        $builder->add(
             'category',
             'choice',
             array(
@@ -65,7 +54,6 @@ class MemberFiltersForm extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'sections' => null,
                 'categories' => null
             )
         );

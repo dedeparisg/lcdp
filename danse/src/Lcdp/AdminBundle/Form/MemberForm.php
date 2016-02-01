@@ -58,17 +58,6 @@ class MemberForm extends AbstractType
         );
 
         $builder->add(
-            'section',
-            'choice',
-            array(
-                'choices' => $options['sections'],
-                'label' => "* Section : ",
-                'mapped' => false,
-                'empty_value' => '- Sélectionner -'
-            )
-        );
-
-        $builder->add(
             'category',
             'choice',
             array(
@@ -97,7 +86,6 @@ class MemberForm extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'sections' => null,
                 'categories' => null
             )
         );

@@ -5,7 +5,7 @@
     <li>Gestion de contenus</li>
     <li class="active">Albums photos</li>
 {% endblock %}
-        
+
 {% block content %}
 
     <div class="row">
@@ -14,7 +14,7 @@
             'filter_url': path('lcdp_admin_album_edit'),
             'filter_button': 'Ajouter un album'
         } %}
-    
+
         <div class="clear"></div>
 
         <div class="col-md-12">
@@ -22,7 +22,6 @@
                 <thead>
                     <tr class="gray">
                         <th>Titre</th>
-                        <th>Section</th>
                         <th>Publié</th>
                         <th>Date de publication</th>
                         <th>Edit.</th>
@@ -33,7 +32,6 @@
                     {% for album in albums %}
                         <tr class="{% if loop.index % 2 %}odd{% endif %}">
                             <td>{{ album.title }}</td>
-                            <td>{{ refAlbumSectionsLabel[album.section] }}</td>
                             <td>{{ (album.isPublished) ? 'Oui' : 'Non' }}</td>
                             <td>{{ album.publicatedAt|date('d-m-Y') }}</td>
                             <td>
@@ -53,4 +51,3 @@
         </div>
     </div>
 {% endblock %}
-    

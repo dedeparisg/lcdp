@@ -12,10 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class FiltersForm extends AbstractType
 {
 
-    public function __construct()
-    {
-    }
-
     /**
      * Cree ou edite un intitulé de poste
      *
@@ -29,17 +25,6 @@ class FiltersForm extends AbstractType
             null,
             array(
                 'label' => "Intitulé : "
-            )
-        );
-
-        $builder->add(
-            'section',
-            'choice',
-            array(
-                'label' => "Section : ",
-                'choices' => $options['sections'],
-                'expanded' => false,
-                'multiple' => true
             )
         );
 
@@ -70,9 +55,7 @@ class FiltersForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
-                'sections' => null
-            )
+            array()
         );
     }
 

@@ -4,8 +4,8 @@
     <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
     <li class="active">Membres</li>
 {% endblock %}
-        
-{% block content %}    
+
+{% block content %}
     <div class="col-md-12">
         <div class="panel">
             <div class="panel-heading">
@@ -32,12 +32,6 @@
                     </div>
                     <div class="left-side">
                         <div class="form-group">
-                            {{ form_label(form.section) }}
-                            {{ form_widget(form.section) }}
-                        </div>
-                    </div>
-                    <div class="left-side">
-                        <div class="form-group">
                             {{ form_label(form.category) }}
                             {{ form_widget(form.category) }}
                         </div>
@@ -50,7 +44,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="clear"></div>
 
     <div class="col-md-12">
@@ -59,7 +53,6 @@
                 <tr class="gray">
                     <th>Nom Prénom</th>
                     <th>N° license</th>
-                    <th>Section</th>
                     <th>Catégorie</th>
                     <th>Edit.</th>
                 </tr>
@@ -69,7 +62,6 @@
                     <tr class="{% if loop.index % 2 %}odd{% endif %}">
                         <th>{{ member.lastName|upper ~ ' ' ~ member.firstName|title }}</th>
                         <th>{{ member.licenceNum }}</th>
-                        <th>{{ refSectionsLabel[member.section]|default() }}</th>
                         <th>{{ refCategoriesLabel[member.category]|default() }}</th>
                         <th>
                             <a href="{{ path('lcdp_admin_member_edit', {'id': member.id}) }}">
@@ -83,4 +75,3 @@
     </div>
 
 {% endblock %}
-    

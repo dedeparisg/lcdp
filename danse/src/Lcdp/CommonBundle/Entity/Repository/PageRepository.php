@@ -31,10 +31,6 @@ class PageRepository extends EntityRepository
                 $query->andWhere('p.title LIKE :title');
                 $query->setParameter('title', '%' . $filters['title'] . '%');
             }
-            if (isset($filters['section']) && !empty($filters['section'])) {
-                $query->andWhere('p.section IN (:section)');
-                $query->setParameter('section', $filters['section']);
-            }
             if (isset($filters['is_published']) && in_array($filters['is_published'], array('0', '1'))) {
                 $query->andWhere('p.isPublished = :published');
                 $query->setParameter('published', $filters['is_published']);

@@ -24,7 +24,6 @@ class MemberController extends BaseController
             new MemberFiltersForm(),
             null,
             array(
-                'sections' => $this->getParameter('ref_members_sections'),
                 'categories' => $this->getParameter('ref_members_categories')
             )
         );
@@ -35,7 +34,6 @@ class MemberController extends BaseController
 
         return array(
             'members' => $members,
-            'refSectionsLabel' => $this->getParameter('ref_members_sections_label'),
             'refCategoriesLabel' => $this->getParameter('ref_members_categories_label'),
             'form' => $form->createView()
         );
@@ -64,12 +62,10 @@ class MemberController extends BaseController
             new MemberForm(),
             $member,
             array(
-                'sections' => $this->getParameter('ref_members_sections'),
                 'categories' => $this->getParameter('ref_members_categories')
             )
         );
 
-        $form['section']->setData($member->getSection());
         $form['category']->setData($member->getCategory());
 
         $form->handleRequest($request);
@@ -77,7 +73,6 @@ class MemberController extends BaseController
         if ($form->isValid()) {
             $formData = $request->get('member_form');
             $this->modifiedAt = new DateTime();
-            $member->setSection($formData['section']);
             $member->setCategory($formData['category']);
 
             $this->persist($member, true);

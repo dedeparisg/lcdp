@@ -34,10 +34,6 @@ class NewsRepository extends EntityRepository
                 $query->andWhere('n.title LIKE :title');
                 $query->setParameter('title', '%' . $filters['title'] . '%');
             }
-            if (isset($filters['section']) && !empty($filters['section'])) {
-                $query->andWhere('n.section IN (:section)');
-                $query->setParameter('section', $filters['section']);
-            }
             if (isset($filters['is_published']) && in_array($filters['is_published'], array('0', '1'))) {
                 $query->andWhere('n.isPublished = :published');
                 $query->setParameter('published', $filters['is_published']);

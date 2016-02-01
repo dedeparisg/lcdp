@@ -31,17 +31,6 @@ class PageForm extends AbstractType
         );
 
         $builder->add(
-            'section',
-            'choice',
-            array(
-                'choices' => $options['sections'],
-                'label' => "* Section : ",
-                'mapped' => false,
-                'empty_value' => '- Sélectionner -'
-            )
-        );
-
-        $builder->add(
             'intro',
             null,
             array(
@@ -65,9 +54,7 @@ class PageForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
-                'sections' => null
-            )
+            array()
         );
     }
 

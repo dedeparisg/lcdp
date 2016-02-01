@@ -41,13 +41,6 @@ class Page
     protected $content;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="section", type="smallint", nullable=false)
-     */
-    protected $section;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
@@ -252,52 +245,6 @@ class Page
     }
 
     /**
-     * Set section
-     *
-     * @param integer $section
-     * @return Page
-     */
-    public function setSection($section)
-    {
-        $this->section = $section;
-
-        return $this;
-    }
-
-    /**
-     * Get section
-     *
-     * @return integer
-     */
-    public function getSection()
-    {
-        return $this->section;
-    }
-
-    /**
-     * Set rubrique
-     *
-     * @param integer $rubrique
-     * @return Page
-     */
-    public function setRubrique($rubrique)
-    {
-        $this->rubrique = $rubrique;
-
-        return $this;
-    }
-
-    /**
-     * Get rubrique
-     *
-     * @return integer
-     */
-    public function getRubrique()
-    {
-        return $this->rubrique;
-    }
-
-    /**
      * Set publicatedAt
      *
      * @param \DateTime $publicatedAt
@@ -359,7 +306,7 @@ class Page
     /**
      * Get isPublished
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsPublished()
     {

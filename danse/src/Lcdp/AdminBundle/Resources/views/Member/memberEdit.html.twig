@@ -11,7 +11,7 @@
         <li class="active">Nouveau membre</li>
     {% endif %}
 {% endblock %}
-        
+
 {% block content %}
     {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
         'back_list_url' : path('lcdp_admin_members'),
@@ -38,10 +38,6 @@
                     {{ form_widget(form.licenceNum) }}
                 </div>
                 <div>
-                    {{ form_label(form.section) }}
-                    {{ form_widget(form.section) }}
-                </div>
-                <div>
                     {{ form_label(form.category) }}
                     {{ form_widget(form.category) }}
                 </div>
@@ -59,4 +55,3 @@
 
     <div class="clear"></div>
 {% endblock %}
-    

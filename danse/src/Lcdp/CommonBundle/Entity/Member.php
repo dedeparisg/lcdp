@@ -50,13 +50,6 @@ class Member
     /**
      * @var integer
      *
-     * @ORM\Column(name="section", type="smallint", nullable=false)
-     */
-    protected $section;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="category", type="smallint", nullable=true)
      */
     protected $category;

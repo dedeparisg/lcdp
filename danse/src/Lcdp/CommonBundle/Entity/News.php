@@ -59,13 +59,6 @@ class News
     protected $content;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="section", type="smallint", nullable=false)
-     */
-    protected $section;
-
-    /**
      * @var \Boolean
      *
      * @ORM\Column(name="is_published", type="boolean", nullable=false)
@@ -303,98 +296,6 @@ class News
     public function getIsDeleted()
     {
         return $this->isDeleted;
-    }
-
-    /**
-     * Set sections
-     *
-     * @param \Lcdp\CommonBundle\Entity\RefSection $sections
-     * @return News
-     */
-    public function setSections(\Lcdp\CommonBundle\Entity\RefSection $sections = null)
-    {
-        $this->sections = $sections;
-
-        return $this;
-    }
-
-    /**
-     * Get sections
-     *
-     * @return \Lcdp\CommonBundle\Entity\RefSection
-     */
-    public function getSections()
-    {
-        return $this->sections;
-    }
-
-    /**
-     * Set rubriques
-     *
-     * @param \Lcdp\CommonBundle\Entity\RefRubrique $rubriques
-     * @return News
-     */
-    public function setRubriques(\Lcdp\CommonBundle\Entity\RefRubrique $rubriques = null)
-    {
-        $this->rubriques = $rubriques;
-
-        return $this;
-    }
-
-    /**
-     * Get rubriques
-     *
-     * @return \Lcdp\CommonBundle\Entity\RefRubrique
-     */
-    public function getRubriques()
-    {
-        return $this->rubriques;
-    }
-
-    /**
-     * Set section
-     *
-     * @param integer $section
-     * @return News
-     */
-    public function setSection($section)
-    {
-        $this->section = $section;
-
-        return $this;
-    }
-
-    /**
-     * Get section
-     *
-     * @return integer
-     */
-    public function getSection()
-    {
-        return $this->section;
-    }
-
-    /**
-     * Set rubrique
-     *
-     * @param integer $rubrique
-     * @return News
-     */
-    public function setRubrique($rubrique)
-    {
-        $this->rubrique = $rubrique;
-
-        return $this;
-    }
-
-    /**
-     * Get rubrique
-     *
-     * @return integer
-     */
-    public function getRubrique()
-    {
-        return $this->rubrique;
     }
 
     /**
