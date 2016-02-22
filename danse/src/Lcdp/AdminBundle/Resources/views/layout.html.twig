@@ -34,7 +34,7 @@
 
         <div class="container">
             <h1>{% block introduction %}{% endblock %}</h1>
-        
+
             {# Flash Messages #}
             {#{% for type, flashMessages in app.session.flashbag.all() %}
                 {% for flashMessage in flashMessages %}
@@ -43,8 +43,10 @@
                     </div>
                 {% endfor %}
             {% endfor %}#}
-            
+
             {% block content %}{% endblock %}
         </div>
     </section>
 {% endblock %}
+
+{% block javascripts %}{% endblock %}

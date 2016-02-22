@@ -1,0 +1,68 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li>Gestion de contenus</li>
+    <li class="active">Pages statiques</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        {% include 'LcdpAdminBundle:Partial:form_filters.html.twig' with {
+            'filter_title': 'Gestion des pages statiques',
+            'filter_url': path('lcdp_admin_page_edit'),
+            'filter_button': 'Ajouter une page'
+        } %}
+
+        <div class="clear"></div>
+
+        <div class="col-md-12">
+            <form id="pageListForm" method="POST" {#href="{{ path() }}"#}>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="gray">
+                            <th></th>
+                            <th>Titre</th>
+                            <th>Publié</th>
+                            <th>Date de publication</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for page in pages %}
+                            <tr class="{% if loop.index % 2 %}odd{% endif %}">
+                                <td>
+                                    {% if not loop.first %}<span class="move-up-page">plus</span> -{% endif %}
+                                    {% if not loop.last %}<span class="move-down-page">moins</span>{% endif %}
+                                    <input type="text" value="{{ loop.index }}"/>
+                                </td>
+                                <td class='title'>{{ page.title }}</td>
+                                <td class='publish'>{% if page.isPublished %}Oui{% else %}Non{% endif %}</td>
+                                <td class='date'>{{ page.publicatedAt|date('d-m-Y \\à H:i:s') }}</td>
+                                <td class="actions">
+                                    <a href="{{ path('lcdp_admin_page_edit', {'id': page.id}) }}">
+                                        <i class="fa fa-pencil"></i> Modifier
+                                    </a>
+                                    {% if page.canBeDeleted%}
+                                        <a href="{{ path('lcdp_admin_content_soft_delete', {'content': 'Page','id': page.id}) }}" onclick="return confirm('Souhaitez-vous supprimer cette page ?');">
+                                            <i class="fa fa-ban"></i> Désactiver
+                                        </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts '@LcdpAdminBundle/Resources/public/js/Page/list.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

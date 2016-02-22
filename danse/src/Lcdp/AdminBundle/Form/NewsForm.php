@@ -48,7 +48,10 @@ class NewsForm extends AbstractType
             null,
             array(
                 'label' => "* Contenu : ",
-                'attr' => array('class' => 'wysiwyg')
+                'attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'advanced'
+                )
             )
         );
 
@@ -56,7 +59,8 @@ class NewsForm extends AbstractType
             'file',
             'file',
             array(
-                'label' => "Image : "
+                'label' => "Image : ",
+                'required' => false
             )
         );
     }

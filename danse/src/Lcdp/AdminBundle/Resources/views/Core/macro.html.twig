@@ -1,0 +1,32 @@
+{% macro pageContent_prototype(value) %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title"> <i class="fa fa-pencil"></i> Edition d'une section</div>
+                    <a class='add_tag_link' href='#'>ajout</a>
+                    <a class="supp_tag_link" href="#">supp</a>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-xs-12 margin-bottom-sm">
+                            {{ form_label(value.title) }}
+                        </div>
+                        <div class="col-xs-12">
+                            {{ form_widget(value.title, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-12 margin-bottom-sm">
+                            {{ form_label(value.content) }}
+                        </div>
+                        <div class="col-xs-12">
+                            {{ form_widget(value.content) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

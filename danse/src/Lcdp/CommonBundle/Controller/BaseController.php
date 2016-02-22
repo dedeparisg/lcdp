@@ -23,8 +23,8 @@ class BaseController extends Controller
     /**
      * Permet de persister une entité et éxecute le flush si flush est à true
      *
-     * @param object  $entity (un Entity)
-     * @param boolean $flash
+     * @param object  $entity L'entité à persisté
+     * @param boolean $flush  Doit-on sauvegarger l'entité courante ou pas ?
      *
      * @author André Tapia <contact@andretapia.com>
      */
@@ -41,8 +41,8 @@ class BaseController extends Controller
     /**
      * Permet de supprimer une entité et éxecute le flush si flush est à true
      *
-     * @param object  $entity (un Entity)
-     * @param boolean $flash
+     * @param object  $entity L'entité à supprimer
+     * @param boolean $flush  Doit-on sauvegarger la suppression ou pas ?
      *
      * @author André Tapia <contact@andretapia.com>
      */

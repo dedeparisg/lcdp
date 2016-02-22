@@ -24,8 +24,7 @@
                         <th>Titre</th>
                         <th>Publié</th>
                         <th>Date de publication</th>
-                        <th>Edit.</th>
-                        <th>Supp.</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,14 +33,12 @@
                             <td>{{ page.title }}</td>
                             <td>{{ (page.isPublished) ? 'Oui' : 'Non' }}</td>
                             <td>{{ page.publicatedAt|date('d-m-Y') }}</td>
-                            <td>
+                            <td class="actions">
                                 <a href="{{ path('lcdp_admin_news_edit', {'id': page.id}) }}">
-                                    <img src="{{ asset('bundles/lcdpadmin/images/picto_editer.png') }}" title="Editer l'actualité"/>
+                                    <i class="fa fa-pencil"></i> Modifier
                                 </a>
-                            </td>
-                            <td>
-                                <a class="softDelete" href="{{ path('lcdp_admin_content_soft_delete', {'content': 'News', 'id': page.id}) }}" onclick="return confirm('Souhaitez-vous supprimer cette actualité ?');">
-                                    <img src="{{ asset('bundles/lcdpadmin/images/picto_supprimer.png') }}" title="Supprimer l'actualité" class="hand" />
+                                <a href="{{ path('lcdp_admin_content_soft_delete', {'content': 'News','id': page.id}) }}" onclick="return confirm('Souhaitez-vous supprimer cette actualité ?');">
+                                    <i class="fa fa-ban"></i> Désactiver
                                 </a>
                             </td>
                         </tr>

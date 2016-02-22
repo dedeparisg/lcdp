@@ -23,6 +23,9 @@ security:
                     kikou: { password: lol, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt|error)|css|img|js)/
+            security: false
         admin_login:
             pattern: ^/admin/login$
             anonymous:  ~

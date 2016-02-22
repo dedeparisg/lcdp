@@ -1,10 +1,10 @@
 /* Author: Louis Holladay
  * Website: AdminDesigns.com
- * Last Updated: 01/01/14 
- 
+ * Last Updated: 01/01/14
+
  * This file is reserved for changes done on
  * a per-page basis. To create independent
- * page layouts an additional class was added 
+ * page layouts an additional class was added
  * to the pages body. For example login.html
  * has an extra body class of ".login-page"
 
@@ -23,7 +23,7 @@
    * messages.html
    * timeline.html
  *
- 
+
  * Pages not listed here were made using 100%
  * reusable styles placed in theme.css
 
@@ -34,7 +34,7 @@
 /* ----------------------------------------
    "MINIMAL" PAGES
    Pages classified as "minimal" are those
-   which do not have sidebar or header. 
+   which do not have sidebar or header.
    This simply adjusts the background.
 -----------------------------------------*/
 body.minimal {
@@ -50,7 +50,7 @@ body.error-page #search-widget {
 }
 /* Error text */
 body.error-page .error-icon {
-	color: #ee4e3c;	
+	color: #ee4e3c;
 	font-size: 80px;
 	position: relative;
 	top: -10px;
@@ -70,7 +70,7 @@ body.coming-soon-page {
 	background: #f6f6f6;
 }
 body.coming-soon-page #main {
-	background:url(../img/patterns/coming-soon-bg.jpg) no-repeat center -60px;	
+	background:url(../img/patterns/coming-soon-bg.jpg) no-repeat center -60px;
 }
 body.coming-soon-page #page-logo {
     width: 250px;
@@ -250,16 +250,16 @@ body.invoice-page .table-condensed tbody tr td:last-child {
 }
 /* Summary table */
 body.invoice-page #invoice-summary {
-	margin: 0;	
+	margin: 0;
 }
 /* Summary table header */
 body.invoice-page #invoice-summary thead th:first-child {
 	text-align: right;
 	width: 200px;
-	padding-right: 55px;	
+	padding-right: 55px;
 }
 body.invoice-page #invoice-summary thead th:last-child {
-	width: 50px;	
+	width: 50px;
 	font-weight: 400;
 }
 /* Summary table rows */
@@ -269,7 +269,7 @@ body.invoice-page #invoice-summary tbody tr td {
 body.invoice-page #invoice-summary tbody tr td:first-child {
 	text-align: right;
 	width: 200px;
-	padding-right: 55px;	
+	padding-right: 55px;
 }
 /* Summary table last row */
 body.invoice-page #invoice-summary tbody tr:last-child td {
@@ -295,7 +295,7 @@ body.invoice-page .panel-sidemenu + .panel-body {
 }
 @media (max-width: 1000px) {
 	body.invoice-page .panel-sidemenu {
-		display: none;	
+		display: none;
 	}
 	body.invoice-page .panel-sidemenu + .panel-body {
 		width: 93%;
@@ -319,7 +319,7 @@ body.gallery-page .panel-menu .tab-content {
 body.dynamic-gallery-page .fade.in {
 	opacity: 1 !important;
 }
-/* Additional Classes applied to Jquery FileUploader 
+/* Additional Classes applied to Jquery FileUploader
  * to enable sorting and filtering on images */
 body.dynamic-gallery-page .mixitups {
 	overflow: auto;
@@ -415,7 +415,7 @@ body.validation-page label.error {
 	font-weight: 600;
 	color: #d9534f;
 	font-size: 12px;
-    margin: 6px 0 0 2px;  
+    margin: 6px 0 0 2px;
 }
 
 /* ------------------------
@@ -594,13 +594,13 @@ body.messages-page .panel-menu button {
 	margin-right: 8px;}
 body.messages-page .panel-menu button:last-child {
 	margin-right: 0px;
-} 
+}
 body.messages-page .messenger-header-actions .search-bar {
-  max-width: 150px;  
+  max-width: 150px;
   position: relative;
   top: 2px;
   margin-right: 4px;
-}   
+}
 
 body.messages-page .email-menu .table tbody > tr > td {
     padding: 10px 8px;
@@ -732,19 +732,19 @@ body.timeline-page #main {
 #timeline > .row > .right-column { margin-top: 60px }
 #timeline .ui-sortable-disabled .panel { cursor: auto }
 /* Timeline Responsive Styles */
-@media (max-width: 770px) { 
+@media (max-width: 770px) {
     #timeline > .row > .left-column .panel { margin-right: 0 }
     #timeline > .row > .right-column .panel { margin-left: 0 }
     #timeline > .row .panel:before { display: none }
     #timeline > .row .panel:after { display: none }
 }
 #timeline .tab-content {
-	min-height: 0;	
+	min-height: 0;
 }
 /* form creation styles */
 #timeline .map {
 	width: 100%;
-	height: 300px;	
+	height: 300px;
 	border: 1px solid #AAA;
 }
 #timeline-image-form .fileupload-preview { text-align: center }
@@ -758,14 +758,21 @@ body.timeline-page #main {
 	min-height: 150px;
 	min-width: 300px;
 }
-#timeline .ui-sortable-placeholder {  
-	visibility: visible !important; 
+#timeline .ui-sortable-placeholder {
+	visibility: visible !important;
 	margin-bottom: 35px;
-	background: #DDD; 
-	
+	background: #DDD;
+
 	border: 1px solid #bbb;
-	border-radius: 3px; 
+	border-radius: 3px;
 	-webkit-box-shadow: 0 1px 3px #BBB inset, 1px 1px 0px #fff;
-	box-shadow: 0 1px 3px #BBB inset, 1px 1px 0px #fff; 
+	box-shadow: 0 1px 3px #BBB inset, 1px 1px 0px #fff;
 }
 #timeline .ui-sortable-placeholder * { visibility: hidden; }
+
+td.actions a {
+	border: 1px solid #cacdcf;
+	border-radius: 5px;
+	margin-right: 5px;
+	padding: 1px 5px;
+}

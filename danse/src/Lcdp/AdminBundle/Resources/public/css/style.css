@@ -96,7 +96,7 @@ fieldset label {
     width: 744px;
 }
 
-.colonne_centre_gray form label {    
+.colonne_centre_gray form label {
     color: #38436B;
     font-weight: bold;
     margin-top: 5px;
@@ -104,11 +104,11 @@ fieldset label {
     display: block;
     float: left;
 }
-.full-size {    
+.full-size {
     width: 100% !important;
 }
 .colonne_centre_gray form input,
-.colonne_centre_gray form select{    
+.colonne_centre_gray form select{
     margin-top: 5px;
     width: 520px;
     display: block;

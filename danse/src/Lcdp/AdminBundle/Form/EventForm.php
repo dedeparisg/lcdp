@@ -40,10 +40,13 @@ class EventForm extends AbstractType
 
         $builder->add(
             'content',
-            'textarea',
+            null,
             array(
                 'label' => "* Contenu : ",
-                'attr' => array('class' => 'tinymce','data-theme' => 'advanced')
+                'attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'advanced'
+                )
             )
         );
 

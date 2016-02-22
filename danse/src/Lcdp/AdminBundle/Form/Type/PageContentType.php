@@ -1,40 +1,44 @@
 <?php
 
-namespace Lcdp\AdminBundle\Form;
+namespace Lcdp\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author André Tapia <contact@andretapia.com>
+  * @author André Tapia <contact@andretapia.com>
  */
-class FiltersForm extends AbstractType
+class PageContentType extends AbstractType
 {
 
     /**
      * Cree ou edite un intitulé de poste
      *
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder->add(
             'title',
             null,
             array(
-                'label' => "Intitulé : "
+                'label' => "* Titre : ",
+                'attr' => array('maxlength' => 255),
             )
         );
 
         $builder->add(
-            'isPublished',
-            'choice',
+            'content',
+            null,
             array(
-                'label' => "Status : ",
-                'choices' => array('1' => 'Publié', '0' => 'Non publié'),
-                'empty_value' => '- Sélectionner -'
+                'label' => "* Contenu : ",
+                'attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'advanced'
+                )
             )
         );
     }
@@ -45,7 +49,9 @@ class FiltersForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array()
+            array(
+                'data_class' => 'Lcdp\CommonBundle\Entity\PageContent'
+            )
         );
     }
 
@@ -54,6 +60,6 @@ class FiltersForm extends AbstractType
      */
     public function getName()
     {
-        return 'filters_form';
+        return 'page_content';
     }
 }

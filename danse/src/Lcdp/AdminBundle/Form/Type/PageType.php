@@ -1,15 +1,15 @@
 <?php
 
-namespace Lcdp\AdminBundle\Form;
+namespace Lcdp\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
-  * @author André Tapia <contact@andretapia.com>
+ * @author André Tapia <contact@andretapia.com>
  */
-class PageForm extends AbstractType
+class PageType extends AbstractType
 {
 
     /**
@@ -30,22 +30,17 @@ class PageForm extends AbstractType
             )
         );
 
-        $builder->add(
-            'intro',
-            null,
-            array(
-                'label' => "Introduction : ",
-                'required' => false,
-            )
-        );
-
-        $builder->add(
-            'content',
-            null,
-            array(
-                'label' => "* Contenu : "
-            )
-        );
+        $builder
+            ->add(
+                'pageContents',
+                'collection',
+                array(
+                    'type' => new PageContentType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'prototype' => true
+                )
+            );
     }
 
     /**
@@ -54,7 +49,9 @@ class PageForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array()
+            array(
+                'data_class' => 'Lcdp\CommonBundle\Entity\Page'
+            )
         );
     }
 
@@ -63,6 +60,6 @@ class PageForm extends AbstractType
      */
     public function getName()
     {
-        return 'page_form';
+        return 'page';
     }
 }

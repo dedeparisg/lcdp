@@ -1,15 +1,14 @@
 <?php
 namespace Lcdp\CommonBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="page")
- * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\PageRepository")
+ * @ORM\Table(name="page_content")
+ * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\PageContentRepository")
  */
-class Page
+class PageContent
 {
     /**
      * @var integer
@@ -21,11 +20,27 @@ class Page
     protected $id;
 
     /**
+     * Liaison vers la page
+     * @var Page $page
+     *
+     * @ORM\ManyToOne(targetEntity="Lcdp\CommonBundle\Entity\Page", inversedBy="pageContents")
+     * @ORM\JoinColumn(name="page_id", referencedColumnName="id")
+     */
+    private $page;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=256)
      */
     protected $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text")
+     */
+    protected $content;
 
     /**
      * @var \DateTime
@@ -49,40 +64,11 @@ class Page
     protected $isPublished;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="publicated_at", type="datetime", nullable=true)
-     */
-    protected $publicatedAt;
-
-    /**
-     * @var \Boolean
-     *
-     * @ORM\Column(name="can_be_deleted", type="boolean", nullable=false)
-     */
-    protected $canBeDeleted;
-
-    /**
-     * @var smallint $position
-     *
-     * @ORM\Column(name="position", type="smallint", nullable=false)
-     */
-    protected $position;
-
-    /**
      * @var \Boolean
      *
      * @ORM\Column(name="is_deleted", type="boolean", nullable=false)
      */
     protected $isDeleted;
-
-    /**
-     * Liaison vers les contenus des pages
-     * @var ArrayCollection $pageContents
-     *
-     * @ORM\OneToMany(targetEntity="Lcdp\CommonBundle\Entity\PageContent", mappedBy="page", cascade={"all"})
-     */
-    protected $pageContents;
 
     /**
      * Constructor
@@ -91,10 +77,8 @@ class Page
     {
         $this->isDeleted = 0;
         $this->isPublished = 0;
-        $this->canBeDeleted = true;
         $this->createdAt = new \DateTime();
         $this->modifiedAt = new \DateTime();
-        $this->pageContents = new ArrayCollection();
     }
 
     /**
@@ -111,7 +95,7 @@ class Page
      * Set title
      *
      * @param string $title
-     * @return StaticContent
+     * @return PageContent
      */
     public function setTitle($title)
     {
@@ -131,10 +115,33 @@ class Page
     }
 
     /**
+     * Set content
+     *
+     * @param string $content
+     * @return PageContent
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return StaticContent
+     * @return PageContent
      */
     public function setCreatedAt($createdAt)
     {
@@ -159,7 +166,7 @@ class Page
      * Set modifiedAt
      *
      * @param \DateTime $modifiedAt
-     * @return StaticContent
+     * @return PageContent
      */
     public function setModifiedAt($modifiedAt)
     {
@@ -182,7 +189,7 @@ class Page
      * Set isDeleted
      *
      * @param boolean $isDeleted
-     * @return StaticContent
+     * @return PageContent
      */
     public function setIsDeleted($isDeleted)
     {
@@ -199,52 +206,6 @@ class Page
     public function getIsDeleted()
     {
         return $this->isDeleted;
-    }
-
-    /**
-     * Set publicatedAt
-     *
-     * @param \DateTime $publicatedAt
-     * @return Page
-     */
-    public function setPublicatedAt($publicatedAt)
-    {
-        $this->publicatedAt = $publicatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get publicatedAt
-     *
-     * @return \DateTime
-     */
-    public function getPublicatedAt()
-    {
-        return $this->publicatedAt;
-    }
-
-    /**
-     * Set canBeDeleted
-     *
-     * @param boolean $canBeDeleted
-     * @return Page
-     */
-    public function setCanBeDeleted($canBeDeleted)
-    {
-        $this->canBeDeleted = $canBeDeleted;
-
-        return $this;
-    }
-
-    /**
-     * Get canBeDeleted
-     *
-     * @return boolean
-     */
-    public function getCanBeDeleted()
-    {
-        return $this->canBeDeleted;
     }
 
     /**
@@ -271,52 +232,25 @@ class Page
     }
 
     /**
-     * Add pageContents
+     * Set page
      *
-     * @param PageContent $pageContents
-     * @return Person
+     * @param \Lcdp\CommonBundle\Entity\Page $page
+     * @return PageContent
      */
-    public function addPageContent(PageContent $pageContents)
+    public function setPage(\Lcdp\CommonBundle\Entity\Page $page = null)
     {
-        $pageContents->setPage($this);
-        $this->pageContents[] = $pageContents;
+        $this->page = $page;
 
         return $this;
     }
 
     /**
-     * Remove pageContents
+     * Get page
      *
-     * @param PageContent $pageContents
+     * @return \Lcdp\CommonBundle\Entity\Page
      */
-    public function removePageContent(PageContent $pageContents)
+    public function getPage()
     {
-        $this->pageContents->removeElement($pageContents);
-    }
-
-    /**
-     * Get pageContents
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPageContents()
-    {
-        return $this->pageContents;
-    }
-
-    /**
-     * @return smallint
-     */
-    public function getPosition()
-    {
-        return $this->position;
-    }
-
-    /**
-     * @param smallint $position
-     */
-    public function setPosition($position)
-    {
-        $this->position = $position;
+        return $this->page;
     }
 }
