@@ -776,3 +776,10 @@ td.actions a {
 	margin-right: 5px;
 	padding: 1px 5px;
 }
+
+.move-up-page, .move-down-page {
+	cursor: pointer;
+}
+.move-up-page:hover, .move-down-page:hover {
+	color: #428bca;
+}

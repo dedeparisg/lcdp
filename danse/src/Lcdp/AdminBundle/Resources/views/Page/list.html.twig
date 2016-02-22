@@ -22,7 +22,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr class="gray">
-                            <th></th>
+                            <th width="45"></th>
                             <th>Titre</th>
                             <th>Publié</th>
                             <th>Date de publication</th>
@@ -31,11 +31,11 @@
                     </thead>
                     <tbody>
                         {% for page in pages %}
-                            <tr class="{% if loop.index % 2 %}odd{% endif %}">
-                                <td>
-                                    {% if not loop.first %}<span class="move-up-page">plus</span> -{% endif %}
-                                    {% if not loop.last %}<span class="move-down-page">moins</span>{% endif %}
-                                    <input type="text" value="{{ loop.index }}"/>
+                            <tr class="{% if loop.index % 2 %}odd{% endif %}" data-pageid="{{ page.id }}">
+                                <td class="event">
+                                    {% if not loop.first %}<span class="move-up-page fa fa-chevron-up"></span>{% else %}&nbsp;&nbsp;&nbsp;{% endif %}
+                                    {% if not loop.last %}<span class="move-down-page fa fa-chevron-down"></span>{% endif %}
+                                    <input type="hidden" value="{{ loop.index }}"/>
                                 </td>
                                 <td class='title'>{{ page.title }}</td>
                                 <td class='publish'>{% if page.isPublished %}Oui{% else %}Non{% endif %}</td>

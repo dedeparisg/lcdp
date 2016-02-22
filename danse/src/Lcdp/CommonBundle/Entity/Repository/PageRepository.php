@@ -23,7 +23,8 @@ class PageRepository extends EntityRepository
     public function getList($filters)
     {
         $query = $this->createQueryBuilder('p')
-                ->where('p.isDeleted = 0');
+            ->where('p.isDeleted = 0')
+            ->orderBy('p.position');
 
         if (!empty($filters)) {
 

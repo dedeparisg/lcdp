@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             // Others Bundles
             new Webnet\Bundle\SwissArmyBundle\WebnetSwissArmyBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
             // Application Bundles
             new Lcdp\AdminBundle\LcdpAdminBundle(),

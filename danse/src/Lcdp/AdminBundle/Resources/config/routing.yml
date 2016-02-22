@@ -41,6 +41,13 @@ lcdp_admin_page_edit:
     requirements:
         id: "\d+"
 
+lcdp_admin_page_update:
+    pattern:  /page/update/
+    defaults: { _controller: LcdpAdminBundle:Page:updatePosition }
+    methods: [POST]
+    options:
+        expose: true
+
 lcdp_admin_news:
     pattern:  /actualites
     defaults: { _controller: LcdpAdminBundle:News:list }

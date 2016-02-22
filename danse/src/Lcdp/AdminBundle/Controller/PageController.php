@@ -8,6 +8,7 @@ use Lcdp\AdminBundle\Form\Type\PageType;
 use Lcdp\CommonBundle\Controller\BaseController;
 use Lcdp\CommonBundle\Entity\Page;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends BaseController
@@ -77,5 +78,42 @@ class PageController extends BaseController
             'form' => $form->createView(),
             'page' => $page
         );
+    }
+
+    /**
+     * Permet de
+     *
+     * @return JsonResponse
+     *
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public function updatePositionAction(Request $request)
+    {
+        // Récupération des pararmètres
+        $position1 = $request->request->get('position_1');
+        $position2 = $request->request->get('position_2');
+        $pageId1 = $request->request->get('page_1');
+        $pageId2 = $request->request->get('page_2');
+
+        if (empty($position1) || empty($position2) || empty($pageId1) || empty($pageId2)) {
+            return new JsonResponse(array('type' => 'error'));
+        }
+
+        // Récupération des pages
+        $page1 = $this->getRepository('Page')->find($pageId1);
+        $page2 = $this->getRepository('Page')->find($pageId2);
+
+        if (empty($page1) || empty($page2)) {
+            return new JsonResponse(array('type' => 'error'));
+        }
+
+        // Sauvegarde de la position
+        $page1->setPosition($position1);
+        $page2->setPosition($position2);
+        $this->persist($page1);
+        $this->persist($page2);
+        $this->flush();
+
+        return new JsonResponse(array('type' => 'success'));
     }
 }
