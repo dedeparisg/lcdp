@@ -23,7 +23,8 @@
         "beberlei/DoctrineExtensions": "^1.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "egulias/email-validator": "~1.2",
-        "stfalcon/tinymce-bundle": "dev-master"
+        "stfalcon/tinymce-bundle": "dev-master",
+        "friendsofsymfony/jsrouting-bundle": "^1.5"
     },
     "scripts": {
         "post-install-cmd": [
