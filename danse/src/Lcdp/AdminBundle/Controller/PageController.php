@@ -43,12 +43,11 @@ class PageController extends BaseController
      * @return array
      *
      * @Template
-     *
      * @author André Tapia <contact@andretapia.com>
      */
     public function editAction(Request $request, $id = null)
     {
-        if (is_null($id)) {
+        if ($isNew = is_null($id)) {
             $page = new Page();
         } else {
             $page = $this->getRepository('Page')->find($id);
@@ -63,12 +62,16 @@ class PageController extends BaseController
 
         if ($form->handleRequest($request) && $form->isValid()) {
             $page->setModifiedAt(new DateTime());
-
+            $page->setPosition(0);
+            
             foreach ($page->getPageContents() as $content) {
                 $content->setPage($page);
+                $this->persist($content);
             }
 
-            $this->persist($page, true);
+            $this->persist($page);
+            $this->flush();
+            
             $this->addFlashMessage('success');
 
             return $this->redirect($this->generateUrl('lcdp_admin_page_edit', array('id' => $page->getId())));
@@ -76,7 +79,8 @@ class PageController extends BaseController
 
         return array(
             'form' => $form->createView(),
-            'page' => $page
+            'page' => $page,
+            'isNew' => $isNew
         );
     }
 

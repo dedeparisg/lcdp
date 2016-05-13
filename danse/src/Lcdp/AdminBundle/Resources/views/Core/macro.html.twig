@@ -4,8 +4,8 @@
             <div class="panel">
                 <div class="panel-heading">
                     <div class="panel-title"> <i class="fa fa-pencil"></i> Edition d'une section</div>
-                    <a class='add_tag_link' href='#'>ajout</a>
                     <a class="supp_tag_link" href="#">supp</a>
+                    <a class='add_tag_link' href='#'>ajout</a>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
@@ -22,7 +22,7 @@
                             {{ form_label(value.content) }}
                         </div>
                         <div class="col-xs-12">
-                            {{ form_widget(value.content) }}
+                            {{ form_widget(value.content, {'attr': {'class': 'tinymce', 'data-theme': 'advanced'}}) }}
                         </div>
                     </div>
                 </div>

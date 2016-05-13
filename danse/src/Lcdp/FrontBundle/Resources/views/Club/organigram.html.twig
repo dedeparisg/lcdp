@@ -17,10 +17,7 @@
 {% block javascripts %}
     {{ parent() }}
 
-    {% javascripts
-        '@LcdpCommonBundle/Resources/public/js/jquery-1.10.2.min.js'
-        '@LcdpCommonBundle/Resources/public/js/organigramme/*'
-    %}
+    {% javascripts '@LcdpCommonBundle/Resources/public/js/organigramme/*' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 

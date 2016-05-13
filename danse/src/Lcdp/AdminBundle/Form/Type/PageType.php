@@ -7,7 +7,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author André Tapia <contact@andretapia.com>
+ * Class PageType
+ *
+ * @package Lcdp\AdminBundle\Form\Type
  */
 class PageType extends AbstractType
 {

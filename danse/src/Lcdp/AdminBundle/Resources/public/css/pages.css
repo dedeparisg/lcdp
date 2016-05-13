@@ -783,3 +783,8 @@ td.actions a {
 .move-up-page:hover, .move-down-page:hover {
 	color: #428bca;
 }
+
+.add_tag_link, .supp_tag_link {
+	float: right;
+	margin-right: 5px;
+}

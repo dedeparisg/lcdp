@@ -7,11 +7,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
-  * @author André Tapia <contact@andretapia.com>
+ * Class PageContentType
+ *
+ * @package Lcdp\AdminBundle\Form\Type
  */
 class PageContentType extends AbstractType
 {
-
     /**
      * Cree ou edite un intitulé de poste
      *
