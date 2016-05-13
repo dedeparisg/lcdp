@@ -2,22 +2,27 @@
 
 namespace Lcdp\FrontBundle\Service;
 
+use Doctrine\ORM\EntityManager;
 use Webnet\Bundle\SwissArmyBundle\Util\StringUtils;
 
 /**
- * Service global au site
+ * Class UtilsService
  *
- * @author André Tapia <atapia@webnet.fr>
+ * @package Lcdp\FrontBundle\Service
  */
 class UtilsService
 {
-
+    /**
+     * @var EntityManager $em
+     */
     protected $em;
 
     /**
-     * Constructeur du service Utils
+     * UtilsService constructor.
+     *
+     * @param EntityManager $em Le gestionnaire d'entité
      */
-    public function __construct($em)
+    public function __construct(EntityManager $em)
     {
         $this->em = $em;
     }
@@ -25,8 +30,8 @@ class UtilsService
     /**
      * Permet de générer un slug en s'assurant de l'unicité de celui-ci
      *
-     * @param string  Type de contenu
-     * @param string  Titre à slugifier
+     * @param string $contentType Type de contenu
+     * @param string $content     Titre à slugifier
      * @return string
      *
      * @author André Tapia <contact@andretapia.com>
@@ -37,16 +42,15 @@ class UtilsService
 
         $content = $this->em->getRepository('LcdpCommonBundle:' . $contentType)->getList(
             array(
-                'diff_id' => is_null($content->getId()) ? 0 : $content->getId(),
-                'section' => $content->getSection(),
-                'slug' => $slug,
-                'is_published' => true
+                'isPublished' => true
             )
         );
 
         if (!empty($content)) {
             for ($i = 1; $i < 1000; $i++) {
-                $content = $this->em->getRepository('LcdpCommonBundle:' . $contentType)->findBy(array('slug' => $slug . '-' . $i));
+                $content = $this->em->getRepository('LcdpCommonBundle:' . $contentType)->findBy(
+                    array('slug' => $slug . '-' . $i)
+                );
 
                 if (empty($content)) {
                     $slug = $slug . '-' . $i;

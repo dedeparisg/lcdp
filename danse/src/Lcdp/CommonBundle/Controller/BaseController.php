@@ -94,13 +94,16 @@ class BaseController extends Controller
      * Raccourci afin d'ajouter un message flash
      *
      * @param string $type    Type du message flash
-     * @param string $message Message
+     * @param string $message Message à afficher
      *
      * @author André Tapia <atapia@webnet.fr>
      */
     protected function addFlashMessage($type, $message = 'Enregistrement effectué !')
     {
-        $this->get('session')->getFlashBag()->add($type, $message);
+        // On vérifie que le type est bien définit dans les classes boostrap
+        if (in_array($type, array('success', 'danger', 'warning', 'info'))) {
+            $this->get('session')->getFlashBag()->add($type, $message);
+        }
     }
 
     /**

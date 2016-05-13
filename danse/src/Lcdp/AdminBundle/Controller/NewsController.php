@@ -9,6 +9,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Lcdp\CommonBundle\Entity\News;
 
+/**
+ * Class NewsController
+ *
+ * @package Lcdp\AdminBundle\Controller
+ */
 class NewsController extends BaseController
 {
     /**
@@ -42,12 +47,10 @@ class NewsController extends BaseController
      * @return array
      *
      * @Template
-     *
      * @author André Tapia <contact@andretapia.com>
      */
     public function editAction(Request $request, $id = null)
     {
-
         if (is_null($id)) {
             $news = new News();
         } else {
@@ -61,25 +64,38 @@ class NewsController extends BaseController
 
         $form = $this->createForm(new NewsForm(), $news);
 
-        if ($form->isValid()) {
+        if ($form->handleRequest($request) && $request->getMethod() == "POST") {
 
-            $file = $request->files->get('news_form');
+            if ($form->isValid()) {
 
-            // On génère l'uid du fichier
-            $uid = $this->get('lcdp.filestore')->generateUniqueId(strtolower($file['file']->getClientOriginalExtension()));
-            // On ajoute le média dans le filestore
-            $this->get('lcdp.filestore')->addMedia($file['file'], $uid,
-                strtolower($file['file']->getClientOriginalExtension()));
-            $news->setImage($uid);
+                $file = $request->files->get('news_form');
 
-            // On s'occupe des données saisie
-            $this->modifiedAt = new \DateTime();
-            $news->setSlug($this->get('lcdp.utils.service')->generateSlug('News', $news));
+                if (!is_null($file['file'])) {
+                    // On génère l'uid du fichier
+                    $uid = $this->get('lcdp.filestore')->generateUniqueId(strtolower($file['file']->getClientOriginalExtension()));
 
-            $this->persist($news, true);
-            $this->addFlashMessage('success');
+                    // On ajoute le média dans le filestore
+                    $this->get('lcdp.filestore')->addMedia(
+                        $file['file'],
+                        $uid,
+                        strtolower($file['file']->getClientOriginalExtension())
+                    );
+                    $news->setImage($uid);
+                }
 
-            return $this->redirect($this->generateUrl('lcdp_admin_news_edit', array('id' => $news->getId())));
+                // On s'occupe des données saisie
+                $this->modifiedAt = new \DateTime();
+                $news->setSlug($this->get('lcdp.utils.service')->generateSlug('News', $news));
+
+                $this->persist($news);
+                $this->flush();
+
+                $this->addFlashMessage('success');
+
+                return $this->redirect($this->generateUrl('lcdp_admin_news_edit', array('id' => $news->getId())));
+            } else {
+                $this->addFlashMessage('danger', "Une erreur est survenue lors de l'enregistrement de l'actualité.");
+            }
         }
 
         return array(
@@ -88,5 +104,4 @@ class NewsController extends BaseController
             'imageUrl' => $this->get('lcdp.filestore')->getUrl($news->getImage(), 'jpg')
         );
     }
-
 }

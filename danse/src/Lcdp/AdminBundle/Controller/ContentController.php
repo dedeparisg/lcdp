@@ -6,16 +6,19 @@ use DateTime;
 use Lcdp\AdminBundle\Form\AlbumForm;
 use Lcdp\AdminBundle\Form\EventForm;
 use Lcdp\AdminBundle\Form\FiltersForm;
-use Lcdp\AdminBundle\Form\NewsForm;
 use Lcdp\CommonBundle\Controller\BaseController;
 use Lcdp\CommonBundle\Entity\Album;
 use Lcdp\CommonBundle\Entity\Event;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class ContentController
+ *
+ * @package Lcdp\AdminBundle\Controller
+ */
 class ContentController extends BaseController
 {
-
     /**
      * Permet de lister les événements
      *
@@ -134,7 +137,7 @@ class ContentController extends BaseController
         $page->setPublicatedAt(($status) ? new DateTime() : null);
         $this->persist($page, true);
 
-        $this->successFlash("Le contenu vient d'être " . (($status) ? 'publié' : 'dépublié') . " !");
+        $this->addFlashMessage('success', "Le contenu vient d'être " . (($status) ? 'publié' : 'dépublié') . " !");
 
         return $this->redirect(
             $this->generateUrl('lcdp_admin_' . strtolower($content) . '_edit', array('id' => $page->getId()))

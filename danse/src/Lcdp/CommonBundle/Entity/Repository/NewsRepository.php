@@ -18,7 +18,7 @@ class NewsRepository extends EntityRepository
      * Permet de lister toutes les pages éditable du site
      *
      * @param array $filters Tableau contenant les filtres
-     * @param array $order   Tableau contenant les tris
+     * @param array $orders   Tableau contenant les tris
      * @param array $limit   Tableau contenant les limites
      *
      * @return array
@@ -34,25 +34,9 @@ class NewsRepository extends EntityRepository
                 $query->andWhere('n.title LIKE :title');
                 $query->setParameter('title', '%' . $filters['title'] . '%');
             }
-            if (isset($filters['is_published']) && in_array($filters['is_published'], array('0', '1'))) {
+            if (isset($filters['isPublished']) && in_array($filters['isPublished'], array('0', '1'))) {
                 $query->andWhere('n.isPublished = :published');
-                $query->setParameter('published', $filters['is_published']);
-            }
-            if (isset($filters['can_be_deleted']) && in_array($filters['can_be_deleted'], array('0', '1'))) {
-                $query->andWhere('n.canBeDeleted = :canBeDeleted');
-                $query->setParameter('canBeDeleted', $filters['can_be_deleted']);
-            }
-            if (isset($filters['is_published']) && $filters['is_published']) {
-                $query->andWhere('n.publicatedAt < :now');
-                $query->setParameter('now', new DateTime());
-            }
-            if (isset($filters['slug'])) {
-                $query->andWhere('n.slug = :slug');
-                $query->setParameter('slug', $filters['slug']);
-            }
-            if (isset($filters['diff_id'])) {
-                $query->andWhere('n.id <> :id');
-                $query->setParameter('id', $filters['diff_id']);
+                $query->setParameter('published', $filters['isPublished']);
             }
         }
 

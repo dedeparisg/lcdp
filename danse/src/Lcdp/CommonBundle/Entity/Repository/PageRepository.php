@@ -32,13 +32,9 @@ class PageRepository extends EntityRepository
                 $query->andWhere('p.title LIKE :title');
                 $query->setParameter('title', '%' . $filters['title'] . '%');
             }
-            if (isset($filters['is_published']) && in_array($filters['is_published'], array('0', '1'))) {
+            if (isset($filters['isPublished']) && in_array($filters['isPublished'], array('0', '1'))) {
                 $query->andWhere('p.isPublished = :published');
-                $query->setParameter('published', $filters['is_published']);
-            }
-            if (isset($filters['can_be_deleted']) && in_array($filters['can_be_deleted'], array('0', '1'))) {
-                $query->andWhere('p.canBeDeleted = :canBeDeleted');
-                $query->setParameter('canBeDeleted', $filters['can_be_deleted']);
+                $query->setParameter('published', $filters['isPublished']);
             }
         }
 

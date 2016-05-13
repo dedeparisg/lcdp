@@ -36,13 +36,13 @@
             <h1>{% block introduction %}{% endblock %}</h1>
 
             {# Flash Messages #}
-            {#{% for type, flashMessages in app.session.flashbag.all() %}
+            {% for type, flashMessages in app.session.flashbag.all() %}
                 {% for flashMessage in flashMessages %}
-                    <div class="flash-{{ type }}">
+                    <div class="alert alert-{{ type }}">
                         {{ flashMessage }}
                     </div>
                 {% endfor %}
-            {% endfor %}#}
+            {% endfor %}
 
             {% block content %}{% endblock %}
         </div>

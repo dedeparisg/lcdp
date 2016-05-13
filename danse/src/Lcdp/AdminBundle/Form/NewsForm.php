@@ -5,17 +5,15 @@ namespace Lcdp\AdminBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 /**
- * @author André Tapia <contact@andretapia.com>
+ * Class NewsForm
+ *
+ * @package Lcdp\AdminBundle\Form
  */
 class NewsForm extends AbstractType
 {
-
-    public function __construct()
-    {
-    }
-
     /**
      * Cree ou edite un intitulé de poste
      *
@@ -24,7 +22,6 @@ class NewsForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder->add(
             'title',
             null,
@@ -57,7 +54,7 @@ class NewsForm extends AbstractType
 
         $builder->add(
             'file',
-            'file',
+            FileType::class,
             array(
                 'label' => "Image : ",
                 'required' => false
@@ -71,8 +68,7 @@ class NewsForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
-            )
+            array()
         );
     }
 
