@@ -27,6 +27,10 @@ class AlbumRepository extends EntityRepository
                 ->where('a.isDeleted = 0');
 
         if (!empty($filters)) {
+            if (isset($filters['type']) && !empty($filters['type'])) {
+                $query->andWhere('a.type LIKE :type');
+                $query->setParameter('type', '%' . $filters['type'] . '%');
+            }
             if (isset($filters['title']) && !empty($filters['title'])) {
                 $query->andWhere('a.title LIKE :title');
                 $query->setParameter('title', '%' . $filters['title'] . '%');

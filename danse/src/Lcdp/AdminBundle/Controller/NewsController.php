@@ -84,7 +84,7 @@ class NewsController extends BaseController
                 }
 
                 // On s'occupe des données saisie
-                $this->modifiedAt = new \DateTime();
+                $news->setModifiedAt(new \DateTime());
                 $news->setSlug($this->get('lcdp.utils.service')->generateSlug('News', $news));
 
                 $this->persist($news);

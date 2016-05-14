@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class NewsController
+ * Class EventController
  *
  * @package Lcdp\AdminBundle\Controller
  */
@@ -51,7 +51,6 @@ class EventController extends BaseController
      */
     public function editAction(Request $request, $id = null)
     {
-
         if (is_null($id)) {
             $event = new Event();
         } else {
@@ -67,7 +66,7 @@ class EventController extends BaseController
 
         if ($form->handleRequest($request) && $request->getMethod() == "POST") {
             if ($form->isValid()) {
-                $this->modifiedAt = new \DateTime();
+                $event->setModifiedAt(new \DateTime());
                 $event->setSlug($this->get('lcdp.utils.service')->generateSlug('Event', $event));
 
                 $this->persist($event, true);
@@ -76,12 +75,6 @@ class EventController extends BaseController
                 return $this->redirect($this->generateUrl('lcdp_admin_event_edit', array('id' => $event->getId())));
             } else {
                 $this->addFlashMessage('danger', "Une erreur est survenue lors de l'enregistrement de l'évenement.");
-
-                echo "André Debug";
-                echo "<pre>";
-                \Doctrine\Common\Util\Debug::dump($form->getErrorsAsString());
-                echo "</pre>";
-                die(__METHOD__);
             }
         }
 

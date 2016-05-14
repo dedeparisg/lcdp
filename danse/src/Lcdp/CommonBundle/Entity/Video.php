@@ -5,10 +5,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="image")
+ * @ORM\Table(name="video")
  * @ORM\Entity
  */
-class Image
+class Video
 {
     /**
      * @var integer
@@ -29,11 +29,9 @@ class Image
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=40)
+     * @ORM\Column(name="url", type="string", length=256)
      */
-    protected $image;
-
-    protected $file;
+    protected $url;
 
     /**
      * @var string
@@ -43,7 +41,7 @@ class Image
     protected $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Album", inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="Album", inversedBy="videos")
      * @ORM\JoinColumn(name="album_id", referencedColumnName="id")
      */
     protected $album;
@@ -62,7 +60,7 @@ class Image
      * Set title
      *
      * @param string $title
-     * @return Image
+     * @return Video
      */
     public function setTitle($title)
     {
@@ -79,6 +77,52 @@ class Image
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return Video
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set album
+     *
+     * @param \Lcdp\CommonBundle\Entity\Album $album
+     * @return Video
+     */
+    public function setAlbum(\Lcdp\CommonBundle\Entity\Album $album = null)
+    {
+        $this->album = $album;
+
+        return $this;
+    }
+
+    /**
+     * Get album
+     *
+     * @return \Lcdp\CommonBundle\Entity\Album
+     */
+    public function getAlbum()
+    {
+        return $this->album;
     }
 
     /**
@@ -102,69 +146,5 @@ class Image
     public function getContent()
     {
         return $this->content;
-    }
-
-    /**
-     * Set album
-     *
-     * @param \Lcdp\CommonBundle\Entity\Album $album
-     * @return Image
-     */
-    public function setAlbum(\Lcdp\CommonBundle\Entity\Album $album = null)
-    {
-        $this->album = $album;
-
-        return $this;
-    }
-
-    /**
-     * Get album
-     *
-     * @return \Lcdp\CommonBundle\Entity\Album
-     */
-    public function getAlbum()
-    {
-        return $this->album;
-    }
-
-    /**
-     * Set image
-     *
-     * @param string $image
-     * @return News
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set file
-     * @param File|null $file
-     */
-    public function setFile(File $file = null)
-    {
-        $this->file = $file;
-    }
-
-    /**
-     * Get file
-     * @return mixed
-     */
-    public function getFile()
-    {
-        return $this->file;
     }
 }

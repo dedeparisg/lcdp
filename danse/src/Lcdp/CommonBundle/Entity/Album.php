@@ -48,6 +48,13 @@ class Album
     protected $date;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="boolean", nullable=false)
+     */
+    protected $type;
+
+    /**
      * @var \Boolean
      *
      * @ORM\Column(name="is_published", type="boolean", nullable=false)
@@ -88,6 +95,11 @@ class Album
     protected $images;
 
     /**
+     * @ORM\OneToMany(targetEntity="Video", mappedBy="album")
+     */
+    protected $videos;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -97,6 +109,7 @@ class Album
         $this->createdAt = new \DateTime();
         $this->modifiedAt = new \DateTime();
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->videos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -347,5 +360,58 @@ class Album
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Add videos
+     *
+     * @param \Lcdp\CommonBundle\Entity\Video $videos
+     * @return Album
+     */
+    public function addvideo(\Lcdp\CommonBundle\Entity\Video $videos)
+    {
+        $this->videos[] = $videos;
+
+        return $this;
+    }
+
+    /**
+     * Remove videos
+     *
+     * @param \Lcdp\CommonBundle\Entity\Video $videos
+     */
+    public function removeVideo(\Lcdp\CommonBundle\Entity\Video $videos)
+    {
+        $this->videos->removeElement($videos);
+    }
+
+    /**
+     * Get videos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVideos()
+    {
+        return $this->videos;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 }

@@ -344,11 +344,19 @@ class News
         return $this->image;
     }
 
+    /**
+     * Set file 
+     * @param File|null $file
+     */
     public function setFile(File $file = null)
     {
         $this->file = $file;
     }
 
+    /**
+     * Get file 
+     * @return mixed
+     */
     public function getFile()
     {
         return $this->file;

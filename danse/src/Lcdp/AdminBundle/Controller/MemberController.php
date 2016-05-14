@@ -72,7 +72,7 @@ class MemberController extends BaseController
 
         if ($form->isValid()) {
             $formData = $request->get('member_form');
-            $this->modifiedAt = new DateTime();
+            $member->setModifiedAt(new DateTime());
             $member->setCategory($formData['category']);
 
             $this->persist($member, true);
