@@ -5,9 +5,13 @@ namespace Lcdp\FrontBundle\Controller;
 use \Lcdp\CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+/**
+ * Class NewsController
+ *
+ * @package Lcdp\FrontBundle\Controller
+ */
 class NewsController extends BaseController
 {
-
     /**
      * Permet d'afficher le listing des news pour chacune des sections
      *
@@ -22,7 +26,7 @@ class NewsController extends BaseController
         $news = $this->getRepository('News')->getList(
             array(
                 'section' => $sectionId,
-                'is_published' => true
+                'isPublished' => true
             ),
             array('publication' => 'DESC')
         );
@@ -30,7 +34,7 @@ class NewsController extends BaseController
         $events = $this->getRepository('Event')->getList(
             array(
                 'section' => $sectionId,
-                'is_published' => true,
+                'isPublished' => true,
                 'futur' => true
             ),
             array('publication' => 'DESC'),
@@ -60,7 +64,7 @@ class NewsController extends BaseController
         $events = $this->getRepository('Event')->getList(
             array(
                 'section' => 21, // Danse News
-                'is_published' => true,
+                'isPublished' => true,
                 'futur' => true
             ),
             array('publication' => 'DESC'),

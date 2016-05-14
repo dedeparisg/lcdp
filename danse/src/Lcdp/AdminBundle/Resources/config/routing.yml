@@ -1,82 +1,82 @@
 lcdp_admin_homepage:
-    pattern:  /
+    path:  /
     defaults: { _controller: LcdpAdminBundle:Admin:index }
 
 logout:
-    pattern:   /logout
+    path:   /logout
     defaults:  { _controller: LcdpAdminBundle:Security:logout }
 
 login:
-    pattern:   /login
+    path:   /login
     defaults:  { _controller: LcdpAdminBundle:Security:login }
 
 login_check:
-    pattern:   /login_check
+    path:   /login_check
 
 lcdp_admin_members:
-    pattern:  /membres
+    path:  /membres
     defaults: { _controller: LcdpAdminBundle:Member:memberList }
 
 lcdp_admin_member_edit:
-    pattern:  /membres/edition/{id}
+    path:  /membres/edition/{id}
     defaults: { _controller: LcdpAdminBundle:Member:memberEdit, id: null }
     requirements:
         id: "\d+"
 
 lcdp_admin_newsletter:
-    pattern:  /newsletter
+    path:  /newsletter
     defaults: { _controller: LcdpAdminBundle:Newsletter:index }
 
 lcdp_admin_parameters:
-    pattern:  /parametrages
+    path:  /parametrages
     defaults: { _controller: LcdpAdminBundle:Admin:config }
 
 lcdp_admin_page:
-    pattern:  /pages
+    path:  /pages
     defaults: { _controller: LcdpAdminBundle:Page:list }
 
 lcdp_admin_page_edit:
-    pattern:  /page/edition/{id}
+    path:  /page/edition/{id}
     defaults: { _controller: LcdpAdminBundle:Page:edit, id: null }
     requirements:
         id: "\d+"
 
 lcdp_admin_page_update:
-    pattern:  /page/update/
+    path:  /page/update/
     defaults: { _controller: LcdpAdminBundle:Page:updatePosition }
     methods: [POST]
     options:
         expose: true
 
 lcdp_admin_news:
-    pattern:  /actualites
+    path:  /actualites
     defaults: { _controller: LcdpAdminBundle:News:list }
 
 lcdp_admin_news_edit:
-    pattern:  /actualite/edition/{id}
+    path:  /actualite/edition/{id}
     defaults: { _controller: LcdpAdminBundle:News:edit, id: null }
     requirements:
         id: "\d+"
 
 lcdp_admin_events:
-    pattern:  /evenements
-    defaults: { _controller: LcdpAdminBundle:Content:eventsList }
+    path:  /evenements
+    defaults: { _controller: LcdpAdminBundle:Event:list }
 
 lcdp_admin_event_edit:
-    pattern:  /evenement/edition/{id}
-    defaults: { _controller: LcdpAdminBundle:Content:eventsEdit, id: null }
+    path:  /evenement/edition/{id}
+    defaults: { _controller: LcdpAdminBundle:Event:edit, id: null }
     requirements:
         id: "\d+"
 
 lcdp_admin_content_soft_delete:
-    pattern:  /suppression/{content}/{id}
+    path:  /suppression/{content}/{id}
     defaults: { _controller: LcdpAdminBundle:Content:softDelete, id: null }
     requirements:
         id: "\d+"
         content: Page|News|Member|Event|Album
 
 lcdp_admin_content_publish_content:
-    pattern:  /publication/{status}/{content}/{id}
+    path:  /publication/{status}/{content}/{id}
     defaults: { _controller: LcdpAdminBundle:Content:publishContent, id: null }
     requirements:
         id: "\d+"
@@ -84,21 +84,21 @@ lcdp_admin_content_publish_content:
         content: Page|News|Member|Event|Album
 
 lcdp_admin_videos:
-    pattern:  /videos
+    path:  /videos
     defaults: { _controller: LcdpAdminBundle:Content:videosList }
 
 lcdp_admin_albums:
-    pattern:  /albums
+    path:  /albums
     defaults: { _controller: LcdpAdminBundle:Content:albumsList }
 
 lcdp_admin_album_edit:
-    pattern:  /albums/edition/{id}
+    path:  /albums/edition/{id}
     defaults: { _controller: LcdpAdminBundle:Content:albumsEdit, id: null }
     requirements:
         id: "\d+"
 
 lcdp_admin_album_edita:
-    pattern:  /albums/edition/test/{id}
+    path:  /albums/edition/test/{id}
     defaults: { _controller: LcdpAdminBundle:Content:aTestEdit, id: null }
     requirements:
         id: "\d+"

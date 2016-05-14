@@ -3,13 +3,13 @@
 namespace Lcdp\CommonBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Lcdp\CommonBundle\Entity\Permission;
-use Lcdp\CommonBundle\Entity\Profile;
 use Lcdp\CommonBundle\Entity\User;
 
 /**
- * Repository des requêtes liées aux utilisateurs
+ * Class UserRepository
+ *
+ * @package Lcdp\CommonBundle\Entity\Repository
  */
 class UserRepository extends EntityRepository
 {
@@ -17,7 +17,7 @@ class UserRepository extends EntityRepository
      * Renvoi l'ensemble des permissions d'un utilisateur
      *
      * @param \Lcdp\CommonBundle\Entity\User $user    Utilisateur
-     * @param boolean $toArray                               Sous la forme d'un array texte (sinon objets par défaut)
+     * @param boolean                        $toArray Sous la forme d'un array texte (sinon objets par défaut)
      * @return array
      *
      * @author André Tapia <atapia@webnet.fr>
@@ -74,7 +74,7 @@ class UserRepository extends EntityRepository
     /**
      * Renvoi l'ensemble des permissions sur les statistiques des graphs pour un utilisateur
      *
-     * @param \Lcdp\CommonBundle\Entity\User $user   Utilisateur
+     * @param \Lcdp\CommonBundle\Entity\User $user Utilisateur
      * @return array
      *
      * @author André Tapia <atapia@webnet.fr>
@@ -137,7 +137,7 @@ class UserRepository extends EntityRepository
     /**
      * Permet de vérifier l'unicité d'un identifiant de connexion au sein de l'application
      *
-     * @param string $login     Identifiant à tester
+     * @param string $login Identifiant à tester
      * @return boolean
      *
      * @author André Tapia <atapia@webnet.fr>

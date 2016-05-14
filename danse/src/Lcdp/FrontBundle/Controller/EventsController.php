@@ -5,6 +5,11 @@ namespace Lcdp\FrontBundle\Controller;
 use \Lcdp\CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+/**
+ * Class EventsController
+ *
+ * @package Lcdp\FrontBundle\Controller
+ */
 class EventsController extends BaseController
 {
     /**
@@ -17,7 +22,7 @@ class EventsController extends BaseController
     {
         $events = $this->getRepository('Event')->getList(
             array(
-                'is_published' => true
+                'isPublished' => true
             )
         );
 

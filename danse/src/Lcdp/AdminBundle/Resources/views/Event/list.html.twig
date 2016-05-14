@@ -34,14 +34,13 @@
                             <td>{{ event.title }}</td>
                             <td>{{ (event.isPublished) ? 'Oui' : 'Non' }}</td>
                             <td>{{ event.publicatedAt|date('d-m-Y') }}</td>
-                            <td>
+                            <td class="actions">
                                 <a href="{{ path('lcdp_admin_event_edit', {'id': event.id}) }}">
-                                    <img src="{{ asset('bundles/lcdpadmin/images/picto_editer.png') }}" title="Editer l'actualité"/>
+                                    <i class="fa fa-pencil"></i> Modifier
                                 </a>
-                            </td>
-                            <td>
-                                <a class="softDelete" href="{{ path('lcdp_admin_content_soft_delete', {'content': 'Event', 'id': event.id}) }}" onclick="return confirm('Souhaitez-vous supprimer cet événement ?');">
-                                    <img src="{{ asset('bundles/lcdpadmin/images/picto_supprimer.png') }}" title="Supprimer l'événement" class="hand" />
+                                <a href="{{ path('lcdp_admin_content_soft_delete', {'content': 'Event','id': event.id}) }}"
+                                   onclick="return confirm('Souhaitez-vous supprimer cet évenement ?');">
+                                    <i class="fa fa-ban"></i> Désactiver
                                 </a>
                             </td>
                         </tr>

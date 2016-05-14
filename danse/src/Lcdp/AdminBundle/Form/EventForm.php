@@ -56,6 +56,7 @@ class EventForm extends AbstractType
             array(
                 'label' => "* Date de début : ",
                 'attr' => array('class' => 'datepicker'),
+                'format' => 'dd/MM/yyyy',
                 'widget' => 'single_text'
             )
         );
@@ -66,6 +67,7 @@ class EventForm extends AbstractType
             array(
                 'label' => "Date de fin : ",
                 'attr' => array('class' => 'datepicker'),
+                'format' => 'dd/MM/yyyy',
                 'widget' => 'single_text'
             )
         );

@@ -5,6 +5,11 @@ namespace Lcdp\FrontBundle\Controller;
 use \Lcdp\CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+/**
+ * Class HomeController
+ *
+ * @package Lcdp\FrontBundle\Controller
+ */
 class HomeController extends BaseController
 {
     /**
@@ -16,24 +21,19 @@ class HomeController extends BaseController
     public function indexAction()
     {
         $news = $this->getRepository('News')->getList(
-            array('is_published' => true),
+            array('isPublished' => true),
             array('publication' => 'DESC'),
             array('limit' => $this->getParameter('pagination_front_home_news'))
         );
 
         $events = $this->getRepository('Event')->getList(
             array(
-                'is_published' => true,
+                'isPublished' => true,
                 'futur' => true
             ),
             array('publication' => 'DESC'),
             array('limit' => $this->getParameter('pagination_front_home_events'))
         );
-
-//        echo '<pre>';
-//        print_r($news);
-//        echo '</pre>';
-//        die('__METHOD__');
 
         return array(
             'news' => $news,
