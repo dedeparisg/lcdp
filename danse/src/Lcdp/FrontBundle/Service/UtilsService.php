@@ -41,20 +41,22 @@ class UtilsService
         $slug = StringUtils::slugify($content->getTitle());
 
         $content = $this->em->getRepository('LcdpCommonBundle:' . $contentType)->getList(
-            array(
-                'isPublished' => true
-            )
+            array('slug' => $slug)
         );
 
         if (!empty($content)) {
-            for ($i = 1; $i < 1000; $i++) {
+            for ($i = 0; $i < 1000; $i++) {
+                $tmpSlug = $slug;
+                if ($i > 0) {
+                    $tmpSlug .= '-' . $i;
+                }
+
                 $content = $this->em->getRepository('LcdpCommonBundle:' . $contentType)->findBy(
-                    array('slug' => $slug . '-' . $i)
+                    array('slug' => $tmpSlug)
                 );
 
                 if (empty($content)) {
-                    $slug = $slug . '-' . $i;
-                    break;
+                    return $tmpSlug;
                 }
             }
         }

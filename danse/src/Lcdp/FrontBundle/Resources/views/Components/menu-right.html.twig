@@ -1,9 +1,13 @@
 <div id="agenda" class="bulle rose">
     <h2>A vos agendas !</h2>
     <ul>
-        <li>Event 1</li>
-        <li>Event 2</li>
+        {% for item in news %}
+            <li>
+                <a href="{{ path('front_event', {"slug": item.slug}) }}">{{ item.title }}</a>
+            </li>
+        {% endfor %}
     </ul>
+    <a href="" class="btn btn-blue btn-xs">En savoir plus</a>
 </div>
 
 <div id="benevol" class="bulle violet">
@@ -16,7 +20,6 @@
 <div id="autre" class="bulle bleu">
     <h2>Autre</h2>
     <ul>
-        <li>.....</li>
         <li>.....</li>
     </ul>
 </div>

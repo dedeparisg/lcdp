@@ -28,6 +28,13 @@ class Page
     protected $title;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=256)
+     */
+    protected $slug;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
@@ -318,5 +325,28 @@ class Page
     public function setPosition($position)
     {
         $this->position = $position;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return News
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

@@ -36,6 +36,10 @@ class NewsRepository extends EntityRepository
                 $query->andWhere('n.isPublished = :published');
                 $query->setParameter('published', $filters['isPublished']);
             }
+            if (isset($filters['futur'])) {
+                $query->andWhere('n.isPublished = :published');
+                $query->setParameter('published', $filters['isPublished']);
+            }
         }
 
         if (!empty($orders)) {

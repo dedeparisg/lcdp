@@ -1,11 +1,10 @@
 <div id="menu" class="bulle rose">
     <h2>LCDP DANSE</h2>
     <ul>
-        <li>Actu 1</li>
-        <li>Actu 2</li>
-        <li>Actu 3</li>
-        <li>Actu 4</li>
-        <li>Actu 5</li>
+        <li><a href="/">Actualités</a></li>
+        {% for page in pages %}
+            <li><a href="{{ path('front_page', {'slug': page.slug}) }}">{{ page.title }}</li>
+        {% endfor %}
     </ul>
 </div>
 

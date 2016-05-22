@@ -13,22 +13,40 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class EventsController extends BaseController
 {
     /**
-     * Permet d'afficher le listing de tous les évenements du site
+     * Permet de gérer l'affichage des pages
      *
-     * @Template
-     * @author André Tapia <contact@andretapia.com>
+     * @param string $slug Le slug de la page concernée
+     * @return array
+     *
+     * @Template()
+     * @author André Tapia <atapia@webnet.fr>
      */
-    public function listAction()
+    public function listAction($slug)
     {
         $events = $this->getRepository('Event')->getList(
-            array(
-                'isPublished' => true
-            )
+
         );
 
         return array(
-            'events' => $events,
-            'ref_sections_routing' => $this->getParameter('ref_sections_routing')
+            'events' => $events
+        );
+    }
+
+    /**
+     * Permet de gérer l'affichage des pages
+     *
+     * @param string $slug Le slug de la page concernée
+     * @return array
+     *
+     * @Template()
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public function viewAction($slug)
+    {
+        $event = $this->getRepository('Event')->findOneByslug($slug);
+
+        return array(
+            'event' => $event
         );
     }
 }

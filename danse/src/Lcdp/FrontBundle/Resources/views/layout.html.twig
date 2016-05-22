@@ -22,7 +22,7 @@
 
         <div id="main" class="row">
             <div class="col-md-3">
-                {% include 'LcdpFrontBundle:Components:menu-left.html.twig' %}
+                {{ render(controller('LcdpFrontBundle:Home:menuLeft')) }}
             </div>
 
             <div class="col-md-9">
@@ -35,16 +35,16 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row">
-                            {#<div id="content" class="bulle ">#}
-                                {#{% block content %}{% endblock %}#}
-                            {#</div>#}
+                            <div id="center-content" class="bulle">
+                                {% block content %}{% endblock %}
+                            </div>
                         </div>
 
                         {% include 'LcdpFrontBundle:Components:menu-bottom.html.twig' %}
                     </div>
 
                     <div class="col-md-4">
-                        {% include 'LcdpFrontBundle:Components:menu-right.html.twig' %}
+                        {{ render(controller('LcdpFrontBundle:Home:menuRight')) }}
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@ $(function(){
     });
 
     // Initialisation
-    if (isNew && $('#collectionHolder').find('.row').length == 0) {
+    if ($('#collectionHolder').find('.row').length == 0) {
         addBlocForm();
     }
 });

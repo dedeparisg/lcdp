@@ -49,7 +49,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
      */
     public function load(ObjectManager $manager)
     {
-        $this->createUser($manager, 'cron@unapei.com', 'cron@unapei.com', 'Cr0nP4s$word#2015', User::ROLE_USER, 'Cron', 'Cron', array());
+        $this->createUser($manager, 'cron@lcdp.fr', 'cron@lcdp.fr', 'Cr0nP4s$word#2016', User::ROLE_USER, 'Cron', 'Cron', array());
         $this->createUser($manager, 'admin', 'dev.andre.tapia@gmail.com', 'admin', User::ROLE_ADMIN, 'Administrateur', 'LCDP', array(Profile::ADMIN));
 
         // Si on est pas en environnement de developpement, on coupe le traitement

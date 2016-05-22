@@ -6,11 +6,11 @@ use \Lcdp\CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * Class NewsController
+ * Class PageController
  *
  * @package Lcdp\FrontBundle\Controller
  */
-class NewsController extends BaseController
+class PageController extends BaseController
 {
     /**
      * Permet de gérer l'affichage des pages
@@ -23,10 +23,10 @@ class NewsController extends BaseController
      */
     public function viewAction($slug)
     {
-        $news = $this->getRepository('News')->findOneByslug($slug);
+        $page = $this->getRepository('Page')->findOneByslug($slug);
 
         return array(
-            'news' => $news
+            'page' => $page
         );
     }
 }

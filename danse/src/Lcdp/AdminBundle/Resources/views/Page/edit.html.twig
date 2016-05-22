@@ -98,10 +98,6 @@
 {% block javascripts %}
     {{ parent() }}
 
-    <script>
-        var isNew = {{ isNew|default(0) }};
-    </script>
-
     {% javascripts '@LcdpAdminBundle/Resources/public/js/Page/edit.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

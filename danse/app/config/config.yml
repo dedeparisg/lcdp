@@ -138,7 +138,7 @@ parameters:
         21: "Equipe 1"
         22: "Equipe 2"
 
-    pagination_front_home_news: 50
+    pagination_front_home_news: 2
     pagination_front_home_events: 5
 
     filestore:

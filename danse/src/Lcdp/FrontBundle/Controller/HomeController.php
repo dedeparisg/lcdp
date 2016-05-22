@@ -41,4 +41,51 @@ class HomeController extends BaseController
             'ref_sections_routing' => $this->getParameter('ref_sections_routing')
         );
     }
+
+    /**
+     * Permet de gérer l'affichage du menu des pages (menu de gauche)
+     *
+     * @return array
+     *
+     * @Template("LcdpFrontBundle:Components:menu-left.html.twig")
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public function menuLeftAction()
+    {
+        $pages = $this->getRepository('Page')->getList(
+            array('isPublished' => true),
+            array(
+                'position' => 'ASC',
+                'publicatedAt' => "DESC"
+            )
+        );
+
+        return array(
+            'pages' => $pages
+        );
+    }
+
+    /**
+     * Permet de gérer l'affichage du menu des pages (menu de droite)
+     *
+     * @return array
+     *
+     * @Template("LcdpFrontBundle:Components:menu-right.html.twig")
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public function menuRightAction()
+    {
+        $news = $this->getRepository('Event')->getList(
+            array('isPublished' => true,),
+            array(
+                'position' => 'ASC',
+                'publicatedAt' => "DESC"
+            ),
+            array('limit' => $this->getParameter('pagination_front_home_events'))
+        );
+
+        return array(
+            'news' => $news
+        );
+    }
 }

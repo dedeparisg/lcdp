@@ -63,7 +63,8 @@ class PageController extends BaseController
         if ($form->handleRequest($request) && $form->isValid()) {
             $page->setModifiedAt(new DateTime());
             $page->setPosition(0);
-            
+            $page->setSlug($this->get('lcdp.utils.service')->generateSlug('Page', $page));
+
             foreach ($page->getPageContents() as $content) {
                 $content->setPage($page);
                 $this->persist($content);
