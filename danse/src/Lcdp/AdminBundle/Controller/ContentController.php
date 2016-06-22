@@ -41,7 +41,7 @@ class ContentController extends BaseController
         $page->setModifiedAt(new DateTime());
         $this->persist($page, true);
 
-        $this->successFlash('Element supprimé !');
+        $this->addFlashMessage('success', 'Element supprimé !');
 
         return $this->redirect($this->generateUrl('lcdp_admin_' . strtolower($content)));
     }

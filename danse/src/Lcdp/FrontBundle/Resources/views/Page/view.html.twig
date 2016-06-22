@@ -5,9 +5,11 @@
 
     {% for child in page.pageContents %}
         <div class="row">
-            <h3>{{ child.title }}</h3>
+            <div class="col-xs-12">
+                <h3>{{ child.title }}</h3>
 
-            {{ child.content|raw }}
+                {{ child.content|raw }}
+            </div>
         </div>
     {% endfor %}
 {% endblock %}

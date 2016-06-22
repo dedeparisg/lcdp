@@ -19,18 +19,21 @@ class FilestoreService
 
     /**
      * Paramètres du service
+     *
      * @var array
      */
     private $parameters;
 
     /**
      * Antivirus (facultatif)
+     *
      * @var \Webnet\Bundle\SwissArmyBundle\Service\Interfaces\AntivirusInterface
      */
     private $antivirus;
 
     /**
      * Encrypteur de fichiers (facultatif)
+     *
      * @var \Webnet\Bundle\SwissArmyBundle\Service\Interfaces\FileEncryptorInterface
      */
     private $fileEncryptor;
@@ -106,14 +109,15 @@ class FilestoreService
     /**
      * Retourne le chemin correspondant à un UID et un type de document
      *
-     * @param  string  $uid             UID du document
-     * @param  string  $fileType        Type du document
-     * @param  boolean $withFilename    [Optionnel] Inclure le nom du fichier (défaut: oui)
-     * @param  string  $rootPath        [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @param  string  $uid          UID du document
+     * @param  string  $fileType     Type du document
+     * @param  boolean $withFilename [Optionnel] Inclure le nom du fichier (défaut: oui)
+     * @param  string  $rootPath     [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
      * @return string  Chemin du fichier
      */
     public function getPath($uid, $fileType, $withFilename = true, $rootPath = null)
     {
+        return 'rr';
         // Chemin de base du filestore
         $rootPath = ($rootPath) ? $rootPath : $this->getSystemPath();
 
@@ -126,9 +130,9 @@ class FilestoreService
 
         // Construction et renvoi du chemin
         $path = $storePrefix . DIRECTORY_SEPARATOR .
-                substr($uid, 0, 1) . DIRECTORY_SEPARATOR .
-                substr($uid, 1, 1) . DIRECTORY_SEPARATOR .
-                substr($uid, 2, 1);
+            substr($uid, 0, 1) . DIRECTORY_SEPARATOR .
+            substr($uid, 1, 1) . DIRECTORY_SEPARATOR .
+            substr($uid, 2, 1);
 
         return ($withFilename) ? $path . DIRECTORY_SEPARATOR . $this->getFilename($uid, $fileType) : $path;
     }
@@ -156,8 +160,8 @@ class FilestoreService
     /**
      * Retourne l'url correspondant à un UID et un type de document
      *
-     * @param  string $uid             UID du document
-     * @param  string $fileType        Type du document
+     * @param  string $uid      UID du document
+     * @param  string $fileType Type du document
      * @return string Url du fichier
      */
     public function getUrl($uid, $fileType)
@@ -167,18 +171,17 @@ class FilestoreService
         if (!empty($uid) && !empty($fileType)) {
             $return = $this->getPath($uid, $fileType, true, $this->getSystemUrl());
         }
-        
+
         return $return;
     }
 
     /**
      * Retourne le chemin correspondant à un UID et un type de document
      *
-     * @param  UploadedFile   $file            Média a enregistrer
-     * @param  string         $uid             UID du document
-     * @param  string         $filename        Nom du document
-     * @param  string         $ext             Extension du document
-     * @param  string         $rootPath        [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @param  UploadedFile $file     Média a enregistrer
+     * @param  string       $uid      UID du document
+     * @param  string       $ext      Extension du document
+     * @param  string       $rootPath [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
      * @return string  Chemin du fichier
      */
     public function addMedia(UploadedFile $file, $uid, $ext, $rootPath = null)
@@ -209,9 +212,10 @@ class FilestoreService
     /**
      * Supprime un média présent dans le filestore
      *
-     * @param  string         $uid             UID du document
-     * @param  string         $fileType        Type du document
-     * @param  string         $rootPath        [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @param  string $uid      UID du document
+     * @param  string $fileType Type du document
+     * @param  string $rootPath [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @return boolean
      */
     public function removeMedia($uid, $fileType, $rootPath = null)
     {
@@ -227,9 +231,9 @@ class FilestoreService
     /**
      * Retourne le contenu brut d'un média
      *
-     * @param  string         $uid             UID du document
-     * @param  string         $fileType        Type du document
-     * @param  string         $rootPath        [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @param  string $uid      UID du document
+     * @param  string $fileType Type du document
+     * @param  string $rootPath [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
      * @return string
      */
     public function getMediaContent($uid, $fileType, $rootPath = null)
@@ -287,7 +291,7 @@ class FilestoreService
     public function isEncoded($fileType)
     {
         return (isset($this->parameters['file_types'][$fileType]['encrypt'])
-                && $this->parameters['file_types'][$fileType]['encrypt'] == true);
+            && $this->parameters['file_types'][$fileType]['encrypt'] == true);
     }
 
     /**

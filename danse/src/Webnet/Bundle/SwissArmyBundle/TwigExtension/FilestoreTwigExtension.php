@@ -36,8 +36,8 @@ class FilestoreTwigExtension extends \Twig_Extension
     /**
      * Retourne l'url correspondant à un UID et un type de document
      *
-     * @param  string $uid             UID du document
-     * @param  string $fileType        Type du document
+     * @param  string $uid      UID du document
+     * @param  string $fileType Type du document
      * @return string Url du fichier
      */
     public function getFileUrl($uid, $fileType)

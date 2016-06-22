@@ -142,17 +142,17 @@ parameters:
     pagination_front_home_events: 5
 
     filestore:
-            paths:
-                store: %kernel.root_dir%/../web/store
-            urls:
-                store: /store
-            fix_extensions: false
-            active_extensions_control: true
-            allowed_extensions: [JPG, JPEG, jpg, jpeg, png, gif] #[pdf, doc, docx, xls, odt]
-            file_types:
-                ADMINISTRATIVE_FILE: {folder: "administrative", encrypt: true}
-                USER_AVATAR: {folder: "pictures", allowed_extensions: [jpg, jpeg]}
-                APPLICATION_FILE: {folder: "application"}
+        paths:
+            store: %kernel.root_dir%/../web/store
+        urls:
+            store: /store
+        fix_extensions: false
+        active_extensions_control: true
+        allowed_extensions: [JPG, JPEG, jpg, jpeg, png, gif] #[pdf, doc, docx, xls, odt]
+        file_types:
+            ADMINISTRATIVE_FILE: {folder: "administrative", encrypt: true}
+            USER_AVATAR: {folder: "pictures", allowed_extensions: [jpg, jpeg]}
+            APPLICATION_FILE: {folder: "application"}
 
 #    file_encryptor: #Uniquement si le module d’encryption est activé
 #            key: %encryption_key%

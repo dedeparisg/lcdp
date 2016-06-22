@@ -4,6 +4,7 @@ namespace Lcdp\FrontBundle\Controller;
 
 use \Lcdp\CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class HomeController
@@ -15,15 +16,23 @@ class HomeController extends BaseController
     /**
      * Permet d'afficher la page d'accueil
      *
+     * @param Request $request La requête courante
+     * @return array
+     *
      * @Template
      * @author André Tapia <contact@andretapia.com>
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $nbElementsPerPage = $this->getParameter('pagination_front_home_news');
+        $currentPage = $request->query->get('page') ? : 1;
+        $nbNews = $this->getRepository('News')->countNews(array('isPublished' => true));
+
         $news = $this->getRepository('News')->getList(
             array('isPublished' => true),
             array('publication' => 'DESC'),
-            array('limit' => $this->getParameter('pagination_front_home_news'))
+            $nbElementsPerPage,
+            ($currentPage - 1) * $nbElementsPerPage
         );
 
         $events = $this->getRepository('Event')->getList(
@@ -38,6 +47,9 @@ class HomeController extends BaseController
         return array(
             'news' => $news,
             'events' => $events,
+            'currentPage' => $currentPage,
+            'nbPages' => ceil($nbNews / $nbElementsPerPage),
+            'url' => $this->generateUrl('homepage') . '?page=',
             'ref_sections_routing' => $this->getParameter('ref_sections_routing')
         );
     }

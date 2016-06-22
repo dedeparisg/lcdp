@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div class="dataTables_paginate paging_simple_numbers" id="pagination_paginate">
+            <ul class="pagination">
+                {% if nbPages > 1 %}
+                    <li class="paginate_button {% if currentPage < 2 %}disabled{% endif %}">
+                        <a href="#">|<</a>
+                    </li>
+                    <li class="paginate_button {% if currentPage < 2 %}disabled{% endif %}">
+                        <a href="{{ url ~ (currentPage - 1) }}"><</a>
+                    </li>
+
+                    {% set startPage = (currentPage < 3) ? 1 : currentPage - 1 %}
+                    {% set endPage = 2 + startPage %}
+                    {% set endPage = (nbPages < endPage) ? nbPages : endPage %}
+                    {% set diff = startPage - endPage + 2 %}
+                    {% set startPage = startPage - ((startPage - diff > 0) ? diff : -1) %}
+
+                    {% if (startPage > 1) %}
+                        <li class="paginate_button {% if currentPage == 1 %}active{% endif %}">
+                            <a href="{{ url ~ '1' }}">1</a>
+                        </li>
+                        {% if currentPage > 3 and endPage > 4 %}
+                            <li class="paginate_button">
+                                <span>...</span>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+
+                    {% for i in startPage..endPage %}
+                        <li class="paginate_button {% if currentPage == i %}active{% endif %}">
+                            <a href="{{ url ~ i }}">{{ i }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if (endPage < nbPages) %}
+                        {% if (nbPages - 1 > endPage) %}
+                            <li class="paginate_button">
+                                <span>...</span>
+                            </li>
+                        {% endif %}
+                        <li class="paginate_button {% if currentPage == nbPages %}active{% endif %}">
+                            <a href="{{ url ~ nbPages }}">{{ nbPages }}</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="paginate_button {% if currentPage >= nbPages %}disabled{% endif %}">
+                        <a href="{{ url ~ (currentPage + 1) }}">></a>
+                    </li>
+                    <li class="paginate_button {% if currentPage == nbPages %}disabled{% endif %}">
+                        <a href="{{ url ~ nbPages }}">>|</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
