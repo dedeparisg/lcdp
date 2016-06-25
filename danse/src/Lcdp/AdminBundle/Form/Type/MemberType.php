@@ -1,15 +1,17 @@
 <?php
 
-namespace Lcdp\AdminBundle\Form;
+namespace Lcdp\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author André Tapia <contact@andretapia.com>
+ * Class MemberType
+ *
+ * @package Lcdp\AdminBundle\Form
  */
-class MemberForm extends AbstractType
+class MemberType extends AbstractType
 {
     /**
      * Cree ou edite un intitulé de poste
@@ -19,7 +21,6 @@ class MemberForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder->add(
             'lastName',
             null,

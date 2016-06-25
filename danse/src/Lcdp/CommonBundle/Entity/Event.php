@@ -301,7 +301,6 @@ class Event
         return $this->isDeleted;
     }
 
-
     /**
      * Set startDate
      *

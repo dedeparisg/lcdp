@@ -2,7 +2,8 @@
 
 namespace Lcdp\AdminBundle\Controller;
 
-use Lcdp\AdminBundle\Form\AlbumForm;
+use Lcdp\AdminBundle\Form\Type\AlbumType;
+use Lcdp\AdminBundle\Form\Type\FiltersType;
 use Lcdp\CommonBundle\Controller\BaseController;
 use Lcdp\CommonBundle\Entity\Album;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -16,7 +17,29 @@ use Symfony\Component\HttpFoundation\Request;
 class AlbumController extends BaseController
 {
     /**
-     * Permet d'éditer un album (vidéos et/ou photos)
+     * Permet de lister les albums
+     *
+     * @param Request $request Composant request
+     * @return array
+     *
+     * @Template
+     * @author André Tapia <contact@andretapia.com>
+     */
+    public function listAction(Request $request)
+    {
+        $form = $this->createForm(new FiltersType());
+        $form->handleRequest($request);
+
+        $albums = $this->getRepository('Album')->getList($request->get('filters_form'));
+
+        return array(
+            'albums' => $albums,
+            'form' => $form->createView()
+        );
+    }
+
+    /**
+     * Permet d'éditer un album
      *
      * @param Request $request Composant request
      * @param integer $id      Identifiant de l'album concerné
@@ -38,7 +61,7 @@ class AlbumController extends BaseController
             throw $this->createAccessDeniedException();
         }
 
-        $form = $this->createForm(new AlbumForm(), $album);
+        $form = $this->createForm(new AlbumType(), $album);
 
         if ($form->handleRequest($request) && $request->getMethod() == "POST") {
             if ($form->isValid()) {
@@ -56,7 +79,7 @@ class AlbumController extends BaseController
 
         return array(
             'form' => $form->createView(),
-            'event' => $album
+            'album' => $album
         );
     }
 }

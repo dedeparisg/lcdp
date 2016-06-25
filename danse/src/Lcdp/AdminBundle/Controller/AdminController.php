@@ -4,6 +4,11 @@ namespace Lcdp\AdminBundle\Controller;
 
 use \Lcdp\CommonBundle\Controller\BaseController;
 
+/**
+ * Class AdminController
+ *
+ * @package Lcdp\AdminBundle\Controller
+ */
 class AdminController extends BaseController
 {
     /**

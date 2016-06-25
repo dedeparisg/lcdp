@@ -11,11 +11,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\HttpFoundation\Request;
 
-
 /**
  * Class UserController
- *
- * Cette classe gère les utilisateurs de l'application
+ * Classe gèrant les utilisateurs de l'application
  *
  * @author  André Tapia <atapia@webnet.fr>
  * @package Lcdp\AdminBundle\Controller

@@ -1,19 +1,21 @@
 <?php
 
-namespace Lcdp\AdminBundle\Form;
+namespace Lcdp\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author André Tapia <contact@andretapia.com>
+ * Class MemberFiltersType
+ *
+ * @package Lcdp\AdminBundle\Form
  */
-class MemberFiltersForm extends AbstractType
+class MemberFiltersType extends AbstractType
 {
     /**
      * Cree ou edite un intitulé de poste
-     *
+     * 
      * @param FormBuilderInterface $builder
      * @param array                $options
      */

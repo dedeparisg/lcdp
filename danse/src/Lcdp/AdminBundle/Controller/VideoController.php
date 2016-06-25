@@ -2,11 +2,10 @@
 
 namespace Lcdp\AdminBundle\Controller;
 
-use Lcdp\AdminBundle\Form\FiltersForm;
+use Lcdp\AdminBundle\Form\Type\FiltersType;
 use Lcdp\CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
-use Lcdp\CommonBundle\Entity\News;
 
 /**
  * Class VideoController
@@ -26,7 +25,7 @@ class VideoController extends BaseController
      */
     public function listAction(Request $request)
     {
-        $form = $this->createForm(new FiltersForm());
+        $form = $this->createForm(new FiltersType());
 
         $form->handleRequest($request);
 

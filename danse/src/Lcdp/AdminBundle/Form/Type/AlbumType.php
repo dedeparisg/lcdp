@@ -1,18 +1,17 @@
 <?php
 
-namespace Lcdp\AdminBundle\Form;
+namespace Lcdp\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 /**
- * Class NewsForm
+ * Class AlbumType
  *
  * @package Lcdp\AdminBundle\Form
  */
-class NewsForm extends AbstractType
+class AlbumType extends AbstractType
 {
     /**
      * Cree ou edite un intitulé de poste
@@ -45,19 +44,27 @@ class NewsForm extends AbstractType
             null,
             array(
                 'label' => "* Contenu : ",
-                'attr' => array(
-                    'class' => 'tinymce',
-                    'data-theme' => 'advanced'
-                )
+                'attr' => array('class' => 'wysiwyg')
             )
         );
 
         $builder->add(
-            'file',
-            FileType::class,
+            'startDate',
+            null,
             array(
-                'label' => "Image : ",
-                'required' => false
+                'label' => "* Date de début : ",
+                'attr' => array('class' => 'datepicker'),
+                'widget' => 'single_text'
+            )
+        );
+
+        $builder->add(
+            'endDate',
+            null,
+            array(
+                'label' => " Date de fin : ",
+                'attr' => array('class' => 'datepicker'),
+                'widget' => 'single_text'
             )
         );
     }
@@ -77,6 +84,6 @@ class NewsForm extends AbstractType
      */
     public function getName()
     {
-        return 'news_form';
+        return 'album_form';
     }
 }

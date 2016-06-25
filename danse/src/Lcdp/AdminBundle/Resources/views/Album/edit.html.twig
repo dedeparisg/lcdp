@@ -10,8 +10,8 @@
 
 {% block breadcrumb %}
     <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
-    <li>Gestion des albums</li>
-    <li><a href="{{ path('lcdp_admin_videos') }}">Vidéos</a></li>
+    <li>Gestion des contenus</li>
+    <li><a href="{{ path('lcdp_admin_albums') }}">Albums</a></li>
     <li class="active>{{ pageTitle }}</li>
 {% endblock %}
 
@@ -51,6 +51,22 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="col-xs-12">
+                                        {{ form_label(form.startDate) }}
+                                    </div>
+                                    <div class="col-xs-12">
+                                        {{ form_widget(form.startDate) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        {{ form_label(form.endDate) }}
+                                    </div>
+                                    <div class="col-xs-12">
+                                        {{ form_widget(form.endDate) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     {{ form_rest(form) }}
                                     <div class="col-xs-12">
                                         <input class="btn pull-right btn btn-primary" type="submit" value="Enregistrer" />
@@ -65,9 +81,9 @@
 
         {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
             'back_list_url' : path('lcdp_admin_news'),
-            'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'News', 'id': news.id}),
-            'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'News', 'id': news.id}),
-            'page' : news
+            'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Album', 'id': album.id}),
+            'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Album', 'id': album.id}),
+            'page' : album
         }%}
     </div>
 {% endblock %}

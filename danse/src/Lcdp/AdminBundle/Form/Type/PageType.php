@@ -13,7 +13,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PageType extends AbstractType
 {
-
     /**
      * Cree ou edite un intitulé de poste
      *
@@ -22,7 +21,6 @@ class PageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder->add(
             'title',
             null,

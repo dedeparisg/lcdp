@@ -3,7 +3,7 @@
 namespace Lcdp\AdminBundle\Controller;
 
 use DateTime;
-use Lcdp\AdminBundle\Form\FiltersForm;
+use Lcdp\AdminBundle\Form\Type\FiltersType;
 use Lcdp\AdminBundle\Form\Type\PageType;
 use Lcdp\CommonBundle\Controller\BaseController;
 use Lcdp\CommonBundle\Entity\Page;
@@ -11,6 +11,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class PageController
+ *
+ * @package Lcdp\AdminBundle\Controller
+ */
 class PageController extends BaseController
 {
     /**
@@ -24,7 +29,7 @@ class PageController extends BaseController
      */
     public function listAction(Request $request)
     {
-        $form = $this->createForm(new FiltersForm());
+        $form = $this->createForm(new FiltersType());
         $form->handleRequest($request);
 
         $pages = $this->getRepository('Page')->getList($request->get('filters_form'));

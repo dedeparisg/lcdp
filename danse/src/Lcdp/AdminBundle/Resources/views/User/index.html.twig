@@ -50,7 +50,7 @@
                     <td>{{ user.lastname }}</td>
                     <td>{{ user.firstname }}</td>
                     <td>{{ user.profileTitle }}</td>
-                    <td>{% if user.locked %}Oui{% else %}Non{% endif %}</td>
+                    <td>{% if not user.locked %}Oui{% else %}Non{% endif %}</td>
                     <td>
                         <a href="{{ path('lcdp_admin_users_edit', {'id': user.id}) }}">
                             <img src="{{ asset('bundles/lcdpadmin/images/picto_editer.png') }}" title="Editer la page"/>

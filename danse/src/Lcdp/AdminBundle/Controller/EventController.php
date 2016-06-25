@@ -2,8 +2,8 @@
 
 namespace Lcdp\AdminBundle\Controller;
 
-use Lcdp\AdminBundle\Form\EventForm;
-use Lcdp\AdminBundle\Form\FiltersForm;
+use Lcdp\AdminBundle\Form\Type\EventType;
+use Lcdp\AdminBundle\Form\Type\FiltersType;
 use Lcdp\CommonBundle\Controller\BaseController;
 use Lcdp\CommonBundle\Entity\Event;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -27,7 +27,7 @@ class EventController extends BaseController
      */
     public function listAction(Request $request)
     {
-        $form = $this->createForm(new FiltersForm());
+        $form = $this->createForm(new FiltersType());
 
         $form->handleRequest($request);
 
@@ -62,7 +62,7 @@ class EventController extends BaseController
             throw $this->createAccessDeniedException();
         }
 
-        $form = $this->createForm(new EventForm(), $event);
+        $form = $this->createForm(new EventType(), $event);
 
         if ($form->handleRequest($request) && $request->getMethod() == "POST") {
             if ($form->isValid()) {

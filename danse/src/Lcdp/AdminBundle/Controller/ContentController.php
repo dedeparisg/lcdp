@@ -3,14 +3,7 @@
 namespace Lcdp\AdminBundle\Controller;
 
 use DateTime;
-use Lcdp\AdminBundle\Form\AlbumForm;
-use Lcdp\AdminBundle\Form\EventForm;
-use Lcdp\AdminBundle\Form\FiltersForm;
 use Lcdp\CommonBundle\Controller\BaseController;
-use Lcdp\CommonBundle\Entity\Album;
-use Lcdp\CommonBundle\Entity\Event;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ContentController

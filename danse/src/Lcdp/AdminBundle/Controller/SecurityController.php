@@ -6,6 +6,11 @@ use \Lcdp\CommonBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 
+/**
+ * Class SecurityController
+ *
+ * @package Lcdp\AdminBundle\Controller
+ */
 class SecurityController extends BaseController
 {
     /**

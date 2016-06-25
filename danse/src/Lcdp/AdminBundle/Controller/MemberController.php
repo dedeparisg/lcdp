@@ -2,18 +2,25 @@
 namespace Lcdp\AdminBundle\Controller;
 
 use DateTime;
-use Lcdp\AdminBundle\Form\MemberFiltersForm;
-use Lcdp\AdminBundle\Form\MemberForm;
+use Lcdp\AdminBundle\Form\Type\MemberFiltersType;
+use Lcdp\AdminBundle\Form\Type\MemberType;
 use Lcdp\CommonBundle\Controller\BaseController;
 use Lcdp\CommonBundle\Entity\Member;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class MemberController
+ *
+ * @package Lcdp\AdminBundle\Controller
+ */
 class MemberController extends BaseController
 {
-
     /**
      * Permet d'afficher la liste des membres de l'association
+     *
+     * @param Request $request La requête courante
+     * @return array
      *
      * @Template
      * @author André Tapia <contact@andretapia.com>
@@ -21,11 +28,9 @@ class MemberController extends BaseController
     public function memberListAction(Request $request)
     {
         $form = $this->createForm(
-            new MemberFiltersForm(),
+            new MemberFiltersType(),
             null,
-            array(
-                'categories' => $this->getParameter('ref_members_categories')
-            )
+            array('categories' => $this->getParameter('ref_members_categories'))
         );
 
         $form->handleRequest($request);
@@ -41,6 +46,10 @@ class MemberController extends BaseController
 
     /**
      * Permet d'éditer un membre de l'association
+     *
+     * @param Request      $request La requête courante
+     * @param integer|null $id      Identifiant du membre à éditer
+     * @return array
      *
      * @Template
      * @author André Tapia <contact@andretapia.com>
@@ -59,7 +68,7 @@ class MemberController extends BaseController
         }
 
         $form = $this->createForm(
-            new MemberForm(),
+            new MemberType(),
             $member,
             array(
                 'categories' => $this->getParameter('ref_members_categories')

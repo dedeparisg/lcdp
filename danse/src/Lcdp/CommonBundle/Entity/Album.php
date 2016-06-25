@@ -1,6 +1,7 @@
 <?php
 namespace Lcdp\CommonBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +37,13 @@ class Album
     /**
      * @var string
      *
+     * @ORM\Column(name="intro", type="text", nullable=true)
+     */
+    protected $intro;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="content", type="text")
      */
     protected $content;
@@ -43,9 +51,16 @@ class Album
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date", nullable=false)
+     * @ORM\Column(name="start_date", type="date", nullable=false)
      */
-    protected $date;
+    protected $startDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end_date", type="date", nullable=true)
+     */
+    protected $endDate;
 
     /**
      * @var string
@@ -108,8 +123,8 @@ class Album
         $this->isPublished = 0;
         $this->createdAt = new \DateTime();
         $this->modifiedAt = new \DateTime();
-        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->videos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
     /**
@@ -169,6 +184,29 @@ class Album
     }
 
     /**
+     * Set intro
+     *
+     * @param string $intro
+     * @return News
+     */
+    public function setIntro($intro)
+    {
+        $this->intro = $intro;
+
+        return $this;
+    }
+
+    /**
+     * Get intro
+     *
+     * @return string
+     */
+    public function getIntro()
+    {
+        return $this->intro;
+    }
+
+    /**
      * Set content
      *
      * @param string $content
@@ -192,26 +230,49 @@ class Album
     }
 
     /**
-     * Set date
+     * Set startDate
      *
-     * @param \DateTime $date
-     * @return Album
+     * @param \DateTime $startDate
+     * @return Event
      */
-    public function setDate($date)
+    public function setStartDate($startDate)
     {
-        $this->date = $date;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     /**
-     * Get date
+     * Get startDate
      *
      * @return \DateTime
      */
-    public function getDate()
+    public function getStartDate()
     {
-        return $this->date;
+        return $this->startDate;
+    }
+
+    /**
+     * Set endDate
+     *
+     * @param \DateTime $endDate
+     * @return Event
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * Get endDate
+     *
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
     }
 
     /**

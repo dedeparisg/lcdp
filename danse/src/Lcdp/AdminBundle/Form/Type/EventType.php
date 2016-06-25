@@ -1,6 +1,6 @@
 <?php
 
-namespace Lcdp\AdminBundle\Form;
+namespace Lcdp\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author André Tapia <contact@andretapia.com>
  */
-class EventForm extends AbstractType
+class EventType extends AbstractType
 {
     /**
      * Cree ou edite un intitulé de poste

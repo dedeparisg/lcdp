@@ -2,8 +2,8 @@
 
 namespace Lcdp\AdminBundle\Controller;
 
-use Lcdp\AdminBundle\Form\FiltersForm;
-use Lcdp\AdminBundle\Form\NewsForm;
+use Lcdp\AdminBundle\Form\Type\FiltersType;
+use Lcdp\AdminBundle\Form\Type\NewsType;
 use Lcdp\CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +27,7 @@ class NewsController extends BaseController
      */
     public function listAction(Request $request)
     {
-        $form = $this->createForm(new FiltersForm());
+        $form = $this->createForm(new FiltersType());
 
         $form->handleRequest($request);
 
@@ -62,7 +62,7 @@ class NewsController extends BaseController
             throw $this->createAccessDeniedException();
         }
 
-        $form = $this->createForm(new NewsForm(), $news);
+        $form = $this->createForm(new NewsType(), $news);
 
         if ($form->handleRequest($request) && $request->getMethod() == "POST") {
 
