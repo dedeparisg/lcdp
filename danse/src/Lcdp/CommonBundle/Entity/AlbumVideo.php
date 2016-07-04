@@ -4,11 +4,14 @@ namespace Lcdp\CommonBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class AlbumVideo
+ *
  * @ORM\Entity
- * @ORM\Table(name="page_content")
- * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\PageContentRepository")
+ * @ORM\Table(name="album_video")
+ * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\AlbumVideoRepository")
+ * @package Lcdp\CommonBundle\Entity
  */
-class PageContent
+class AlbumVideo
 {
     /**
      * @var integer
@@ -21,24 +24,31 @@ class PageContent
 
     /**
      * Liaison vers la page
-     * @var Page $page
+     * @var Album $page
      *
-     * @ORM\ManyToOne(targetEntity="Lcdp\CommonBundle\Entity\Page", inversedBy="pageContents")
-     * @ORM\JoinColumn(name="page_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Lcdp\CommonBundle\Entity\Album", inversedBy="albumVideos")
+     * @ORM\JoinColumn(name="album_id", referencedColumnName="id")
      */
-    private $page;
+    private $album;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=256)
+     * @ORM\Column(name="title", type="string", length=256, nullable=true)
      */
     protected $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="url", type="string", length=256, nullable=true)
+     */
+    protected $url;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", nullable=true)
      */
     protected $content;
 
@@ -79,7 +89,7 @@ class PageContent
      * Set title
      *
      * @param string $title
-     * @return PageContent
+     * @return AlbumVideo
      */
     public function setTitle($title)
     {
@@ -102,7 +112,7 @@ class PageContent
      * Set content
      *
      * @param string $content
-     * @return PageContent
+     * @return AlbumVideo
      */
     public function setContent($content)
     {
@@ -125,13 +135,11 @@ class PageContent
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return PageContent
+     * @return AlbumVideo
      */
     public function setCreatedAt($createdAt)
     {
-        $createdAt = new \DateTime();
-
-        $this->createdAt = $createdAt;
+        $this->createdAt = empty($createdAt) ? new \DateTime() : $createdAt;
 
         return $this;
     }
@@ -150,7 +158,7 @@ class PageContent
      * Set modifiedAt
      *
      * @param \DateTime $modifiedAt
-     * @return PageContent
+     * @return AlbumVideo
      */
     public function setModifiedAt($modifiedAt)
     {
@@ -170,25 +178,47 @@ class PageContent
     }
 
     /**
-     * Set page
+     * Set album
      *
-     * @param \Lcdp\CommonBundle\Entity\Page $page
-     * @return PageContent
+     * @param \Lcdp\CommonBundle\Entity\Album $album
+     * @return AlbumVideo
      */
-    public function setPage(\Lcdp\CommonBundle\Entity\Page $page = null)
+    public function setAlbum(\Lcdp\CommonBundle\Entity\Album $album = null)
     {
-        $this->page = $page;
+        $this->album = $album;
 
         return $this;
     }
 
     /**
-     * Get page
+     * Get album
      *
-     * @return \Lcdp\CommonBundle\Entity\Page
+     * @return \Lcdp\CommonBundle\Entity\Album
      */
-    public function getPage()
+    public function getAlbum()
     {
-        return $this->page;
+        return $this->album;
+    }
+
+    /**
+     * Get Url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set Url
+     *
+     * @param string $url
+     * @return Albumvideo
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+        return $this;
     }
 }

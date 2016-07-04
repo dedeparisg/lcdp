@@ -63,13 +63,6 @@ class Album
     protected $endDate;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="boolean", nullable=false)
-     */
-    protected $type;
-
-    /**
      * @var \Boolean
      *
      * @ORM\Column(name="is_published", type="boolean", nullable=false)
@@ -110,9 +103,14 @@ class Album
     protected $images;
 
     /**
-     * @ORM\OneToMany(targetEntity="Video", mappedBy="album")
+     * @ORM\OneToMany(targetEntity="AlbumVideo", mappedBy="album", cascade={"all"})
      */
-    protected $videos;
+    protected $albumVideos;
+
+    /**
+     * Fake field
+     */
+    private $photos;
 
     /**
      * Constructor
@@ -124,7 +122,7 @@ class Album
         $this->createdAt = new \DateTime();
         $this->modifiedAt = new \DateTime();
         $this->images = new ArrayCollection();
-        $this->videos = new ArrayCollection();
+        $this->albumVideos = new ArrayCollection();
     }
 
     /**
@@ -424,55 +422,58 @@ class Album
     }
 
     /**
-     * Add videos
+     * Add albumVideo
      *
-     * @param \Lcdp\CommonBundle\Entity\Video $videos
+     * @param \Lcdp\CommonBundle\Entity\AlbumVideo $albumVideo
      * @return Album
      */
-    public function addvideo(\Lcdp\CommonBundle\Entity\Video $videos)
+    public function addAlbumVideo(\Lcdp\CommonBundle\Entity\AlbumVideo $albumVideo)
     {
-        $this->videos[] = $videos;
+        $this->albumVideos[] = $albumVideo;
 
         return $this;
     }
 
     /**
-     * Remove videos
+     * Remove albumVideo
      *
-     * @param \Lcdp\CommonBundle\Entity\Video $videos
+     * @param \Lcdp\CommonBundle\Entity\AlbumVideo $albumVideo
      */
-    public function removeVideo(\Lcdp\CommonBundle\Entity\Video $videos)
+    public function removeAlbumVideo(\Lcdp\CommonBundle\Entity\AlbumVideo $albumVideo)
     {
-        $this->videos->removeElement($videos);
+        $this->albumVideos->removeElement($albumVideo);
     }
 
     /**
-     * Get videos
+     * Get albumVideos
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getVideos()
+    public function getAlbumVideos()
     {
-        return $this->videos;
+        return $this->albumVideos;
     }
 
     /**
-     * Get type
+     * Get photos
      *
-     * @return string
+     * @return mixed
      */
-    public function getType()
+    public function getPhotos()
     {
-        return $this->type;
+        return $this->photos;
     }
 
     /**
-     * Set type
+     * Set photos
      *
-     * @param string $type
+     * @param $photos
+     * @return $this
      */
-    public function setType($type)
+    public function setPhotos($photos)
     {
-        $this->type = $type;
+        $this->photos = $photos;
+
+        return $this;
     }
 }

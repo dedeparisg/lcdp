@@ -7,14 +7,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class PageContentType
+ * Class AlbumVideoType
  *
  * @package Lcdp\AdminBundle\Form\Type
  */
-class PageContentType extends AbstractType
+class AlbumVideoType extends AbstractType
 {
     /**
-     * Cree ou edite le contenu d'une page
+     * Cree ou edite une vidéo d'un album
      *
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -25,7 +25,16 @@ class PageContentType extends AbstractType
             'title',
             null,
             array(
-                'label' => "* Titre : ",
+                'label' => "Titre : ",
+                'attr' => array('maxlength' => 255),
+            )
+        );
+
+        $builder->add(
+            'url',
+            null,
+            array(
+                'label' => "URL (iframe): ",
                 'attr' => array('maxlength' => 255),
             )
         );
@@ -34,7 +43,7 @@ class PageContentType extends AbstractType
             'content',
             null,
             array(
-                'label' => "* Contenu : ",
+                'label' => "Contenu : ",
                 'attr' => array(
                     'class' => 'tinymce',
                     'data-theme' => 'advanced'
@@ -50,7 +59,7 @@ class PageContentType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Lcdp\CommonBundle\Entity\PageContent'
+                'data_class' => 'Lcdp\CommonBundle\Entity\AlbumVideo'
             )
         );
     }
@@ -60,6 +69,6 @@ class PageContentType extends AbstractType
      */
     public function getName()
     {
-        return 'page_content';
+        return 'album_video';
     }
 }

@@ -4,7 +4,6 @@ namespace Lcdp\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class AlbumType
@@ -54,6 +53,7 @@ class AlbumType extends AbstractType
             array(
                 'label' => "* Date de début : ",
                 'attr' => array('class' => 'datepicker'),
+                'format' => 'dd/MM/yyyy',
                 'widget' => 'single_text'
             )
         );
@@ -64,19 +64,33 @@ class AlbumType extends AbstractType
             array(
                 'label' => " Date de fin : ",
                 'attr' => array('class' => 'datepicker'),
+                'format' => 'dd/MM/yyyy',
                 'widget' => 'single_text'
             )
         );
-    }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(
-            array()
-        );
+        $builder
+            ->add(
+                'albumVideos',
+                'collection',
+                array(
+                    'type' => new AlbumVideoType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'prototype' => true
+                )
+            );
+
+        $builder
+            ->add(
+                'photo',
+                'file',
+                array(
+                    'multiple' => true,
+                    'label' => 'Photos : ',
+//                    'mapped' => false
+                )
+            );
     }
 
     /**

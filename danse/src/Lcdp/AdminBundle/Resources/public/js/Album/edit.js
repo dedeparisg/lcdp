@@ -1,17 +1,39 @@
 $(function(){
-    // On bind le click d'ajout d'un nouveau bloc
-    $('div#collectionHolder').on('click', '.add_tag_link', function(e) {
+    // Gestion de l'affichage des videos ou photos
+    $('span.video').on('click', function() {
+        $('#photo-content').addClass('hidden');
+        $('#video-content').removeClass('hidden');
+    });
+    $('span.photo').on('click', function() {
+        $('#video-content').addClass('hidden');
+        $('#photo-content').removeClass('hidden');
+    });
+
+    // Gestion des actions sur la liste des videos
+    $('span.edit-video').on('click', function(){
+        cleanVideoContent();
+
+        var elemId = $(this).closest('tr').data('attr');
+        $('body').find("#video-collection-" + elemId).removeClass('hidden');
+    });
+    $('span.preview-video').on('click', function(){
+        cleanVideoContent();
+
+        var url = $(this).closest('tr').data('url');
+        $("#video-preview").removeClass('hidden').html(url);
+    });
+
+    // Gestion des collections des vidéos
+    $('div#video-content').on('click', '.add_tag_link', function(e) {
         e.preventDefault();
         addBlocForm();
     });
-
-    // On bind le click de suppression d'un bloc
     $('div#collectionHolder').on('click', '.supp_tag_link', function (e) {
         e.preventDefault();
         removeBlocForm($(this));
     });
 
-    // Initialisation
+    // Initialisation des collection des videos
     if ($('#collectionHolder').find('.row').length == 0) {
         addBlocForm();
     }
@@ -37,11 +59,10 @@ function addBlocForm()
     collectionHolder.append($newEntry);
     collectionHolder.append('<div class="clear"></div>');
 
-
-    // On initialise le WYSIWYG
-    initTinyMCE();
+    initTinyMCE(); // On initialise le WYSIWYG
+    cleanVideoContent();
+    $('body').find("#video-collection-" + totalPageCount).removeClass('hidden');
 }
-
 
 /**
  * Permet de suppirmer un bloc de texte
@@ -57,4 +78,14 @@ function removeBlocForm(currentElem)
     }
 
     currentElem.closest('.row').remove();
+}
+
+/**
+ * Permet de faire le ménage dans la sections des vidéos
+ */
+function cleanVideoContent() {
+    $("#video-preview").addClass('hidden');
+    $('body').find('.video-collection').each(function(){
+        $(this).addClass('hidden');
+    });
 }

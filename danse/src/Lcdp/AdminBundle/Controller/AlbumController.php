@@ -65,8 +65,29 @@ class AlbumController extends BaseController
 
         if ($form->handleRequest($request) && $request->getMethod() == "POST") {
             if ($form->isValid()) {
-                $album->setModifiedAt(new DateTime());
+                $data = $form->getData();
+
+                echo "André Debug";
+                echo "<pre>";
+                \Doctrine\Common\Util\Debug::dump($album->getPhoto());
+                echo "</pre>";
+                echo "<pre>";
+                \Doctrine\Common\Util\Debug::dump($data);
+                echo "</pre>";
+                echo "André Debug";
+                echo "<pre>";
+                print_r($_FILES);
+                echo "</pre>";
+                die(__METHOD__);
+                die(__METHOD__);
+
+                $album->setModifiedAt(new \DateTime());
                 $album->setSlug($this->get('lcdp.utils.service')->generateSlug('Album', $album));
+
+                foreach ($album->getAlbumVideos() as $content) {
+                    $content->setAlbum($album);
+                    $this->persist($content);
+                }
 
                 $this->persist($album, true);
                 $this->addFlashMessage('success');
