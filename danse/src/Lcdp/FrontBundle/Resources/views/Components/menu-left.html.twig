@@ -3,7 +3,7 @@
     <ul>
         <li><a href="/">Actualités</a></li>
         {% for page in pages %}
-            <li><a href="{{ path('front_page', {'slug': page.slug}) }}">{{ page.title }}</li>
+            <li><a href="{{ path('front_page', {'slug': page.slug}) }}">{{ page.title }}</a></li>
         {% endfor %}
     </ul>
 </div>

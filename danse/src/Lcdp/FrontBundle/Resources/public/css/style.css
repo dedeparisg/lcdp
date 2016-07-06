@@ -11,7 +11,7 @@ body{
     margin-bottom: 20px;
     border-radius: 15px;
     padding: 10px;
-    border: 1px solid black;
+    border: 1px solid #999;
     background-color: #fff;
 }
 .bulle h2{
@@ -19,23 +19,23 @@ body{
 }
 .bulle.violet h2{
     color: #fff;
-    background-color: #5d3ab5;
+    background-color: #8B1880;
 }
 .bulle.orange h2{
     color: #fff;
-    background-color: #E94216;
+    background-color: #EF7100;
 }
 .bulle.rouge h2{
     color: #fff;
-    background-color: red;
+    background-color: #E3000B;
 }
 .bulle.rose h2{
     color: #fff;
-    background-color: #BB7EA6;
+    background-color: #E50075;
 }
 .bulle.bleu h2{
     color: #fff;
-    background-color: #1c5b86;
+    background-color: #008AD2;
 }
 
 .menu-top a {
@@ -45,17 +45,39 @@ body{
     margin-bottom: 20px;
     margin-right: 10px;
     padding: 5px 40px;
+    border-radius: 10px;
+    font-weight: bold;
 }
 
 .menu-top .bleu {
     color: #fff;
-    background-color: #1c5b86;
+    background-color: #008AD2;
 }
 .menu-top .violet {
     color: #fff;
-    background-color: #5d3ab5;
+    background-color: #8B1880;
 }
-.menu-top .gris {
+.menu-top .gris,
+.btn-gray{
     color: #fff;
-    background-color: gray;
+    background-color: #A3ACB3;
+}
+
+#header .intro {
+    background-image: url('../img/intro.jpg');
+    display: block;
+    height: 43px;
+    margin-bottom: 30px;
+    margin-left: 100px;
+    margin-top: 20px;
+    width: 800px;
+}
+#header a {
+    height: 150px;
+    display: block;
+}
+#header h2 {
+    font-size: 23px;
+    font-weight: normal;
+    margin-top: 40px;
 }

@@ -9,7 +9,7 @@
                 {#<img src="{{ fileUrl(child.image|split('.')[0]) }}" />#}
                 {{ child.intro|raw }}
 
-                <a class="btn-xs btn-blue btn pull-right" href="{{ path('front_news', {'slug': child.slug}) }}">En savoir plus</a>
+                <a class="btn-xs btn-gray btn pull-right" href="{{ path('front_news', {'slug': child.slug}) }}">> En savoir plus...</a>
             </div>
         </div>
     {% endfor %}
