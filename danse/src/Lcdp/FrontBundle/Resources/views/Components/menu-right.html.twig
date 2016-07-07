@@ -1,5 +1,5 @@
 <div id="agenda" class="bulle rose">
-    <h2>A vos agendas !</h2>
+    <h2 class="text-center">A vos agendas !</h2>
     <ul>
         {% for item in news %}
             <li>
@@ -11,21 +11,24 @@
 </div>
 
 <div id="benevol" class="bulle violet">
-    <h2>Tous bénévoles !</h2>
-    <ul>
-        <li>Rejoignez nous !</li>
-    </ul>
+    <h2 class="text-center">Tous BÉNÉVOLES !</h2>
+    <div class="row">
+        <img class="col-xs-6" src="{{ asset('bundles/lcdpfront/img/Picto_DISCUTION_VIOLET_xs.png') }}"/>
+        <ul class="col-xs-6">
+            <li>Rejoignez nous !</li>
+        </ul>
+    </div>
 </div>
 
 <div id="autre" class="bulle bleu">
-    <h2>Autre</h2>
+    <h2 class="text-center">LCDP XXXXXX</h2>
     <ul>
         <li>.....</li>
     </ul>
 </div>
 
 <div id="gallerie" class="bulle orange">
-    <h2>LCDP en images</h2>
+    <h2 class="text-center">LCDP en images</h2>
     <ul>
         <li>Reportage photos</li>
         <li>Reportage vidéos</li>
