@@ -273,19 +273,6 @@ class UserService
     }
 
     /**
-     * Renvoi l'ensemble des permissions sur les statistiques des graphs pour un utilisateur
-     *
-     * @param User $user Objet utilisateur
-     * @return array
-     *
-     * @author André Tapia <atapia@webnet.fr>
-     */
-    public function getUserStatisticGraphPermissions(User $user)
-    {
-        return $this->userRepository->getUserStatisticGraphPermissions($user);
-    }
-
-    /**
      * Retourne un tableau contenant les prénoms et noms de utilisateur pour l'autocompletion
      *
      * @return array
@@ -301,70 +288,6 @@ class UserService
         foreach ($users as $user) {
             $return['firstNames'][$user->getFirstname()] = $user->getFirstname();
             $return['lastNames'][$user->getLastname()] = $user->getLastname();
-        }
-
-        return $return;
-    }
-
-    /**
-     * Permet d'exporter la liste des utilisateurs au format CSV
-     *
-     * @param array $users Liste des utilisateurs à exporter
-     * @return ExportCsvService
-     *
-     * @author André Tapia <atapia@webnet.fr>
-     */
-    public function generateCsv($users)
-    {
-        ////////////////
-        // ETAPE 1 - on génère l'en-tête et on l'ajoute au fichier
-        $this->csvService->addLine($this->exportHeaders());
-
-        ////////////////
-        // ETAPE 2 - on format les données des utilisateurs
-        foreach ($users as $user) {
-            // On récupère le périmètre de l'utilisateur
-            $organizationalEntities = $this->organizationalEntityService->getEntities(explode(',',
-                $user['permissionIds']));
-
-            $newLine = array();
-            $newLine[] = $user['lastname'];
-            $newLine[] = $user['firstname'];
-            $newLine[] = $user['login'];
-            $newLine[] = str_replace('-', '', implode(', ', $organizationalEntities));
-            $newLine[] = str_replace(',', ', ', $user['profileTitle']);
-
-            // On ajoute la ligne à notre fichier
-            $this->csvService->addLine($newLine);
-        }
-
-        return $this->csvService;
-    }
-
-    /**
-     * Permet de formatter les données pour l'export PDF (liste des utilisateurs)
-     *
-     * @param array $users Tableau contenant les utilisateurs
-     * @return array
-     *
-     * @author André Tapia <atapia@webnet.fr>
-     */
-    public function formatForPdf(array $users)
-    {
-        $return = array('headers' => $this->exportHeaders());
-
-        foreach ($users as $user) {
-            // On récupère le périmètre de l'utilisateur
-            $organizationalEntities = $this->organizationalEntityService->getEntities(explode(',',
-                $user['permissionIds']));
-
-            $return['users'][] = array(
-                'lastName' => $user['lastname'],
-                'firstName' => $user['firstname'],
-                'login' => $user['login'],
-                'perimeter' => explode(',', str_replace('-', '', implode(',', $organizationalEntities))),
-                'profil' => $user['profileTitle']
-            );
         }
 
         return $return;
@@ -437,26 +360,6 @@ class UserService
         if (empty($user)) {
             $return = false;
         }
-
-        return $return;
-    }
-
-    /**
-     * Permet de factoriser le tableau d'en tête des fichiers d'export
-     *
-     * @return array
-     *
-     * @author André Tapia <atapia@webnet.fr>
-     */
-    private function exportHeaders()
-    {
-        $return = array(
-            $this->translator->trans('lg.person.common.lastname'),
-            $this->translator->trans('lg.person.common.firstname'),
-            $this->translator->trans('lg.login.id'),
-            $this->translator->trans('lg.common.perimeter'),
-            $this->translator->trans('lg.common.profil')
-        );
 
         return $return;
     }

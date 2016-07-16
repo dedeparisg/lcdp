@@ -138,6 +138,9 @@ parameters:
         21: "Equipe 1"
         22: "Equipe 2"
 
+    lcdp.mailer.params:
+        daemon_email: no-reply@lcdp.fr
+
     pagination_front_home_news: 2
     pagination_front_home_events: 5
 

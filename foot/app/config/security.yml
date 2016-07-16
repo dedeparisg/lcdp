@@ -29,6 +29,9 @@ security:
         admin_login:
             pattern: ^/admin/login$
             anonymous:  ~
+        admin_lostpassword:
+            pattern: ^/admin/lostpassword$
+            anonymous:  ~
 
         admin:
             pattern: ^/admin

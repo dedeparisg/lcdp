@@ -20,3 +20,15 @@ services :
         class: Lcdp\CommonBundle\TwigExtension\LcdpExtension
         tags:
             - { name: twig.extension }
+
+    # Gestionnaire des envois de mails
+    lcdp.mailer:
+        class: Lcdp\CommonBundle\Service\MailerService
+        arguments: ["@twig", "@mailer", "%lcdp.mailer.params%"]
+
+    # Gestionnaire de procédure de réinitialisation des mots de passe
+    lcdp.users.lostpassword:
+        class: Lcdp\CommonBundle\Service\LostPasswordService
+        arguments: ["@lcdp.common.users", "@lcdp.mailer", "@logger"]
+        tags:
+            - {name: monolog.logger, channel: service.users }

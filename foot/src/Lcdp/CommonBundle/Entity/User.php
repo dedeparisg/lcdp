@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(fields={"login"},  groups={"registration"})
- * @UniqueEntity(fields={"email"}, message="lg.login.email_repeat", groups={"registration"})
+ * @UniqueEntity(fields={"email"}, message="Cette adresse mail a déjà été utilisé", groups={"registration"})
  *
  * @author André Tapia <atapia@webnet.fr>
  */
@@ -50,21 +50,19 @@ class User implements AdvancedUserInterface
      * @var string $password
      *
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(min=8, minMessage="lg.user.min.password", groups={"Default", "registration"})
-     * @Assert\Regex(pattern="/((.*[A-Z]){1,})/", message="lg.login.password_not_valid", groups={"Default", "registration"})
-     * @Assert\Regex(pattern="/((.*[a-z]){1,})/", message="lg.login.password_not_valid", groups={"Default", "registration"})
-     * @Assert\Regex(pattern="/((.*[0-9]){1,})/", message="lg.login.password_not_valid", groups={"Default", "registration"})
-     * @Assert\Regex(pattern="/((.*\W|_){1,})/", message="lg.login.password_not_valid", groups={"Default", "registration"})
+     * @Assert\Length(min=8, minMessage="Le mot de passe doit contenir au moins 8 caractères.", groups={"Default", "registration"})
+     * @Assert\Regex(pattern="/((.*[A-Z]){1,})/", message="Le mot de passe doit être composé au moins d'une lettre majucule.", groups={"Default", "registration"})
+     * @Assert\Regex(pattern="/((.*[a-z]){1,})/", message="Le mot de passe doit être composé au moins d'une lettre minuscule.", groups={"Default", "registration"})
+     * @Assert\Regex(pattern="/((.*[0-9]){1,})/", message="Le mot de passe doit être composé au moins d'un chiffre.", groups={"Default", "registration"})
      */
     private $password;
 
     /**
-     * @Assert\Length(min=8, minMessage="lg.user.min.password", groups={"Default", "registration"})
+     * @Assert\Length(min=8, minMessage="Le mot de passe doit contenir au moins 8 caractères.", groups={"Default", "registration"})
      * @Assert\NotBlank(groups={"registration"})
-     * @Assert\Regex(pattern="/((.*[A-Z]){1,})/", message="lg.login.password_not_valid", groups={"Default", "registration"})
-     * @Assert\Regex(pattern="/((.*[a-z]){1,})/", message="lg.login.password_not_valid", groups={"Default", "registration"})
-     * @Assert\Regex(pattern="/((.*[0-9]){1,})/", message="lg.login.password_not_valid", groups={"Default", "registration"})
-     * @Assert\Regex(pattern="/((.*\W|_){1,})/", message="lg.login.password_not_valid", groups={"Default", "registration"})
+     * @Assert\Regex(pattern="/((.*[A-Z]){1,})/", message="Le mot de passe doit être composé au moins d'une lettre majucule.", groups={"Default", "registration"})
+     * @Assert\Regex(pattern="/((.*[a-z]){1,})/", message="Le mot de passe doit être composé au moins d'une lettre minuscule.", groups={"Default", "registration"})
+     * @Assert\Regex(pattern="/((.*[0-9]){1,})/", message="Le mot de passe doit être composé au moins d'un chiffre.", groups={"Default", "registration"})
      */
     public $cannonicalPassword;
 
@@ -207,8 +205,8 @@ class User implements AdvancedUserInterface
     public static function getAvailableRoles()
     {
         return array(
-            self::ROLE_USER => 'lg.common.roles.user',
-            self::ROLE_ADMIN => 'lg.common.roles.admin'
+            self::ROLE_USER => 'ROLE_USER',
+            self::ROLE_ADMIN => 'ROLE_ADMIN'
         );
     }
 
