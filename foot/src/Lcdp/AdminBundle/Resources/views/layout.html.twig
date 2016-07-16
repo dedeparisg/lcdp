@@ -1,0 +1,54 @@
+{% extends "::admin.html.twig" %}
+
+{% block title %}
+    {{ parent() ~ ' - Administration' }}
+{% endblock %}
+
+{% block body %}
+
+    <aside id="sidebar">
+        <div id="logo">
+            <a href="{{ path('lcdp_admin_homepage') }}">
+                <img src="{{ asset('bundles/lcdpcommon/images/logo/LCDP_NOIR.png') }}" alt="Le club des paquerêttes" title="Page d'administration" />
+            </a>
+        </div>
+        <div id="sidebar-menu">
+            {% include 'LcdpAdminBundle:Partial:menu_left.html.twig' %}
+        </div>
+    </aside>
+
+    <section id="content">
+        <div id="topbar">
+            <ol class="breadcrumb">
+                {% block breadcrumb %}
+                    <li class="active">Accueil</li>
+                {% endblock %}
+            </ol>
+
+            {% block loginInfo %}
+                <ol class="breadcrumb right">
+                    <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+                </ol>
+            {% endblock %}
+        </div>
+
+        <div class="container">
+            <h1>{% block introduction %}{% endblock %}</h1>
+
+            {# Flash Messages #}
+            {% for type, flashMessages in app.session.flashbag.all() %}
+                {% for flashMessage in flashMessages %}
+                    <div class="alert alert-{{ type }}">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

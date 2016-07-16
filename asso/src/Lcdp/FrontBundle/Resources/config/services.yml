@@ -1,0 +1,9 @@
+parameters:
+    lcdp.utils.class: Lcdp\FrontBundle\Service\UtilsService
+
+services:
+    lcdp.utils.service:
+        class: %lcdp.utils.class%
+        arguments: ["@doctrine.orm.entity_manager"]
+
+

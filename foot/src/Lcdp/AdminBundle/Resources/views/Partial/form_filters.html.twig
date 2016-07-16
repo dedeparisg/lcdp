@@ -1,0 +1,25 @@
+<div class="col-md-12">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-title"><i class="fa fa-flask"></i> {{ filter_title }}</div>
+            <div class="right">
+                <a class="btn btn-default" href="{{ filter_url }}">{{ filter_button }}</a>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+            <div class="col-xs-6">
+                {{ form_row(form.title) }}
+            </div>
+            <div class="col-xs-6">
+                {{ form_row(form.isPublished) }}
+            </div>
+            <div class="col-xs-12">
+                {{ form_rest(form) }}
+                <input type="submit" class="btn btn-primary btn-sm pull-right" value="Filtrer"/>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

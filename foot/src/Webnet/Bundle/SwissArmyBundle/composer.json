@@ -1,0 +1,27 @@
+{
+    "name": "webnet/swissarmy-bundle",
+    "description": "Boite à outils des projets WEBNET",
+    "keywords": ["webnet"],
+    "type": "symfony-bundle",
+    "license": "Propriétaire",
+    "authors": [
+        {
+            "name": "Team PHP",
+            "email": "contact@webnet.fr"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "symfony/framework-bundle": "~2.4"
+    },
+    "autoload": {
+        "psr-0": { "Webnet\\Bundle\\SwissArmyBundle": "" }
+    },
+    "target-dir": "Webnet/Bundle/SwissArmyBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-trunk": "1.0.x-dev"
+        }
+    },
+    "minimum-stability": "stable"
+}

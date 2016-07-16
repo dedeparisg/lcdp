@@ -1,0 +1,51 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li>Gestion de contenus</li>
+    <li class="active">Actualités</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        {% include 'LcdpAdminBundle:Partial:form_filters.html.twig' with {
+            'filter_title': 'Gestion des actualités',
+            'filter_url': path('lcdp_admin_news_edit'),
+            'filter_button': 'Ajouter une actualité'
+        } %}
+
+        <div class="clear"></div>
+
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr class="gray">
+                        <th>Titre</th>
+                        <th>Publié</th>
+                        <th>Date de publication</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for page in pages %}
+                        <tr class="{% if loop.index % 2 %}odd{% endif %}">
+                            <td>{{ page.title }}</td>
+                            <td>{{ (page.isPublished) ? 'Oui' : 'Non' }}</td>
+                            <td>{{ page.publicatedAt|date('d-m-Y') }}</td>
+                            <td class="actions">
+                                <a href="{{ path('lcdp_admin_news_edit', {'id': page.id}) }}">
+                                    <i class="fa fa-pencil"></i> Modifier
+                                </a>
+                                <a href="{{ path('lcdp_admin_content_soft_delete', {'content': 'News','id': page.id}) }}" onclick="return confirm('Souhaitez-vous supprimer cette actualité ?');">
+                                    <i class="fa fa-ban"></i> Désactiver
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

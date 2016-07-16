@@ -1,0 +1,53 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li>Gestion de contenus</li>
+    <li class="active">Albums photos</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        {% include 'LcdpAdminBundle:Partial:form_filters.html.twig' with {
+            'filter_title': 'Gestion des albums',
+            'filter_url': path('lcdp_admin_album_edit'),
+            'filter_button': 'Ajouter un album'
+        } %}
+
+        <div class="clear"></div>
+
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr class="gray">
+                        <th>Titre</th>
+                        <th>Publié</th>
+                        <th>Date de publication</th>
+                        <th>Edit.</th>
+                        <th>Supp.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for album in albums %}
+                        <tr class="{% if loop.index % 2 %}odd{% endif %}">
+                            <td>{{ album.title }}</td>
+                            <td>{{ (album.isPublished) ? 'Oui' : 'Non' }}</td>
+                            <td>{{ album.publicatedAt|date('d-m-Y') }}</td>
+                            <td>
+                                <a href="{{ path('lcdp_admin_album_edit', {'id': album.id}) }}">
+                                    <img src="{{ asset('bundles/lcdpadmin/images/picto_editer.png') }}" title="Editer l'actualité"/>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="softDelete" href="{{ path('lcdp_admin_content_soft_delete', {'content': 'Event', 'id': album.id}) }}" onclick="return confirm('Souhaitez-vous supprimer cet événement ?');">
+                                    <img src="{{ asset('bundles/lcdpadmin/images/picto_supprimer.png') }}" title="Supprimer l'événement" class="hand" />
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

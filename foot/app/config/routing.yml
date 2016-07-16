@@ -1,0 +1,19 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+lcdp_front:
+    resource: "@LcdpFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
+lcdp_common:
+    resource: "@LcdpCommonBundle/Resources/config/routing.yml"
+    prefix:   /
+
+lcdp_admin_annotation:
+    resource: "@LcdpAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
+
+lcdp_admin:
+    resource: "@LcdpAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin

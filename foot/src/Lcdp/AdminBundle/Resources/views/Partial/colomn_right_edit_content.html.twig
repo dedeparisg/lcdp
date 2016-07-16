@@ -1,0 +1,46 @@
+<div class="col-md-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title"> <i class="fa fa-pencil"></i> Résumé </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row margin-bottom">
+                        <div class="col-lg-12">
+                            <label>Date de création:</label>
+                            <span>{{ page.createdAt|date('\\l\\e d-m-Y \\à H:i:s')}}</span>
+                        </div>
+                    </div>
+                    <div class="row margin-bottom">
+                        <div class="col-lg-12">
+                            <label>Dernière modification:</label>
+                            <span>{{ page.modifiedAt|date('\\l\\e d-m-Y \\à H:i:s')}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title"><i class="fa fa-pencil"></i> Publication </div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-lg-12 control-label">
+                        <label>Date de publication:</label>
+                        <span>{{ (page.publicatedAt) is empty ? 'Non publié' : page.publicatedAt|date('\\l\\e d-m-Y \\à H:i:s')}}</span>
+                    </div>
+                    <div class="col-lg-12 control-label">
+                        {% if page.isPublished%}
+                            <a class="btn btn-primary" href="{{ unpublished_url }}">Dépublier la page</a>
+                        {% else %}
+                            <a class="btn btn-primary" href="{{ published_url }}">Publier la page</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

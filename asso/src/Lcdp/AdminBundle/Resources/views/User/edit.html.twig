@@ -1,0 +1,103 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li><a href="{{ path('lcdp_admin_users') }}">Utilisateurs</a></li>
+    <li class="active">Edition d'un utilisateur</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <form action="" method="post" id="user_form" name="unapei_user" novalidate="novalidate">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="panel-title"><i class="fa fa-pencil"></i>Informations personnelles</div>
+                            </div>
+
+                            <div class="panel-body">
+                                <div id="users-edition" class="col-lg-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-content">
+                                            <div class="row m-b">
+                                                <div class="col-sm-6 no-padding full-width-child">{{ form_row(form.firstname) }}</div>
+                                                <div class="col-sm-6 no-padding full-width-child">{{ form_row(form.lastname) }}</div>
+                                            </div>
+
+                                            <div class="row m-b">
+                                                <div class="col-sm-6 no-padding full-width-child xs-m-b">{{ form_row(form.email.first) }}</div>
+                                                <div class="col-sm-6 no-padding full-width-child">{{ form_row(form.email.second) }}</div>
+                                            </div>
+
+                                            <div class="row m-b">
+                                                <div class="col-lg-6 no-padding full-width-child">
+                                                    {{ form_row(form.cannonicalPassword.first, {'attr': {'infoBulle': true, 'infoMessage': 'lg.form.help.password'}}) }}
+                                                </div>
+                                                <div class="col-sm-6 no-padding full-width-child">{{ form_row(form.cannonicalPassword.second) }}</div>
+                                            </div>
+                                            <div class="row m-b">
+                                                <div class="col-sm-6 no-padding full-width-child xs-m-b">{{ form_row(form.login) }}</div>
+                                                <div class="col-sm-6 no-padding full-width-child">{{ form_row(form.locked, {'attr': {'radioSize': 3, 'radioColSize': 2}}) }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if form.profiles|default() %}
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <div class="panel-title"><i class="fa fa-pencil"></i>Profiles de l'utilisateur</div>
+                                </div>
+
+                                <div class="panel-body">
+                                    <div id="profile-div" class="col-lg-6 label-no-style">
+                                        <div class="ibox float-e-margins {% if form.profiles.vars.errors|length %}div-has-error{% endif %}">
+                                            <table class="table table-striped no-margins">
+                                                {{ form_widget(form.profiles) }}
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="hidden">
+                {{ form_rest(form) }}
+            </div>
+
+            <div class="form-group float-e-margins">
+                <div class="col-xs-12 m-b">
+                    <button type="button" class="publish btn btn-primary pull-right">Enregistrer</button>
+                    <a href="{{ path('homepage') }}" class="btn btn-white pull-right m-r">Annuler</a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        var isNew = "{{ isNew|default(false) }}";
+    </script>
+
+    {% javascripts '@LcdpAdminBundle/Resources/public/js/User/edit.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+

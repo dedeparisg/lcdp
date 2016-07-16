@@ -1,0 +1,77 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li class="active">Membres</li>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title"> <i class="fa fa-flask"></i> Gestions des membres</div>
+                <div class="right">
+                    <a class="btn btn-default" href="{{ path('lcdp_admin_member_edit') }}">Ajouter un membre</a>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                {{ form_start(form, {attr: {novalidate: 'novalidate'}})}}
+
+                    <div class="left-side">
+                        <div class="form-group">
+                            {{ form_label(form.name) }}
+                            {{ form_widget(form.name) }}
+                        </div>
+                    </div>
+                    <div class="left-side">
+                        <div class="form-group">
+                            {{ form_label(form.licenceNum) }}
+                            {{ form_widget(form.licenceNum) }}
+                        </div>
+                    </div>
+                    <div class="left-side">
+                        <div class="form-group">
+                            {{ form_label(form.category) }}
+                            {{ form_widget(form.category) }}
+                        </div>
+                    </div>
+
+                    {{ form_rest(form)}}
+
+                    <input type="submit" class="btn btn-primary btn-sm" value="Filtrer"/>
+                {{ form_end(form)}}
+            </div>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="gray">
+                    <th>Nom Prénom</th>
+                    <th>N° license</th>
+                    <th>Catégorie</th>
+                    <th>Edit.</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in members %}
+                    <tr class="{% if loop.index % 2 %}odd{% endif %}">
+                        <th>{{ member.lastName|upper ~ ' ' ~ member.firstName|title }}</th>
+                        <th>{{ member.licenceNum }}</th>
+                        <th>{{ refCategoriesLabel[member.category]|default() }}</th>
+                        <th>
+                            <a href="{{ path('lcdp_admin_member_edit', {'id': member.id}) }}">
+                                <img src="{{ asset('bundles/lcdpadmin/images/picto_editer.png') }}" title="Editer le membre"/>
+                            </a>
+                        </th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

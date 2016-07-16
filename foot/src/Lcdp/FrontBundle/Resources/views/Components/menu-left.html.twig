@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="menu-top col-xs-12">
+        <a href="/" class="bleu">
+            <img src="{{ asset('bundles/lcdpfront/img/Picto_FOOT_BLANC_xs.png') }}"/>
+            LCDP FOOT
+        </a>
+    </div>
+</div>
+
+<div id="menu" class="bulle rose">
+    <div><a href="/">Actualités</a></div>
+    {% for page in pages %}
+        <div>
+            <a href="{{ path('front_page', {'slug': page.slug}) }}">{{ page.title }}</a>
+        </div>
+    {% endfor %}
+</div>
+
+<div id="pub" class="bulle rouge">
+    <h2 class="text-center">PUBLICITE</h2>
+    <p class="text-center description"><img src="http://fakeimg.pl/250x200/?text=image 250x200"/></p>
+</div>
+

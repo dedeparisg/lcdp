@@ -1,0 +1,44 @@
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        Lcdp\CommonBundle\Entity\User:
+            algorithm: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        chain_provider:
+            chain:
+                providers: [in_memory, lcdp_db_users]
+        lcdp_db_users:
+            entity:
+                class: LcdpCommonBundle:User
+                property: login
+        in_memory:
+            memory:
+                users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    kikou: { password: lol, roles: [ 'ROLE_ADMIN' ] }
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt|error)|css|img|js)/
+            security: false
+        admin_login:
+            pattern: ^/admin/login$
+            anonymous:  ~
+
+        admin:
+            pattern: ^/admin
+            provider: chain_provider
+            form_login:
+                login_path:  /admin/login
+                check_path:  /admin/login_check
+            logout:
+                path:   /admin/logout
+                target: /admin
+
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

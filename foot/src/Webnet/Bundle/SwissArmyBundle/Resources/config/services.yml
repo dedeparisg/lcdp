@@ -1,0 +1,6 @@
+services:
+    lcdp.filestore.twig.extension:
+        class: Webnet\Bundle\SwissArmyBundle\TwigExtension\FilestoreTwigExtension
+        arguments: ["%filestore%"]
+        tags:
+            - { name: twig.extension }

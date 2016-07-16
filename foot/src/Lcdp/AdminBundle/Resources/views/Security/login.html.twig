@@ -1,0 +1,46 @@
+{% extends "::admin.html.twig" %}
+
+{% block title %}
+    {{ parent() ~ ' - Identification' }}
+{% endblock %}
+
+{% block bodyClass %}login-page{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div id="page-logo"> <img src="{{ asset('bundles/lcdpcommon/images/logo/LCDP_NOIR.png') }}" class="img-responsive" alt="Logo - Le club des paquerêtteso" /> </div>
+        </div>
+        <div class="row">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title"> <i class="fa fa-lock"></i> Login </div>
+                </div>
+                <form class="cmxform" id="altForm" action="{{ path('login_check') }}" method="post" />
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i> </span>
+                                <input type="text" id="username" name="_username" class="form-control phone" maxlength="10" autocomplete="off" placeholder="Nom d'utilisateur" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group"> <span class="input-group-addon"><i class="fa fa-key"></i> </span>
+                                <input type="password" id="password" name="_password" class="form-control product" maxlength="10" autocomplete="off" placeholder="Mot de passe" />
+                            </div>
+                        </div>
+                        {% if error %}
+                            <div class="alert alert-warning login-alert">{{ error.message }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="panel-footer"> <span class="panel-title-sm pull-left" style="padding-top: 7px;"><a> Mot de passe oublié?</a></span>
+                        <div class="form-group margin-bottom-none">
+                            <input class="btn btn-primary pull-right" type="submit" value="Connexion" />
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

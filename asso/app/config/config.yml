@@ -1,0 +1,159 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    #translator:      { fallback: "%locale%" }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'bootstrap_3_layout.html.twig'
+    globals:
+        ref_sections_routing: %ref_sections_routing%
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:
+        - LcdpAdminBundle
+        - LcdpCommonBundle
+        - LcdpFrontBundle
+    filters:
+        cssrewrite: ~
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        entity_managers:
+            default:
+                auto_mapping: true
+                dql:
+                    string_functions:
+                        group_concat: DoctrineExtensions\Query\Mysql\GroupConcat
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+#Editeur WYSIWYG
+stfalcon_tinymce:
+    include_jquery: true
+    tinymce_jquery: true
+    selector: ".tinymce"
+    use_callback_tinymce_init:  false
+    theme:
+        # Simple theme: same as default theme
+        simple: ~
+        # Advanced theme with almost all enabled plugins
+        advanced:
+             plugins:
+                 - "advlist autolink lists link image charmap print preview hr anchor pagebreak"
+                 - "searchreplace wordcount visualblocks visualchars code fullscreen"
+                 - "insertdatetime media nonbreaking save table contextmenu directionality"
+                 - "emoticons template paste textcolor"
+             toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+             toolbar2: "print preview media | forecolor backcolor emoticons | stfalcon | example"
+             image_advtab: true
+
+parameters:
+    # Les routes associées aux sections du site
+    ref_sections_routing:
+        1: news
+        11: assoc_soiree
+        12: assoc_sortie
+        13: assoc_voyage
+        21: danse_news
+        22: danse_soiree
+        23: danse_events
+        31: foot_news
+        32: foot_soiree
+        33: foot_resultat
+        33: foot_events
+
+    ref_members_categories:
+        Bureau:
+            1: Directeur
+            2: Directeur associé
+            3: Comptable
+        Danse:
+            11: "- 10 ans"
+            12: "- 13 ans"
+            13: "- 16 ans"
+            14: "- 18 ans"
+            15: "- 30 ans"
+            16: "+ 30 ans"
+            17: "TC"
+        Football:
+            21: "Equipe 1"
+            22: "Equipe 2"
+
+    ref_members_categories_label:
+        1: Directeur
+        2: Directeur associé
+        3: Comptable
+        11: "- 10 ans"
+        12: "- 13 ans"
+        13: "- 16 ans"
+        14: "- 18 ans"
+        15: "- 30 ans"
+        16: "+ 30 ans"
+        17: "TC"
+        21: "Equipe 1"
+        22: "Equipe 2"
+
+    pagination_front_home_news: 2
+    pagination_front_home_events: 5
+
+    filestore:
+        paths:
+            store: %kernel.root_dir%/../web/store
+        urls:
+            store: /store
+        fix_extensions: false
+        active_extensions_control: true
+        allowed_extensions: [JPG, JPEG, jpg, jpeg, png, gif] #[pdf, doc, docx, xls, odt]
+        file_types:
+            ADMINISTRATIVE_FILE: {folder: "administrative", encrypt: true}
+            USER_AVATAR: {folder: "pictures", allowed_extensions: [jpg, jpeg]}
+            APPLICATION_FILE: {folder: "application"}
+
+#    file_encryptor: #Uniquement si le module d’encryption est activé
+#            key: %encryption_key%
+#            tmp_dir: /tmp

@@ -1,0 +1,53 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="wrapper" class="clearfix">
+        <header id="header">
+            <div class="col-lg-9">
+                <div class="col-xs-12">
+                    <span class="intro"></span>
+                </div>
+                <div class="col-xs-12">
+                    <img src="http://fakeimg.pl/1000x150/?text=Site FOOT  -  Image 1000 x 150"/>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <a href="{{ path('homepage') }}" title="Le club des pâquerettes" rel="Page d'acceuil">
+                    <img src="{{ asset('bundles/lcdpcommon/images/logo/LCDP_degrade.png') }}" alt="Le club des paquerêttes" title="Page d'accueil" width="300"/>
+                </a>
+                <h2>Enfants, ados, adultes, senior</h2>
+            </div>
+        </header>
+
+        <div id="main" class="row">
+            <div class="col-md-3">
+                {{ render(controller('LcdpFrontBundle:Home:menuLeft')) }}
+            </div>
+
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="menu-top col-xs-12">
+                        {% include 'LcdpFrontBundle:Components:menu-top.html.twig' %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div id="center-content" class="bulle">
+                                {% block content %}{% endblock %}
+                            </div>
+                        </div>
+
+                        {% include 'LcdpFrontBundle:Components:menu-bottom.html.twig' %}
+                    </div>
+
+                    <div class="col-md-4">
+                        {{ render(controller('LcdpFrontBundle:Home:menuRight')) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

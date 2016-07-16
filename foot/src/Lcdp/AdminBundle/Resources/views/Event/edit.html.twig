@@ -1,0 +1,89 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block content_block_name %}{% endblock %}
+
+{% if event.id is defined and event.id is not null %}
+    {% set pageTitle = "Edition d'un événement" %}
+{% else %}
+    {% set pageTitle = "Nouvel événement" %}
+{% endif %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li>Gestion de contenus</li>
+    <li><a href="{{ path('lcdp_admin_events') }}">Evénements</a></li>
+    <li class="active">{{ pageTitle }}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            {{ form_start(form, {'attr' : {'class': 'form-horizontal'}}) }}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="panel-title"> <i class="fa fa-pencil"></i> {{ pageTitle }} </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-xs-12 margin-bottom-sm">
+                                        {{ form_label(form.title) }}
+                                    </div>
+                                    <div class="col-xs-12">
+                                        {{ form_widget(form.title) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12 margin-bottom-sm">
+                                        {{ form_label(form.startDate) }}
+                                    </div>
+                                    <div class="col-xs-12">
+                                        {{ form_widget(form.startDate) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12 margin-bottom-sm">
+                                        {{ form_label(form.endDate) }}
+                                    </div>
+                                    <div class="col-xs-12">
+                                        {{ form_widget(form.endDate) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12 margin-bottom-sm">
+                                        {{ form_label(form.intro) }}
+                                    </div>
+                                    <div class="col-xs-12">
+                                        {{ form_widget(form.intro) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12 margin-bottom-sm">
+                                        {{ form_label(form.content) }}
+                                    </div>
+                                    <div class="col-xs-12">
+                                        {{ form_widget(form.content) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_rest(form) }}
+                                    <div class="col-xs-12">
+                                        <input class="btn pull-right btn btn-primary" type="submit" value="Enregistrer" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+
+        {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
+            'back_list_url' : path('lcdp_admin_events'),
+            'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Event', 'id': event.id}),
+            'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Event', 'id': event.id}),
+            'page' : event
+        }%}
+    </div>
+{% endblock %}

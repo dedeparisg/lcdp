@@ -1,0 +1,104 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% import 'LcdpAdminBundle:Core:macro.html.twig' as pageMacro %}
+
+{% block content_block_name %}{% endblock %}
+
+{% if page.id is defined and page.id is not null %}
+    {% set pageTitle = "Edition de page" %}
+{% else %}
+    {% set pageTitle = "Nouvelle page" %}
+{% endif %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li>Gestion de contenus</li>
+    <li><a href="{{ path('lcdp_admin_page') }}">Pages statiques</a></li>
+    <li class="active">{{ pageTitle }}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            {{ form_start(form, {'attr' : {'class': 'form-horizontal'}}) }}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title"> <i class="fa fa-pencil"></i> {{ pageTitle }} </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-xs-12 margin-bottom-sm">
+                                    {{ form_label(form.title) }}
+                                </div>
+                                <div class="col-xs-12">
+                                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="collectionHolder" data-prototype="{{ pageMacro.pageContent_prototype(form.pageContents.vars.prototype)|e }}">
+                {% for key, trouble in form.vars.data.pageContents %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <div class="panel-title"> <i class="fa fa-pencil"></i> Edition d'une section</div>
+                                    <a class="supp_tag_link" href="#">supp</a>
+                                    <a class='add_tag_link' href='#'>ajout</a>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="col-xs-12 margin-bottom-sm">
+                                            {{ form_label(form.pageContents[key].title) }}
+                                        </div>
+                                        <div class="col-xs-12">
+                                            {{ form_widget(form.pageContents[key].title, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-xs-12 margin-bottom-sm">
+                                            {{ form_label(form.pageContents[key].content) }}
+                                        </div>
+                                        <div class="col-xs-12">
+                                            {{ form_widget(form.pageContents[key].content) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <div class="hidden">{{ form_rest(form) }}</div>
+                <div class="col-xs-12">
+                    <input class="btn pull-right btn btn-primary" type="submit" value="Enregistrer" />
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
+        {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
+            'back_list_url' : path('lcdp_admin_page'),
+            'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Page', 'id': page.id}),
+            'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Page', 'id': page.id}),
+            'page' : page
+        }%}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts '@LcdpAdminBundle/Resources/public/js/Page/edit.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

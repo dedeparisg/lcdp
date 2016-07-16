@@ -1,0 +1,64 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li class="active">Utilisateurs</li>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title"><i class="fa fa-flask"></i> Gestion des utilisateurs</div>
+                <div class="right">
+                    <a class="btn btn-default" href="{{ path("lcdp_admin_users_new") }}">Ajouter un utilisateur</a>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+                <div class="col-xs-12 col-sm-6">
+                    {{ form_row(form.firstname) }}
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    {{ form_row(form.lastname) }}
+                </div>
+                {{ form_rest(form) }}
+
+                <input type="submit" class="btn btn-primary btn-sm" value="Filtrer"/>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr class="gray">
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Profil</th>
+                <th>Compte actif</th>
+                <th>Edit.</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users|default() %}
+                <tr class="{% if loop.index % 2 %}odd{% endif %}">
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.profileTitle }}</td>
+                    <td>{% if not user.locked %}Oui{% else %}Non{% endif %}</td>
+                    <td>
+                        <a href="{{ path('lcdp_admin_users_edit', {'id': user.id}) }}">
+                            <img src="{{ asset('bundles/lcdpadmin/images/picto_editer.png') }}" title="Editer la page"/>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

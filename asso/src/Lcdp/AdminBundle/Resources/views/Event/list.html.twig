@@ -1,0 +1,52 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li>Gestion de contenus</li>
+    <li class="active">Evénements</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        {% include 'LcdpAdminBundle:Partial:form_filters.html.twig' with {
+            'filter_title': 'Gestion des événements',
+            'filter_url': path('lcdp_admin_event_edit'),
+            'filter_button': 'Ajouter un événement'
+        } %}
+
+        <div class="clear"></div>
+
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr class="gray">
+                        <th>Titre</th>
+                        <th>Publié</th>
+                        <th>Date de publication</th>
+                        <th>Edit.</th>
+                        <th>Supp.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in events %}
+                        <tr class="{% if loop.index % 2 %}odd{% endif %}">
+                            <td>{{ event.title }}</td>
+                            <td>{{ (event.isPublished) ? 'Oui' : 'Non' }}</td>
+                            <td>{{ event.publicatedAt|date('d-m-Y') }}</td>
+                            <td class="actions">
+                                <a href="{{ path('lcdp_admin_event_edit', {'id': event.id}) }}">
+                                    <i class="fa fa-pencil"></i> Modifier
+                                </a>
+                                <a href="{{ path('lcdp_admin_content_soft_delete', {'content': 'Event','id': event.id}) }}"
+                                   onclick="return confirm('Souhaitez-vous supprimer cet évenement ?');">
+                                    <i class="fa fa-ban"></i> Désactiver
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

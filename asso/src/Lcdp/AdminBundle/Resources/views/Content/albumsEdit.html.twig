@@ -1,0 +1,226 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block content_block_name %}{% endblock %}
+
+{% if album.id is defined and album.id is not null %}
+    {% set pagetitle = "Edition d'un album" %}
+{% else %}
+    {% set pagetitle = "Nouvel album" %}
+{% endif %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li>Gestion de contenus</li>
+    <li><a href="{{ path('lcdp_admin_albums') }}">Albums photos</a></li>
+    <li class="active">{{ pagetitle }}</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title"> <i class="fa fa-pencil"></i> {{ pagetitle }} </div>
+                        </div>
+                        <div class="panel-body">
+                            {{ form_start(form, {'attr' : {'class': 'form-horizontal'}}) }}
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        {{ form_label(form.title, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(form.date, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(form.content, null, {'label_attr': {'class' : 'col-lg-2 control-label'}}) }}
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.content, {'attr': {'class': 'form-control wysiwyg'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_rest(form) }}
+                                        <div class="col-md-9">
+                                            <input class="btn btn btn-primary" type="submit" value="Enregistrer" />
+                                        </div>
+                                    </div>
+                                </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title"><i class="fa fa-cloud-upload"></i> JQuery Uploader</div>
+                        <div class="panel-btns pull-right margin-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-gradient sort" data-sort="random">Rand</button>
+                                <button type="button" class="btn btn-default btn-gradient sort active" data-sort="data-cat" data-order="asc">Asc</button>
+                                <button type="button" class="btn btn-default btn-gradient sort" data-sort="data-cat" data-order="desc">Desc</button>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data" />
+                        <noscript>
+                            <input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/" />
+                        </noscript>
+                        <div class="panel-menu">
+                            <div class="fileupload-buttonbar">
+                                <span class="btn btn-info btn-gradient fileinput-button margin-right-sm">
+                                    <i class="glyphicon glyphicon-plus"></i> <span>Add files...</span>
+                                    <input type="file" name="files[]" multiple="" />
+                                </span>
+                                <button type="submit" class="btn btn-default btn-gradient start margin-right-sm"> <i class="glyphicons glyphicons-upload"></i> <span>Start upload</span> </button>
+                                <button type="reset" class="btn btn-default btn-gradient cancel margin-right-sm"> <i class="glyphicon glyphicon-ban-circle"></i> <span>Cancel upload</span> </button>
+                                <button type="button" class="btn btn-default btn-gradient delete margin-right-sm"> <i class="glyphicon glyphicon-trash"></i> <span>Delete</span> </button>
+                                <span class="margin-left-sm">
+                                    <input type="checkbox" class="checkbox toggle inline-object" />
+                                </span>
+                                <span class="fileupload-process"></span>
+                                <div class="col-lg-5 hidden fileupload-progress fade">
+                                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                                    </div>
+                                    <div class="progress-extended">&nbsp;</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <table role="presentation" class="table table-striped">
+                                <tbody class="files"></tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
+            'back_list_url' : path('lcdp_admin_albums'),
+            'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Album', 'id': album.id}),
+            'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Album', 'id': album.id}),
+            'page' : album
+        }%}
+    </div>
+
+
+    {% verbatim %}
+    <script id="template-upload" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+            <tr class="template-upload fade">
+                <td>
+                    <span class="preview"></span>
+                </td>
+                <td>
+                    <p class="name">{%=file.name%}</p>
+                    <strong class="error text-danger"></strong>
+                </td>
+                <td>
+                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+                </td>
+                <td>
+                    {% if (!i && !o.options.autoUpload) { %}
+                        <button class="btn btn-success btn-gradient start" disabled>
+                            <i class="glyphicons glyphicons-upload"></i>
+                            <span>Start</span>
+                        </button>
+                    {% } %}
+                    {% if (!i) { %}
+                        <button class="btn btn-danger btn-gradient cancel">
+                            <i class="glyphicon glyphicon-ban-circle"></i>
+                            <span>Cancel</span>
+                        </button>
+                    {% } %}
+                </td>
+            </tr>
+        {% } %}
+        </script>
+        <script id="template-download" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+            <tr class="template-download fade">
+                <td>
+                    <span class="preview">
+                        {% if (file.thumbnailUrl) { %}
+                            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                        {% } %}
+                    </span>
+                </td>
+                <td>
+                    <p class="name">
+                        {% if (file.url) { %}
+                            <a href="{%=file.url%}" class="item-link" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                        {% } else { %}
+                            <span>{%=file.name%}</span>
+                        {% } %}
+                    </p>
+                    {% if (file.error) { %}
+                        <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                    {% } %}
+                </td>
+                <td>
+                    <span class="size">{%=o.formatFileSize(file.size)%}</span>
+                </td>
+                <td>
+                    {% if (file.deleteUrl) { %}
+                        <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <span>Delete</span>
+                        </button>
+                        <input type="checkbox" name="delete" value="1" class="toggle hidden">
+                    {% } else { %}
+                        <button class="btn btn-warning cancel">
+                            <i class="glyphicon glyphicon-ban-circle"></i>
+                            <span>Cancel</span>
+                        </button>
+                    {% } %}
+                </td>
+            </tr>
+        {% } %}
+    </script>
+    {% endverbatim %}
+
+{% endblock %}
+
+{# Core CSS #}
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets filter="cssrewrite"
+        'bundles/lcdpadmin/css/libs/jquery.fileupload.css'
+        'bundles/lcdpadmin/css/libs/jquery.fileupload-ui.css'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" media="all"/>
+    {% endstylesheets %}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+        '@LcdpAdminBundle/Resources/public/js/libs/tmpl.min.js'
+        '@LcdpAdminBundle/Resources/public/js/libs/load-image.min.js'
+        '@LcdpAdminBundle/Resources/public/js/libs/canvas-to-blob.min.js'
+        '@LcdpAdminBundle/Resources/public/js/libs/jquery.fileupload.js'
+        '@LcdpAdminBundle/Resources/public/js/libs/jquery.fileupload-process.js'
+        '@LcdpAdminBundle/Resources/public/js/libs/jquery.fileupload-image.js'
+        '@LcdpAdminBundle/Resources/public/js/libs/jquery.fileupload-validate.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <!--[if (gte IE 8)&(lt IE 10)]>
+        <script src="js/cors/jquery.xdr-transport.js"></script>
+    <![endif]-->
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block content_block_name %}{% endblock %}
+
+{% block content %}
+
+    <form id="fileupload" action="" method="POST" enctype="multipart/form-data">
+        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        <div class="row fileupload-buttonbar">
+            <div class="pull-left">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Ajouter un fichier ...</span>
+                    <input type="file" name="files[]" multiple>
+                </span>
+                <button type="submit" class="btn btn-primary start">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Lancer l'envoi des photos</span>
+                </button>
+            </div>
+            <!-- The global progress state -->
+            <div class="pull-right fileupload-progress fade">
+                <!-- The global progress bar -->
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                </div>
+                <!-- The extended global progress state -->
+                <div class="progress-extended">&nbsp;</div>
+            </div>
+        </div>
+        <!-- The table listing the files available for upload/download -->
+        <table role="presentation" class="table table-striped">
+            <tbody class="files"></tbody>
+        </table>
+    </form>
+
+    {% verbatim %}
+        <!-- The template to display files available for upload -->
+        <script id="template-upload" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+            <tr class="template-upload fade">
+                <td>
+                    <span class="preview"></span>
+                </td>
+                <td>
+                    <p class="name">{%=file.name%}</p>
+                    <strong class="error label label-danger"></strong>
+                </td>
+                <td>
+                    <p class="size">Envoi en cours ...</p>
+                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+                </td>
+                <td>
+                    {% if (!i && !o.options.autoUpload) { %}
+                        <button class="btn btn-primary start" disabled>
+                            <i class="glyphicon glyphicon-upload"></i>
+                            <span>Envoyer</span>
+                        </button>
+                    {% } %}
+                    {% if (!i) { %}
+                        <button class="btn btn-warning cancel">
+                            <i class="glyphicon glyphicon-ban-circle"></i>
+                            <span>Annuler</span>
+                        </button>
+                    {% } %}
+                </td>
+            </tr>
+        {% } %}
+        </script>
+        <!-- The template to display files available for download -->
+        <script id="template-download" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+            <tr class="template-download fade">
+                <td>
+                    <span class="preview"></span>
+                </td>
+                <td>
+                    <p class="name">
+                        <span>{%=file.name%}</span>
+                    </p>
+                    {% if (file.error) { %}
+                        <div><span class="label label-danger">{%=file.error%}</span></div>
+                    {% } else { %}
+                        <div><span class="label label-success">Reçu</span></div>
+                    {% } %}
+                </td>
+                <td>
+                    <span class="size">{%=o.formatFileSize(file.size)%}</span>
+                </td>
+                <td>
+                    <button class="btn btn-warning cancel">
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                        <span>Cacher</span>
+                    </button>
+                </td>
+            </tr>
+        {% } %}
+        </script>
+    {% endverbatim %}
+
+    <div class="clear"></div>
+{% endblock %}
+    
+    
+{#{% block head_javascripts %}#}
+
+    {% block javascripts %}
+        {% javascripts 
+            '@LcdpAdminBundle/Resources/public/js/libs/load-image.min.js'
+            '@LcdpAdminBundle/Resources/public/js/libs/canvas-to-blob.min.js' 
+            '@LcdpAdminBundle/Resources/public/js/libs/tmpl.min.js' 
+            '@LcdpAdminBundle/Resources/public/js/libs/jquery.ui.widget.js' 
+            '@LcdpAdminBundle/Resources/public/js/libs/jquery.iframe-transport.js' 
+            '@LcdpAdminBundle/Resources/public/js/libs/jquery.fileupload.js' 
+            '@LcdpAdminBundle/Resources/public/js/libs/jquery.fileupload-process.js' 
+            '@LcdpAdminBundle/Resources/public/js/libs/jquery.fileupload-image.js' 
+            '@LcdpAdminBundle/Resources/public/js/libs/jquery.fileupload-validate.js' 
+            '@LcdpAdminBundle/Resources/public/js/libs/jquery.fileupload-ui.js' 
+            '@LcdpAdminBundle/Resources/public/js/galery.js' 
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+{#                
+    <script src="{{ asset('bundles/lcdpadmin/js/libs/load-image.min.js') }}"></script>
+    <script src="{{ asset('bundles/lcdpadmin/js/libs/canvas-to-blob.min.js') }}"></script>
+    <script src="{{ asset('bundles/lcdpadmin/js/libs/tmpl.min.js') }}"></script>
+    <script src="{{ asset('bundles/lcdpadmin/js/libs/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('bundles/lcdpadmin/js/libs/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('bundles/lcdpadmin/js/libs/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('bundles/lcdpadmin/js/libs/jquery.fileupload-process.js') }}"></script>
+    <script src="{{ asset('bundles/lcdpadmin/js/libs/jquery.fileupload-image.js') }}"></script>
+    <script src="{{ asset('bundles/lcdpadmin/js/libs/jquery.fileupload-validate.js') }}"></script>
+    <script src="{{ asset('bundles/lcdpadmin/js/libs/jquery.fileupload-ui.js') }}"></script>
+    <script src="{{ asset('bundles/lcdpadmin/js/galery.js') }}"></script>
+    #}
+{#{% endblock %}#}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets filter="cssrewrite"
+        'bundles/lcdpadmin/css/libs/*'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" media="all"/>
+    {% endstylesheets %}
+{% endblock %}

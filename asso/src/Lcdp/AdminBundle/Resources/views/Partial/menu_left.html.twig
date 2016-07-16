@@ -1,0 +1,60 @@
+<ul class="nav sidebar-nav">
+    <li>
+        <a href="#">
+            <span class="glyphicons glyphicons-sort"></span>
+            <span class="sidebar-title">Gestion de contenus</span>
+        </a>
+        <ul class="nav sub-nav menu-open">
+            <li>
+                <a href="{{ path('lcdp_admin_page') }}">
+                    <span class="glyphicons glyphicons-notes"></span> Pages statiques
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('lcdp_admin_news') }}">
+                    <span class="glyphicons glyphicons-eye_open"></span> Actualités
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('lcdp_admin_events') }}">
+                    <span class="glyphicons glyphicons-calendar"></span> Evénements
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('lcdp_admin_albums') }}">
+                    <span class="glyphicons glyphicons-picture"></span> Albums
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="{{ path('lcdp_admin_profile_list') }}">
+            <span class="glyphicons glyphicons-nameplate"></span>
+            <span class="sidebar-title">Profiles</span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('lcdp_admin_users') }}">
+            <span class="glyphicons glyphicons-group"></span>
+            <span class="sidebar-title">Utilisateurs</span>
+        </a>
+    </li>
+    {#<li>#}
+        {#<a href="{{ path('lcdp_admin_newsletter') }}">#}
+            {#<span class="glyphicons glyphicons-envelope"></span>#}
+            {#<span class="sidebar-title">Newsletter</span>#}
+        {#</a>#}
+    {#</li>#}
+    <li>
+        <a href="{{ path('lcdp_admin_members') }}">
+            <span class="glyphicons glyphicons-parents"></span>
+            <span class="sidebar-title">Membres</span>
+        </a>
+    </li>
+    {#<li>#}
+        {#<a href="{{ path('lcdp_admin_parameters') }}">#}
+            {#<span class="glyphicons glyphicons-cogwheels"></span>#}
+            {#<span class="sidebar-title">Paramétrages</span>#}
+        {#</a>#}
+    {#</li>#}
+</ul>

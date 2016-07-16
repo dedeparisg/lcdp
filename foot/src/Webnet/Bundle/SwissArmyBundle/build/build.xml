@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="WebnetSwissArmyBundle" basedir="." default="main">
+    <property name="ws" value="${project.basedir}"/>
+    <property name="builddir" value="build"/>
+
+    <target name="clean" description="Clean the build environment">
+        <delete dir="${builddir}/logs/coverage"/>
+        <delete dir="${builddir}/logs"/>
+        <delete dir="${builddir}/docs"/>
+        <delete dir="${builddir}/phpdoc"/>
+        <delete dir="${builddir}/browser"/>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare the build environment">
+        <exec logoutput="true" command="php composer.phar install" />
+        <mkdir dir="${builddir}"/>
+        <mkdir dir="${builddir}/logs"/>
+        <mkdir dir="${builddir}/logs/coverage"/>
+        <mkdir dir="${builddir}/docs"/>
+        <mkdir dir="${builddir}/phpdoc"/>
+        <mkdir dir="${builddir}/browser"/>
+    </target>
+
+    <target name="build" depends="prepare" description="Build the project">
+        <phingcall target="phpdoc2" />
+        <phingcall target="phpcpd" />
+        <phingcall target="pdepend" />
+        <phingcall target="phpmd" />
+        <phingcall target="checkstyle" />
+        <phingcall target="phpcb" />
+    </target>
+    
+    <target name="phpdoc2" description="Generates API documentation">
+        <exec logoutput="true" command="phpdoc project:run -c build/phpdoc.dist.xml"/>
+    </target>
+
+    <target name="phpcpd" description="Detecting duplicated code">
+        <phpcpd minLines="5" minTokens="5">
+            <fileset dir=".">
+                <include name="**/*.php"/>
+                <exclude name="**/Tests/**.php"/>
+            </fileset>
+            <formatter type="pmd" outfile="${builddir}/logs/pmd-cpd.xml"/>
+        </phpcpd>
+    </target>
+
+    <target name="pdepend" description="Generating JDepend report">
+        <exec logoutput="true" command="pdepend --jdepend-xml=${builddir}/logs/jdepend.xml --jdepend-chart=${builddir}/logs/dependencies.svg --overview-pyramid=${builddir}/logs/overview-pyramid.svg ."/>
+    </target>
+
+    <target name="phpmd" description="Generating PHPMD report">
+        <phpmd file=".">
+            <formatter type="xml" outfile="${builddir}/logs/phpmd.xml" />
+        </phpmd>
+    </target>
+
+    <target name="checkstyle" description="Find coding standard violations using PHP_CodeSniffer">
+        <phpcodesniffer standard="PSR2">
+            <fileset dir=".">
+                <include name="**/*.php"/>
+                <exclude name="**/Tests/**.php"/>
+                <exclude name="**/DataFixtures/**.php"/>
+            </fileset>
+            <formatter type="checkstyle" outfile="${builddir}/logs/checkstyle.xml" />
+        </phpcodesniffer>
+    </target>
+
+    <target name="phpcb" description="Generating code browser...">
+        <exec logoutput="true" command="phpcb --log ${builddir}/logs --source . --output ${builddir}/browser" />
+    </target>
+
+</project>

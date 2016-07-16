@@ -1,0 +1,164 @@
+body{
+    background-image: url('../img/body.png');
+    background-repeat: repeat-x;
+}
+#header, #main {
+    margin: 20px auto 15px;
+    max-width: 1400px;
+    min-height: 250px;
+    position: relative;
+}
+.bulle {
+    margin-bottom: 20px;
+    border-radius: 15px;
+    padding: 15px;
+    border: 1px solid #999;
+    background-color: #fff;
+}
+.bulle h2{
+    border-radius: 10px;
+}
+.bulle.violet h2{
+    color: #fff;
+    background-color: #8B1880;
+}
+.bulle.orange h2{
+    color: #fff;
+    background-color: #EF7100;
+}
+.bulle.rouge h2{
+    color: #fff;
+    background-color: #E3000B;
+}
+.bulle.rose h2{
+    color: #fff;
+    background-color: #E50075;
+}
+.bulle.bleu h2{
+    color: #fff;
+    background-color: #008AD2;
+}
+
+.menu-top a {
+    float: left;
+    height: 40px;
+    line-height: 30px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    padding: 5px 40px 5px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#menu h2 {
+    padding: 1px 40px 1px 20px;
+    margin-bottom: 20px;
+}
+
+#menu div {
+    background-image: url('../img/picto_bleu.png');
+    background-repeat: no-repeat;
+    border-bottom: 1px dotted;
+    font-size: 17px;
+    line-height: 17px;
+    padding-bottom: 9px;
+    padding-left: 13px;
+    margin-bottom: 6px;
+}
+
+.menu-top .bleu {
+    color: #fff;
+    background-color: #008AD2;
+    width: 100%;
+}
+.menu-top .violet {
+    color: #fff;
+    background-color: #8B1880;
+}
+.menu-top .rose {
+    color: #fff;
+    background-color: #E50075;
+    border-radius: 10px;
+}
+.menu-top .gris,
+.btn-gray{
+    color: #fff;
+    background-color: #A3ACB3;
+}
+
+#header .intro {
+    background-image: url('../img/intro.jpg');
+    display: block;
+    height: 43px;
+    margin-bottom: 30px;
+    margin-left: 100px;
+    margin-top: 20px;
+    width: 800px;
+}
+#header a {
+    height: 150px;
+    display: block;
+}
+#header h2 {
+    font-size: 23px;
+    font-weight: normal;
+    margin-top: 40px;
+}
+
+#center-content h2 {
+    background-image: url('../img/picto_rose_md.png');
+    background-repeat: no-repeat;
+    border-bottom: 2px dotted gray;
+    border-radius: 0;
+    color: #000;
+    font-size: 35px;
+    line-height: 25px;
+    margin-bottom: 6px;
+    padding-bottom: 9px;
+    padding-left: 20px;
+    padding-top: 2px;
+}
+
+#center-content h3 {
+    color: #e50075;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#center-content .news {
+    margin-top: 20px;
+}
+
+#center-content .date {
+    color: #000;
+    font-size: 25px;
+    font-weight: bold;
+}
+#center-content .separator {
+    height: 1px;
+    display: block;
+    border-bottom: 1px dotted;
+    margin-top: 20px;
+}
+li {
+    line-height: 25px;
+}
+.rose li{
+    list-style-image: url("../img/picto_rose.png");
+}
+.bleu li{
+    list-style-image: url("../img/picto_bleu.png");
+}
+.violet li{
+    list-style-image: url("../img/picto_violet.png");
+}
+.orange li{
+    list-style-image: url("../img/picto_orange.png");
+}
+
+#contact p {
+    color: #008AD2;
+    font-weight: bold;
+    font-size: 15px;
+}

@@ -1,0 +1,15 @@
+{% extends "LcdpFrontBundle::layout.html.twig" %}
+
+{% block content %}
+    <h2>{{ page.title }}</h2>
+
+    {% for child in page.pageContents %}
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>{{ child.title }}</h3>
+
+                {{ child.content|raw }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
