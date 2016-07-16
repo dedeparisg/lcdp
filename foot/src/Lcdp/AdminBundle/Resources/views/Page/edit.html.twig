@@ -86,12 +86,14 @@
             {{ form_end(form) }}
         </div>
 
-        {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
-            'back_list_url' : path('lcdp_admin_page'),
-            'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Page', 'id': page.id}),
-            'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Page', 'id': page.id}),
-            'page' : page
-        }%}
+        {% if page.id|default %}
+            {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
+                'back_list_url' : path('lcdp_admin_page'),
+                'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Page', 'id': page.id}),
+                'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Page', 'id': page.id}),
+                'page' : page
+            }%}
+        {% endif %}
     </div>
 {% endblock %}
 

@@ -14,7 +14,7 @@
     <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
     <li>Gestion des contenus</li>
     <li><a href="{{ path('lcdp_admin_albums') }}">Albums</a></li>
-    <li class="active>{{ pageTitle }}</li>
+    <li class="active">{{ pageTitle }}</li>
 {% endblock %}
 
 {% block content %}
@@ -177,12 +177,14 @@
             {{ form_end(form) }}
         </div>
 
-        {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
-            'back_list_url' : path('lcdp_admin_news'),
-            'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Album', 'id': album.id}),
-            'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Album', 'id': album.id}),
-            'page' : album
-        }%}
+        {% if album.id|default %}
+            {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
+                'back_list_url' : path('lcdp_admin_news'),
+                'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Album', 'id': album.id}),
+                'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Album', 'id': album.id}),
+                'page' : album
+            }%}
+        {% endif %}
     </div>
 {% endblock %}
 

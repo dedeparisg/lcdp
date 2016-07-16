@@ -79,11 +79,13 @@
             {{ form_end(form) }}
         </div>
 
-        {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
-            'back_list_url' : path('lcdp_admin_events'),
-            'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Event', 'id': event.id}),
-            'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Event', 'id': event.id}),
-            'page' : event
-        }%}
+        {% if event.id|default %}
+            {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
+                'back_list_url' : path('lcdp_admin_events'),
+                'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Event', 'id': event.id}),
+                'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Event', 'id': event.id}),
+                'page' : event
+            }%}
+        {% endif %}
     </div>
 {% endblock %}

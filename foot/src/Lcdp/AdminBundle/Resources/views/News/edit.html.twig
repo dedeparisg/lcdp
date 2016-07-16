@@ -12,7 +12,7 @@
     <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
     <li>Gestion de contenus</li>
     <li><a href="{{ path('lcdp_admin_news') }}">Actualités</a></li>
-    <li class="active>{{ pageTitle }}</li>
+    <li class="active">{{ pageTitle }}</li>
 {% endblock %}
 
 {% block content %}
@@ -78,11 +78,13 @@
             {{ form_end(form) }}
         </div>
 
-        {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
-            'back_list_url' : path('lcdp_admin_news'),
-            'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'News', 'id': news.id}),
-            'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'News', 'id': news.id}),
-            'page' : news
-        }%}
+        {% if news.id|default %}
+            {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
+                'back_list_url' : path('lcdp_admin_news'),
+                'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'News', 'id': news.id}),
+                'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'News', 'id': news.id}),
+                'page' : news
+            }%}
+        {% endif %}
     </div>
 {% endblock %}
