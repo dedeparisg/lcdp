@@ -33,4 +33,4 @@ assetic:
     use_controller: true
 
 swiftmailer:
-    delivery_address: atapia@webnet.fr
+    delivery_address: dev.andre.tapia@gmail.com

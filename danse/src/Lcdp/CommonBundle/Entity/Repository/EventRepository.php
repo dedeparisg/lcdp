@@ -23,19 +23,7 @@ class EventRepository extends EntityRepository
      */
     public function getList($filters = null, $orders = null, $limit = null)
     {
-        $query = $this->createQueryBuilder('e')
-                ->where('e.isDeleted = 0');
-
-        if (!empty($filters)) {
-            if (isset($filters['title']) && !empty($filters['title'])) {
-                $query->andWhere('e.title LIKE :title');
-                $query->setParameter('title', '%' . $filters['title'] . '%');
-            }
-            if (isset($filters['isPublished']) && in_array($filters['isPublished'], array('0', '1'))) {
-                $query->andWhere('e.isPublished = :published');
-                $query->setParameter('published', $filters['isPublished']);
-            }
-        }
+        $query = $this->getQueryBase($filters);
 
         if (!empty($orders)) {
             if (isset($orders['publication'])) {
@@ -52,5 +40,50 @@ class EventRepository extends EntityRepository
         $return = $query->getQuery()->getArrayResult();
 
         return $return;
+    }
+
+    /**
+     * Permet de comptabiliser tous les evenements publiés du site
+     *
+     * @param array $filters Tableau contenant les filtres
+     * @return array
+     *
+     * @author André Tapia <contact@andretapia.com>
+     */
+    public function countEvents($filters = null)
+    {
+        $query = $this->getQueryBase($filters);
+        $query->select('COUNT(e.id)');
+
+        $return = $query->getQuery()->getSingleScalarResult();
+
+        return $return;
+    }
+
+    /**
+     * Factorisation des requêtes d'evenements
+     *
+     * @param array $filters Tableau contenant les filtres
+     * @return QueryBuilder
+     *
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public function getQueryBase($filters)
+    {
+        $query = $this->createQueryBuilder('e')
+            ->where('e.isDeleted = 0');
+
+        if (!empty($filters)) {
+            if (isset($filters['title']) && !empty($filters['title'])) {
+                $query->andWhere('e.title LIKE :title');
+                $query->setParameter('title', '%' . $filters['title'] . '%');
+            }
+            if (isset($filters['isPublished']) && in_array($filters['isPublished'], array('0', '1'))) {
+                $query->andWhere('e.isPublished = :published');
+                $query->setParameter('published', $filters['isPublished']);
+            }
+        }
+
+        return $query;
     }
 }

@@ -60,11 +60,6 @@ class UserRepository extends EntityRepository
                     $return[$title]['UPDATE'] = ($return[$title]['UPDATE'] || $permission->getUpdate());
                     $return[$title]['DELETE'] = ($return[$title]['DELETE'] || $permission->getDelete());
                 }
-
-                // Cas particulier pour les exports CSV => le droit figure dans la table user
-                if ($title == Permission::STATISTIC_CSV) {
-                    $return[$title]['READ'] = $user->getExportCsv();
-                }
             }
         }
 

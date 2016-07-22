@@ -164,11 +164,42 @@
                 </div>
 
                 <div id="photo-content" class="hidden">
-                    PHOTOS
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <i class="fa fa-list"></i>&nbsp;Liste des photos
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    {{ form_row(form.imgFiles) }}
+
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr class="gray">
+                                                <th>Image</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for key, picture in album.pictures %}
+                                                <tr class="{% if loop.index % 2 %}odd{% endif %}" data-pictureid="{{ picture.id }}" data-albumid="{{ album.id }}">
+                                                    <td><img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" width="300"></td>
+                                                    <td>
+                                                        <span class="delete-picture">Supprimer</span>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    {#{{ form_rest(form) }}#}
                     <div class="col-xs-12">
                         <input class="btn pull-right btn btn-primary" type="submit" value="Enregistrer" />
                     </div>

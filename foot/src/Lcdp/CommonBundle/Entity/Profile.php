@@ -33,7 +33,7 @@ class Profile
      * @var string $title
      *
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Merci de renseigner ce champ.")
      */
     private $title;
 

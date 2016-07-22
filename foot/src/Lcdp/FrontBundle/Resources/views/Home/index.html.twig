@@ -5,7 +5,11 @@
     {% for child in news %}
         <div class="row margin-bottom-lg news">
             <div class="col-xs-4">
-                <img src="http://fakeimg.pl/200x200/" width="200" height="200"/>
+                {% if child.image is not empty %}
+                    <img src="{{ fileUrl(child.image, 'NEWS') }}" width="200" height="200"/>
+                {% else %}
+                    <img src="http://fakeimg.pl/200x200/" width="200" height="200"/>
+                {% endif %}
             </div>
             <div class="col-xs-8">
                 <h3 class="col-xs-12">{{ child.title }}</h3>

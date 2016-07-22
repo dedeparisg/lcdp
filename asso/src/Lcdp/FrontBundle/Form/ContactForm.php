@@ -10,11 +10,6 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class ContactForm extends AbstractType
 {
-
-    public function __construct()
-    {
-    }
-
     /**
      * Cree ou edite un intitulé de poste
      *

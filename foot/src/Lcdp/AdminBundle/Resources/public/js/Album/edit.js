@@ -37,6 +37,8 @@ $(function(){
     if ($('#collectionHolder').find('.row').length == 0) {
         addBlocForm();
     }
+
+    managePictures();
 });
 
 /**
@@ -87,5 +89,28 @@ function cleanVideoContent() {
     $("#video-preview").addClass('hidden');
     $('body').find('.video-collection').each(function(){
         $(this).addClass('hidden');
+    });
+}
+
+/**
+ * Gestion de la suppression des images
+ */
+function managePictures() {
+    $('.delete-picture').on('click', function(){
+
+        $tr = $(this).closest('tr');
+
+        // Appel AJAX pour sauvegarder la modification que l'on vient d'apporter
+        $.ajax({
+            type: 'POST',
+            url: Routing.generate('lcdp_admin_remove_picture', {'albumId': $tr.data('albumid'), 'id': $tr.data('pictureid')}),
+            success: function(data){
+                if (data.success === true) {
+                    $tr.remove();
+                } else {
+                    alert("Une erreur est survenue lors de la suppression de l'image.");
+                }
+            }
+        });
     });
 }

@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -143,6 +144,9 @@ parameters:
 
     pagination_front_home_news: 2
     pagination_front_home_events: 5
+    pagination_front_home_albums: 5
+    pagination_front_all_events: 20
+    pagination_front_all_albums: 20
 
     filestore:
         paths:
@@ -151,11 +155,10 @@ parameters:
             store: /store
         fix_extensions: false
         active_extensions_control: true
-        allowed_extensions: [JPG, JPEG, jpg, jpeg, png, gif] #[pdf, doc, docx, xls, odt]
+        allowed_extensions: [JPG, JPEG, jpg, jpeg, png]
         file_types:
-            ADMINISTRATIVE_FILE: {folder: "administrative", encrypt: true}
-            USER_AVATAR: {folder: "pictures", allowed_extensions: [jpg, jpeg]}
-            APPLICATION_FILE: {folder: "application"}
+            NEWS: {folder: "files", allowed_extensions: [JPG, JPEG, jpg, jpeg, png]}
+            ALBUM: {folder: "files", allowed_extensions: [JPG, JPEG, jpg, jpeg, png]}
 
 #    file_encryptor: #Uniquement si le module d’encryption est activé
 #            key: %encryption_key%

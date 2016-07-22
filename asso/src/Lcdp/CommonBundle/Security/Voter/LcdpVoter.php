@@ -4,19 +4,20 @@ namespace Lcdp\CommonBundle\Security\Voter;
 
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use \Lcdp\CommonBundle\Service\UserService;
+use Lcdp\CommonBundle\Service\UserService;
 
 /**
- * Votant pour les droits de l'application Unapei
+ * Class LcdpVoter
+ *
+ * @package Lcdp\CommonBundle\Security\Voter
  */
 class LcdpVoter implements VoterInterface
 {
-    const UNAPEI_ROLE_PREFIX = 'UNAPEI_';
-    const UNAPEI_ROLE_READ_SUFFIX = 'READ';
-    const UNAPEI_ROLE_CREATE_SUFFIX = 'CREATE';
-    const UNAPEI_ROLE_UPDATE_SUFFIX = 'UPDATE';
-    const UNAPEI_ROLE_DELETE_SUFFIX = 'DELETE';
-    const UNAPEI_ROLE_USER_ACCESS = 'CHECK_USER_ACCESS';
+    const UNIVERSAL_ROLE_PREFIX = 'LCDP_';
+    const UNIVERSAL_ROLE_READ_SUFFIX = 'READ';
+    const UNIVERSAL_ROLE_CREATE_SUFFIX = 'CREATE';
+    const UNIVERSAL_ROLE_UPDATE_SUFFIX = 'UPDATE';
+    const UNIVERSAL_ROLE_DELETE_SUFFIX = 'DELETE';
 
     /**
      * Cache facultatif des permissions (la session de l'utilisateur courant par défaut)
@@ -27,15 +28,16 @@ class LcdpVoter implements VoterInterface
 
     /**
      * Manager des utilisateurs
-     * @var \Unapei\Bundle\CoreBundle\Service\UserService
+     *
+     * @var \Lcdp\CommonBundle\Service\UserService $userManager
      */
     protected $userManager;
 
     /**
      * Constructeur du voteur
      *
-     * @param \Unapei\Bundle\CoreBundle\Service\UserService $userManager  Manager des utilisateurs
-     * @param mixed                                         $cache        Session
+     * @param \Lcdp\CommonBundle\Service\UserService $userManager Manager des utilisateurs
+     * @param mixed                          $cache       Session
      */
     public function __construct(UserService $userManager, $cache)
     {
@@ -51,7 +53,7 @@ class LcdpVoter implements VoterInterface
      */
     public function supportsAttribute($attribute)
     {
-        return 0 === strpos($attribute, self::UNAPEI_ROLE_PREFIX);
+        return 0 === strpos($attribute, self::UNIVERSAL_ROLE_PREFIX);
     }
 
     /**
@@ -74,7 +76,6 @@ class LcdpVoter implements VoterInterface
      * @param TokenInterface $token      A TokenInterface instance
      * @param object         $object     The object to secure
      * @param array          $attributes An array of attributes associated with the method being invoked
-     *
      * @return integer either ACCESS_GRANTED, ACCESS_ABSTAIN, or ACCESS_DENIED
      */
     public function vote(TokenInterface $token, $object, array $attributes)
@@ -95,7 +96,7 @@ class LcdpVoter implements VoterInterface
             }
 
             // On vérifie que l'utilisateur possède la permission demandée
-            if ($this->hasPermission($user, $attribute, $object)) {
+            if ($this->hasPermission($user, $attribute)) {
                 return VoterInterface::ACCESS_GRANTED;
             } else {
                 $result = VoterInterface::ACCESS_DENIED;
@@ -110,18 +111,12 @@ class LcdpVoter implements VoterInterface
      *
      * @param object $user        Utilisateur courant
      * @param string $featureCode Code de la permission à vérifier
-     * @param object $object      Objet sur lequel l'accès est demandé
      * @return boolean
      */
-    protected function hasPermission($user, $featureCode, $object)
+    protected function hasPermission($user, $featureCode)
     {
         // On supprime le préfixe du code de la feature
-        $featureCode = substr($featureCode, strlen(self::UNAPEI_ROLE_PREFIX));
-
-        // Cas particulier de l'accès à un utilisateur
-        if ($featureCode == self::UNAPEI_ROLE_USER_ACCESS) {
-            return $this->userManager->hasUserAccessToPerimeter($user, $object);
-        }
+        $featureCode = substr($featureCode, strlen(self::UNIVERSAL_ROLE_PREFIX));
 
         // On récupère les permissions de l'utilisateur courant
         $userPermissions = $this->cache ? $this->cache->get('userPermissions', array()) : array();
@@ -140,7 +135,7 @@ class LcdpVoter implements VoterInterface
         $lastPart = end($parts);
 
         // La permission est-elle générique ou sur une action particulière ?
-        if (in_array($lastPart, array(self::UNAPEI_ROLE_READ_SUFFIX, self::UNAPEI_ROLE_CREATE_SUFFIX, self::UNAPEI_ROLE_UPDATE_SUFFIX, self::UNAPEI_ROLE_DELETE_SUFFIX))) {
+        if (in_array($lastPart, $this->getAllSuffix())) {
             $featureCode = substr($featureCode, 0, 0 - (strlen($lastPart) + 1));
 
             return $userPermissions[$featureCode][$lastPart];
@@ -153,7 +148,24 @@ class LcdpVoter implements VoterInterface
 
             return $hasPermission;
         }
+    }
 
-        return $userPermissions;
+    /**
+     * Permet de récupérer un tableau contenant tout les suffix possible pour une permission
+     *
+     * @return array
+     *
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    private function getAllSuffix()
+    {
+        $return = array(
+            self::UNIVERSAL_ROLE_READ_SUFFIX,
+            self::UNIVERSAL_ROLE_CREATE_SUFFIX,
+            self::UNIVERSAL_ROLE_UPDATE_SUFFIX,
+            self::UNIVERSAL_ROLE_DELETE_SUFFIX
+        );
+
+        return $return;
     }
 }

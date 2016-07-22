@@ -27,18 +27,20 @@
             </li>
         </ul>
     </li>
-    <li>
-        <a href="{{ path('lcdp_admin_profile_list') }}">
-            <span class="glyphicons glyphicons-nameplate"></span>
-            <span class="sidebar-title">Profiles</span>
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('lcdp_admin_users') }}">
-            <span class="glyphicons glyphicons-group"></span>
-            <span class="sidebar-title">Utilisateurs</span>
-        </a>
-    </li>
+    {#<li>#}
+        {#<a href="{{ path('lcdp_admin_profile_list') }}">#}
+            {#<span class="glyphicons glyphicons-nameplate"></span>#}
+            {#<span class="sidebar-title">Profiles</span>#}
+        {#</a>#}
+    {#</li>#}
+    {% if is_granted('LCDP_USER_INFOS_READ') %}
+        <li>
+            <a href="{{ path('lcdp_admin_users') }}">
+                <span class="glyphicons glyphicons-group"></span>
+                <span class="sidebar-title">Utilisateurs</span>
+            </a>
+        </li>
+    {% endif %}
     {#<li>#}
         {#<a href="{{ path('lcdp_admin_newsletter') }}">#}
             {#<span class="glyphicons glyphicons-envelope"></span>#}

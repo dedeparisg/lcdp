@@ -7,7 +7,7 @@
             </li>
         {% endfor %}
     </ul>
-    <a href="" class="btn btn-blue btn-xs">En savoir plus</a>
+    <a href="{{ path('front_events') }}" class="btn btn-blue btn-xs">Voir tous les événements</a>
 </div>
 
 <div id="benevol" class="bulle violet">
@@ -21,7 +21,7 @@
 </div>
 
 <div id="autre" class="bulle bleu">
-    <h2 class="text-center">Prochaine rencontre</h2>
+    <h2 class="text-center">LCDP XXXXXX</h2>
     <ul>
         <li>.....</li>
     </ul>
@@ -30,7 +30,11 @@
 <div id="gallerie" class="bulle orange">
     <h2 class="text-center">LCDP en images</h2>
     <ul>
-        <li>Reportage photos</li>
-        <li>Reportage vidéos</li>
+        {% for item in albums %}
+            <li>
+                <a href="{{ path('front_album', {"slug": item.slug}) }}">{{ item.title }}</a>
+            </li>
+        {% endfor %}
     </ul>
+    <a href="{{ path('front_albums') }}" class="btn btn-blue btn-xs">Voir tous les albums</a>
 </div>

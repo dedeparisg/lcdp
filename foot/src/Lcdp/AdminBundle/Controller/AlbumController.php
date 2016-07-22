@@ -6,8 +6,11 @@ use Lcdp\AdminBundle\Form\Type\AlbumType;
 use Lcdp\AdminBundle\Form\Type\FiltersType;
 use Lcdp\CommonBundle\Controller\BaseController;
 use Lcdp\CommonBundle\Entity\Album;
+use Lcdp\CommonBundle\Entity\AlbumPicture;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class AlbumController
@@ -65,28 +68,30 @@ class AlbumController extends BaseController
 
         if ($form->handleRequest($request) && $request->getMethod() == "POST") {
             if ($form->isValid()) {
-                $data = $form->getData();
-
-                echo "André Debug";
-                echo "<pre>";
-                \Doctrine\Common\Util\Debug::dump($album->getPhoto());
-                echo "</pre>";
-                echo "<pre>";
-                \Doctrine\Common\Util\Debug::dump($data);
-                echo "</pre>";
-                echo "André Debug";
-                echo "<pre>";
-                print_r($_FILES);
-                echo "</pre>";
-                die(__METHOD__);
-                die(__METHOD__);
-
                 $album->setModifiedAt(new \DateTime());
                 $album->setSlug($this->get('lcdp.utils.service')->generateSlug('Album', $album));
 
                 foreach ($album->getAlbumVideos() as $content) {
                     $content->setAlbum($album);
                     $this->persist($content);
+                }
+
+                foreach ($album->getImgFiles() as $imgFile){
+                    $picture = new AlbumPicture();
+                    $picture->setAlbum($album);
+                    $picture->setPriority(0);
+
+                    // On génère l'uid du fichier
+                    $uid = $this->get('lcdp.filestore')->generateUniqueId(strtolower($imgFile->getClientOriginalExtension()));
+
+                    // On ajoute le média dans le filestore
+                    $this->get('lcdp.filestore')->addMedia(
+                        $imgFile,
+                        $uid,
+                        strtolower($imgFile->getClientOriginalExtension())
+                    );
+                    $picture->setImgAlt($uid);
+                    $this->persist($picture);
                 }
 
                 $this->persist($album, true);
@@ -102,5 +107,39 @@ class AlbumController extends BaseController
             'form' => $form->createView(),
             'album' => $album
         );
+    }
+
+    /**
+     * Permet de supprimer une image d'un album
+     *
+     * @param integer $albumId Identifiant de l'album concerné
+     * @param integer $id      Identifiant de l'image concerné
+     * @return JsonResponse
+     *
+     * @Template
+     * @author André Tapia <contact@andretapia.com>
+     */
+    public function removeAlbumPictureAction($albumId, $id)
+    {
+        $album = $this->getRepository('Album')->find($albumId);
+
+        if (empty($album)) {
+            return new JsonResponse(array('success' => false));
+        }
+
+        $picture = $this->getRepository('AlbumPicture')->findOneBy(
+            array(
+                'album' => $album,
+                'id' => $id
+            )
+        );
+
+        if (empty($album)) {
+            return new JsonResponse(array('success' => false));
+        }
+
+        $this->remove($picture, true);
+
+        return new JsonResponse(array('success' => true));
     }
 }

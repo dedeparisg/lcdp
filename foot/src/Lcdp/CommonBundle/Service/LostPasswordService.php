@@ -23,7 +23,7 @@ class LostPasswordService
     /**
      * Service de mail
      *
-     * @var MailerService $mailer
+     * @var LcdpMailerService $mailer
      */
     private $mailer;
 
@@ -37,15 +37,15 @@ class LostPasswordService
     /**
      * Constructeur du service
      *
-     * @param UserService         $users      Service de gestion des utilisateurs
-     * @param MailerService       $mailer     Service de mail
-     * @param LoggerInterface     $logger     Service de log
+     * @param UserService       $users  Service de gestion des utilisateurs
+     * @param  LcdpMailerService $mailer Service de mail
+     * @param LoggerInterface   $logger Service de log
      *
      * @author André Tapia <atapia@webnet.fr>
      */
     public function __construct(
         UserService $users = null,
-        MailerService $mailer = null,
+        LcdpMailerService $mailer = null,
         LoggerInterface $logger = null
     ) {
         $this->users = $users;
@@ -79,7 +79,7 @@ class LostPasswordService
             // On envoie le mail
             $this->mailer->sendMessage(
                 $user->getEmail(),
-                ':Email:lostPassword.html.twig',
+                'LcdpCommonBundle:Email:lostPassword.html.twig',
                 compact('user')
             );
 

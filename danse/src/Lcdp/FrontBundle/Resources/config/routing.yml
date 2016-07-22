@@ -17,7 +17,7 @@ front_page:
 
 front_events:
     path: /evenements
-    defaults: { _controller: "LcdpFrontBundle:Events:view" }
+    defaults: { _controller: "LcdpFrontBundle:Events:list" }
 
 front_event:
     path: /evenement/{slug}
@@ -27,106 +27,10 @@ front_news:
     path: /actualite/{slug}
     defaults: { _controller: "LcdpFrontBundle:News:view" }
 
-#contact_us:
-#    path: /contact
-#    defaults: { _controller: LcdpFrontBundle:Contact:index }
-#
-#all_events:
-#    path: /evenements
-#    defaults: { _controller: LcdpFrontBundle:Events:list }
-#
-## Section "Le club"
-#club_histoire:
-#    path: /le-club/histoire
-#    defaults: { _controller: LcdpFrontBundle:Club:staticPage, contentId: 1 }
-#
-#club_organigramme:
-#    path: /le-club/organigramme
-#    defaults: { _controller: LcdpFrontBundle:Club:organigram }
-#
-#club_infos:
-#    path: /le-club/infos
-#    defaults: { _controller: LcdpFrontBundle:Club:staticPage, contentId: 2 }
-#
-## Section "Danse"
-#danse_all_news:
-#    path: /danse/actualites
-#    defaults: { _controller: LcdpFrontBundle:News:list, sectionId: 21 }
-#
-#danse_news:
-#    path: /danse/actualites/{slug}
-#    defaults: { _controller: LcdpFrontBundle:News:show, sectionId: 21 }
-#
-#danse_all_soiree:
-#    path: /danse/soirees
-#    defaults: { _controller: LcdpFrontBundle:News:list, sectionId: 22 }
-#
-#danse_soiree:
-#    path: /danse/soirees/{slug}
-#    defaults: { _controller: LcdpFrontBundle:News:show, sectionId: 22 }
-#
-#danse_all_event:
-#    path: /danse/evenements
-#    defaults: { _controller: LcdpFrontBundle:Events:list, sectionId: 23 }
-#
-#danse_event:
-#    path: /danse/evenements/{slug}
-#    defaults: { _controller: LcdpFrontBundle:Events:show, sectionId: 23 }
-#
-#danse_cours:
-#    path: /danse/cours
-#    defaults: { _controller: LcdpFrontBundle:Club:staticPage, contentId: 7 }
-#
-#danse_infos:
-#    path: /danse/infos
-#    defaults: { _controller: LcdpFrontBundle:Club:staticPage, contentId: 7 }
-#
-## Section "Football"
-#foot_all_news:
-#    path: /football/actualites
-#    defaults: { _controller: LcdpFrontBundle:News:list, sectionId: 31 }
-#
-#foot_news:
-#    path: /football/actualites/{slug}
-#    defaults: { _controller: LcdpFrontBundle:News:show, sectionId: 31 }
-#
-#foot_all_event:
-#    path: /football/evenements
-#    defaults: { _controller: LcdpFrontBundle:Events:show, sectionId: 33 }
-#
-#foot_event:
-#    path: /football/evenements/{slug}
-#    defaults: { _controller: LcdpFrontBundle:Events:show, sectionId: 33 }
-#
-## Section "Associtation"
-#assoc_all_soiree:
-#    path: /association/soirees
-#    defaults: { _controller: LcdpFrontBundle:News:list, sectionId: 11 }
-#
-#assoc_soiree:
-#    path: /association/soirees/{slug}
-#    defaults: { _controller: LcdpFrontBundle:News:show, sectionId: 11 }
-#
-#assoc_all_event:
-#    path: /association/evenements
-#    defaults: { _controller: LcdpFrontBundle:Events:list, sectionId: [11, 12, 13] }
-#
-#assoc_event:
-#    path: /association/evenements/{slug}
-#    defaults: { _controller: LcdpFrontBundle:Events:show, sectionId: [11, 12, 13] }
-#
-#assoc_all_sortie:
-#    path: /association/sorties
-#    defaults: { _controller: LcdpFrontBundle:News:list, sectionId: 12 }
-#
-#assoc_sortie:
-#    path: /association/sorties/{slug}
-#    defaults: { _controller: LcdpFrontBundle:News:show, sectionId: 12 }
-#
-#assoc_all_voyage:
-#    path: /association/voyages
-#    defaults: { _controller: LcdpFrontBundle:News:list, sectionId: 13 }
-#
-#assoc_voyage:
-#    path: /association/voyages/{slug}
-#    defaults: { _controller: LcdpFrontBundle:News:show, sectionId: 13 }
+front_albums:
+    path: /albums
+    defaults: { _controller: "LcdpFrontBundle:Album:list" }
+
+front_album:
+    path: /album/{slug}
+    defaults: { _controller: "LcdpFrontBundle:Album:view" }

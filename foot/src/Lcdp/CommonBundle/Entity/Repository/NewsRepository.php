@@ -48,7 +48,7 @@ class NewsRepository extends EntityRepository
     }
 
     /**
-     * Permet de lister toutes les pages éditable du site
+     * Permet de comptabiliser toutes les actualitées publiées du site
      *
      * @param array $filters Tableau contenant les filtres
      * @return array

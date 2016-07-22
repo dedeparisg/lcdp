@@ -128,7 +128,7 @@ class UserType extends AbstractType
             $profiles = $form->get('profiles');
 
             if (count($profiles->getData()) == 0) {
-                $profiles->addError(new FormError("Ce champ est obligatoire."));
+                $profiles->addError(new FormError("Merci de renseigner ce champ."));
             }
         });
     }

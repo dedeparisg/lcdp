@@ -5,11 +5,17 @@ namespace Lcdp\AdminBundle\Controller;
 use Lcdp\AdminBundle\Form\Type\UserFilterType;
 use Lcdp\AdminBundle\Form\Type\UserType;
 use \Lcdp\CommonBundle\Controller\BaseController;
+use Lcdp\FrontBundle\Service\UtilsService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Webnet\Bundle\SwissArmyBundle\Util\StringUtils;
+use Webnet\Bundle\SwissArmyBundle\WebnetSwissArmyBundle;
 
 /**
  * Class UserController
@@ -17,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author  André Tapia <atapia@webnet.fr>
  * @package Lcdp\AdminBundle\Controller
- * @Route("/utilisateurs")
+ * @Route("/users")
  */
 class UserController extends BaseController
 {
@@ -26,7 +32,7 @@ class UserController extends BaseController
      *
      * @Route("/", name="lcdp_admin_users")
      * @Method({"GET"})
-     * @Secure(roles="UNAPEI_USER_INFOS_READ")
+     * @Security("is_granted('LCDP_USER_INFOS_READ')")
      * @Template()
      *
      * @param Request $request La requete courante
@@ -50,10 +56,10 @@ class UserController extends BaseController
     /**
      * Ajout / Edition d'un utilisateur
      *
-     * @Route("/users/new", name="lcdp_admin_users_new")
-     * @Route("/users/{id}/edit", name="lcdp_admin_users_edit", requirements={"id": "\d+"})
+     * @Route("/new", name="lcdp_admin_users_new")
+     * @Route("/{id}/edit", name="lcdp_admin_users_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
-     * @Secure(roles="UNAPEI_USER_INFOS_UPDATE")
+     * @Security("is_granted('LCDP_USER_INFOS_READ')")
      * @Template()
      *
      * @param Request $request Requête courante
@@ -80,10 +86,15 @@ class UserController extends BaseController
         $form->get('locked')->setData($user->getLocked() ? 1 : 0);
 
         if ($form->handleRequest($request)) {
+
             if ($form->isValid()) {
-                $this->get('lcdp.common.users')->createorUpdateUser($user);
-                $this->addFlashMessage('success');
-                return $this->redirectToRoute('lcdp_admin_users_edit', array('id' => $user->getId()));
+                try {
+                    $this->get('lcdp.common.users')->createorUpdateUser($user);
+                    $this->addFlashMessage('success');
+                    return $this->redirectToRoute('lcdp_admin_users_edit', array('id' => $user->getId()));
+                } catch (\Exception $e) {
+                    $this->addFlashMessage('danger', "Une erreur est survenue lors de l'enregistrement de l'utilisateur.");
+                }
             }
         }
 
@@ -91,5 +102,29 @@ class UserController extends BaseController
             'form' => $form->createView(),
             'isNew' => $isNew
         );
+    }
+
+    /**
+     * Permet de générer un identifiant unique de connexion
+     * Appel en Ajax depuis la fiche d'un utilisateur
+     *
+     * @Route("/login", name="users_login", options={"expose"=true})
+     * @Method({"POST"})
+     * @Secure(roles="LCDP_USER_INFOS_READ")
+     *
+     * @param Request $request      La requête courante
+     * @return JsonResponse
+     *
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public function generateUniqueIdAction(Request $request)
+    {
+        $firstname = StringUtils::slugify($request->request->get('firstname'));
+        $lastname = StringUtils::slugify($request->request->get('lastname'));
+        $email = $request->request->get('email');
+
+        $return = $this->get('lcdp.common.users')->generateLogin($firstname, $lastname, $email);
+
+        return new JsonResponse($return);
     }
 }

@@ -3,6 +3,7 @@
 namespace Lcdp\CommonBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Lcdp\CommonBundle\Entity\Profile;
 use Lcdp\CommonBundle\Entity\Repository\UserRepository;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

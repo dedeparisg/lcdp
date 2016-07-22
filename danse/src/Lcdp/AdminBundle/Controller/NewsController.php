@@ -101,7 +101,7 @@ class NewsController extends BaseController
         return array(
             'form' => $form->createView(),
             'news' => $news,
-            'imageUrl' => $this->get('lcdp.filestore')->getUrl($news->getImage(), 'jpg')
+            'imageUrl' => $this->get('lcdp.filestore')->getUrl($news->getImage(), 'NEWS')
         );
     }
 }

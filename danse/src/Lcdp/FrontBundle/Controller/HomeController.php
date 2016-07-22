@@ -35,18 +35,8 @@ class HomeController extends BaseController
             ($currentPage - 1) * $nbElementsPerPage
         );
 
-        $events = $this->getRepository('Event')->getList(
-            array(
-                'isPublished' => true,
-                'futur' => true
-            ),
-            array('publication' => 'DESC'),
-            array('limit' => $this->getParameter('pagination_front_home_events'))
-        );
-
         return array(
             'news' => $news,
-            'events' => $events,
             'currentPage' => $currentPage,
             'nbPages' => ceil($nbNews / $nbElementsPerPage),
             'url' => $this->generateUrl('homepage') . '?page=',
@@ -96,7 +86,14 @@ class HomeController extends BaseController
             array('limit' => $this->getParameter('pagination_front_home_events'))
         );
 
+        $albums = $this->getRepository('Album')->getList(
+            array('isPublished' => true),
+            array('publication' => 'DESC'),
+            array('limit' => $this->getParameter('pagination_front_home_albums'))
+        );
+
         return array(
+            'albums' => $albums,
             'news' => $news
         );
     }

@@ -92,11 +92,10 @@ lcdp_admin_album_edit:
     defaults: { _controller: LcdpAdminBundle:Album:edit, id: null }
     requirements:
         id: "\d+"
-#
-#lcdp_admin_videos:
-#    path:  /videos
-#    defaults: { _controller: LcdpAdminBundle:Video:list }
-#
-#lcdp_admin_images:
-#    path:  /albums/images
-#    defaults: { _controller: LcdpAdminBundle:Image:list }
+
+lcdp_admin_remove_picture:
+    path:  /albums/{albumId}/image/{id}
+    defaults: { _controller: LcdpAdminBundle:Album:removeAlbumPicture }
+    methods: [POST]
+    options:
+        expose: true

@@ -66,7 +66,7 @@ class SecurityController extends BaseController
                 $this->get('lcdp.users.lostpassword')->handleRequest($form->getData()['email']);
                 $this->addFlashMessage('success', "Un email contenant un lien permettant de réinitialiser votre mot de passe vient de vous être envoyé");
             } catch (\Exception $e) {
-                $this->addFlashMessage('error', $e->getMessage());
+                $this->addFlashMessage('danger', $e->getMessage());
             }
 
             return $this->redirect($this->generateUrl('auth_lostpassword'));

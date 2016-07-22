@@ -1,0 +1,54 @@
+services :
+    lcdp.filestore:
+        class: Webnet\Bundle\SwissArmyBundle\Service\FilestoreService
+        arguments: ["%filestore%"]
+        calls:
+            - [setAntivirus, ["@?sirh.antivirus"]] # Pour activer le contrôle antivirus
+            - [setFileEncryptor, ["@?sirh.file.encryptor.tripledes"]] # Pour activer le module d’encryption
+
+    # Gestionnaire d'utilisateurs
+    lcdp.common.users:
+        class: Lcdp\CommonBundle\Service\UserService
+        arguments: ["@doctrine.orm.entity_manager", "@security.password_encoder", "@lcdp.export.csv", "@translator"]
+
+    # Extension Twig
+    lcdp.twig.extension:
+        class: Lcdp\CommonBundle\TwigExtension\LcdpExtension
+        tags:
+            - { name: twig.extension }
+
+    # Gestionnaire des envoi de mails
+    lcdp.mailer.service:
+        class: Lcdp\CommonBundle\Service\LcdpMailerService
+        arguments: ["@twig", "@mailer", "%lcdp.mailer.params%"]
+
+    # Gestionnaire de procédure de réinitialisation des mots de passe
+    lcdp.users.lostpassword:
+        class: Lcdp\CommonBundle\Service\LostPasswordService
+        arguments: ["@lcdp.common.users", "@lcdp.mailer.service", "@logger"]
+        tags:
+            - {name: monolog.logger, channel: service.users }
+
+    # Gère les exports en CSV
+    lcdp.export.csv:
+        class: Lcdp\CommonBundle\Service\ExportCsvService
+
+    # Utils
+    lcdp.utils.service:
+        class: Lcdp\FrontBundle\Service\UtilsService
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    # Voteur
+    lcdp.security.voter:
+        class: Lcdp\CommonBundle\Security\Voter\LcdpVoter
+        arguments: ["@lcdp.common.users", "@session"]
+        public: false
+        tags:
+            - { name: security.voter }
+
+    # Extension Twig du filestore
+    lcdp.filestore.twig.extension:
+        class: Webnet\Bundle\SwissArmyBundle\TwigExtension\FilestoreTwigExtension
+        arguments: [@lcdp.filestore]
+        tags:
+            - { name: twig.extension }

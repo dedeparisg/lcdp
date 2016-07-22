@@ -98,19 +98,46 @@ class Album
     protected $isDeleted;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="album")
+     * Images liées
+     * @var ArrayCollection $pictures
+     *
+     * @ORM\OneToMany(targetEntity="Lcdp\CommonBundle\Entity\AlbumPicture", mappedBy="album", cascade={"persist"})
      */
-    protected $images;
+    protected $pictures;
 
     /**
+     * Vidéos liées
+     * @var ArrayCollection $albumVideos
+     *
      * @ORM\OneToMany(targetEntity="AlbumVideo", mappedBy="album", cascade={"all"})
      */
     protected $albumVideos;
 
     /**
-     * Fake field
+     * @var Fake Field
      */
-    private $photos;
+    protected $imgFiles;
+
+    /**
+     * Retourne l'élément picture de priorité minimale
+     *
+     * @return AlbumPicture|false
+     */
+    public function getMainPicture()
+    {
+        $picturesArr = $this->getPictures();
+        if (empty($picturesArr)) {
+            return false;
+        }
+
+        $iterator = $picturesArr->getIterator();
+        $iterator->uasort(function (AlbumPicture $a, AlbumPicture $b) {
+            return ($a->getPriority() < $b->getPriority()) ? -1 : 1;
+        });
+        $sortedArr = new ArrayCollection(iterator_to_array($iterator));
+
+        return $sortedArr->first();
+    }
 
     /**
      * Constructor
@@ -121,7 +148,7 @@ class Album
         $this->isPublished = 0;
         $this->createdAt = new \DateTime();
         $this->modifiedAt = new \DateTime();
-        $this->images = new ArrayCollection();
+        $this->pictures = new ArrayCollection();
         $this->albumVideos = new ArrayCollection();
     }
 
@@ -389,39 +416,6 @@ class Album
     }
 
     /**
-     * Add images
-     *
-     * @param \Lcdp\CommonBundle\Entity\Image $images
-     * @return Album
-     */
-    public function addImage(\Lcdp\CommonBundle\Entity\Image $images)
-    {
-        $this->images[] = $images;
-
-        return $this;
-    }
-
-    /**
-     * Remove images
-     *
-     * @param \Lcdp\CommonBundle\Entity\Image $images
-     */
-    public function removeImage(\Lcdp\CommonBundle\Entity\Image $images)
-    {
-        $this->images->removeElement($images);
-    }
-
-    /**
-     * Get images
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
-
-    /**
      * Add albumVideo
      *
      * @param \Lcdp\CommonBundle\Entity\AlbumVideo $albumVideo
@@ -455,25 +449,53 @@ class Album
     }
 
     /**
-     * Get photos
+     * Add pictures
      *
-     * @return mixed
+     * @param \Lcdp\CommonBundle\Entity\AlbumPicture $pictures
+     * @return Album
      */
-    public function getPhotos()
+    public function addPicture(\Lcdp\CommonBundle\Entity\AlbumPicture $pictures)
     {
-        return $this->photos;
+        $this->pictures[] = $pictures;
+
+        return $this;
     }
 
     /**
-     * Set photos
+     * Remove pictures
      *
-     * @param $photos
-     * @return $this
+     * @param \Lcdp\CommonBundle\Entity\AlbumPicture $pictures
      */
-    public function setPhotos($photos)
+    public function removePicture(\Lcdp\CommonBundle\Entity\AlbumPicture $pictures)
     {
-        $this->photos = $photos;
+        $this->pictures->removeElement($pictures);
+    }
 
+    /**
+     * Get pictures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPictures()
+    {
+        return $this->pictures;
+    }
+
+    /**
+     * @return Fake
+     */
+    public function getImgFiles()
+    {
+        return $this->imgFiles;
+    }
+
+    /**
+     * @param Fake $imgFiles
+     * @return Album
+     */
+    public function setImgFiles($imgFiles)
+    {
+        $this->imgFiles = $imgFiles;
         return $this;
     }
 }

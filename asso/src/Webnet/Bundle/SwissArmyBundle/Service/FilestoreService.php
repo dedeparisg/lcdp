@@ -19,21 +19,18 @@ class FilestoreService
 
     /**
      * Paramètres du service
-     *
      * @var array
      */
     private $parameters;
 
     /**
      * Antivirus (facultatif)
-     *
      * @var \Webnet\Bundle\SwissArmyBundle\Service\Interfaces\AntivirusInterface
      */
     private $antivirus;
 
     /**
      * Encrypteur de fichiers (facultatif)
-     *
      * @var \Webnet\Bundle\SwissArmyBundle\Service\Interfaces\FileEncryptorInterface
      */
     private $fileEncryptor;
@@ -100,7 +97,7 @@ class FilestoreService
 
         // Si une extension est spécifiée, on l'ajoute
         if ($extension) {
-            $uid .= '.' . $extension;
+            $uid .= '.' . strtolower($extension);
         }
 
         return $uid;
@@ -109,15 +106,14 @@ class FilestoreService
     /**
      * Retourne le chemin correspondant à un UID et un type de document
      *
-     * @param  string  $uid          UID du document
-     * @param  string  $fileType     Type du document
-     * @param  boolean $withFilename [Optionnel] Inclure le nom du fichier (défaut: oui)
-     * @param  string  $rootPath     [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @param  string  $uid             UID du document
+     * @param  string  $fileType        Type du document
+     * @param  boolean $withFilename    [Optionnel] Inclure le nom du fichier (défaut: oui)
+     * @param  string  $rootPath        [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
      * @return string  Chemin du fichier
      */
     public function getPath($uid, $fileType, $withFilename = true, $rootPath = null)
     {
-        return 'rr';
         // Chemin de base du filestore
         $rootPath = ($rootPath) ? $rootPath : $this->getSystemPath();
 
@@ -160,34 +156,26 @@ class FilestoreService
     /**
      * Retourne l'url correspondant à un UID et un type de document
      *
-     * @param  string $uid      UID du document
-     * @param  string $fileType Type du document
+     * @param  string $uid             UID du document
+     * @param  string $fileType        Type du document
      * @return string Url du fichier
      */
     public function getUrl($uid, $fileType)
     {
-        $return = '';
-
-        if (!empty($uid) && !empty($fileType)) {
-            $return = $this->getPath($uid, $fileType, true, $this->getSystemUrl());
-        }
-
-        return $return;
+        return $this->getPath($uid, $fileType, true, $this->getSystemUrl());
     }
 
     /**
      * Retourne le chemin correspondant à un UID et un type de document
      *
-     * @param  UploadedFile $file     Média a enregistrer
-     * @param  string       $uid      UID du document
-     * @param  string       $ext      Extension du document
-     * @param  string       $rootPath [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @param  UploadedFile   $file            Média a enregistrer
+     * @param  string         $uid             UID du document
+     * @param  string         $fileType        Type du document
+     * @param  string         $rootPath        [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
      * @return string  Chemin du fichier
      */
-    public function addMedia(UploadedFile $file, $uid, $ext, $rootPath = null)
+    public function addMedia(UploadedFile $file, $uid, $fileType, $rootPath = null)
     {
-        $fileType = $this->mimeContentType($uid, $ext);
-
         // On vérifie le fichier avant de l'ajouter sur le filestore
         $this->ensureMediaSafetyBeforeUpload($file, $fileType);
 
@@ -210,12 +198,42 @@ class FilestoreService
     }
 
     /**
+     * Retourne le chemin correspondant à un UID et un type de document
+     *
+     * @param  string         $content         Source du média
+     * @param  string         $uid             UID du document
+     * @param  string         $fileType        Type du document
+     * @param  string         $rootPath        [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @return string  Chemin du fichier
+     */
+    public function addContentAsMedia($content, $uid, $fileType, $rootPath = null)
+    {
+        // On récupère le chemin du fichier
+        $mediaPath = $this->getPath($uid, $fileType, false, $rootPath);
+        $mediaName = $this->getFilename($uid, $fileType);
+
+        // On vérifie que le chemin existe sinon on le cree
+        if (!is_dir($mediaPath)) {
+            mkdir($mediaPath, 0777, true);
+        }
+
+        // On écrit le fichier
+        if (file_put_contents($mediaPath . DIRECTORY_SEPARATOR . $mediaName, $content) === false) {
+            return false;
+        }
+
+        // On effectue les derniers contrôles sur le fichier
+        $this->ensureMediaSafetyAfterUpload($mediaPath . DIRECTORY_SEPARATOR . $mediaName, $fileType);
+
+        return true;
+    }
+
+    /**
      * Supprime un média présent dans le filestore
      *
-     * @param  string $uid      UID du document
-     * @param  string $fileType Type du document
-     * @param  string $rootPath [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
-     * @return boolean
+     * @param  string         $uid             UID du document
+     * @param  string         $fileType        Type du document
+     * @param  string         $rootPath        [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
      */
     public function removeMedia($uid, $fileType, $rootPath = null)
     {
@@ -223,7 +241,9 @@ class FilestoreService
         $mediaPath = $this->getPath($uid, $fileType, true, $rootPath);
 
         // On supprime le média
-        unlink($mediaPath);
+        if (is_file($mediaPath)) {
+            unlink($mediaPath);
+        }
 
         return true;
     }
@@ -231,9 +251,9 @@ class FilestoreService
     /**
      * Retourne le contenu brut d'un média
      *
-     * @param  string $uid      UID du document
-     * @param  string $fileType Type du document
-     * @param  string $rootPath [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @param  string         $uid             UID du document
+     * @param  string         $fileType        Type du document
+     * @param  string         $rootPath        [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
      * @return string
      */
     public function getMediaContent($uid, $fileType, $rootPath = null)
@@ -269,15 +289,14 @@ class FilestoreService
             }
 
             // On contrôle l'extension du fichier
-            if (!in_array($file->getClientOriginalExtension(), $allowedExtensions)) {
-                throw new FilestoreException('Extension du fichier non autorisée');
+            if (!in_array(strtolower($file->getClientOriginalExtension()), $allowedExtensions)) {
+                throw new FilestoreException('lg.filestore.exceptions.unallowed.extension');
             }
 
             // Si Symfony réussit à deviner la véritable extension du fichier, celle-ci est également contrôlée
             $guessedExtension = $file->guessClientExtension();
-
-            if ($guessedExtension && !in_array($guessedExtension, $allowedExtensions)) {
-                throw new FilestoreException('Extension du fichier non autorisée');
+            if ($guessedExtension && !in_array(strtolower($guessedExtension), $allowedExtensions)) {
+                throw new FilestoreException('lg.filestore.exceptions.unallowed.extension');
             }
         }
     }
@@ -313,69 +332,6 @@ class FilestoreService
         // Encryptage (si configuré)
         if ($this->isEncoded($fileType)) {
             $this->fileEncryptor->encryptFile($filePath, FileEncryptorInterface::OUTPUT_MODE_OVERRIDE);
-        }
-    }
-
-    protected function mimeContentType($filename, $ext)
-    {
-        $mime_types = array(
-            'txt' => 'text/plain',
-            'htm' => 'text/html',
-            'html' => 'text/html',
-            'php' => 'text/html',
-            'css' => 'text/css',
-            'js' => 'application/javascript',
-            'json' => 'application/json',
-            'xml' => 'application/xml',
-            'swf' => 'application/x-shockwave-flash',
-            'flv' => 'video/x-flv',
-            // images
-            'png' => 'image/png',
-            'jpe' => 'image/jpeg',
-            'jpeg' => 'image/jpeg',
-            'jpg' => 'image/jpeg',
-            'gif' => 'image/gif',
-            'bmp' => 'image/bmp',
-            'ico' => 'image/vnd.microsoft.icon',
-            'tiff' => 'image/tiff',
-            'tif' => 'image/tiff',
-            'svg' => 'image/svg+xml',
-            'svgz' => 'image/svg+xml',
-            // archives
-            'zip' => 'application/zip',
-            'rar' => 'application/x-rar-compressed',
-            'exe' => 'application/x-msdownload',
-            'msi' => 'application/x-msdownload',
-            'cab' => 'application/vnd.ms-cab-compressed',
-            // audio/video
-            'mp3' => 'audio/mpeg',
-            'qt' => 'video/quicktime',
-            'mov' => 'video/quicktime',
-            // adobe
-            'pdf' => 'application/pdf',
-            'psd' => 'image/vnd.adobe.photoshop',
-            'ai' => 'application/postscript',
-            'eps' => 'application/postscript',
-            'ps' => 'application/postscript',
-            // ms office
-            'doc' => 'application/msword',
-            'rtf' => 'application/rtf',
-            'xls' => 'application/vnd.ms-excel',
-            'ppt' => 'application/vnd.ms-powerpoint',
-            // open office
-            'odt' => 'application/vnd.oasis.opendocument.text',
-            'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
-        );
-
-        if (array_key_exists($ext, $mime_types)) {
-            return $mime_types[$ext];
-        } elseif (function_exists('finfo_open')) {
-            $finfo = finfo_open(FILEINFO_MIME);
-            $mimetype = finfo_file($finfo, $filename);
-            finfo_close($finfo);
-            return $mimetype;
-        } else {
-            return 'application/octet-stream';
         }
     }
 }

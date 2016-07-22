@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Le club des paquerêttes{% endblock %}</title>
+        <title>{% block title %}Le club des paquerêttes - Administration{% endblock %}</title>
 
 {#
         <meta name="keywords" content="HTML5 Bootstrap 3 Admin Template UI Theme" />
@@ -19,6 +19,7 @@
         {% block stylesheets %}
             {% stylesheets filter="cssrewrite"
                 'bundles/lcdpadmin/css/libs/bootstrap-3.0.3.min.css'
+                'bundles/lcdpadmin/css/libs/jquery.fancybox-1.3.4.css'
                 'bundles/lcdpadmin/css/libs/glyphicons_pro/glyphicons.min.css'
                 'bundles/lcdpadmin/css/libs/font-awsome/font-awesome.min.css'
                 'bundles/lcdpadmin/css/theme.css'
@@ -66,9 +67,10 @@
                 '@LcdpCommonBundle/Resources/public/js/bootstrap-3.0.3.min.js'
                 '@LcdpAdminBundle/Resources/public/js/main.js'
                 '@LcdpAdminBundle/Resources/public/js/libs/bootbox.min.js'
+                '@LcdpAdminBundle/Resources/public/js/libs/jquery.mousewheel-3.0.4.pack.js'
+                '@LcdpAdminBundle/Resources/public/js/libs/jquery.fancybox-1.3.4.js'
                 'bundles/fosjsrouting/js/router.js'
             %}
-            {#'@LcdpAdminBundle/Resources/public/js/redactor.js'#}
                 <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
 

@@ -41,7 +41,7 @@
                 <th>Prénom</th>
                 <th>Profil</th>
                 <th>Compte actif</th>
-                <th>Edit.</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -51,9 +51,9 @@
                     <td>{{ user.firstname }}</td>
                     <td>{{ user.profileTitle }}</td>
                     <td>{% if not user.locked %}Oui{% else %}Non{% endif %}</td>
-                    <td>
+                    <td class="actions">
                         <a href="{{ path('lcdp_admin_users_edit', {'id': user.id}) }}">
-                            <img src="{{ asset('bundles/lcdpadmin/images/picto_editer.png') }}" title="Editer la page"/>
+                            <i class="fa fa-pencil"></i> Modifier
                         </a>
                     </td>
                 </tr>

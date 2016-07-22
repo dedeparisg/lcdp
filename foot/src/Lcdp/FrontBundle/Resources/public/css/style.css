@@ -57,7 +57,7 @@ body{
 }
 
 #menu div {
-    background-image: url('../img/picto_bleu.png');
+    background-image: url('../img/picto_rose.png');
     background-repeat: no-repeat;
     border-bottom: 1px dotted;
     font-size: 17px;
@@ -70,7 +70,6 @@ body{
 .menu-top .bleu {
     color: #fff;
     background-color: #008AD2;
-    width: 100%;
 }
 .menu-top .violet {
     color: #fff;
@@ -80,6 +79,7 @@ body{
     color: #fff;
     background-color: #E50075;
     border-radius: 10px;
+    width: 100%;
 }
 .menu-top .gris,
 .btn-gray{
@@ -121,7 +121,7 @@ body{
 }
 
 #center-content h3 {
-    color: #008AD2;
+    color: #e50075;
     font-size: 25px;
     font-weight: bold;
 }
@@ -160,5 +160,9 @@ li {
 #contact p {
     color: #008AD2;
     font-weight: bold;
+    font-size: 15px;
+}
+.article-content{
+    margin-top: 20px;
     font-size: 15px;
 }

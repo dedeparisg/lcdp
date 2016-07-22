@@ -1,5 +1,13 @@
 {% extends "LcdpFrontBundle::layout.html.twig" %}
 
 {% block content %}
-    <h2>{{ event.title }}</h2>
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>{{ event.title|default }}</h2>
+
+            <h3>{{ formatLcdpDateFromTo(event.startDate, event.endDate) }}</h3>
+
+            <div class="article-content">{{ event.content|raw }}</div>
+        </div>
+    </div>
 {% endblock %}

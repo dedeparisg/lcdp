@@ -43,7 +43,10 @@ class AlbumType extends AbstractType
             null,
             array(
                 'label' => "* Contenu : ",
-                'attr' => array('class' => 'wysiwyg')
+                'attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'advanced'
+                )
             )
         );
 
@@ -83,11 +86,12 @@ class AlbumType extends AbstractType
 
         $builder
             ->add(
-                'photo',
+                'imgFiles',
                 'file',
                 array(
                     'multiple' => true,
                     'label' => 'Photos : ',
+                    'required' => false,
 //                    'mapped' => false
                 )
             );

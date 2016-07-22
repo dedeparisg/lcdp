@@ -59,7 +59,7 @@ class User implements AdvancedUserInterface
 
     /**
      * @Assert\Length(min=8, minMessage="Le mot de passe doit contenir au moins 8 caractères.", groups={"Default", "registration"})
-     * @Assert\NotBlank(groups={"registration"})
+     * @Assert\NotBlank(groups={"registration"}, message="Merci de renseigner ce champ.")
      * @Assert\Regex(pattern="/((.*[A-Z]){1,})/", message="Le mot de passe doit être composé au moins d'une lettre majucule.", groups={"Default", "registration"})
      * @Assert\Regex(pattern="/((.*[a-z]){1,})/", message="Le mot de passe doit être composé au moins d'une lettre minuscule.", groups={"Default", "registration"})
      * @Assert\Regex(pattern="/((.*[0-9]){1,})/", message="Le mot de passe doit être composé au moins d'un chiffre.", groups={"Default", "registration"})
@@ -72,7 +72,7 @@ class User implements AdvancedUserInterface
      *
      * @ORM\Column(type="string", name="email", length=60, unique=true)
      * @Assert\Email(strict="true")
-     * @Assert\NotBlank(groups={"Default", "registration"})
+     * @Assert\NotBlank(groups={"Default", "registration"}, message="Merci de renseigner ce champ.")
      * @Assert\Length(max=60)
      */
     private $email;
@@ -148,7 +148,7 @@ class User implements AdvancedUserInterface
      *
      * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
      * @Assert\Length(max=255)
-     * @Assert\NotBlank(groups={"Default", "registration"})
+     * @Assert\NotBlank(groups={"Default", "registration"}, message="Merci de renseigner ce champ.")
      */
     private $firstname;
 
@@ -157,7 +157,7 @@ class User implements AdvancedUserInterface
      * @var string $lastname
      *
      * @ORM\Column(name="lastname", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(groups={"Default", "registration"})
+     * @Assert\NotBlank(groups={"Default", "registration"}, message="Merci de renseigner ce champ.")
      * @Assert\Length(max=255)
      */
     private $lastname;
