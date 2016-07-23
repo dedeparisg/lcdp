@@ -5,7 +5,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
  * @ORM\Table(name="album")
  * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\AlbumRepository")
  */

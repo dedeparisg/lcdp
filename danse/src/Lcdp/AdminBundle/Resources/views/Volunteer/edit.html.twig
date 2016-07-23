@@ -1,0 +1,67 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% block content_block_name %}{% endblock %}
+
+{% if news.id is defined and news.id is not null %}
+    {% set pageTitle = "Edition d'une page de la section \"Tous bénévoles\"" %}
+{% else %}
+    {% set pageTitle = "Nouvelle page de la section \"Tous bénévoles\"" %}
+{% endif %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('lcdp_admin_homepage') }}">Accueil</a></li>
+    <li>Gestion de contenus</li>
+    <li><a href="{{ path('lcdp_admin_volunteers') }}">Tous bénévoles</a></li>
+    <li class="active">{{ pageTitle }}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            {{ form_start(form, {'attr' : {'class': 'form-horizontal'}}) }}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="panel-title"> <i class="fa fa-pencil"></i> {{ pageTitle }} </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-xs-12 margin-bottom-sm">
+                                        {{ form_label(form.title) }}
+                                        </div>
+                                    <div class="col-xs-12">
+                                        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        {{ form_label(form.content) }}
+                                    </div>
+                                    <div class="col-xs-12">
+                                        {{ form_widget(form.content) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_rest(form) }}
+                                    <div class="col-xs-12">
+                                        <input class="btn pull-right btn btn-primary" type="submit" value="Enregistrer" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+
+        {% if volunteer.id|default %}
+            {% include 'LcdpAdminBundle:Partial:colomn_right_edit_content.html.twig' with {
+                'back_list_url' : path('lcdp_admin_volunteers'),
+                'unpublished_url' : path('lcdp_admin_content_publish_content', {'status': '0','content': 'Volunteer', 'id': volunteer.id}),
+                'published_url' : path('lcdp_admin_content_publish_content', {'status': '1', 'content': 'Volunteer', 'id': volunteer.id}),
+                'page' : volunteer
+            }%}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -6,7 +6,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * @ORM\Entity
  * @ORM\Table(name="news")
  * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\NewsRepository")
  */

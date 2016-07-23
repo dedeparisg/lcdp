@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class AlbumVideo
  *
- * @ORM\Entity
  * @ORM\Table(name="album_video")
  * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\AlbumVideoRepository")
  * @package Lcdp\CommonBundle\Entity

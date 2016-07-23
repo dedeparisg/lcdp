@@ -92,8 +92,14 @@ class HomeController extends BaseController
             array('limit' => $this->getParameter('pagination_front_home_albums'))
         );
 
+        $volunteers = $this->getRepository('Volunteer')->getList(
+            array('isPublished' => true),
+            array('publication' => 'DESC')
+        );
+
         return array(
             'albums' => $albums,
+            'volunteers' => $volunteers,
             'news' => $news
         );
     }

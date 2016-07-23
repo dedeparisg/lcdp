@@ -13,23 +13,23 @@ login:
 login_check:
     path:   /login_check
 
-lcdp_admin_members:
-    path:  /membres
-    defaults: { _controller: LcdpAdminBundle:Member:memberList }
-
-lcdp_admin_member_edit:
-    path:  /membres/edition/{id}
-    defaults: { _controller: LcdpAdminBundle:Member:memberEdit, id: null }
-    requirements:
-        id: "\d+"
-
-lcdp_admin_newsletter:
-    path:  /newsletter
-    defaults: { _controller: LcdpAdminBundle:Newsletter:index }
-
-lcdp_admin_parameters:
-    path:  /parametrages
-    defaults: { _controller: LcdpAdminBundle:Admin:config }
+#lcdp_admin_members:
+#    path:  /membres
+#    defaults: { _controller: LcdpAdminBundle:Member:memberList }
+#
+#lcdp_admin_member_edit:
+#    path:  /membres/edition/{id}
+#    defaults: { _controller: LcdpAdminBundle:Member:memberEdit, id: null }
+#    requirements:
+#        id: "\d+"
+#
+#lcdp_admin_newsletter:
+#    path:  /newsletter
+#    defaults: { _controller: LcdpAdminBundle:Newsletter:index }
+#
+#lcdp_admin_parameters:
+#    path:  /parametrages
+#    defaults: { _controller: LcdpAdminBundle:Admin:config }
 
 lcdp_admin_page:
     path:  /pages
@@ -49,31 +49,31 @@ lcdp_admin_page_update:
         expose: true
 
 lcdp_admin_news:
-    path:  /actualites
+    path:  /news
     defaults: { _controller: LcdpAdminBundle:News:list }
 
 lcdp_admin_news_edit:
-    path:  /actualite/edition/{id}
+    path:  /news/edition/{id}
     defaults: { _controller: LcdpAdminBundle:News:edit, id: null }
     requirements:
         id: "\d+"
 
 lcdp_admin_events:
-    path:  /evenements
+    path:  /events
     defaults: { _controller: LcdpAdminBundle:Event:list }
 
 lcdp_admin_event_edit:
-    path:  /evenement/edition/{id}
+    path:  /event/edition/{id}
     defaults: { _controller: LcdpAdminBundle:Event:edit, id: null }
     requirements:
         id: "\d+"
 
 lcdp_admin_content_soft_delete:
-    path:  /suppression/{content}/{id}
+    path:  /remove/{content}/{id}
     defaults: { _controller: LcdpAdminBundle:Content:softDelete, id: null }
     requirements:
         id: "\d+"
-        content: Page|News|Member|Event|Album
+        content: Page|News|Member|Event|Album|Volunteer
 
 lcdp_admin_content_publish_content:
     path:  /publication/{status}/{content}/{id}
@@ -81,7 +81,7 @@ lcdp_admin_content_publish_content:
     requirements:
         id: "\d+"
         status: 0|1
-        content: Page|News|Member|Event|Album
+        content: Page|News|Member|Event|Album|Volunteer
 
 lcdp_admin_albums:
     path:  /albums
@@ -99,3 +99,13 @@ lcdp_admin_remove_picture:
     methods: [POST]
     options:
         expose: true
+
+lcdp_admin_volunteers:
+    path:  /volunteers
+    defaults: { _controller: LcdpAdminBundle:Volunteer:list }
+
+lcdp_admin_volunteer_edit:
+    path:  /volunteer/edition/{id}
+    defaults: { _controller: LcdpAdminBundle:Volunteer:edit, id: null }
+    requirements:
+        id: "\d+"

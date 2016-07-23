@@ -5,7 +5,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
  * @ORM\Table(name="page")
  * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\PageRepository")
  */

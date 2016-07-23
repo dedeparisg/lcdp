@@ -1,0 +1,12 @@
+{% extends "LcdpFrontBundle::layout.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>{{ volunteer.title|default }}</h2>
+
+            <div class="article-content">{{ volunteer.content|raw }}</div>
+        </div>
+    </div>
+{% endblock %}
+    

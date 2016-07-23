@@ -34,3 +34,7 @@ front_albums:
 front_album:
     path: /album/{slug}
     defaults: { _controller: "LcdpFrontBundle:Album:view" }
+
+front_volunteer:
+    path: /tous-benevoles/{slug}
+    defaults: { _controller: "LcdpFrontBundle:Volunteer:view" }

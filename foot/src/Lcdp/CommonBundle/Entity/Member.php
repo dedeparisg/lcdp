@@ -4,7 +4,6 @@ namespace Lcdp\CommonBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
  * @ORM\Table(name="member")
  * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\MemberRepository")
  */
