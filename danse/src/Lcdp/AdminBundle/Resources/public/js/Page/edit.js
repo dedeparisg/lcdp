@@ -50,7 +50,7 @@ function removeBlocForm(currentElem)
 {
     var collectionholder = currentElem.closest('#collectionHolder');
 
-    // On ne fait  que de vider les champs rien s'il ne reste qu'un seul élément
+    // S'il ne reste qu'un seul élément, on supprime la saisie uniquement
     if (collectionholder.find('.row').length == 1) {
         collectionholder.find('input, textarea').val('');
         return false;

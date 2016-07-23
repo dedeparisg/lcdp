@@ -46,7 +46,7 @@
                                     </a>
                                     {% if page.canBeDeleted%}
                                         <a href="{{ path('lcdp_admin_content_soft_delete', {'content': 'Page','id': page.id}) }}" onclick="return confirm('Souhaitez-vous supprimer cette page ?');">
-                                            <i class="fa fa-ban"></i> Désactiver
+                                            <i class="fa fa-ban"></i> Supprimer
                                         </a>
                                     {% endif %}
                                 </td>

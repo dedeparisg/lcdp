@@ -33,7 +33,7 @@ twig:
         resources:
             - 'bootstrap_3_layout.html.twig'
     globals:
-        ref_sections_routing: %ref_sections_routing%
+        lcdp_urls: "%lcdp_urls%"
 
 # Assetic Configuration
 assetic:
@@ -94,51 +94,6 @@ stfalcon_tinymce:
              image_advtab: true
 
 parameters:
-    # Les routes associées aux sections du site
-    ref_sections_routing:
-        1: news
-        11: assoc_soiree
-        12: assoc_sortie
-        13: assoc_voyage
-        21: danse_news
-        22: danse_soiree
-        23: danse_events
-        31: foot_news
-        32: foot_soiree
-        33: foot_resultat
-        33: foot_events
-
-    ref_members_categories:
-        Bureau:
-            1: Directeur
-            2: Directeur associé
-            3: Comptable
-        Danse:
-            11: "- 10 ans"
-            12: "- 13 ans"
-            13: "- 16 ans"
-            14: "- 18 ans"
-            15: "- 30 ans"
-            16: "+ 30 ans"
-            17: "TC"
-        Football:
-            21: "Equipe 1"
-            22: "Equipe 2"
-
-    ref_members_categories_label:
-        1: Directeur
-        2: Directeur associé
-        3: Comptable
-        11: "- 10 ans"
-        12: "- 13 ans"
-        13: "- 16 ans"
-        14: "- 18 ans"
-        15: "- 30 ans"
-        16: "+ 30 ans"
-        17: "TC"
-        21: "Equipe 1"
-        22: "Equipe 2"
-
     lcdp.mailer.params:
         daemon_email: no-reply@lcdp.fr
 
@@ -147,6 +102,12 @@ parameters:
     pagination_front_home_albums: 5
     pagination_front_all_events: 20
     pagination_front_all_albums: 20
+
+    lcdp_urls:
+        danse: "http://danse.leclubdespaquerettes.fr"
+        foot: "http://foot.leclubdespaquerettes.fr"
+        asso: "http://association.leclubdespaquerettes.fr"
+        petanque: "http://petanque.leclubdespaquerettes.fr"
 
     filestore:
         paths:
@@ -159,7 +120,3 @@ parameters:
         file_types:
             NEWS: {folder: "files", allowed_extensions: [JPG, JPEG, jpg, jpeg, png]}
             ALBUM: {folder: "files", allowed_extensions: [JPG, JPEG, jpg, jpeg, png]}
-
-#    file_encryptor: #Uniquement si le module d’encryption est activé
-#            key: %encryption_key%
-#            tmp_dir: /tmp

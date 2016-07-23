@@ -22,13 +22,13 @@ class AlbumVideo
     protected $id;
 
     /**
-     * Liaison vers la page
-     * @var Album $page
+     * Liaison vers le groupe d'un album
+     * @var AlbumGroup $albumGroup
      *
-     * @ORM\ManyToOne(targetEntity="Lcdp\CommonBundle\Entity\Album", inversedBy="albumVideos")
-     * @ORM\JoinColumn(name="album_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Lcdp\CommonBundle\Entity\AlbumGroup", inversedBy="albumVideos")
+     * @ORM\JoinColumn(name="album_group_id", referencedColumnName="id")
      */
-    private $album;
+    private $albumGroup;
 
     /**
      * @var string
@@ -177,26 +177,26 @@ class AlbumVideo
     }
 
     /**
-     * Set album
+     * Set albumGroup
      *
-     * @param \Lcdp\CommonBundle\Entity\Album $album
-     * @return AlbumVideo
+     * @param \Lcdp\CommonBundle\Entity\AlbumGroup $albumGroup
+     * @return AlbumPicture
      */
-    public function setAlbum(\Lcdp\CommonBundle\Entity\Album $album = null)
+    public function setAlbumGroup(\Lcdp\CommonBundle\Entity\AlbumGroup $albumGroup = null)
     {
-        $this->album = $album;
+        $this->albumGroup = $albumGroup;
 
         return $this;
     }
 
     /**
-     * Get album
+     * Get albumGroup
      *
-     * @return \Lcdp\CommonBundle\Entity\Album
+     * @return \Lcdp\CommonBundle\Entity\AlbumGroup
      */
-    public function getAlbum()
+    public function getAlbumGroup()
     {
-        return $this->album;
+        return $this->albumGroup;
     }
 
     /**

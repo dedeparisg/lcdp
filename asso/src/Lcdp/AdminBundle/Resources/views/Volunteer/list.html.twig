@@ -9,7 +9,7 @@
 {% block content %}
     <div class="row">
         {% include 'LcdpAdminBundle:Partial:form_filters.html.twig' with {
-            'filter_title': 'Gestion des pages',
+            'filter_title': 'Gestion des pages "Tous bénévoles"',
             'filter_url': path('lcdp_admin_volunteer_edit'),
             'filter_button': 'Ajouter une page'
         } %}
@@ -37,7 +37,7 @@
                                     <i class="fa fa-pencil"></i> Modifier
                                 </a>
                                 <a href="{{ path('lcdp_admin_content_soft_delete', {'content': 'Volunteer','id': volunteer.id}) }}" onclick="return confirm('Souhaitez-vous supprimer cette actualité ?');">
-                                    <i class="fa fa-ban"></i> Désactiver
+                                    <i class="fa fa-ban"></i> Supprimer
                                 </a>
                             </td>
                         </tr>

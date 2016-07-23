@@ -56,6 +56,7 @@ class PageController extends BaseController
             $page = new Page();
         } else {
             $page = $this->getRepository('Page')->find($id);
+            $oldPagesContents = clone $page->getPageContents();
         }
 
         // Sécurité
@@ -65,10 +66,15 @@ class PageController extends BaseController
 
         $form = $this->createForm(new PageType(), $page);
 
+
         if ($form->handleRequest($request) && $form->isValid()) {
             $page->setModifiedAt(new DateTime());
             $page->setPosition(0);
             $page->setSlug($this->get('lcdp.utils.service')->generateSlug('Page', $page));
+
+            foreach ($oldPagesContents as $oldPagesContent) {
+                $this->remove($oldPagesContent);
+            }
 
             foreach ($page->getPageContents() as $content) {
                 $content->setPage($page);

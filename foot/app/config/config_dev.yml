@@ -34,3 +34,10 @@ assetic:
 
 swiftmailer:
     delivery_address: dev.andre.tapia@gmail.com
+
+parameters:
+    lcdp_urls:
+        danse: "http://danse.lcdp.fr"
+        foot: "http://foot.lcdp.fr"
+        asso: "http://association.lcdp.fr"
+        petanque: "http://petanque.lcdp.fr"

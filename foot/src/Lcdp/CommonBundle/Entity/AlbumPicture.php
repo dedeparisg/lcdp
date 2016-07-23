@@ -20,10 +20,10 @@ class AlbumPicture
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Album", inversedBy="pictures")
-     * @ORM\JoinColumn(name="album_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="AlbumGroup", inversedBy="pictures")
+     * @ORM\JoinColumn(name="album_group_id", referencedColumnName="id")
      */
-    protected $album;
+    protected $albumGroup;
 
     /**
      * Non persisté
@@ -59,26 +59,26 @@ class AlbumPicture
     }
 
     /**
-     * Set album
+     * Set albumGroup
      *
-     * @param \Lcdp\CommonBundle\Entity\Album $album
-     * @return Image
+     * @param \Lcdp\CommonBundle\Entity\AlbumGroup $albumGroup
+     * @return AlbumPicture
      */
-    public function setAlbum(\Lcdp\CommonBundle\Entity\Album $album = null)
+    public function setAlbumGroup(\Lcdp\CommonBundle\Entity\AlbumGroup $albumGroup = null)
     {
-        $this->album = $album;
+        $this->albumGroup = $albumGroup;
 
         return $this;
     }
 
     /**
-     * Get album
+     * Get albumGroup
      *
-     * @return \Lcdp\CommonBundle\Entity\Album
+     * @return \Lcdp\CommonBundle\Entity\AlbumGroup
      */
-    public function getAlbum()
+    public function getAlbumGroup()
     {
-        return $this->album;
+        return $this->albumGroup;
     }
 
     /**

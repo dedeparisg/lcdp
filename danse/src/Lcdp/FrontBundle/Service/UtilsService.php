@@ -46,6 +46,8 @@ class UtilsService
             foreach ($content as $item) {
                 if ($item['id'] !== $object->getId()) {
                     $pass = $pass && false;
+                } else {
+                    return $object->getSlug();
                 }
             }
 

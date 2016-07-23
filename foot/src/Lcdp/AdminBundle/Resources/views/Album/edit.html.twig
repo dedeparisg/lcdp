@@ -37,6 +37,20 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="col-xs-6">
+                                        {{ form_label(form.startDate) }}
+                                    </div>
+                                    <div class="col-xs-6">
+                                        {{ form_label(form.endDate) }}
+                                    </div>
+                                    <div class="col-xs-6">
+                                        {{ form_widget(form.startDate) }}
+                                    </div>
+                                    <div class="col-xs-6">
+                                        {{ form_widget(form.endDate) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="col-xs-12">
                                         {{ form_label(form.intro) }}
                                     </div>
@@ -52,152 +66,138 @@
                                         {{ form_widget(form.content) }}
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-xs-6">
-                                        {{ form_label(form.startDate) }}
-                                    </div>
-                                    <div class="col-xs-6">
-                                        {{ form_label(form.endDate) }}
-                                    </div>
-                                    <div class="col-xs-6">
-                                        {{ form_widget(form.startDate) }}
-                                    </div>
-                                    <div class="col-xs-6">
-                                        {{ form_widget(form.endDate) }}
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <span class="video btn btn-blue col-md-4 col-lg-offset-1">Vidéos</span>
-                                <span class="photo btn btn-green col-md-4 col-md-offset-2">Photos</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {#<div class="row">#}
+                    {#<div class="col-md-12">#}
+                        {#<div class="panel">#}
+                            {#<div class="panel-heading">#}
+                                {#<span class="video btn btn-blue col-md-4 col-lg-offset-1">Vidéos</span>#}
+                                {#<span class="photo btn btn-green col-md-4 col-md-offset-2">Photos</span>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
 
-                <div id="video-content" class="hidden">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <div class="panel-title">
-                                        <i class="fa fa-list"></i>&nbsp;Liste des vidéos
-                                    </div>
-                                    <a class='add_tag_link' href='#'>Nouvelle vidéo</a>
-                                </div>
-                                <div class="panel-body">
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr class="gray">
-                                                <th>Titre de la vidéo</th>
-                                                <th>Action possible</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for key, video in album.albumVideos %}
-                                                <tr class="{% if loop.index % 2 %}odd{% endif %}" data-attr="{{ key }}" data-url="{{ video.url }}">
-                                                    <td>{{ video.title }}</td>
-                                                    <td>
-                                                        <span class="edit-video">Editer</span>
-                                                        <span class="preview-video">Prévisualiser</span>
-                                                    </td>
-                                                </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {#<div id="video-content" class="hidden">#}
+                    {#<div class="row">#}
+                        {#<div class="col-md-12">#}
+                            {#<div class="panel">#}
+                                {#<div class="panel-heading">#}
+                                    {#<div class="panel-title">#}
+                                        {#<i class="fa fa-list"></i>&nbsp;Liste des vidéos#}
+                                    {#</div>#}
+                                    {#<a class='add_tag_link' href='#'>Nouvelle vidéo</a>#}
+                                {#</div>#}
+                                {#<div class="panel-body">#}
+                                    {#<table class="table table-bordered table-striped">#}
+                                        {#<thead>#}
+                                            {#<tr class="gray">#}
+                                                {#<th>Titre de la vidéo</th>#}
+                                                {#<th>Action possible</th>#}
+                                            {#</tr>#}
+                                        {#</thead>#}
+                                        {#<tbody>#}
+                                            {#{% for key, video in album.albumVideos %}#}
+                                                {#<tr class="{% if loop.index % 2 %}odd{% endif %}" data-attr="{{ key }}" data-url="{{ video.url }}">#}
+                                                    {#<td>{{ video.title }}</td>#}
+                                                    {#<td>#}
+                                                        {#<span class="edit-video">Editer</span>#}
+                                                        {#<span class="preview-video">Prévisualiser</span>#}
+                                                    {#</td>#}
+                                                {#</tr>#}
+                                            {#{% endfor %}#}
+                                        {#</tbody>#}
+                                    {#</table>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
 
-                    <div id="video-preview" class="hidden text-center"></div>
+                    {#<div id="video-preview" class="hidden text-center"></div>#}
 
-                    <div id="collectionHolder" data-prototype="{{ pageMacro.albumVideo_prototype(form.albumVideos.vars.prototype)|e }}">
-                        {% for key, trouble in form.vars.data.albumVideos %}
-                            <div id="video-collection-{{ key }}" class="row hidden video-collection">
-                                <div class="col-md-12">
-                                    <div class="panel">
-                                        <div class="panel-heading">
-                                            <div class="panel-title"> <i class="fa fa-pencil"></i> Edition d'une vidéo</div>
-                                            <a class="supp_tag_link" href="#">supp</a>
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                <div class="col-xs-12 margin-bottom-sm">
-                                                    {{ form_label(form.albumVideos[key].url) }}
-                                                </div>
-                                                <div class="col-xs-12">
-                                                    {{ form_widget(form.albumVideos[key].url, {'attr': {'class': 'form-control'}}) }}
-                                                </div>
-                                            </div>
+                    {#<div id="collectionHolder" data-prototype="{{ pageMacro.albumVideo_prototype(form.albumVideos.vars.prototype)|e }}">#}
+                        {#{% for key, trouble in form.vars.data.albumVideos %}#}
+                            {#<div id="video-collection-{{ key }}" class="row hidden video-collection">#}
+                                {#<div class="col-md-12">#}
+                                    {#<div class="panel">#}
+                                        {#<div class="panel-heading">#}
+                                            {#<div class="panel-title"> <i class="fa fa-pencil"></i> Edition d'une vidéo</div>#}
+                                            {#<a class="supp_tag_link" href="#">supp</a>#}
+                                        {#</div>#}
+                                        {#<div class="panel-body">#}
+                                            {#<div class="form-group">#}
+                                                {#<div class="col-xs-12 margin-bottom-sm">#}
+                                                    {#{{ form_label(form.albumVideos[key].url) }}#}
+                                                {#</div>#}
+                                                {#<div class="col-xs-12">#}
+                                                    {#{{ form_widget(form.albumVideos[key].url, {'attr': {'class': 'form-control'}}) }}#}
+                                                {#</div>#}
+                                            {#</div>#}
 
-                                            <div class="form-group">
-                                                <div class="col-xs-12 margin-bottom-sm">
-                                                    {{ form_label(form.albumVideos[key].title) }}
-                                                </div>
-                                                <div class="col-xs-12">
-                                                    {{ form_widget(form.albumVideos[key].title, {'attr': {'class': 'form-control'}}) }}
-                                                </div>
-                                            </div>
+                                            {#<div class="form-group">#}
+                                                {#<div class="col-xs-12 margin-bottom-sm">#}
+                                                    {#{{ form_label(form.albumVideos[key].title) }}#}
+                                                {#</div>#}
+                                                {#<div class="col-xs-12">#}
+                                                    {#{{ form_widget(form.albumVideos[key].title, {'attr': {'class': 'form-control'}}) }}#}
+                                                {#</div>#}
+                                            {#</div>#}
 
-                                            <div class="form-group">
-                                                <div class="col-xs-12 margin-bottom-sm">
-                                                    {{ form_label(form.albumVideos[key].content) }}
-                                                </div>
-                                                <div class="col-xs-12">
-                                                    {{ form_widget(form.albumVideos[key].content) }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
+                                            {#<div class="form-group">#}
+                                                {#<div class="col-xs-12 margin-bottom-sm">#}
+                                                    {#{{ form_label(form.albumVideos[key].content) }}#}
+                                                {#</div>#}
+                                                {#<div class="col-xs-12">#}
+                                                    {#{{ form_widget(form.albumVideos[key].content) }}#}
+                                                {#</div>#}
+                                            {#</div>#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#{% endfor %}#}
+                    {#</div>#}
+                {#</div>#}
 
-                <div id="photo-content" class="hidden">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <div class="panel-title">
-                                        <i class="fa fa-list"></i>&nbsp;Liste des photos
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    {{ form_row(form.imgFiles) }}
+                {#<div id="photo-content" class="hidden">#}
+                    {#<div class="row">#}
+                        {#<div class="col-md-12">#}
+                            {#<div class="panel">#}
+                                {#<div class="panel-heading">#}
+                                    {#<div class="panel-title">#}
+                                        {#<i class="fa fa-list"></i>&nbsp;Liste des photos#}
+                                    {#</div>#}
+                                {#</div>#}
+                                {#<div class="panel-body">#}
+                                    {#{{ form_row(form.imgFiles) }}#}
 
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr class="gray">
-                                                <th>Image</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for key, picture in album.pictures %}
-                                                <tr class="{% if loop.index % 2 %}odd{% endif %}" data-pictureid="{{ picture.id }}" data-albumid="{{ album.id }}">
-                                                    <td><img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" width="300"></td>
-                                                    <td>
-                                                        <span class="delete-picture">Supprimer</span>
-                                                    </td>
-                                                </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                    {#<table class="table table-bordered table-striped">#}
+                                        {#<thead>#}
+                                            {#<tr class="gray">#}
+                                                {#<th>Image</th>#}
+                                                {#<th></th>#}
+                                            {#</tr>#}
+                                        {#</thead>#}
+                                        {#<tbody>#}
+                                            {#{% for key, picture in album.pictures %}#}
+                                                {#<tr class="{% if loop.index % 2 %}odd{% endif %}" data-pictureid="{{ picture.id }}" data-albumid="{{ album.id }}">#}
+                                                    {#<td><img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" width="300"></td>#}
+                                                    {#<td>#}
+                                                        {#<span class="delete-picture">Supprimer</span>#}
+                                                    {#</td>#}
+                                                {#</tr>#}
+                                            {#{% endfor %}#}
+                                        {#</tbody>#}
+                                    {#</table>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
 
                 <div class="form-group">
                     <div class="col-xs-12">

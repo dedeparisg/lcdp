@@ -39,8 +39,7 @@ class HomeController extends BaseController
             'news' => $news,
             'currentPage' => $currentPage,
             'nbPages' => ceil($nbNews / $nbElementsPerPage),
-            'url' => $this->generateUrl('homepage') . '?page=',
-            'ref_sections_routing' => $this->getParameter('ref_sections_routing')
+            'url' => $this->generateUrl('homepage') . '?page='
         );
     }
 

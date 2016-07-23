@@ -72,29 +72,28 @@ class AlbumType extends AbstractType
             )
         );
 
-        $builder
-            ->add(
-                'albumVideos',
-                'collection',
-                array(
-                    'type' => new AlbumVideoType(),
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'prototype' => true
-                )
-            );
-
-        $builder
-            ->add(
-                'imgFiles',
-                'file',
-                array(
-                    'multiple' => true,
-                    'label' => 'Photos : ',
-                    'required' => false,
-//                    'mapped' => false
-                )
-            );
+//        $builder
+//            ->add(
+//                'albumVideos',
+//                'collection',
+//                array(
+//                    'type' => new AlbumVideoType(),
+//                    'allow_add' => true,
+//                    'allow_delete' => true,
+//                    'prototype' => true
+//                )
+//            );
+//
+//        $builder
+//            ->add(
+//                'imgFiles',
+//                'file',
+//                array(
+//                    'multiple' => true,
+//                    'label' => 'Photos : ',
+//                    'required' => false,
+//                )
+//            );
     }
 
     /**
