@@ -21,23 +21,27 @@ class FiltersType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(
-            'title',
-            null,
-            array(
-                'label' => "Intitulé : "
-            )
-        );
+        if ($options['title'] === true) {
+            $builder->add(
+                'title',
+                null,
+                array(
+                    'label' => "Intitulé : "
+                )
+            );
+        }
 
-        $builder->add(
-            'isPublished',
-            'choice',
-            array(
-                'label' => "Status : ",
-                'choices' => array('1' => 'Publié', '0' => 'Non publié'),
-                'empty_value' => '- Sélectionner -'
-            )
-        );
+        if ($options['isPublished'] === true) {
+            $builder->add(
+                'isPublished',
+                'choice',
+                array(
+                    'label' => "Status : ",
+                    'choices' => array('1' => 'Publié', '0' => 'Non publié'),
+                    'empty_value' => '- Sélectionner -'
+                )
+            );
+        }
     }
 
     /**
@@ -46,7 +50,10 @@ class FiltersType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array()
+            array(
+                'title' => true,
+                'isPublished' => true
+            )
         );
     }
 

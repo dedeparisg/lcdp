@@ -25,13 +25,5 @@
 </div>
 
 <div id="gallerie" class="bulle orange">
-    <h2 class="text-center">LCDP en images</h2>
-    <ul>
-        {% for item in albums %}
-            <li>
-                <a href="{{ path('front_album', {"slug": item.slug}) }}">{{ item.title }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="{{ path('front_albums') }}" class="btn btn-blue btn-xs">Voir tous les albums</a>
+    <a href="{{ path('front_albums_years') }}"><h2 class="text-center">LCDP en images</h2></a>
 </div>

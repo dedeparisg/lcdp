@@ -1,45 +1,98 @@
 $(function(){
-    // Gestion de l'affichage des videos ou photos
-    $('span.video').on('click', function() {
-        $('#photo-content').addClass('hidden');
-        $('#video-content').removeClass('hidden');
-    });
-    $('span.photo').on('click', function() {
-        $('#video-content').addClass('hidden');
-        $('#photo-content').removeClass('hidden');
-    });
+    // // Gestion de l'affichage des videos ou photos
+    // $('span.video').on('click', function() {
+    //     $('#photo-content').addClass('hidden');
+    //     $('#video-content').removeClass('hidden');
+    // });
+    // $('span.photo').on('click', function() {
+    //     $('#video-content').addClass('hidden');
+    //     $('#photo-content').removeClass('hidden');
+    // });
 
-    // Gestion des actions sur la liste des videos
-    $('span.edit-video').on('click', function(){
-        cleanVideoContent();
+    // // Gestion des actions sur la liste des videos
+    // $('span.edit-video').on('click', function(){
+    //     cleanVideoContent();
+    //
+    //     var elemId = $(this).closest('tr').data('attr');
+    //     $('body').find("#video-collection-" + elemId).removeClass('hidden');
+    // });
+    // $('span.preview-video').on('click', function(){
+    //     cleanVideoContent();
+    //
+    //     var url = $(this).closest('tr').data('url');
+    //     $("#video-preview").removeClass('hidden').html(url);
+    // });
 
+    // // Gestion des collections des vidéos
+    // $('div#video-content').on('click', '.add_tag_link', function(e) {
+    //     e.preventDefault();
+    //     addBlocForm();
+    // });
+    // $('div#collectionHolder').on('click', '.supp_tag_link', function (e) {
+    //     e.preventDefault();
+    //     removeBlocForm($(this));
+    // });
+    //
+    // // Initialisation des collections des videos
+    // if ($('#collectionHolder').find('.row').length == 0) {
+    //     addBlocForm();
+    // }
+
+    // // Initialisation des collections des groupes
+    // if ($('#collectionGroup').find('.row').length == 0) {
+    //     addGroupBlocForm();
+    // }
+
+    // Gestion de l'ajout d'un groupe
+    $('div#group-content').on('click', '.add_tag_link', function(e) {
+        e.preventDefault();
+        addGroupBlocForm();
+    });
+    // Gestion de la suppression d'un groupe
+    $('div#collectionGroup').on('click', '.supp_tag_link', function (e) {
+        e.preventDefault();
+        removeGroupBlocForm($(this));
+    });
+    // Gestion de l'edition d'un groupe
+    $('span.edit-group').on('click', function(){
         var elemId = $(this).closest('tr').data('attr');
-        $('body').find("#video-collection-" + elemId).removeClass('hidden');
+        $('body').find("#group-collection-" + elemId).removeClass('hidden');
     });
-    $('span.preview-video').on('click', function(){
-        cleanVideoContent();
-
-        var url = $(this).closest('tr').data('url');
-        $("#video-preview").removeClass('hidden').html(url);
-    });
-
-    // Gestion des collections des vidéos
-    $('div#video-content').on('click', '.add_tag_link', function(e) {
-        e.preventDefault();
-        addBlocForm();
-    });
-    $('div#collectionHolder').on('click', '.supp_tag_link', function (e) {
-        e.preventDefault();
-        removeBlocForm($(this));
-    });
-
-    // Initialisation des collection des videos
-    if ($('#collectionHolder').find('.row').length == 0) {
-        addBlocForm();
-    }
-
-    managePictures();
+    // managePictures();
 });
+
+/**
+ * Permet d'ajouter un nouveau bloc de texte
+ */
+function addGroupBlocForm()
+{
+    var collectionGroup = $('#collectionGroup');
+
+    // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
+    var prototype = collectionGroup.attr('data-prototype');
+
+    // Remplace '__name__' dans le HTML du prototype par un nombre basé sur la longueur de la collection courante
+    var totalGroupCount = $('#collectionGroup .row').length;
+    var newForm = prototype.replace(/__name__/g, totalGroupCount++);
+
+    // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un groupe"
+    var $newEntry = $('<div></div>').append(newForm);
+
+    collectionGroup.append($newEntry);
+    collectionGroup.append('<div class="clear"></div>');
+
+    $('body').find("#group-collection-" + totalGroupCount).removeClass('hidden');
+}
+
+/**
+ * Permet de suppirmer un bloc de texte
+ */
+function removeGroupBlocForm(currentElem)
+{
+    if(confirm('Êtes-vous sur de vouloir supprimer le groupes ainsi que toutes les photos et vidéos associées ?')) {
+        currentElem.closest('.row').remove();
+    }
+}
 
 /**
  * Permet d'ajouter un nouveau bloc de texte

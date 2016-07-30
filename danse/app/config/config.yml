@@ -101,7 +101,6 @@ parameters:
     pagination_front_home_events: 5
     pagination_front_home_albums: 5
     pagination_front_all_events: 20
-    pagination_front_all_albums: 20
 
     lcdp_urls:
         danse: "http://danse.leclubdespaquerettes.fr"

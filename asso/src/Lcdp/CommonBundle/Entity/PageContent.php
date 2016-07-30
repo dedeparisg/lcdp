@@ -1,11 +1,15 @@
 <?php
+
 namespace Lcdp\CommonBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class PageContent
+ *
  * @ORM\Table(name="page_content")
  * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\PageContentRepository")
+ * @package Lcdp\CommonBundle\Entity
  */
 class PageContent
 {

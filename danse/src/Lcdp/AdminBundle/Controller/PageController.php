@@ -72,8 +72,10 @@ class PageController extends BaseController
             $page->setPosition(0);
             $page->setSlug($this->get('lcdp.utils.service')->generateSlug('Page', $page));
 
-            foreach ($oldPagesContents as $oldPagesContent) {
-                $this->remove($oldPagesContent);
+            if (isset($oldPagesContents) && !empty($oldPagesContents)) {
+                foreach ($oldPagesContents as $oldPagesContent) {
+                    $this->remove($oldPagesContent);
+                }
             }
 
             foreach ($page->getPageContents() as $content) {

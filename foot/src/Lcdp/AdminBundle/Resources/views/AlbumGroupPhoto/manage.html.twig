@@ -1,0 +1,70 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% import 'LcdpAdminBundle:Core:macro.html.twig' as pageMacro %}
+
+{% block body %}
+    <div id="photo-content" style="height:900px">
+        {# Flash Messages #}
+        {% for type, flashMessages in app.session.flashbag.all() %}
+            {% for flashMessage in flashMessages %}
+                <div class="alert alert-{{ type }}">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {{ form_start(form, {'attr' : {'class': 'form-horizontal'}}) }}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <i class="fa fa-list"></i>&nbsp;Ajouter des photos
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        {{ form_row(form.imgFiles) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <i class="fa fa-list"></i>&nbsp;Liste des photos
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                            {% for key, picture in albumGroup.pictures %}
+                                {% if loop.first %}<tr>{% endif %}
+                                    <td data-pictureid="{{ picture.id }}" data-albumid="{{ albumGroup.id }}">
+                                        <img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" width="300">
+                                        <span class="delete-picture">Supprimer</span>
+                                    </td>
+                                {% if loop.last %}</tr>{% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-12">
+                <input class="btn pull-right btn btn-primary" type="submit" value="Enregistrer" />
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts '@LcdpAdminBundle/Resources/public/js/AlbumGroupVideo/manage.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

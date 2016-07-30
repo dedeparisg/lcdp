@@ -2,6 +2,7 @@
 
 namespace Lcdp\AdminBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -72,28 +73,18 @@ class AlbumType extends AbstractType
             )
         );
 
-//        $builder
-//            ->add(
-//                'albumVideos',
-//                'collection',
-//                array(
-//                    'type' => new AlbumVideoType(),
-//                    'allow_add' => true,
-//                    'allow_delete' => true,
-//                    'prototype' => true
-//                )
-//            );
-//
-//        $builder
-//            ->add(
-//                'imgFiles',
-//                'file',
-//                array(
-//                    'multiple' => true,
-//                    'label' => 'Photos : ',
-//                    'required' => false,
-//                )
-//            );
+        $builder
+            ->add(
+                'albumGroups',
+                'collection',
+                array(
+                    'type' => new AlbumGroupType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'prototype' => true,
+                    'by_reference' => true,
+                )
+            );
     }
 
     /**

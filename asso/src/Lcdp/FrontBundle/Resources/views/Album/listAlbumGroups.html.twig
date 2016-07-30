@@ -1,0 +1,12 @@
+{% extends "LcdpFrontBundle::layout.html.twig" %}
+
+{% block content %}
+    <h2>Tous les groupes de l'album</h2>
+    <div class="row margin-bottom-lg news">
+        {% for child in album.albumGroups %}
+            <div class="col-xs-3 text-center">
+                <a class="btn-lg btn-gray btn" href="{{ path('front_album_view', {'year': year, 'albumSlug': album.slug, 'groupId' : child.id}) }}">{{ child.title }}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,6 +1,7 @@
 <?php
 namespace Lcdp\CommonBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -96,6 +97,15 @@ class Album
     protected $isDeleted;
 
     /**
+     * Différents groupe de l'album
+     * @var ArrayCollection $albumGroups
+     *
+     * @ORM\OneToMany(targetEntity="Lcdp\CommonBundle\Entity\AlbumGroup", mappedBy="album", cascade={"all"})
+     */
+    protected $albumGroups;
+
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -104,6 +114,7 @@ class Album
         $this->isPublished = 0;
         $this->createdAt = new \DateTime();
         $this->modifiedAt = new \DateTime();
+        $this->albumGroups = new ArrayCollection();
     }
 
     /**
@@ -367,5 +378,39 @@ class Album
     public function getIsDeleted()
     {
         return $this->isDeleted;
+    }
+
+    /**
+     * Add albumGroups
+     *
+     * @param \Lcdp\CommonBundle\Entity\AlbumGroup $albumGroups
+     * @return Album
+     */
+    public function addAlbumGroup(\Lcdp\CommonBundle\Entity\AlbumGroup $albumGroups)
+    {
+        $albumGroups->setAlbum($this);
+        $this->albumGroups[] = $albumGroups;
+
+        return $this;
+    }
+
+    /**
+     * Remove albumGroups
+     *
+     * @param \Lcdp\CommonBundle\Entity\AlbumGroup $albumGroups
+     */
+    public function removeAlbumGroup(\Lcdp\CommonBundle\Entity\AlbumGroup $albumGroups)
+    {
+        $this->albumGroups->removeElement($albumGroups);
+    }
+
+    /**
+     * Get albumGroups
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAlbumGroups()
+    {
+        return $this->albumGroups;
     }
 }

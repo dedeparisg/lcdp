@@ -9,12 +9,25 @@
 
         <div class="panel-body">
             {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
-            <div class="col-xs-6">
-                {{ form_row(form.title) }}
-            </div>
-            <div class="col-xs-6">
-                {{ form_row(form.isPublished) }}
-            </div>
+
+            {% if disable_item|default() is not empty %}
+                {% set size = 12 %}
+            {% else %}
+                {% set size = 6 %}
+            {% endif %}
+
+            {% if disable_item|default() != 'title' %}
+                <div class="col-xs-{{ size }}">
+                    {{ form_row(form.title) }}
+                </div>
+            {% endif %}
+
+            {% if disable_item|default() != 'isPublished' %}
+                <div class="col-xs-{{ size }}">
+                    {{ form_row(form.isPublished) }}
+                </div>
+            {% endif %}
+
             <div class="col-xs-12">
                 {{ form_rest(form) }}
                 <input type="submit" class="btn btn-primary btn-sm pull-right" value="Filtrer"/>

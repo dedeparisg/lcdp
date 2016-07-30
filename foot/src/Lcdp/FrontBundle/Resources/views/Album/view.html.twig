@@ -3,18 +3,18 @@
 {% block content %}
     <div class="row">
         <div class="col-xs-12">
-            <h2>{{ album.title|default }}</h2>
+            <h2>{{ albumGroup.album.title|default }}</h2>
 
-            <h3>{{ formatLcdpDateFromTo(album.startDate, album.endDate) }}</h3>
+            <h3>{{ formatLcdpDateFromTo(albumGroup.album.startDate, albumGroup.album.endDate) }}</h3>
 
-            <div class="article-content">{{ album.content|raw }}</div>
+            <div class="article-content">{{ albumGroup.album.content|raw }}</div>
 
-            {% for video in album.albumVideos %}
+            {% for video in albumGroup.albumVideos %}
                 <div class="col-xs-12">{{ video.url|raw }}</div>
             {% endfor %}
 
             <div class="col-xs-12">
-                {% for picture in album.pictures %}
+                {% for picture in albumGroup.pictures %}
                     <img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" width="150">
                 {% endfor %}
             </div>

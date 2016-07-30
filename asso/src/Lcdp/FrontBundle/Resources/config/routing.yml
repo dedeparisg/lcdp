@@ -27,13 +27,28 @@ front_news:
     path: /actualite/{slug}
     defaults: { _controller: "LcdpFrontBundle:News:view" }
 
-front_albums:
+front_albums_years:
     path: /albums
-    defaults: { _controller: "LcdpFrontBundle:Album:list" }
+    defaults: { _controller: "LcdpFrontBundle:Album:listAlbumYears" }
 
-front_album:
-    path: /album/{slug}
+front_albums:
+    path: /albums/{year}
+    defaults: { _controller: "LcdpFrontBundle:Album:listAlbums" }
+    requirements:
+        year: "\d+"
+
+front_albums_groups:
+    path: /albums/{year}/{album}
+    defaults: { _controller: "LcdpFrontBundle:Album:listAlbumGroups" }
+    requirements:
+        year: "\d+"
+
+front_album_view:
+    path: /albums/{year}/{albumSlug}/groupe/{groupId}
     defaults: { _controller: "LcdpFrontBundle:Album:view" }
+    requirements:
+        year: "\d+"
+        groupId: "\d+"
 
 front_volunteer:
     path: /tous-benevoles/{slug}

@@ -1,4 +1,5 @@
 <?php
+
 namespace Lcdp\CommonBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -8,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class AlbumGroup
  *
  * @ORM\Table(name="album_group")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\AlbumGroupRepository")
  * @package Lcdp\CommonBundle\Entity
  */
 class AlbumGroup
@@ -26,7 +27,7 @@ class AlbumGroup
      * Liaison vers la page
      * @var Album $page
      *
-     * @ORM\ManyToOne(targetEntity="Lcdp\CommonBundle\Entity\Album", inversedBy="albumVideos")
+     * @ORM\ManyToOne(targetEntity="Lcdp\CommonBundle\Entity\Album", inversedBy="albumGroups")
      * @ORM\JoinColumn(name="album_id", referencedColumnName="id")
      */
     private $album;
@@ -34,7 +35,7 @@ class AlbumGroup
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=256, nullable=true)
+     * @ORM\Column(name="title", type="string", length=256)
      */
     protected $title;
 
@@ -53,10 +54,17 @@ class AlbumGroup
     protected $modifiedAt;
 
     /**
+     * @var \Boolean
+     *
+     * @ORM\Column(name="is_deleted", type="boolean", nullable=true)
+     */
+    protected $isDeleted;
+
+    /**
      * Images liées
      * @var ArrayCollection $pictures
      *
-     * @ORM\OneToMany(targetEntity="Lcdp\CommonBundle\Entity\AlbumPicture", mappedBy="album", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Lcdp\CommonBundle\Entity\AlbumPicture", mappedBy="albumGroup", cascade={"all"})
      */
     protected $pictures;
 
@@ -64,7 +72,7 @@ class AlbumGroup
      * Vidéos liées
      * @var ArrayCollection $albumVideos
      *
-     * @ORM\OneToMany(targetEntity="AlbumVideo", mappedBy="album", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="AlbumVideo", mappedBy="albumGroup", cascade={"all"})
      */
     protected $albumVideos;
 
@@ -79,6 +87,7 @@ class AlbumGroup
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->deleted = false;
         $this->modifiedAt = new \DateTime();
         $this->pictures = new ArrayCollection();
         $this->albumVideos = new ArrayCollection();
@@ -121,7 +130,7 @@ class AlbumGroup
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return AlbumVideo
+     * @return AlbumGroup
      */
     public function setCreatedAt($createdAt)
     {
@@ -144,7 +153,7 @@ class AlbumGroup
      * Set modifiedAt
      *
      * @param \DateTime $modifiedAt
-     * @return AlbumVideo
+     * @return AlbumGroup
      */
     public function setModifiedAt($modifiedAt)
     {
@@ -167,7 +176,7 @@ class AlbumGroup
      * Set album
      *
      * @param \Lcdp\CommonBundle\Entity\Album $album
-     * @return AlbumVideo
+     * @return AlbumGroup
      */
     public function setAlbum(\Lcdp\CommonBundle\Entity\Album $album = null)
     {
@@ -190,7 +199,7 @@ class AlbumGroup
      * Add albumVideo
      *
      * @param \Lcdp\CommonBundle\Entity\AlbumVideo $albumVideo
-     * @return Album
+     * @return AlbumGroup
      */
     public function addAlbumVideo(\Lcdp\CommonBundle\Entity\AlbumVideo $albumVideo)
     {
@@ -223,7 +232,7 @@ class AlbumGroup
      * Add pictures
      *
      * @param \Lcdp\CommonBundle\Entity\AlbumPicture $pictures
-     * @return Album
+     * @return AlbumGroup
      */
     public function addPicture(\Lcdp\CommonBundle\Entity\AlbumPicture $pictures)
     {
@@ -262,11 +271,34 @@ class AlbumGroup
 
     /**
      * @param Fake $imgFiles
-     * @return Album
+     * @return AlbumGroup
      */
     public function setImgFiles($imgFiles)
     {
         $this->imgFiles = $imgFiles;
         return $this;
+    }
+
+    /**
+     * Set isDeleted
+     *
+     * @param boolean $isDeleted
+     * @return Album
+     */
+    public function setIsDeleted($isDeleted)
+    {
+        $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    /**
+     * Get isDeleted
+     *
+     * @return boolean
+     */
+    public function getIsDeleted()
+    {
+        return $this->isDeleted;
     }
 }

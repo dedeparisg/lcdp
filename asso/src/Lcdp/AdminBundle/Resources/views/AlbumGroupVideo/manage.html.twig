@@ -1,0 +1,115 @@
+{% extends "LcdpAdminBundle::layout.html.twig" %}
+
+{% import 'LcdpAdminBundle:Core:macro.html.twig' as pageMacro %}
+
+{% block body %}
+    <div id="video-content" style="height:900px">
+        {# Flash Messages #}
+        {% for type, flashMessages in app.session.flashbag.all() %}
+            {% for flashMessage in flashMessages %}
+                <div class="alert alert-{{ type }}">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <i class="fa fa-list"></i>&nbsp;Liste des vidéos
+                        </div>
+                        <a class='add_tag_link' href='#'>Nouvelle vidéo</a>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr class="gray">
+                                    <th>Titre de la vidéo</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for key, video in albumGroup.albumVideos|default() %}
+                                    <tr class="{% if loop.index % 2 %}odd{% endif %}" data-attr="{{ key }}" data-url="{{ video.url }}">
+                                        <td>{{ video.title }}</td>
+                                        <td>
+                                            <span class="edit-video">Editer</span>
+                                            <span class="preview-video">Prévisualiser</span>
+                                            <span class="remove-video"
+                                                href="{{ path('lcdp_admin_remove_video', {'albumId': video.albumGroup.album.id, 'groupId': video.albumGroup.id, 'videoId': video.id}) }}"
+                                            >
+                                                Supprimer
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="preview" class="hidden text-center"></div>
+
+        {{ form_start(form, {'attr' : {'class': 'form-horizontal'}}) }}
+        <div id="collectionHolder" data-prototype="{{ pageMacro.albumVideo_prototype(form.albumVideos.vars.prototype)|e }}">
+            {% for key, trouble in form.vars.data.albumVideos %}
+                <div id="video-collection-{{ key }}" class="row hidden video-collection">
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="panel-title"> <i class="fa fa-pencil"></i> Edition d'une vidéo</div>
+                                <a class="supp_tag_link" href="#">supp</a>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-xs-12 margin-bottom-sm">
+                                        {{ form_label(form.albumVideos[key].url) }}
+                                    </div>
+                                    <div class="col-xs-12">
+                                        {{ form_widget(form.albumVideos[key].url, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-xs-12 margin-bottom-sm">
+                                        {{ form_label(form.albumVideos[key].title) }}
+                                    </div>
+                                    <div class="col-xs-12">
+                                        {{ form_widget(form.albumVideos[key].title, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-xs-12 margin-bottom-sm">
+                                        {{ form_label(form.albumVideos[key].content) }}
+                                    </div>
+                                    <div class="col-xs-12">
+                                        {{ form_widget(form.albumVideos[key].content) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <input class="btn pull-right btn btn-primary" type="submit" value="Enregistrer" />
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts '@LcdpAdminBundle/Resources/public/js/AlbumGroupVideo/manage.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

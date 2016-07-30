@@ -15,54 +15,102 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class AlbumController extends BaseController
 {
     /**
-     * Permet de gérer l'affichage des pages
+     * Permet de gérer l'affichage des albums par années
      *
-     * @param Request $request La requête courante
      * @return array
      *
      * @Template()
      * @author André Tapia <atapia@webnet.fr>
      */
-    public function listAction(Request $request)
+    public function listAlbumYearsAction()
     {
-        $nbElementsPerPage = $this->getParameter('pagination_front_all_albums');
-        $currentPage = $request->query->get('page') ? : 1;
-        $nbNews = $this->getRepository('Album')->countEvents(array('isPublished' => true));
+        $albums = $this->getRepository('Album')->getListByYear(array('isPublished' => true));
 
+        return array(
+            'albums' => $albums,
+        );
+    }
+
+    /**
+     * Permet de gérer l'affichage des albums d'une année
+     *
+     * @param integer $year L'année concernée
+     * @return array
+     *
+     * @Template()
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public function listAlbumsAction($year)
+    {
         $albums = $this->getRepository('Album')->getList(
-            array('isPublished' => true),
-            array('publication' => 'DESC'),
-            $nbElementsPerPage,
-            ($currentPage - 1) * $nbElementsPerPage
+            array(
+                'isPublished' => true,
+                'year' => $year
+            )
         );
 
         return array(
             'albums' => $albums,
-            'currentPage' => $currentPage,
-            'nbPages' => ceil($nbNews / $nbElementsPerPage),
-            'url' => $this->generateUrl('front_albums') . '?page=',
+            'year' => $year
+        );
+    }
+
+    /**
+     * Permet de gérer l'affichage des groupes d'un album
+     *
+     * @param integer $year L'année concernée
+     * @param string $album Le slug de l'album
+     * @return array
+     *
+     * @Template()
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public function listAlbumGroupsAction($year, $album)
+    {
+        $album = $this->getRepository('Album')->findOneBy(
+            array(
+                'isPublished' => true,
+                'slug' => $album
+            )
+        );
+
+        if (empty($album) || $album->getStartDate()->format('Y') != $year) {
+            throw new NotFoundHttpException();
+        }
+
+        return array(
+            'album' => $album,
+            'year' => $year
         );
     }
 
     /**
      * Permet de gérer l'affichage des pages
      *
-     * @param string $slug Le slug de la page concernée
+     * @param integer $year      L'année concernée
+     * @param string  $albumSlug Le slug de l'album
+     * @param integer $groupId   L'identifiant du groupe concnernée
      * @return array
      *
      * @Template()
      * @author André Tapia <atapia@webnet.fr>
      */
-    public function viewAction($slug)
+    public function viewAction($year, $albumSlug, $groupId)
     {
-        $album = $this->getRepository('Album')->findOneByslug($slug);
+        $albumGroup = $this->getRepository('AlbumGroup')->find($groupId);
 
-        if (empty($album)) {
+        if (empty($albumGroup)) {
             throw new NotFoundHttpException();
+        } else {
+            $album = $albumGroup->getAlbum();
+
+            if (empty($album) || $album->getSlug() != $albumSlug || $album->getStartDate()->format('Y') != $year) {
+                throw new NotFoundHttpException();
+            }
         }
 
         return array(
-            'album' => $album
+            'albumGroup' => $albumGroup
         );
     }
 }

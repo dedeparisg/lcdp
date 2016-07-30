@@ -280,7 +280,7 @@ class Page
      * Add pageContents
      *
      * @param PageContent $pageContents
-     * @return Person
+     * @return Page
      */
     public function addPageContent(PageContent $pageContents)
     {
