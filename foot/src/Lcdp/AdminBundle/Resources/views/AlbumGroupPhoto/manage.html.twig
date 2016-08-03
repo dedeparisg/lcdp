@@ -27,6 +27,14 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <input class="btn pull-right btn btn-primary" type="submit" value="Enregistrer" />
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <div class="row">
             <div class="col-md-12">
                 <div class="panel">
                     <div class="panel-heading">
@@ -38,7 +46,7 @@
                         <table class="table table-bordered table-striped">
                             <tbody>
                             {% for key, picture in albumGroup.pictures %}
-                                {% if loop.first %}<tr>{% endif %}
+                                <tr>
                                     <td data-pictureid="{{ picture.id }}" data-albumid="{{ albumGroup.id }}">
                                         <img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" width="300">
                                         <span class="delete-picture"
@@ -47,7 +55,7 @@
                                             Supprimer
                                         </span>
                                     </td>
-                                {% if loop.last %}</tr>{% endif %}
+                                </tr>
                             {% endfor %}
                             </tbody>
                         </table>
@@ -55,13 +63,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-xs-12">
-                <input class="btn pull-right btn btn-primary" type="submit" value="Enregistrer" />
-            </div>
-        </div>
-        {{ form_end(form) }}
     </div>
 {% endblock %}
 

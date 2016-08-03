@@ -47,8 +47,14 @@ class AlbumGroupPhotoController extends BaseController
         if ($form->handleRequest($request) && $request->getMethod() == "POST") {
             if ($form->isValid()) {
                 $albumGroup->setModifiedAt(new \DateTime());
+                $isOk = false;
 
-                foreach ($albumGroup->getImgFiles() as $imgFile){
+                foreach ($albumGroup->getImgFiles() as $imgFile) {
+                    if (is_null($imgFile)) {
+                        continue;
+                    }
+                    $isOk = true;
+
                     $picture = new AlbumPicture();
                     $picture->setAlbumGroup($albumGroup);
                     $picture->setPriority(0);
@@ -66,14 +72,14 @@ class AlbumGroupPhotoController extends BaseController
                     $this->persist($picture);
                 }
 
-//                foreach ($albumGroup->getPictures() as $picture) {
-//                    $picture->setAlbumGroup($albumGroup);
-//                    $this->persist($picture);
-//                }
                 $this->persist($albumGroup);
                 $this->flush();
 
-                $this->addFlashMessage('success');
+                if ($isOk) {
+                    $this->addFlashMessage('success');
+                } else {
+                    $this->addFlashMessage('danger', "Aucune image n'a été sélectionnée.");
+                }
 
                 return $this->redirect(
                     $this->generateUrl(
