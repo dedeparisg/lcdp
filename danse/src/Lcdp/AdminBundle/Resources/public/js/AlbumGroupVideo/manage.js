@@ -80,7 +80,7 @@ function removeVideo(elem) {
             if (data.success === true) {
                 $tr.remove();
             } else {
-                alert("Une erreur est survenue lors de la suppression de l'image.");
+                alert("Une erreur est survenue lors de la suppression de la vidéo.");
             }
         }
     });

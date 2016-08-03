@@ -125,7 +125,7 @@ lcdp_admin_album_group_photo:
         groupId: "\d+"
 
 lcdp_admin_remove_picture:
-    path:  /album/{albumId}/group/{groupId}/photo/{videoId}
+    path:  /album/{albumId}/group/{groupId}/photo/{pictureId}
     defaults: { _controller: LcdpAdminBundle:AlbumGroupPhoto:removeAlbumPicture }
     methods: [POST]
     options:

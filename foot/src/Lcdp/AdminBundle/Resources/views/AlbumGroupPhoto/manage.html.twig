@@ -41,7 +41,11 @@
                                 {% if loop.first %}<tr>{% endif %}
                                     <td data-pictureid="{{ picture.id }}" data-albumid="{{ albumGroup.id }}">
                                         <img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" width="300">
-                                        <span class="delete-picture">Supprimer</span>
+                                        <span class="delete-picture"
+                                          href="{{ path('lcdp_admin_remove_picture', {'albumId': picture.albumGroup.album.id, 'groupId': picture.albumGroup.id, 'pictureId': picture.id}) }}"
+                                        >
+                                            Supprimer
+                                        </span>
                                     </td>
                                 {% if loop.last %}</tr>{% endif %}
                             {% endfor %}
@@ -64,7 +68,7 @@
 {% block javascripts %}
     {{ parent() }}
 
-    {% javascripts '@LcdpAdminBundle/Resources/public/js/AlbumGroupVideo/manage.js' %}
+    {% javascripts '@LcdpAdminBundle/Resources/public/js/AlbumGroupPhoto/manage.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

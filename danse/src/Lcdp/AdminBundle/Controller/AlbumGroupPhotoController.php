@@ -97,17 +97,17 @@ class AlbumGroupPhotoController extends BaseController
     /**
      * Permet de supprimer une photo d'un album
      *
-     * @param integer $albumId Identifiant de l'album concerné
-     * @param integer $groupId Identifiant du groupe concerné
-     * @param integer $photoId Identifiant de la photo concerné
+     * @param integer $albumId   Identifiant de l'album concerné
+     * @param integer $groupId   Identifiant du groupe concerné
+     * @param integer $pictureId Identifiant de la photo concerné
      * @return JsonResponse
      *
      * @Template
      * @author André Tapia <contact@andretapia.com>
      */
-    public function removeAlbumVideoAction($albumId, $groupId, $photoId)
+    public function removeAlbumPictureAction($albumId, $groupId, $pictureId)
     {
-        $photo = $this->getRepository('AlbumPicture')->find($photoId);
+        $photo = $this->getRepository('AlbumPicture')->find($pictureId);
 
         // Sécutiré
         if (empty($photo)) {
