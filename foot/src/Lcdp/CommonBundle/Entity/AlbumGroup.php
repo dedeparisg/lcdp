@@ -35,6 +35,13 @@ class AlbumGroup
     /**
      * @var string
      *
+     * @ORM\Column(name="content", type="text")
+     */
+    protected $content;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="title", type="string", length=256)
      */
     protected $title;
@@ -170,6 +177,29 @@ class AlbumGroup
     public function getModifiedAt()
     {
         return $this->modifiedAt;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     * @return AlbumGroup
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 
     /**

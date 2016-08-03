@@ -83,7 +83,8 @@ class AlbumController extends BaseController
                     $this->persist($group);
                 }
 
-                $this->persist($album, true);
+                $this->persist($album);
+                $this->flush();
                 $this->addFlashMessage('success');
 
                 return $this->redirect($this->generateUrl('lcdp_admin_album_edit', array('id' => $album->getId())));

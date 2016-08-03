@@ -91,6 +91,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-xs-12 margin-bottom-sm">
+                        {{ form_label(value.content) }}
+                    </div>
+                    <div class="col-xs-12">
+                        {{ form_widget(value.content, {'attr': {'class': 'tinymce', 'data-theme': 'advanced'}}) }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
