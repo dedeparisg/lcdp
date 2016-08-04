@@ -3,7 +3,7 @@
 {% import 'LcdpAdminBundle:Core:macro.html.twig' as pageMacro %}
 
 {% block body %}
-    <div id="photo-content" style="height:900px">
+    <div id="photo-content" style="height:900px" data-albumid="{{ albumGroup.album.id }}" data-groupid="{{ albumGroup.id }}">
         {# Flash Messages #}
         {% for type, flashMessages in app.session.flashbag.all() %}
             {% for flashMessage in flashMessages %}
@@ -15,7 +15,7 @@
 
         {{ form_start(form, {'attr' : {'class': 'form-horizontal'}}) }}
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="panel">
                     <div class="panel-heading">
                         <div class="panel-title">
@@ -27,15 +27,20 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <input class="btn pull-right btn btn-primary" type="submit" value="Enregistrer" />
-                </div>
-            </div>
-            {{ form_end(form) }}
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="btn pull-right btn btn-primary" type="submit" value="Enregistrer" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+
+        <div class="row">
+            <div class="col-xs-12">
                 <div class="panel">
                     <div class="panel-heading">
                         <div class="panel-title">
@@ -45,18 +50,20 @@
                     <div class="panel-body">
                         <table class="table table-bordered table-striped">
                             <tbody>
-                            {% for key, picture in albumGroup.pictures %}
-                                <tr>
-                                    <td data-pictureid="{{ picture.id }}" data-albumid="{{ albumGroup.id }}">
-                                        <img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" width="300">
-                                        <span class="delete-picture"
-                                          href="{{ path('lcdp_admin_remove_picture', {'albumId': picture.albumGroup.album.id, 'groupId': picture.albumGroup.id, 'pictureId': picture.id}) }}"
-                                        >
-                                            Supprimer
-                                        </span>
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                            <tr>
+                                <td id="sortable">
+                                    {% for key, picture in pictures %}
+                                        <div class="admin_picture_list" data-key="{{ key}}" data-pictureid="{{ picture.id }}" data-albumid="{{ albumGroup.id }}">
+                                            <img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" width="300">
+                                            <span class="delete-picture"
+                                              href="{{ path('lcdp_admin_remove_picture', {'albumId': picture.albumGroup.album.id, 'groupId': picture.albumGroup.id, 'pictureId': picture.id}) }}"
+                                            >
+                                                Supprimer
+                                            </span>
+                                        </div>
+                                    {% endfor %}
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

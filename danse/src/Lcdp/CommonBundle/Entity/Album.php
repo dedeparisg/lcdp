@@ -41,13 +41,6 @@ class Album
     protected $intro;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="content", type="text")
-     */
-    protected $content;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="start_date", type="date", nullable=false)
@@ -194,29 +187,6 @@ class Album
     public function getIntro()
     {
         return $this->intro;
-    }
-
-    /**
-     * Set content
-     *
-     * @param string $content
-     * @return Album
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Get content
-     *
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
     }
 
     /**

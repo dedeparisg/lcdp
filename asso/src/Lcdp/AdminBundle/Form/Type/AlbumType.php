@@ -40,18 +40,6 @@ class AlbumType extends AbstractType
         );
 
         $builder->add(
-            'content',
-            null,
-            array(
-                'label' => "* Contenu : ",
-                'attr' => array(
-                    'class' => 'tinymce',
-                    'data-theme' => 'advanced'
-                )
-            )
-        );
-
-        $builder->add(
             'startDate',
             null,
             array(

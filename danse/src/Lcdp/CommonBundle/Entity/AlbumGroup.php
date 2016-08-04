@@ -94,7 +94,7 @@ class AlbumGroup
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->deleted = false;
+        $this->isDeleted = false;
         $this->modifiedAt = new \DateTime();
         $this->pictures = new ArrayCollection();
         $this->albumVideos = new ArrayCollection();

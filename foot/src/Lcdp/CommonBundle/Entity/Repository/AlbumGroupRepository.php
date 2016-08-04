@@ -54,10 +54,11 @@ class AlbumGroupRepository extends EntityRepository
      *
      * @author André Tapia <atapia@webnet.fr>
      */
-    public function getQueryBase($filters)
+    public function getQueryBase(array $filters = array())
     {
         $query = $this->createQueryBuilder('a')
-            ->where('a.isDeleted = 0');
+            ->where('a.isDeleted = :false')
+            ->setParameter('false', false);
 
         if (!empty($filters)) {
             if (isset($filters['title']) && !empty($filters['title'])) {

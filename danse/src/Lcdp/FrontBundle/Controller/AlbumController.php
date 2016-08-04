@@ -110,7 +110,8 @@ class AlbumController extends BaseController
         }
 
         return array(
-            'albumGroup' => $albumGroup
+            'albumGroup' => $albumGroup,
+            'pictures' => $this->getRepository('AlbumPicture')->getAllByAlbum($albumGroup->getId())
         );
     }
 }

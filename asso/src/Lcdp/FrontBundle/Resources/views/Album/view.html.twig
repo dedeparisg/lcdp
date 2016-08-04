@@ -7,14 +7,14 @@
 
             <h3>{{ formatLcdpDateFromTo(albumGroup.album.startDate, albumGroup.album.endDate) }}</h3>
 
-            <div class="article-content">{{ albumGroup.album.content|raw }}</div>
+            <div class="article-content">{{ albumGroup.content|raw }}</div>
 
             {% for video in albumGroup.albumVideos %}
                 <div class="col-xs-12">{{ video.url|raw }}</div>
             {% endfor %}
 
             <div class="col-xs-12">
-                {% for picture in albumGroup.pictures %}
+                {% for picture in pictures %}
                     <img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" width="150">
                 {% endfor %}
             </div>

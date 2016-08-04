@@ -128,6 +128,22 @@ lcdp_admin_remove_picture:
     path:  /album/{albumId}/group/{groupId}/photo/{pictureId}
     defaults: { _controller: LcdpAdminBundle:AlbumGroupPhoto:removeAlbumPicture }
     methods: [POST]
+    requirements:
+        albumId: "\d+"
+        groupId: "\d+"
+        pictureId: "\d+"
+    options:
+        expose: true
+
+lcdp_admin_change_picture_priority:
+    path:  /album/{albumId}/group/{groupId}/photo/priority
+    defaults: { _controller: LcdpAdminBundle:AlbumGroupPhoto:updatePriorityAlbumPicture }
+    methods: [POST]
+    requirements:
+        albumId: "\d+"
+        groupId: "\d+"
+        pictureId: "\d+"
+        position: "\d+"
     options:
         expose: true
 

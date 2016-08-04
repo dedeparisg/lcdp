@@ -94,9 +94,11 @@ class AlbumGroupPhotoController extends BaseController
                 $this->addFlashMessage('danger', "Une erreur est survenue lors de l'enregistrement des photos.");
             }
         }
+
         return array(
             'form' => $form->createView(),
-            'albumGroup' => $albumGroup
+            'albumGroup' => $albumGroup,
+            'pictures' => $this->getRepository('AlbumPicture')->getAllByAlbum($albumGroup->getId())
         );
     }
 
@@ -133,6 +135,43 @@ class AlbumGroupPhotoController extends BaseController
         }
 
         $this->remove($photo, true);
+
+        return new JsonResponse(array('success' => true));
+    }
+
+
+    /**
+     * Permet de maj la position d'une photo
+     *
+     * @param Request $request La requête courante
+     * @param integer $albumId Identifiant de l'album concerné
+     * @param integer $groupId Identifiant du groupe concerné
+     * @return JsonResponse
+     *
+     * @Template
+     * @author André Tapia <contact@andretapia.com>
+     */
+    public function updatePriorityAlbumPictureAction(Request $request, $albumId, $groupId)
+    {
+        $albumGroup = $this->getRepository('AlbumGroup')->find($groupId);
+
+        // Sécutiré
+        if (empty($albumGroup)) {
+            throw $this->createAccessDeniedException();
+        } else {
+            $album = $albumGroup->getAlbum();
+            if (empty($album) || $album->getId() != $albumId) {
+                throw $this->createAccessDeniedException();
+            }
+        }
+
+        foreach ($request->request->get('data') as $pictureId => $priority) {
+            $picture = $this->getRepository('AlbumPicture')->find($pictureId);
+            $picture->setPriority($priority);
+            $this->persist($picture);
+        }
+
+        $this->flush();
 
         return new JsonResponse(array('success' => true));
     }
