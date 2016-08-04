@@ -2,6 +2,7 @@
 
 namespace Webnet\Bundle\SwissArmyBundle\Service;
 
+use Lcdp\FrontBundle\Service\UtilsService;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Webnet\Bundle\SwissArmyBundle\Service\Interfaces\AntivirusInterface;
 use Webnet\Bundle\SwissArmyBundle\Service\Interfaces\FileEncryptorInterface;
@@ -24,6 +25,12 @@ class FilestoreService
     private $parameters;
 
     /**
+     * Service Utils
+     * @var UtilsService $utilsService
+     */
+    private $utilsService;
+
+    /**
      * Antivirus (facultatif)
      * @var \Webnet\Bundle\SwissArmyBundle\Service\Interfaces\AntivirusInterface
      */
@@ -38,11 +45,13 @@ class FilestoreService
     /**
      * Constructeur du service
      *
-     * @param array $parameters Paramètres du service
+     * @param array        $parameters   Paramètres du service
+     * @param UtilsService $utilsService Service utilisataire
      */
-    public function __construct($parameters)
+    public function __construct($parameters, UtilsService $utilsService)
     {
         $this->parameters = $parameters;
+        $this->utilsService = $utilsService;
     }
 
     /**
@@ -176,23 +185,61 @@ class FilestoreService
      */
     public function addMedia(UploadedFile $file, $uid, $fileType, $rootPath = null)
     {
+        $uidExploded = explode('.', $uid);
+
         // On vérifie le fichier avant de l'ajouter sur le filestore
         $this->ensureMediaSafetyBeforeUpload($file, $fileType);
 
         // On récupère le chemin du fichier
         $mediaPath = $this->getPath($uid, $fileType, false, $rootPath);
-        $mediaName = $this->getFilename($uid, $fileType);
 
-        // On vérifie que le chemin existe sinon on le cree
+        // Déclaration des différent nom de vignettes
+        $mediaNameWatermark = $this->getFilename($uid, $fileType);
+        $mediaNameClean = $this->getFilename($uidExploded[0] . '_clean.' . $uidExploded[1], $fileType);
+        $mediaNameMedium = $this->getFilename($uidExploded[0] . '_med.' . $uidExploded[1], $fileType);
+        $mediaNameBo = $this->getFilename($uidExploded[0] . '_bo.' . $uidExploded[1], $fileType);
+        $mediaNameFo = $this->getFilename($uidExploded[0] . '_fo.' . $uidExploded[1], $fileType);
+
+        // On vérifie que le chemin existe sinon on le créer
         if (!is_dir($mediaPath)) {
             mkdir($mediaPath, 0777, true);
         }
 
         // On écrit le fichier
-        $file->move($mediaPath, $mediaName);
+        $file->move($mediaPath, $mediaNameClean);
+
+        // Image "Originale" avec watermark
+        $this->utilsService->resizeImage(
+            $mediaPath . '/' . $mediaNameClean,
+            $mediaPath . '/' . $mediaNameWatermark,
+            null,
+            null,
+            true
+        );
+
+        // Image "Medium" (230px de large)
+        $this->utilsService->resizeImage(
+            $mediaPath . '/' . $mediaNameClean,
+            $mediaPath . '/' . $mediaNameMedium,
+            230
+        );
+
+        // Image "BO" (300px de large)
+        $this->utilsService->resizeImage(
+            $mediaPath . '/' . $mediaNameClean,
+            $mediaPath . '/' . $mediaNameBo,
+            300
+        );
+
+        // Image "FO" (150px de large)
+        $this->utilsService->resizeImage(
+            $mediaPath . '/' . $mediaNameClean,
+            $mediaPath . '/' . $mediaNameFo,
+            150
+        );
 
         // On effectue les derniers contrôles sur le fichier
-        $this->ensureMediaSafetyAfterUpload($mediaPath . DIRECTORY_SEPARATOR . $mediaName, $fileType);
+        $this->ensureMediaSafetyAfterUpload($mediaPath . DIRECTORY_SEPARATOR . $mediaNameClean, $fileType);
 
         return true;
     }
@@ -200,10 +247,10 @@ class FilestoreService
     /**
      * Retourne le chemin correspondant à un UID et un type de document
      *
-     * @param  string         $content         Source du média
-     * @param  string         $uid             UID du document
-     * @param  string         $fileType        Type du document
-     * @param  string         $rootPath        [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @param  string $content  Source du média
+     * @param  string $uid      UID du document
+     * @param  string $fileType Type du document
+     * @param  string $rootPath [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
      * @return string  Chemin du fichier
      */
     public function addContentAsMedia($content, $uid, $fileType, $rootPath = null)
@@ -231,9 +278,10 @@ class FilestoreService
     /**
      * Supprime un média présent dans le filestore
      *
-     * @param  string         $uid             UID du document
-     * @param  string         $fileType        Type du document
-     * @param  string         $rootPath        [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @param  string $uid      UID du document
+     * @param  string $fileType Type du document
+     * @param  string $rootPath [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @return boolean
      */
     public function removeMedia($uid, $fileType, $rootPath = null)
     {
@@ -251,9 +299,9 @@ class FilestoreService
     /**
      * Retourne le contenu brut d'un média
      *
-     * @param  string         $uid             UID du document
-     * @param  string         $fileType        Type du document
-     * @param  string         $rootPath        [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
+     * @param  string $uid      UID du document
+     * @param  string $fileType Type du document
+     * @param  string $rootPath [Optionnel] Chemin d'accès au filestore (par défaut, celui configuré par défaut est utilisé)
      * @return string
      */
     public function getMediaContent($uid, $fileType, $rootPath = null)
