@@ -33,7 +33,7 @@ $(function () {
  * Gestion de la suppression des videos
  */
 function removePicture(elem) {
-    $tr = elem.closest('tr');
+    $div = elem.closest('div');
 
     // Appel AJAX pour sauvegarder la modification que l'on vient d'apporter
     $.ajax({
@@ -41,7 +41,7 @@ function removePicture(elem) {
         url: elem.attr('href'),
         success: function (data) {
             if (data.success === true) {
-                $tr.remove();
+                $div.remove();
             } else {
                 alert("Une erreur est survenue lors de la suppression de l'image.");
             }
