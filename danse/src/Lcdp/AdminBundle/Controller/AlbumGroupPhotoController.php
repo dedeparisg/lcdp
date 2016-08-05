@@ -134,6 +134,9 @@ class AlbumGroupPhotoController extends BaseController
             }
         }
 
+        // On supprime le média dans le filestore
+        $this->get('lcdp.filestore')->removeMedia($photo->getImgAlt(), 'ALBUM');
+
         $this->remove($photo, true);
 
         return new JsonResponse(array('success' => true));

@@ -285,12 +285,33 @@ class FilestoreService
      */
     public function removeMedia($uid, $fileType, $rootPath = null)
     {
-        // On récupère le chemin du fichier
-        $mediaPath = $this->getPath($uid, $fileType, true, $rootPath);
+        $uidExploded = explode('.', $uid);
 
-        // On supprime le média
-        if (is_file($mediaPath)) {
-            unlink($mediaPath);
+        // Récupération des différent nom de vignettes
+        $mediaNameWatermark = $this->getPath($uid, $fileType, true, $rootPath);
+        $mediaNameClean = $this->getPath($uidExploded[0] . '_clean.' . $uidExploded[1], $fileType, true, $rootPath);
+        $mediaNameMedium = $this->getPath($uidExploded[0] . '_med.' . $uidExploded[1], $fileType, true, $rootPath);
+        $mediaNameBo = $this->getPath($uidExploded[0] . '_bo.' . $uidExploded[1], $fileType, true, $rootPath);
+        $mediaNameFo = $this->getPath($uidExploded[0] . '_fo.' . $uidExploded[1], $fileType, true, $rootPath);
+
+        if (is_file($mediaNameWatermark)) {
+            unlink($mediaNameWatermark);
+        }
+
+        if (is_file($mediaNameClean)) {
+            unlink($mediaNameClean);
+        }
+
+        if (is_file($mediaNameMedium)) {
+            unlink($mediaNameMedium);
+        }
+
+        if (is_file($mediaNameBo)) {
+            unlink($mediaNameBo);
+        }
+
+        if (is_file($mediaNameFo)) {
+            unlink($mediaNameFo);
         }
 
         return true;
