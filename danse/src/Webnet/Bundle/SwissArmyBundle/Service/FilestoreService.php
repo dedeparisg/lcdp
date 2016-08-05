@@ -231,11 +231,11 @@ class FilestoreService
             300
         );
 
-        // Image "FO" (150px de large)
+        // Image "FO" (140px de large)
         $this->utilsService->resizeImage(
             $mediaPath . '/' . $mediaNameClean,
             $mediaPath . '/' . $mediaNameFo,
-            150
+            140
         );
 
         // On effectue les derniers contrôles sur le fichier

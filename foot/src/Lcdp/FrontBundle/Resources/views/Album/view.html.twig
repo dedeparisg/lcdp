@@ -3,21 +3,40 @@
 {% block content %}
     <div class="row">
         <div class="col-xs-12">
-            <h2>{{ albumGroup.album.title|default }}</h2>
+            <h2>{{ albumGroup.album.title }}</h2>
 
             <h3>{{ formatLcdpDateFromTo(albumGroup.album.startDate, albumGroup.album.endDate) }}</h3>
 
             <div class="article-content">{{ albumGroup.content|raw }}</div>
+
+            <div class="social_sharing">
+                {% include 'LcdpFrontBundle:Components:social_sharing.html.twig' with({'title': albumGroup.album.title}) %}
+            </div>
 
             {% for video in albumGroup.albumVideos %}
                 <div class="col-xs-12">{{ video.url|raw }}</div>
             {% endfor %}
 
             <div class="col-xs-12">
-                {% for picture in pictures %}
-                    <img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" width="150">
-                {% endfor %}
+                <div id="aniimated-thumbnials">
+                    {% for picture in pictures %}
+                        <a href="{{ fileUrl(picture.imgAlt, 'ALBUM') }}">
+                            <img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" height="140" />
+                        </a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{  parent() }}
+
+    <script>
+        $('#aniimated-thumbnials').lightGallery({
+            thumbnail: true,
+            pager: true
+        });
+    </script>
 {% endblock %}

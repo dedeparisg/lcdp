@@ -8,6 +8,10 @@
             <h3>{{ formatLcdpDateFromTo(event.startDate, event.endDate) }}</h3>
 
             <div class="article-content">{{ event.content|raw }}</div>
+
+            <div class="social_sharing">
+                {% include 'LcdpFrontBundle:Components:social_sharing.html.twig' with({'title': event.title}) %}
+            </div>
         </div>
     </div>
 {% endblock %}

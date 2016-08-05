@@ -166,3 +166,17 @@ li {
     margin-top: 20px;
     font-size: 15px;
 }
+
+#aniimated-thumbnials {
+    text-align: center;
+}
+#aniimated-thumbnials a {
+    background-color: #eee;
+    border: 1px solid #999;
+    display: block;
+    float: left;
+    height: 150px;
+    margin: 1px;
+    overflow: hidden;
+    width: 140px;
+}
