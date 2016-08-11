@@ -34,7 +34,7 @@
                         {% for album in albums %}
                             <tr class="{% if loop.index % 2 %}odd{% endif %}" data-pageid="{{ album.id }}">
                                 <td class='title'>{{ album.title }}</td>
-                                <td class='year'>{{ album.startDateYear|defautl() }}</td>
+                                <td class='year'>{{ album.startDateYear|default() }}</td>
                                 <td class='publish'>{% if album.isPublished %}Oui{% else %}Non{% endif %}</td>
                                 <td class='date'>{{ album.publicatedAt|date('d-m-Y \\à H:i:s') }}</td>
                                 <td class="actions">
