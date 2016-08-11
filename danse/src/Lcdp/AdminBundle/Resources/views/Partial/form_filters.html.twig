@@ -16,9 +16,19 @@
                 {% set size = 6 %}
             {% endif %}
 
+            {% if show_item|default() is not empty %}
+                {% set size = (size / 2) %}
+            {% endif %}
+
             {% if disable_item|default() != 'title' %}
                 <div class="col-xs-{{ size }}">
                     {{ form_row(form.title) }}
+                </div>
+            {% endif %}
+
+            {% if show_item|default() == 'year' %}
+                <div class="col-xs-{{ size }}">
+                    {{ form_row(form.year) }}
                 </div>
             {% endif %}
 

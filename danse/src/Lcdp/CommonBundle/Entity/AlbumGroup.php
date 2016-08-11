@@ -35,7 +35,7 @@ class AlbumGroup
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="content", type="text", nullable=true)
      */
     protected $content;
 
@@ -45,6 +45,13 @@ class AlbumGroup
      * @ORM\Column(name="title", type="string", length=256)
      */
     protected $title;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="priority", type="integer", nullable=true)
+     */
+    protected $priority;
 
     /**
      * @var \DateTime
@@ -330,5 +337,28 @@ class AlbumGroup
     public function getIsDeleted()
     {
         return $this->isDeleted;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param integer $priority
+     * @return AlbumGroup
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 }

@@ -24,15 +24,17 @@ class AlbumRepository extends EntityRepository
         $return = array();
 
         $query = $this->getQueryBase($filters);
-        $query->select('a.id, a.startDate');
-        $query->orderBy('a.startDate', 'DESC');
+        $query->select('a.id, a.startDateYear');
+        $query->orderBy('a.startDateYear', 'DESC');
 
         $albums = $query->getQuery()->getArrayResult();
 
         // On initialise les tableaux de retours
         foreach ($albums as $album) {
-            $year = $album['startDate']->format('Y');
-            $return[$year] = $year;
+            if (!isset($return[$album['startDateYear']])) {
+                $return[$album['startDateYear']] = 0;
+            }
+            $return[$album['startDateYear']] = ($return[$album['startDateYear']] + 1);
         }
 
         return $return;
@@ -49,7 +51,8 @@ class AlbumRepository extends EntityRepository
     public function getList($filters = null)
     {
         $query = $this->getQueryBase($filters);
-        $query->orderBy('a.title', 'ASC');
+        $query->orderBy('a.startDateYear', 'DESC');
+        $query->addOrderBy('a.title', 'ASC');
         $return = $query->getQuery()->getArrayResult();
 
         return $return;
@@ -73,8 +76,12 @@ class AlbumRepository extends EntityRepository
                 $query->andWhere('a.isPublished = :published');
                 $query->setParameter('published', $filters['isPublished']);
             }
+            if (isset($filters['title'])) {
+                $query->andWhere('a.title  LIKE :title');
+                $query->setParameter('title', '%' . $filters['title'] . '%');
+            }
             if (isset($filters['year'])) {
-                $query->andWhere('a.startDate LIKE :startDate');
+                $query->andWhere('a.startDateYear LIKE :startDate');
                 $query->setParameter('startDate', $filters['year'] . '%');
             }
         }

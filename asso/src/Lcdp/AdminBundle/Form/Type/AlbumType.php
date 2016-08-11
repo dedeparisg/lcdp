@@ -2,9 +2,9 @@
 
 namespace Lcdp\AdminBundle\Form\Type;
 
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Webnet\Bundle\SwissArmyBundle\Util\StringUtils;
 
 /**
  * Class AlbumType
@@ -43,7 +43,7 @@ class AlbumType extends AbstractType
             'startDate',
             null,
             array(
-                'label' => "* Date de début : ",
+                'label' => "Date de début : ",
                 'attr' => array('class' => 'datepicker'),
                 'format' => 'dd/MM/yyyy',
                 'widget' => 'single_text'
@@ -58,6 +58,71 @@ class AlbumType extends AbstractType
                 'attr' => array('class' => 'datepicker'),
                 'format' => 'dd/MM/yyyy',
                 'widget' => 'single_text'
+            )
+        );
+
+        $builder->add(
+            'startDateYear',
+            'choice',
+            array(
+                'label' => "* Année : ",
+                'choices' => StringUtils::getYearsFrom(),
+                'empty_value' => '- Sélectionner -'
+            )
+        );
+
+        $builder->add(
+            'startDateMonth',
+            'choice',
+            array(
+                'label' => "Mois : ",
+                'choices' => StringUtils::getMonths(),
+                'empty_value' => '- Sélectionner -',
+                'required' => false
+            )
+        );
+
+        $builder->add(
+            'startDateDay',
+            'choice',
+            array(
+                'label' => "Jour : ",
+                'choices' => StringUtils::getDays(),
+                'empty_value' => '- Sélectionner -',
+                'required' => false,
+            )
+        );
+
+        $builder->add(
+            'endDateYear',
+            'choice',
+            array(
+                'label' => "Année : ",
+                'choices' => StringUtils::getYearsFrom(),
+                'empty_value' => '- Sélectionner -',
+                'required' => false
+            )
+        );
+
+        $builder->add(
+            'endDateMonth',
+            'choice',
+            array(
+                'label' => "Mois : ",
+                'choices' => StringUtils::getMonths(),
+                'empty_value' => '- Sélectionner -',
+                'required' => false
+            )
+        );
+
+        $builder->add(
+            'endDateDay',
+            'choice',
+            array(
+                'label' => "Jour : ",
+                'choices' => StringUtils::getDays(),
+                'empty_value' => '- Sélectionner -',
+                'required' => false
             )
         );
 

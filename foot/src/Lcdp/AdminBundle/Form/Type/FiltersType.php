@@ -5,6 +5,7 @@ namespace Lcdp\AdminBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webnet\Bundle\SwissArmyBundle\Util\StringUtils;
 
 /**
  * Class FiltersType
@@ -42,6 +43,18 @@ class FiltersType extends AbstractType
                 )
             );
         }
+
+        if ($options['year'] === true) {
+            $builder->add(
+                'year',
+                'choice',
+                array(
+                    'label' => "Année : ",
+                    'choices' => StringUtils::getYearsFrom(),
+                    'empty_value' => '- Sélectionner -'
+                )
+            );
+        }
     }
 
     /**
@@ -52,7 +65,8 @@ class FiltersType extends AbstractType
         $resolver->setDefaults(
             array(
                 'title' => true,
-                'isPublished' => true
+                'isPublished' => true,
+                'year' => false
             )
         );
     }

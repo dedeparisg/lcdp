@@ -55,6 +55,48 @@ class Album
     protected $endDate;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="start_date_year", type="smallint", nullable=false)
+     */
+    protected $startDateYear;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="start_date_month", type="smallint", nullable=true)
+     */
+    protected $startDateMonth;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="start_date_day", type="smallint", nullable=true)
+     */
+    protected $startDateDay;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="end_date_year", type="smallint", nullable=false)
+     */
+    protected $endDateYear;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="end_date_month", type="smallint", nullable=true)
+     */
+    protected $endDateMonth;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="end_date_day", type="smallint", nullable=true)
+     */
+    protected $endDateDay;
+
+    /**
      * @var \Boolean
      *
      * @ORM\Column(name="is_published", type="boolean", nullable=false)
@@ -382,5 +424,114 @@ class Album
     public function getAlbumGroups()
     {
         return $this->albumGroups;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getStartDateYear()
+    {
+        return $this->startDateYear;
+    }
+
+    /**
+     * @param int $startDateYear
+     * @return Album
+     */
+    public function setStartDateYear($startDateYear)
+    {
+        $this->startDateYear = $startDateYear;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStartDateMonth()
+    {
+        return $this->startDateMonth;
+    }
+
+    /**
+     * @param int $startDateMonth
+     * @return Album
+     */
+    public function setStartDateMonth($startDateMonth)
+    {
+        $this->startDateMonth = $startDateMonth;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStartDateDay()
+    {
+        return $this->startDateDay;
+    }
+
+    /**
+     * @param int $startDateDay
+     * @return Album
+     */
+    public function setStartDateDay($startDateDay)
+    {
+        $this->startDateDay = $startDateDay;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEndDateYear()
+    {
+        return $this->endDateYear;
+    }
+
+    /**
+     * @param int $endDateYear
+     * @return Album
+     */
+    public function setEndDateYear($endDateYear)
+    {
+        $this->endDateYear = $endDateYear;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEndDateMonth()
+    {
+        return $this->endDateMonth;
+    }
+
+    /**
+     * @param int $endDateMonth
+     * @return Album
+     */
+    public function setEndDateMonth($endDateMonth)
+    {
+        $this->endDateMonth = $endDateMonth;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEndDateDay()
+    {
+        return $this->endDateDay;
+    }
+
+    /**
+     * @param int $endDateDay
+     * @return Album
+     */
+    public function setEndDateDay($endDateDay)
+    {
+        $this->endDateDay = $endDateDay;
+        return $this;
     }
 }

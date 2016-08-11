@@ -74,12 +74,20 @@ class AlbumController extends BaseController
             )
         );
 
-        if (empty($album) || $album->getStartDate()->format('Y') != $year) {
+        if (empty($album) || $album->getStartDateYear() != $year) {
             throw new NotFoundHttpException();
         }
 
+        // Permet de trier à la volée les groupes de l'album
+        $albumGroups = array();
+        foreach ($album->getAlbumGroups() as $group) {
+            $albumGroups[$group->getPriority()] = $group;
+        }
+        ksort($albumGroups);
+
         return array(
             'album' => $album,
+            'albumGroups' => $albumGroups,
             'year' => $year
         );
     }
@@ -104,7 +112,7 @@ class AlbumController extends BaseController
         } else {
             $album = $albumGroup->getAlbum();
 
-            if (empty($album) || $album->getSlug() != $albumSlug || $album->getStartDate()->format('Y') != $year) {
+            if (empty($album) || $album->getSlug() != $albumSlug || $album->getStartDateYear() != $year) {
                 throw new NotFoundHttpException();
             }
         }

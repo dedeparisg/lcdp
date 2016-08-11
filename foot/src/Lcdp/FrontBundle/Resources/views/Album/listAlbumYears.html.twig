@@ -3,9 +3,12 @@
 {% block content %}
     <h2>Tous les albums</h2>
     <div class="row margin-bottom-lg news">
-        {% for child in albums %}
-            <div class="col-xs-3 text-center">
-                <a class="btn-lg btn-gray btn" href="{{ path('front_albums', {'year': child}) }}">{{ child }}</a>
+        {% for year, count in albums %}
+            <div class="col-xs-4 text-center">
+                <a class="album-years col-xs-12" href="{{ path('front_albums', {'year': year}) }}">
+                    <div class="first">{{ year }}</div>
+                    <div class="second">{{ count }}&nbsp;album{% if count > 1 %}s{% endif %}</div>
+                </a>
             </div>
         {% endfor %}
     </div>

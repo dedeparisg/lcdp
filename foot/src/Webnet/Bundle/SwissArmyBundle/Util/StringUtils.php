@@ -3,18 +3,10 @@
 namespace Webnet\Bundle\SwissArmyBundle\Util;
 
 /**
-* String utility functions.
-*/
+ * String utility functions.
+ */
 class StringUtils
 {
-    /**
-     * This class should not be instantiated
-     */
-    private function __construct()
-    {
-
-    }
-
     /**
      * Permet de retirer tous les caractères spéciaux d'une chaine
      *
@@ -67,5 +59,70 @@ class StringUtils
         $uid .= substr($chars, 20, 12);
 
         return $uid;
+    }
+
+    /**
+     * Permet de lister les années d'aujourd'hui depuis la création du club
+     *
+     * @param integer $start Année de début
+     * @return array
+     *
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public static function getYearsFrom($start = 2006)
+    {
+        $years = array();
+        $now = new \DateTime();
+
+        for ($min = $start, $max = $now->format('Y'); $max >= $min; $max--) {
+            $years[$max] = $max;
+        }
+
+        return $years;
+    }
+
+    /**
+     * Permet de lister les mois en Français
+     *
+     * @return array
+     *
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public static function getMonths()
+    {
+        $months = array(
+            1 => "Janvier",
+            2 => "Février",
+            3 => "Mars",
+            4 => "Avril",
+            5 => "Mai",
+            6 => "Juin",
+            7 => "Juillet",
+            8 => "Août",
+            9 => "Septembre",
+            10 => "Octobre",
+            11 => "Novembre",
+            12 => "Décembre"
+        );
+
+        return $months;
+    }
+
+    /**
+     * Permet de lister les jours possible d'un mois
+     *
+     * @return array
+     *
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public static function getDays()
+    {
+        $days = array();
+
+        for ($min = 1, $max = 31; $min <= $max; $min++) {
+            $days[$min] = $min;
+        }
+
+        return $days;
     }
 }

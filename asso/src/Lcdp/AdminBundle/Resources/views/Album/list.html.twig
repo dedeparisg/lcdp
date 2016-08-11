@@ -12,7 +12,8 @@
         {% include 'LcdpAdminBundle:Partial:form_filters.html.twig' with {
             'filter_title': 'Gestion des albums',
             'filter_url': path('lcdp_admin_album_edit'),
-            'filter_button': 'Ajouter un album'
+            'filter_button': 'Ajouter un album',
+            'show_item': 'year'
         } %}
 
         <div class="clear"></div>
@@ -23,6 +24,7 @@
                     <thead>
                         <tr class="gray">
                             <th>Titre</th>
+                            <th>Année</th>
                             <th>Publié</th>
                             <th>Date de publication</th>
                             <th></th>
@@ -32,6 +34,7 @@
                         {% for album in albums %}
                             <tr class="{% if loop.index % 2 %}odd{% endif %}" data-pageid="{{ album.id }}">
                                 <td class='title'>{{ album.title }}</td>
+                                <td class='year'>{% if album.startDate is not empty %}{{  album.startDate|date('Y') }}{% endif %}</td>
                                 <td class='publish'>{% if album.isPublished %}Oui{% else %}Non{% endif %}</td>
                                 <td class='date'>{{ album.publicatedAt|date('d-m-Y \\à H:i:s') }}</td>
                                 <td class="actions">

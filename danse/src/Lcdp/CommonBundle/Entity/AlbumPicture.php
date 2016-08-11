@@ -42,7 +42,7 @@ class AlbumPicture
     private $imgAlt;
 
     /**
-     * @var string
+     * @var integer
      *
      * @ORM\Column(name="priority", type="integer", nullable=true)
      */
@@ -108,7 +108,7 @@ class AlbumPicture
      * Set priority
      *
      * @param integer $priority
-     * @return Image
+     * @return AlbumPicture
      */
     public function setPriority($priority)
     {

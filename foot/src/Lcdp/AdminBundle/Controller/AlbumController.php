@@ -30,7 +30,7 @@ class AlbumController extends BaseController
      */
     public function listAction(Request $request)
     {
-        $form = $this->createForm(new FiltersType());
+        $form = $this->createForm(new FiltersType(), null, array('year' => true));
         $form->handleRequest($request);
 
         $albums = $this->getRepository('Album')->getList($request->get('filters_form'));

@@ -34,11 +34,20 @@ class AlbumGroupType extends AbstractType
             'content',
             null,
             array(
-                'label' => "* Contenu : ",
+                'label' => "Contenu : ",
                 'attr' => array(
                     'class' => 'tinymce',
                     'data-theme' => 'advanced'
                 )
+            )
+        );
+
+        $builder->add(
+            'priority',
+            'text',
+            array(
+                'label' => "Position : ",
+                'attr' => array('maxlength' => 255)
             )
         );
     }

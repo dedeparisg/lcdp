@@ -3,9 +3,12 @@
 {% block content %}
     <h2>Tous les groupes de l'album</h2>
     <div class="row margin-bottom-lg news">
-        {% for child in album.albumGroups %}
-            <div class="col-xs-3 text-center">
-                <a class="btn-lg btn-gray btn" href="{{ path('front_album_view', {'year': year, 'albumSlug': album.slug, 'groupId' : child.id}) }}">{{ child.title }}</a>
+        {% for child in albumGroups|default() %}
+            <div class="col-xs-4 text-center">
+                <a class="album-groups col-xs-12" href="{{ path('front_album_view', {'year': year, 'albumSlug': album.slug, 'groupId' : child.id}) }}">
+                    <div class="first">{{ child.title }}</div>
+                    <div class="second">{{ child.pictures|length }} photo{% if child.pictures|length > 1%}s{% endif %} / {{ child.albumVideos|length }} vidéo{% if child.albumVideos|length > 1%}s{% endif %}</div>
+                </a>
             </div>
         {% endfor %}
     </div>

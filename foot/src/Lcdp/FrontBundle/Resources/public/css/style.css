@@ -175,8 +175,34 @@ li {
     border: 1px solid #999;
     display: block;
     float: left;
-    height: 150px;
-    margin: 1px;
+    height: 140px;
+    margin: 2px;
     overflow: hidden;
-    width: 140px;
+    width: 155px;
+}
+
+.album-years, .album-groups {
+    background: #ddd none repeat scroll 0 0;
+    border: 1px solid #000;
+    height: 100px;
+    width: 100%;
+    color: black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.album-years div.first, .album-groups div.first {
+    font-size: 27px;
+    font-weight: bold;
+    line-height: 75px;
+}
+.album-years div.second, .album-groups div.second {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.album-years:hover, .album-groups:hover {
+    color: white;
+    background: black;
+    text-decoration: none;
 }

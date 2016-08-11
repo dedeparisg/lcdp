@@ -2,6 +2,8 @@
 
 namespace Lcdp\CommonBundle\TwigExtension;
 
+use Lcdp\CommonBundle\Entity\Album;
+
 /**
  * Extension twig
  *
@@ -33,7 +35,8 @@ class LcdpExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'formatLcdpDateFromTo' => new \Twig_Function_Method($this, 'formatLcdpDateFromTo', array('is_safe' => array('html')))
+            'formatLcdpDateFromTo' => new \Twig_Function_Method($this, 'formatLcdpDateFromTo', array('is_safe' => array('html'))),
+            'formatLcdpAlbumDate' => new \Twig_Function_Method($this, 'formatLcdpAlbumDate', array('is_safe' => array('html')))
         );
     }
 
@@ -96,6 +99,100 @@ class LcdpExtension extends \Twig_Extension
 
 
         return $return;
+    }
+
+    /**
+     * Formatte correctement une période
+     * Affichera par exemple : "Du samedi 24 juin au dimanche 25 juin 2016"
+     *
+     * @param array $entity
+     * @return string
+     *
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public static function formatLcdpAlbumDate(array $entity)
+    {
+        $from = null;
+        $startDateYear = $entity['startDateYear'];
+        $startDateMonth = $entity['startDateMonth'];
+        $startDateDay = $entity['startDateDay'];
+
+        if (!empty($startDateYear) && !empty($startDateMonth) && !empty($startDateDay)) {
+            $from = new \DateTime($startDateDay . '-' . $startDateMonth . '-' . $startDateYear);
+        }
+
+        $endDateYear = $entity['endDateYear'];
+        $endDateMonth = $entity['endDateMonth'];
+        $endDateDay = $entity['endDateDay'];
+
+        if (!empty($endDateYear) && !empty($endDateMonth) && !empty($endDateDay)) {
+            $to = new \DateTime($endDateDay . '-' . $endDateMonth . '-' . $endDateYear);
+        }
+
+        // Si seulement l'année de début est spécifiée
+        if (!empty($startDateYear) && empty($startDateMonth) && empty($startDateDay) && empty($endDateYear) && empty($endDateMonth) && empty($endDateDay)) {
+            return "En " . $startDateYear;
+        }
+
+        // Si seulement les années de début et de fin sont spécifiée
+        if (!empty($startDateYear) && empty($startDateMonth) && empty($startDateDay) && !empty($endDateYear) && empty($endDateMonth) && empty($endDateDay)) {
+            if ($startDateYear == $endDateYear) {
+                return "En " . $startDateYear;
+            } else {
+                return "De " . $startDateYear . ' à ' . $endDateYear;
+            }
+        }
+
+        $months = LcdpExtension::getMonths();
+
+        // Si seulement l'année et le mois de début sont spécifiés
+        if (!empty($startDateYear) && !empty($startDateMonth) && empty($startDateDay) && empty($endDateYear) && empty($endDateMonth) && empty($endDateDay)) {
+            return "En " . $months[$startDateMonth] . ' ' . $startDateYear;
+        }
+
+        // Si seulement l'année et le mois de début et de fin sont spécifiés
+        if (!empty($startDateYear) && !empty($startDateMonth) && empty($startDateDay) && !empty($endDateYear) && !empty($endDateMonth) && empty($endDateDay)) {
+            if ($startDateYear == $endDateYear) {
+                if ($startDateMonth == $endDateMonth) {
+                    return "En " . $months[$startDateMonth] . ' ' . $startDateYear;
+                } else {
+                    return "De " . $months[$startDateMonth] . ' à ' . $months[$endDateMonth] . ' ' . $startDateYear;
+                }
+            } else {
+                return "De " . $months[$startDateMonth] . ' ' . $startDateYear . ' à ' . $months[$endDateMonth] . ' ' . $endDateYear;
+            }
+        }
+
+        $days = LcdpExtension::getDays();
+
+        // Si seulement l'année, le mois et le jour de début sont spécifiés
+        if (!empty($startDateYear) && !empty($startDateMonth) && !empty($startDateDay) && empty($endDateYear) && empty($endDateMonth) && empty($endDateDay)) {
+            $nom_jour = $from->format("w");
+
+            return 'Le ' . strtolower($days[$nom_jour]) . ' ' . $startDateDay . ' ' . $months[$startDateMonth] . ' ' . $startDateYear;
+        }
+
+        // Si toutes les valeurs sont renseignées
+        if (!empty($startDateYear) && !empty($startDateMonth) && !empty($startDateDay) && !empty($endDateYear) && !empty($endDateMonth) && !empty($endDateDay)) {
+
+            $nom_jour_start = $from->format("w");
+            $nom_jour_end = $to->format("w");
+
+            if ($startDateYear == $endDateYear) {
+                if ($startDateMonth == $endDateMonth) {
+                    if ($startDateDay == $endDateDay) {
+                        return 'Le ' . strtolower($days[$nom_jour_start]) . ' ' . $startDateDay . ' ' . $months[$startDateMonth] . ' ' . $startDateYear;
+                    } else {
+
+                        return 'Du ' . strtolower($days[$nom_jour_start]) . ' ' . $startDateDay . ' au ' . strtolower($days[$nom_jour_end]) . ' ' . $endDateDay . ' ' . $months[$startDateMonth] . ' ' . $startDateYear;
+                    }
+                } else {
+                    return 'Du ' . strtolower($days[$nom_jour_start]) . ' ' . $startDateDay . ' ' . $months[$startDateMonth] . ' au ' . strtolower($days[$nom_jour_end]) . ' ' . $endDateDay . ' ' . $months[$endDateMonth] . ' ' . $startDateYear;
+                }
+            } else {
+                return 'Du ' . strtolower($days[$nom_jour_start]) . ' ' . $startDateDay . ' ' . $months[$startDateMonth] . ' ' . $startDateYear . ' au ' . strtolower($days[$nom_jour_end]) . ' ' . $endDateDay . ' ' . $months[$endDateMonth] . ' ' . $endDateYear;
+            }
+        }
     }
 
     /**
