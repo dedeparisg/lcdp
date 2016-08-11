@@ -41,20 +41,6 @@ class Album
     protected $intro;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="start_date", type="date", nullable=false)
-     */
-    protected $startDate;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="end_date", type="date", nullable=true)
-     */
-    protected $endDate;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="start_date_year", type="smallint", nullable=false)
@@ -229,52 +215,6 @@ class Album
     public function getIntro()
     {
         return $this->intro;
-    }
-
-    /**
-     * Set startDate
-     *
-     * @param \DateTime $startDate
-     * @return Event
-     */
-    public function setStartDate($startDate)
-    {
-        $this->startDate = $startDate;
-
-        return $this;
-    }
-
-    /**
-     * Get startDate
-     *
-     * @return \DateTime
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * Set endDate
-     *
-     * @param \DateTime $endDate
-     * @return Event
-     */
-    public function setEndDate($endDate)
-    {
-        $this->endDate = $endDate;
-
-        return $this;
-    }
-
-    /**
-     * Get endDate
-     *
-     * @return \DateTime
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
     }
 
     /**
