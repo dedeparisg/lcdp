@@ -64,7 +64,7 @@ class Album
     /**
      * @var integer
      *
-     * @ORM\Column(name="end_date_year", type="smallint", nullable=false)
+     * @ORM\Column(name="end_date_year", type="smallint", nullable=true)
      */
     protected $endDateYear;
 

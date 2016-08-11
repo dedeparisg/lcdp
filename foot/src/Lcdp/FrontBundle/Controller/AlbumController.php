@@ -80,8 +80,11 @@ class AlbumController extends BaseController
 
         // Permet de trier à la volée les groupes de l'album
         $albumGroups = array();
+        $tmp = 100;
         foreach ($album->getAlbumGroups() as $group) {
-            $albumGroups[$group->getPriority()] = $group;
+            $tmp++;
+            $key = empty($group->getPriority()) ? $tmp : $group->getPriority();
+            $albumGroups[$key] = $group;
         }
         ksort($albumGroups);
 

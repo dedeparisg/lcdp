@@ -47,7 +47,8 @@ class AlbumGroupType extends AbstractType
             'text',
             array(
                 'label' => "Position : ",
-                'attr' => array('maxlength' => 255)
+                'attr' => array('maxlength' => 255),
+                'required' => false
             )
         );
     }
