@@ -40,28 +40,6 @@ class AlbumType extends AbstractType
         );
 
         $builder->add(
-            'startDate',
-            null,
-            array(
-                'label' => "Date de début : ",
-                'attr' => array('class' => 'datepicker'),
-                'format' => 'dd/MM/yyyy',
-                'widget' => 'single_text'
-            )
-        );
-
-        $builder->add(
-            'endDate',
-            null,
-            array(
-                'label' => " Date de fin : ",
-                'attr' => array('class' => 'datepicker'),
-                'format' => 'dd/MM/yyyy',
-                'widget' => 'single_text'
-            )
-        );
-
-        $builder->add(
             'startDateYear',
             'choice',
             array(
