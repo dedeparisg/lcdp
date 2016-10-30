@@ -51,6 +51,9 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
     {
         $this->createUser($manager, 'cron@lcdp.fr', 'cron@lcdp.fr', 'Cr0nP4s$word#2016', User::ROLE_USER, 'Cron', 'Cron', array());
         $this->createUser($manager, 'admin', 'dev.andre.tapia@gmail.com', 'admin', User::ROLE_ADMIN, 'Administrateur', 'LCDP', array(Profile::ADMIN));
+        $this->createUser($manager, 'fbienvenu', 'leclubdespaquerettes@gmail.com', 'LCDPadmin2016!', User::ROLE_ADMIN, 'Fatima', 'Bienvenu', array(Profile::ADMIN));
+        $this->createUser($manager, 'vcarrier', 'val.carrier94@gmail.com', 'LCDPadmin2016!', User::ROLE_ADMIN, 'Valérie', 'Carrier', array(Profile::ADMIN));
+        $this->createUser($manager, 'mjunk', 'michele.junk@sfr.fr', 'LCDPadmin2016!', User::ROLE_ADMIN, 'Michele', 'Junk', array(Profile::ADMIN));
 
         // Si on est pas en environnement de developpement, on coupe le traitement
         if (!in_array($this->container->get('kernel')->getEnvironment(), array('dev'))) {

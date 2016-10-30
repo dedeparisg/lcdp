@@ -38,6 +38,9 @@ body{
     color: #fff;
     background-color: #008AD2;
 }
+.bulle.bleu h2 img{
+    margin-left: 15px;
+}
 
 .menu-top a {
     float: left;
@@ -57,7 +60,6 @@ body{
 }
 
 #menu div {
-    background-image: url('../img/picto_rose.png');
     background-repeat: no-repeat;
     border-bottom: 1px dotted;
     font-size: 17px;
@@ -66,20 +68,8 @@ body{
     padding-left: 13px;
     margin-bottom: 6px;
 }
-
-.menu-top .bleu {
-    color: #fff;
-    background-color: #008AD2;
-}
-.menu-top .violet {
-    color: #fff;
-    background-color: #8B1880;
-}
-.menu-top .rose {
-    color: #fff;
-    background-color: #E50075;
-    border-radius: 10px;
-    width: 100%;
+.menu-top a {
+    min-width: 50px;
 }
 .menu-top .gris,
 .btn-gray{
@@ -107,7 +97,6 @@ body{
 }
 
 #center-content h2 {
-    background-image: url('../img/picto_rose_md.png');
     background-repeat: no-repeat;
     border-bottom: 2px dotted gray;
     border-radius: 0;
@@ -121,7 +110,6 @@ body{
 }
 
 #center-content h3 {
-    color: #e50075;
     font-size: 25px;
     font-weight: bold;
 }

@@ -1,0 +1,31 @@
+.menu-top .bleu {
+    color: #fff;
+    background-color: #008AD2;
+}
+.menu-top .violet {
+    color: #fff;
+    background-color: #8B1880;
+}
+.menu-top .orange {
+    color: #fff;
+    background-color: #EF7100;
+}
+.menu-top .rose {
+    color: #fff;
+    background-color: #E50075;
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+#menu div {
+    background-image: url('../img/picto_rose.png');
+}
+
+#center-content h2 {
+    background-image: url('../img/picto_rose_md.png');
+}
+
+#center-content h3 {
+    color: #E50075;
+}
