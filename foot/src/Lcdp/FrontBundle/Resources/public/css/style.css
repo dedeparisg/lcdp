@@ -38,6 +38,9 @@ body{
     color: #fff;
     background-color: #008AD2;
 }
+.bulle.bleu h2 img{
+    margin-left: 15px;
+}
 
 .menu-top a {
     float: left;
@@ -66,7 +69,9 @@ body{
     padding-left: 13px;
     margin-bottom: 6px;
 }
-
+.menu-top a {
+    min-width: 50px;
+}
 .menu-top .bleu {
     color: #fff;
     background-color: #008AD2;
@@ -74,6 +79,10 @@ body{
 .menu-top .violet {
     color: #fff;
     background-color: #8B1880;
+}
+.menu-top .orange {
+    color: #fff;
+    background-color: #EF7100;
 }
 .menu-top .rose {
     color: #fff;
