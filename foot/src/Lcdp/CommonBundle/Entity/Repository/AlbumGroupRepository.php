@@ -69,4 +69,22 @@ class AlbumGroupRepository extends EntityRepository
 
         return $query;
     }
+
+    /**
+     * Permet de lister les evenements pour le sitemap
+     *
+     * @return array
+     *
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public function getItemsForSitemap()
+    {
+        return $this->createQueryBuilder('ag')
+            ->innerJoin('ag.album', 'a')
+            ->where('ag.isDeleted = false')
+            ->andWhere('a.isDeleted = false')
+            ->andWhere('a.isPublished = true')
+            ->getQuery()
+            ->getResult();
+    }
 }

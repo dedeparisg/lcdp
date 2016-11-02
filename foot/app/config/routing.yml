@@ -17,3 +17,7 @@ lcdp_admin_annotation:
 lcdp_admin:
     resource: "@LcdpAdminBundle/Resources/config/routing.yml"
     prefix:   /admin
+
+PrestaSitemapBundle:
+    resource: "@PrestaSitemapBundle/Resources/config/routing.yml"
+    prefix:   /

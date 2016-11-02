@@ -52,3 +52,12 @@ services :
         arguments: [@lcdp.filestore]
         tags:
             - { name: twig.extension }
+
+    # Sitemap
+    app.sitemap.subscriber:
+        class: Lcdp\FrontBundle\EventListener\SitemapSubscriber
+        arguments:
+            - "@router"
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: "kernel.event_subscriber", priority: 100 }

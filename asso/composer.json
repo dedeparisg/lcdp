@@ -24,7 +24,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "egulias/email-validator": "~1.2",
         "stfalcon/tinymce-bundle": "~1.0.1",
-        "friendsofsymfony/jsrouting-bundle": "^1.5"
+        "friendsofsymfony/jsrouting-bundle": "^1.5",
+        "presta/sitemap-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

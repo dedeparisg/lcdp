@@ -2,6 +2,8 @@
 homepage:
     path:  /
     defaults: { _controller: "LcdpFrontBundle:Home:index" }
+    options:
+        sitemap: true
 
 menu_left:
     path:  /menu-left
@@ -18,6 +20,8 @@ front_page:
 front_events:
     path: /evenements
     defaults: { _controller: "LcdpFrontBundle:Events:list" }
+    options:
+        sitemap: true
 
 front_event:
     path: /evenement/{slug}
@@ -30,6 +34,8 @@ front_news:
 front_albums_years:
     path: /albums
     defaults: { _controller: "LcdpFrontBundle:Album:listAlbumYears" }
+    options:
+        sitemap: true
 
 front_albums:
     path: /albums/{year}

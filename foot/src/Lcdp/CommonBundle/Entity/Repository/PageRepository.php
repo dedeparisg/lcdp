@@ -49,4 +49,20 @@ class PageRepository extends EntityRepository
 
         return $return;
     }
+
+    /**
+     * Permet de lister les evenements pour le sitemap
+     *
+     * @return array
+     *
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public function getItemsForSitemap()
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.isDeleted = false')
+            ->andWhere('p.isPublished = true')
+            ->getQuery()
+            ->getResult();
+    }
 }

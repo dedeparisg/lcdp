@@ -41,3 +41,6 @@ parameters:
         foot: "http://foot.lcdp.fr"
         asso: "http://association.lcdp.fr"
         petanque: "http://petanque.lcdp.fr"
+
+        presta_sitemap:
+            timetolive: 3600

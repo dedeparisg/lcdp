@@ -13,3 +13,6 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    router.request_context.host: association.leclubdespaquerettes.fr
+    router.request_context.scheme: http

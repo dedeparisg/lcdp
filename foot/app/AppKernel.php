@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Webnet\Bundle\SwissArmyBundle\WebnetSwissArmyBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Presta\SitemapBundle\PrestaSitemapBundle(),
 
             // Application Bundles
             new Lcdp\AdminBundle\LcdpAdminBundle(),
