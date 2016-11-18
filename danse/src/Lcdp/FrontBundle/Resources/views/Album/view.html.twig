@@ -22,7 +22,7 @@
                 <div id="aniimated-thumbnials">
                     {% for picture in pictures %}
                         <a href="{{ fileUrl(picture.imgAlt, 'ALBUM') }}">
-                            <img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" height="140" />
+                            <img src="{{ fileUrl(picture.imgAlt, 'ALBUM', 'fo') }}" height="140" />
                         </a>
                     {% endfor %}
                 </div>

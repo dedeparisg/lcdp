@@ -147,6 +147,7 @@ class FilestoreService
      *
      * @param string $uid      UID du document
      * @param string $fileType Type du document
+     * @return string
      */
     public function getFilename($uid, $fileType)
     {

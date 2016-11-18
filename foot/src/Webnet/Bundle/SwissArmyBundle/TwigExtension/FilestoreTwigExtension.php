@@ -38,11 +38,20 @@ class FilestoreTwigExtension extends \Twig_Extension
      *
      * @param  string $uid      UID du document
      * @param  string $fileType Type du document
+     * @param  string $fileFormat Format de l'image
      * @return string Url du fichier
      */
-    public function getFileUrl($uid, $fileType)
+    public function getFileUrl($uid, $fileType, $fileFormat = null)
     {
-        return $this->filestore->getUrl($uid, $fileType);
+        $url = $this->filestore->getUrl($uid, $fileType);
+
+        if (!is_null($fileFormat)) {
+            $urls = explode('.', $url);
+            $urls[count($urls) - 2] .= '_' . $fileFormat;
+            $url = implode('.', $urls);
+        }
+
+        return $url;
     }
 
     /**

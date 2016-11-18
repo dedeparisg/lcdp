@@ -182,7 +182,13 @@ li {
 .album-years div.first, .album-groups div.first {
     font-size: 27px;
     font-weight: bold;
+    height: 75px;
+}
+.album-years div.first {
     line-height: 75px;
+}
+.album-groups div.first {
+    line-height: 35px;
 }
 .album-years div.second, .album-groups div.second {
     font-size: 14px;

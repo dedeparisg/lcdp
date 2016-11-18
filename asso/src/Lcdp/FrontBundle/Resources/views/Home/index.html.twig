@@ -6,7 +6,7 @@
         <div class="row margin-bottom-lg news">
             <div class="col-xs-4">
                 {% if child.image is not empty %}
-                    <img src="{{ fileUrl(child.image, 'NEWS') }}" width="230" />
+                    <img src="{{ fileUrl(child.image, 'NEWS', 'med') }}" width="230" />
                 {% else %}
                     <img src="http://fakeimg.pl/230x180/" width="230" />
                 {% endif %}

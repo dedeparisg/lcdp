@@ -54,7 +54,7 @@
                                 <td id="sortable">
                                     {% for key, picture in pictures %}
                                         <div class="admin_picture_list" data-key="{{ key}}" data-pictureid="{{ picture.id }}" data-albumid="{{ albumGroup.id }}">
-                                            <img src="{{ fileUrl(picture.imgAlt, 'ALBUM') }}" width="300">
+                                            <img src="{{ fileUrl(picture.imgAlt, 'ALBUM', 'bo') }}" width="300">
                                             <span class="delete-picture"
                                               href="{{ path('lcdp_admin_remove_picture', {'albumId': picture.albumGroup.album.id, 'groupId': picture.albumGroup.id, 'pictureId': picture.id}) }}"
                                             >

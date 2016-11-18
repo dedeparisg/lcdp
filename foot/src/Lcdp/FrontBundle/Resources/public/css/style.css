@@ -60,7 +60,6 @@ body{
 }
 
 #menu div {
-    background-image: url('../img/picto_rose.png');
     background-repeat: no-repeat;
     border-bottom: 1px dotted;
     font-size: 17px;
@@ -71,24 +70,6 @@ body{
 }
 .menu-top a {
     min-width: 50px;
-}
-.menu-top .bleu {
-    color: #fff;
-    background-color: #008AD2;
-}
-.menu-top .violet {
-    color: #fff;
-    background-color: #8B1880;
-}
-.menu-top .orange {
-    color: #fff;
-    background-color: #EF7100;
-}
-.menu-top .rose {
-    color: #fff;
-    background-color: #E50075;
-    border-radius: 10px;
-    width: 100%;
 }
 .menu-top .gris,
 .btn-gray{
@@ -116,7 +97,6 @@ body{
 }
 
 #center-content h2 {
-    background-image: url('../img/picto_rose_md.png');
     background-repeat: no-repeat;
     border-bottom: 2px dotted gray;
     border-radius: 0;
@@ -130,7 +110,6 @@ body{
 }
 
 #center-content h3 {
-    color: #e50075;
     font-size: 25px;
     font-weight: bold;
 }
@@ -203,7 +182,13 @@ li {
 .album-years div.first, .album-groups div.first {
     font-size: 27px;
     font-weight: bold;
+    height: 75px;
+}
+.album-years div.first {
     line-height: 75px;
+}
+.album-groups div.first {
+    line-height: 35px;
 }
 .album-years div.second, .album-groups div.second {
     font-size: 14px;

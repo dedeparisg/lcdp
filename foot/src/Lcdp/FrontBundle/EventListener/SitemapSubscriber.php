@@ -53,9 +53,9 @@ class SitemapSubscriber implements EventSubscriberInterface
      */
     public function registerPages(SitemapPopulateEvent $sitemapPopulateEvent)
     {
-        $this->managePages($sitemapPopulateEvent, 'Page', 'front_page');
-        $this->managePages($sitemapPopulateEvent, 'Event', 'front_event');
-        $this->managePages($sitemapPopulateEvent, 'News', 'front_news');
+        $this->managePages($sitemapPopulateEvent, 'Page');
+        $this->managePages($sitemapPopulateEvent, 'Event');
+        $this->managePages($sitemapPopulateEvent, 'News');
         $this->manageAlbums($sitemapPopulateEvent);
     }
 
@@ -64,17 +64,16 @@ class SitemapSubscriber implements EventSubscriberInterface
      *
      * @param SitemapPopulateEvent $sitemapPopulateEvent Sitemap
      * @param string               $class                Nom de la classe concernée
-     * @param string               $routeName            Nom de la route
      *
      * @author André Tapia <atapia@webnet.fr>
      */
-    private function managePages(SitemapPopulateEvent $sitemapPopulateEvent, $class, $routeName)
+    private function managePages(SitemapPopulateEvent $sitemapPopulateEvent, $class)
     {
         $pages = $this->manager->getRepository('LcdpCommonBundle:' . $class)->getItemsForSitemap();
 
         foreach ($pages as $page) {
             $url = $this->urlGenerator->generate(
-                $routeName,
+                "front_" . strtolower($class),
                 ['slug' => $page->getSlug()],
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
