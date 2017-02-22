@@ -77,7 +77,10 @@ class HomeController extends BaseController
     public function menuRightAction()
     {
         $news = $this->getRepository('Event')->getList(
-            array('isPublished' => true,),
+            array(
+                'isPublished' => true,
+                'future' => true
+            ),
             array(
                 'position' => 'ASC',
                 'publicatedAt' => "DESC"

@@ -82,6 +82,10 @@ class EventRepository extends EntityRepository
                 $query->andWhere('e.isPublished = :published');
                 $query->setParameter('published', $filters['isPublished']);
             }
+            if (isset($filters['future']) && $filters['future'] === true) {
+                $query->andWhere('e.startDate >= :now');
+                $query->setParameter('now', new \DateTime());
+            }
         }
 
         return $query;
