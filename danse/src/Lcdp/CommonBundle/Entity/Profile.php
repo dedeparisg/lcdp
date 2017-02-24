@@ -92,10 +92,10 @@ class Profile
     /**
      * Add permissions
      *
-     * @param Lcdp\CommonBundle\Entity\ProfilePermission $permissions
+     * @param \Lcdp\CommonBundle\Entity\ProfilePermission $permissions
      * @return Profile
      */
-    public function addPermission(Lcdp\CommonBundle\Entity\ProfilePermission $permissions)
+    public function addPermission(\Lcdp\CommonBundle\Entity\ProfilePermission $permissions)
     {
         $this->permissions[] = $permissions;
 
@@ -105,9 +105,9 @@ class Profile
     /**
      * Remove permissions
      *
-     * @param Lcdp\CommonBundle\Entity\ProfilePermission $permissions
+     * @param \Lcdp\CommonBundle\Entity\ProfilePermission $permissions
      */
-    public function removePermission(Lcdp\CommonBundle\Entity\ProfilePermission $permissions)
+    public function removePermission(\Lcdp\CommonBundle\Entity\ProfilePermission $permissions)
     {
         $this->permissions->removeElement($permissions);
     }
@@ -125,10 +125,10 @@ class Profile
     /**
      * Add users
      *
-     * @param Lcdp\CommonBundle\Entity\User $users
+     * @param \Lcdp\CommonBundle\Entity\User $users
      * @return Profile
      */
-    public function addUser(Lcdp\CommonBundle\Entity\User $users)
+    public function addUser(\Lcdp\CommonBundle\Entity\User $users)
     {
         $this->users[] = $users;
 
@@ -138,9 +138,9 @@ class Profile
     /**
      * Remove users
      *
-     * @param Lcdp\CommonBundle\Entity\User $users
+     * @param \Lcdp\CommonBundle\Entity\User $users
      */
-    public function removeUser(Lcdp\CommonBundle\Entity\User $users)
+    public function removeUser(\Lcdp\CommonBundle\Entity\User $users)
     {
         $this->users->removeElement($users);
     }
