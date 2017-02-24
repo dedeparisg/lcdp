@@ -1,3 +1,6 @@
+.menu-top a.col-xs-3 {
+    width: 30%;
+}
 .menu-top .bleu {
     color: #fff;
     background-color: #008AD2;
