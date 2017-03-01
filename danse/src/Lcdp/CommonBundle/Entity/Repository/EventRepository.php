@@ -27,8 +27,10 @@ class EventRepository extends EntityRepository
 
         if (!empty($orders)) {
             if (isset($orders['publication'])) {
-                $query->orderBy('e.publicatedAt', $orders['publication']);
+                $query->orderBy('e.startDate', $orders['publication']);
             }
+        } else {
+            $query->orderBy('e.startDate', 'ASC');
         }
 
         if (!empty($limit)) {

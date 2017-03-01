@@ -81,10 +81,7 @@ class HomeController extends BaseController
                 'isPublished' => true,
                 'future' => true
             ),
-            array(
-                'position' => 'ASC',
-                'publicatedAt' => "DESC"
-            ),
+            array('publication' => "ASC"),
             array('limit' => $this->getParameter('pagination_front_home_events'))
         );
 
