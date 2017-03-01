@@ -1,5 +1,5 @@
-.menu-top a.col-xs-3 {
-    width: 30%;
+.h1-none {
+    display: none;
 }
 .menu-top .bleu {
     color: #fff;
