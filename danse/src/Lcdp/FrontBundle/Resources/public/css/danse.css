@@ -32,3 +32,26 @@
 #center-content h3 {
     color: #E50075;
 }
+
+.home-gallery {
+    width:100%;
+}
+.home-gallery .lSPager {
+    display: none;
+}
+.home-gallery ul {
+    list-style: none outside none;
+    padding-left: 0;
+    margin-bottom:0;
+}
+.home-gallery ul li {
+    display: block;
+    float: left;
+    margin-right: 6px;
+    cursor:pointer;
+}
+.home-gallery ul li img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}

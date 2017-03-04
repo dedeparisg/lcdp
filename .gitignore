@@ -6,3 +6,4 @@ vendor
 /danse/app/config/parameters.yml
 /asso/app/config/parameters.yml
 /foot/app/config/parameters.yml
+DataFixtures
