@@ -113,7 +113,10 @@ class HomeController extends BaseController
     {
         $news = $this->getRepository('News')->getList(
             array('isPublished' => true),
-            array('publication' => 'DESC')
+            array('publication' => 'DESC'),
+            null,
+            null,
+            false
         );
 
         $feed = $this->get('eko_feed.feed.manager')->get('news');

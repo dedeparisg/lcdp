@@ -399,7 +399,7 @@ class News implements RoutedItemInterface
      */
     public function getFeedItemRouteParameters()
     {
-        return $this->slug;
+        return array('slug' => $this->slug);
     }
 
     /**

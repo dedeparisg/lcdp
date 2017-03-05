@@ -15,15 +15,16 @@ class NewsRepository extends EntityRepository
     /**
      * Permet de lister toutes les pages éditable du site
      *
-     * @param array        $filters Tableau contenant les filtres
-     * @param array        $orders  Tableau contenant les tris
-     * @param integer|null $limit   Pagination
-     * @param integer|null $offset  Page de démarage
+     * @param array        $filters     Tableau contenant les filtres
+     * @param array        $orders      Tableau contenant les tris
+     * @param integer|null $limit       Pagination
+     * @param integer|null $offset      Page de démarage
+     * @param bool         $returnArray Renvoi un tableau ou un objet ?
      * @return array
      *
      * @author André Tapia <contact@andretapia.com>
      */
-    public function getList($filters = null, $orders = null, $limit = null, $offset = null)
+    public function getList($filters = null, $orders = null, $limit = null, $offset = null, $returnArray = true)
     {
         $query = $this->getQueryBase($filters);
 
@@ -42,7 +43,11 @@ class NewsRepository extends EntityRepository
             }
         }
 
-        $return = $query->getQuery()->getArrayResult();
+        if ($returnArray) {
+            $return = $query->getQuery()->getArrayResult();
+        } else {
+            $return = $query->getQuery()->getResult();
+        }
 
         return $return;
     }
