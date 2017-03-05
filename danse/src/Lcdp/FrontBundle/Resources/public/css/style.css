@@ -145,6 +145,12 @@ li {
     list-style-image: url("../img/picto_orange.png");
 }
 
+#contact .col-xs-8 {
+    padding-left: 0;
+}
+#contact .col-xs-4 {
+    padding: 0;
+}
 #contact p {
     color: #008AD2;
     font-weight: bold;
