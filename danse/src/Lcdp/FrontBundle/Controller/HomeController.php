@@ -103,25 +103,4 @@ class HomeController extends BaseController
             'events' => $events
         );
     }
-
-    /**
-     * Generate the article feed
-     *
-     * @return Response XML Feed
-     */
-    public function feedAction()
-    {
-        $news = $this->getRepository('News')->getList(
-            array('isPublished' => true),
-            array('publication' => 'DESC'),
-            null,
-            null,
-            false
-        );
-
-        $feed = $this->get('eko_feed.feed.manager')->get('news');
-        $feed->addFromArray($news);
-
-        return new Response($feed->render('rss'));
-    }
 }

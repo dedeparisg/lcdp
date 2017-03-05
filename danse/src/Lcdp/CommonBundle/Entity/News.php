@@ -375,7 +375,7 @@ class News implements RoutedItemInterface
      */
     public function getFeedItemDescription()
     {
-        return $this->content;
+        return $this->intro;
     }
 
     /**

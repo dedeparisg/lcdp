@@ -17,11 +17,12 @@ class EventRepository extends EntityRepository
      * @param array $filters Tableau contenant les filtres
      * @param array $orders  Tableau contenant les tris
      * @param array $limit   Tableau contenant les limites
+     * @param bool $returnArray Retourn un tableau ou un objet ?
      * @return array
      *
      * @author André Tapia <contact@andretapia.com>
      */
-    public function getList($filters = null, $orders = null, $limit = null)
+    public function getList($filters = null, $orders = null, $limit = null, $returnArray = true)
     {
         $query = $this->getQueryBase($filters);
 
@@ -39,7 +40,11 @@ class EventRepository extends EntityRepository
             }
         }
 
-        $return = $query->getQuery()->getArrayResult();
+        if ($returnArray) {
+            $return = $query->getQuery()->getArrayResult();
+        } else {
+            $return = $query->getQuery()->getResult();
+        }
 
         return $return;
     }

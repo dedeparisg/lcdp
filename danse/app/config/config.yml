@@ -97,9 +97,15 @@ eko_feed:
     feeds:
         news:
             title:       'Le Club Des Pâquerettes: Actualités'
-            description: 'Dernières actualités'
+            description: "Fil d'actualités"
             link:
                 route_name: 'homepage'
+            encoding:    'utf-8'
+        events:
+            title:       'Le Club Des Pâquerettes: Evénements'
+            description: "Fil des évenements"
+            link:
+                route_name: 'front_events'
             encoding:    'utf-8'
 
 parameters:

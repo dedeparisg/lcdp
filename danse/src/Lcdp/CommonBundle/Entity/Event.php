@@ -2,12 +2,13 @@
 namespace Lcdp\CommonBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Eko\FeedBundle\Item\Writer\RoutedItemInterface;
 
 /**
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\EventRepository")
  */
-class Event
+class Event implements RoutedItemInterface
 {
     /**
      * @var integer
@@ -367,5 +368,54 @@ class Event
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * this method returns entity item title
+     */
+    public function getFeedItemTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * this method returns entity item description (or content)
+     */
+    public function getFeedItemDescription()
+    {
+        return $this->intro;
+    }
+
+    /**
+     * this method returns entity item publication date
+     */
+    public function getFeedItemPubDate()
+    {
+        return $this->getPublicatedAt();
+    }
+
+    /**
+     * this method returns the name of the route
+     */
+    public function getFeedItemRouteName()
+    {
+        return 'front_event';
+    }
+
+    /**
+     * this method must return an array with the parameters that are required for the route
+     */
+    public function getFeedItemRouteParameters()
+    {
+        return array('slug' => $this->slug);
+    }
+
+    /**
+     * this method returns the anchor that will be appended to the router-generated url.
+     * Note: can be an empty string
+     */
+    public function getFeedItemUrlAnchor()
+    {
+        return '';
     }
 }
