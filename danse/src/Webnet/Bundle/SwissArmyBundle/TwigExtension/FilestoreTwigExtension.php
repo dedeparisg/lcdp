@@ -28,8 +28,8 @@ class FilestoreTwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'filePath' => new \Twig_Function_Method($this, 'getFilePath'),
-            'fileUrl' => new \Twig_Function_Method($this, 'getFileUrl')
+            'filePath' => new \Twig_SimpleFunction('filePath', array($this, 'getFilePath')),
+            'fileUrl' => new \Twig_SimpleFunction('fileUrl', array($this, 'getFileUrl'))
         );
     }
 
