@@ -21,7 +21,7 @@ class LcdpExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'formatLcdpDate' => new \Twig_Filter_Method($this, 'formatLcdpDate')
+            'formatLcdpDate' => new \Twig_SimpleFilter('formatLcdpDate', array($this, 'formatLcdpDate')),
         );
     }
 
@@ -35,8 +35,8 @@ class LcdpExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'formatLcdpDateFromTo' => new \Twig_Function_Method($this, 'formatLcdpDateFromTo', array('is_safe' => array('html'))),
-            'formatLcdpAlbumDate' => new \Twig_Function_Method($this, 'formatLcdpAlbumDate', array('is_safe' => array('html')))
+            'formatLcdpDateFromTo' => new \Twig_SimpleFunction('formatLcdpDateFromTo', array($this, 'formatLcdpDateFromTo', array('is_safe' => array('html')))),
+            'formatLcdpAlbumDate' => new \Twig_SimpleFunction('formatLcdpAlbumDate', array($this, 'formatLcdpAlbumDate', array('is_safe' => array('html'))))
         );
     }
 
