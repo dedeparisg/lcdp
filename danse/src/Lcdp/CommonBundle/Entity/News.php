@@ -2,6 +2,7 @@
 namespace Lcdp\CommonBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Eko\FeedBundle\Item\Writer\RoutedItemInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -9,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * @ORM\Table(name="news")
  * @ORM\Entity(repositoryClass="Lcdp\CommonBundle\Entity\Repository\NewsRepository")
  */
-class News
+class News implements RoutedItemInterface
 {
     /**
      * @var integer
@@ -344,7 +345,7 @@ class News
     }
 
     /**
-     * Set file 
+     * Set file
      * @param File|null $file
      */
     public function setFile(File $file = null)
@@ -353,11 +354,60 @@ class News
     }
 
     /**
-     * Get file 
+     * Get file
      * @return mixed
      */
     public function getFile()
     {
         return $this->file;
+    }
+
+    /**
+     * this method returns entity item title
+     */
+    public function getFeedItemTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * this method returns entity item description (or content)
+     */
+    public function getFeedItemDescription()
+    {
+        return $this->content;
+    }
+
+    /**
+     * this method returns entity item publication date
+     */
+    public function getFeedItemPubDate()
+    {
+        return $this->getPublicatedAt();
+    }
+
+    /**
+     * this method returns the name of the route
+     */
+    public function getFeedItemRouteName()
+    {
+        return 'front_news';
+    }
+
+    /**
+     * this method must return an array with the parameters that are required for the route
+     */
+    public function getFeedItemRouteParameters()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * this method returns the anchor that will be appended to the router-generated url.
+     * Note: can be an empty string
+     */
+    public function getFeedItemUrlAnchor()
+    {
+        return '';
     }
 }

@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
+            new Eko\FeedBundle\EkoFeedBundle(),
 
             // Application Bundles
             new Lcdp\AdminBundle\LcdpAdminBundle(),

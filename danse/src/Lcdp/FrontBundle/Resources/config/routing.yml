@@ -5,6 +5,10 @@ homepage:
     options:
         sitemap: true
 
+feed:
+    path:  /feed
+    defaults: { _controller: "LcdpFrontBundle:Home:feed" }
+
 menu_left:
     path:  /menu-left
     defaults: { _controller: "LcdpFrontBundle:Home:menuLeft" }

@@ -5,6 +5,7 @@ namespace Lcdp\FrontBundle\Controller;
 use \Lcdp\CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class HomeController
@@ -76,7 +77,7 @@ class HomeController extends BaseController
      */
     public function menuRightAction()
     {
-        $news = $this->getRepository('Event')->getList(
+        $events = $this->getRepository('Event')->getList(
             array(
                 'isPublished' => true,
                 'future' => true
@@ -99,7 +100,25 @@ class HomeController extends BaseController
         return array(
             'albums' => $albums,
             'volunteers' => $volunteers,
-            'news' => $news
+            'events' => $events
         );
+    }
+
+    /**
+     * Generate the article feed
+     *
+     * @return Response XML Feed
+     */
+    public function feedAction()
+    {
+        $news = $this->getRepository('News')->getList(
+            array('isPublished' => true),
+            array('publication' => 'DESC')
+        );
+
+        $feed = $this->get('eko_feed.feed.manager')->get('news');
+        $feed->addFromArray($news);
+
+        return new Response($feed->render('rss'));
     }
 }

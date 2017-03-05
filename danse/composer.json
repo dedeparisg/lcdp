@@ -25,7 +25,8 @@
         "egulias/email-validator": "~1.2",
         "stfalcon/tinymce-bundle": "~1.0.1",
         "friendsofsymfony/jsrouting-bundle": "^1.5",
-        "presta/sitemap-bundle": "dev-master"
+        "presta/sitemap-bundle": "~1.5",
+        "eko/feedbundle": "~1.2"
     },
     "scripts": {
         "post-install-cmd": [

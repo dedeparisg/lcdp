@@ -15,7 +15,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        #assets_version: SomeVersionScheme
+        assets_version: 1
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
@@ -92,6 +92,15 @@ stfalcon_tinymce:
              toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
              toolbar2: "print preview media | forecolor backcolor emoticons | stfalcon | example"
              image_advtab: true
+
+eko_feed:
+    feeds:
+        news:
+            title:       'Le Club Des Pâquerettes: Actualités'
+            description: 'Dernières actualités'
+            link:
+                route_name: 'homepage'
+            encoding:    'utf-8'
 
 parameters:
     lcdp.mailer.params:
