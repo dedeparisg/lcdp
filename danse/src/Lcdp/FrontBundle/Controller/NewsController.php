@@ -3,6 +3,7 @@
 namespace Lcdp\FrontBundle\Controller;
 
 use \Lcdp\CommonBundle\Controller\BaseController;
+use Lcdp\CommonBundle\Entity\News;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
@@ -23,10 +24,14 @@ class NewsController extends BaseController
      */
     public function viewAction($slug)
     {
+        /** @var News $news */
         $news = $this->getRepository('News')->findOneByslug($slug);
 
         return array(
-            'news' => $news
+            'news' => $news,
+            'breadcrumb' => $this->breadcrumb(
+                array($news->getTitle() => '')
+            )
         );
     }
 }

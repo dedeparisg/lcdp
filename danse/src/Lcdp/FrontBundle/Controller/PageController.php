@@ -3,6 +3,7 @@
 namespace Lcdp\FrontBundle\Controller;
 
 use \Lcdp\CommonBundle\Controller\BaseController;
+use Lcdp\CommonBundle\Entity\Page;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
@@ -23,10 +24,14 @@ class PageController extends BaseController
      */
     public function viewAction($slug)
     {
+        /** @var Page $page */
         $page = $this->getRepository('Page')->findOneByslug($slug);
 
         return array(
-            'page' => $page
+            'page' => $page,
+            'breadcrumb' => $this->breadcrumb(
+                array($page->getTitle() => '')
+            )
         );
     }
 }

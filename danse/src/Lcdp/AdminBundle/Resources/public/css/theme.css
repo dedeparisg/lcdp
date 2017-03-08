@@ -694,6 +694,15 @@ body.sidebar-collapsed ul.sidebar-nav li:hover ul.sub-nav, body.sidebar-collapse
     font-size: 14px;
     background-color: transparent;
 }
+.breadcrumb.bulle{
+    padding:5px 15px;
+    float: none;
+}
+.breadcrumb.bulle li{
+    margin:0;
+}.breadcrumb.bulle span{
+    color:#000;
+}
 .breadcrumb .glyphicons {
     font-size: 13px;
     top: 0;

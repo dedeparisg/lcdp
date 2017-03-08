@@ -1,6 +1,7 @@
 body{
     background-image: url('../img/body.png');
     background-repeat: repeat-x;
+    cursor: default;
 }
 #header, #main {
     margin: 20px auto 15px;
@@ -43,6 +44,7 @@ body{
 }
 
 .menu-top a {
+    min-width: 50px;
     float: left;
     height: 40px;
     line-height: 30px;
@@ -52,6 +54,21 @@ body{
     border-radius: 10px;
     font-weight: bold;
     font-size: 16px;
+}
+.menu-top .breadcrumb a {
+    min-width: 0px;
+    padding: 0px;
+    border-radius: 0px;
+    float: none;
+    height: auto;
+    line-height: auto;
+    margin: 0px;
+    font-weight: normal;
+    color: #fff;
+}
+.menu-top .breadcrumb li {
+    margin: 0;
+    color: #fff;
 }
 
 #menu h2 {
@@ -67,9 +84,6 @@ body{
     padding-bottom: 9px;
     padding-left: 13px;
     margin-bottom: 6px;
-}
-.menu-top a {
-    min-width: 50px;
 }
 .menu-top .gris,
 .btn-gray{

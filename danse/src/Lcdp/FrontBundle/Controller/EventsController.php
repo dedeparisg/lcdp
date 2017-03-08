@@ -3,6 +3,7 @@
 namespace Lcdp\FrontBundle\Controller;
 
 use \Lcdp\CommonBundle\Controller\BaseController;
+use Lcdp\CommonBundle\Entity\Event;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -41,6 +42,9 @@ class EventsController extends BaseController
             'currentPage' => $currentPage,
             'nbPages' => ceil($nbNews / $nbElementsPerPage),
             'url' => $this->generateUrl('front_events') . '?page=',
+            'breadcrumb' => $this->breadcrumb(
+                array('Tous les événements' => '')
+            )
         );
     }
 
@@ -55,6 +59,7 @@ class EventsController extends BaseController
      */
     public function viewAction($slug)
     {
+        /** @var Event $event */
         $event = $this->getRepository('Event')->findOneByslug($slug);
 
         if (empty($event)) {
@@ -62,7 +67,14 @@ class EventsController extends BaseController
         }
 
         return array(
-            'event' => $event
+            'event' => $event,
+
+            'breadcrumb' => $this->breadcrumb(
+                array(
+                    'Tous les événements' => $this->generateUrl('front_events'),
+                    $event->getTitle() => ''
+                )
+            )
         );
     }
 }

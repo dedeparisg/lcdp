@@ -3,6 +3,8 @@
 namespace Lcdp\FrontBundle\Controller;
 
 use \Lcdp\CommonBundle\Controller\BaseController;
+use Lcdp\CommonBundle\Entity\Album;
+use Lcdp\CommonBundle\Entity\AlbumGroup;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -28,6 +30,9 @@ class AlbumController extends BaseController
 
         return array(
             'albums' => $albums,
+            'breadcrumb' => $this->breadcrumb(
+                array('Tous les albums' => '')
+            )
         );
     }
 
@@ -51,7 +56,13 @@ class AlbumController extends BaseController
 
         return array(
             'albums' => $albums,
-            'year' => $year
+            'year' => $year,
+            'breadcrumb' => $this->breadcrumb(
+                array(
+                    'Tous les albums' => $this->generateUrl('front_albums_years'),
+                    $year => ''
+                )
+            )
         );
     }
 
@@ -91,7 +102,14 @@ class AlbumController extends BaseController
         return array(
             'album' => $album,
             'albumGroups' => $albumGroups,
-            'year' => $year
+            'year' => $year,
+            'breadcrumb' => $this->breadcrumb(
+                array(
+                    'Tous les albums' => $this->generateUrl('front_albums_years'),
+                    $year => $this->generateUrl('front_albums', array('year' => $year)),
+                    $album->getTitle() => ''
+                )
+            )
         );
     }
 
@@ -108,6 +126,7 @@ class AlbumController extends BaseController
      */
     public function viewAction($year, $albumSlug, $groupId)
     {
+        /** @var AlbumGroup $albumGroup */
         $albumGroup = $this->getRepository('AlbumGroup')->find($groupId);
 
         if (empty($albumGroup)) {
@@ -122,7 +141,15 @@ class AlbumController extends BaseController
 
         return array(
             'albumGroup' => $albumGroup,
-            'pictures' => $this->getRepository('AlbumPicture')->getAllByAlbum($albumGroup->getId())
+            'pictures' => $this->getRepository('AlbumPicture')->getAllByAlbum($albumGroup->getId()),
+            'breadcrumb' => $this->breadcrumb(
+                array(
+                    'Tous les albums' => $this->generateUrl('front_albums_years'),
+                    $year => $this->generateUrl('front_albums', array('year' => $year)),
+                    $album->getTitle() => $this->generateUrl('front_albums_groups', array('year' => $year, 'album' => $album->getSlug())),
+                    $albumGroup->getTitle() => ''
+                )
+            )
         );
     }
 }

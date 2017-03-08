@@ -1,0 +1,16 @@
+{% if breadcrumb|default() %}
+    <div class="row">
+        <ol class="breadcrumb bulle">
+            {% for title, url in breadcrumb %}
+                {% if loop.last %}
+                    <li class="breadcrumb-item active">{{ title }}</li>
+                {% else %}
+                    {% if loop.first %}
+                        <span class="glyphicon glyphicon-home"></span>
+                    {% endif %}
+                    <li class="breadcrumb-item"><a href="{{ url }}">{{ title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </div>
+{% endif %}

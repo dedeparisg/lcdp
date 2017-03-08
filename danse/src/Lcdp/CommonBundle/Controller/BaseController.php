@@ -23,8 +23,8 @@ class BaseController extends Controller
     /**
      * Permet de persister une entité et éxecute le flush si flush est à true
      *
-     * @param object  $entity L'entité à persisté
-     * @param boolean $flush  Doit-on sauvegarger l'entité courante ou pas ?
+     * @param object $entity L'entité à persisté
+     * @param boolean $flush Doit-on sauvegarger l'entité courante ou pas ?
      *
      * @author André Tapia <contact@andretapia.com>
      */
@@ -41,8 +41,8 @@ class BaseController extends Controller
     /**
      * Permet de supprimer une entité et éxecute le flush si flush est à true
      *
-     * @param object  $entity L'entité à supprimer
-     * @param boolean $flush  Doit-on sauvegarger la suppression ou pas ?
+     * @param object $entity L'entité à supprimer
+     * @param boolean $flush Doit-on sauvegarger la suppression ou pas ?
      *
      * @author André Tapia <contact@andretapia.com>
      */
@@ -93,7 +93,7 @@ class BaseController extends Controller
     /**
      * Raccourci afin d'ajouter un message flash
      *
-     * @param string $type    Type du message flash
+     * @param string $type Type du message flash
      * @param string $message Message à afficher
      *
      * @author André Tapia <atapia@webnet.fr>
@@ -117,6 +117,21 @@ class BaseController extends Controller
     public function getParameter($param)
     {
         return $this->container->getParameter($param);
+    }
+
+    /**
+     * Renvoi le fil d'ariane pour une page
+     *
+     * @param array $items Tableau contenant les éléments du fil d'ariane
+     * @return array
+     */
+    public function breadcrumb(array $items)
+    {
+        $default = array(
+            'Accueil' => $this->generateUrl('homepage')
+        );
+
+        return $default + $items;
     }
 }
 
