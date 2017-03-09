@@ -13,13 +13,15 @@
 <div id="gallerie" class="bulle orange">
     <a href="{{ path('front_albums_years') }}"><h2 class="text-center">LCDP en images</h2></a>
 
-    {#<div class="home-gallery">#}
-        {#<ul id="lightSlider">#}
-            {#<li>#}
-                {#<img src="http://sachinchoolur.github.io/lightslider/img/cS-13.jpg" />#}
-            {#</li>#}
-        {#</ul>#}
-    {#</div>#}
+    <div class="home-gallery">
+        <ul id="lightSlider">
+            {% for i in 1..15 %}
+                <li>
+                    <a href="{{ path('front_albums_years') }}"><img src="{{ asset('/store/content/img_home/' ~ i ~ '.png') }}" /></a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 
 <div id="benevol" class="bulle violet">
