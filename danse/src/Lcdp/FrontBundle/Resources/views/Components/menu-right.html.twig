@@ -1,4 +1,4 @@
-<div id="agenda" class="bulle rose">
+<div id="agenda" class="bulle rose hidden-sm">
     <h2 class="text-center">A vos agendas !</h2>
     <ul>
         {% for item in events %}
@@ -10,10 +10,10 @@
     <a href="{{ path('front_events') }}" class="btn btn-blue btn-xs">Voir tous les événements</a>
 </div>
 
-<div id="gallerie" class="bulle orange">
+<div id="gallerie" class="bulle orange col-sm-6 col-md-12">
     <a href="{{ path('front_albums_years') }}"><h2 class="text-center">LCDP en images</h2></a>
 
-    <div class="home-gallery">
+    <div class="home-gallery text-center">
         <ul id="lightSlider">
             {% for i in 1..15 %}
                 <li>
@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<div id="benevol" class="bulle violet">
+<div id="benevol" class="bulle violet col-sm-6 col-md-12">
     <h2 class="text-center">Tous BÉNÉVOLES !</h2>
     <div class="row">
         <img class="col-xs-6" src="{{ asset('bundles/lcdpfront/img/Picto_DISCUTION_VIOLET_xs.png') }}"/>

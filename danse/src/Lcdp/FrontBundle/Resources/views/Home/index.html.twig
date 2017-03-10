@@ -3,24 +3,37 @@
 {% block content %}
     <h2>Actualités</h2>
     {% for child in news %}
-        <div class="row margin-bottom-lg news">
-            <div class="col-xs-4">
+        <article class="row margin-bottom-lg news">
+            <div class="col-sm-4 hidden-xs no-padding-right">
                 {% if child.image is not empty %}
-                    <img src="{{ fileUrl(child.image, 'NEWS', 'med') }}" width="220" />
+                    <img src="{{ fileUrl(child.image, 'NEWS', 'med') }}" class="col-xs-12 no-padding"/>
                 {% else %}
-                    <img src="http://fakeimg.pl/230x180/" width="230" />
+                    <img src="http://fakeimg.pl/230x180/" class="col-xs-12 no-padding"/>
                 {% endif %}
             </div>
-            <div class="col-xs-8">
+            <div class="col-sm-8">
                 <h3 class="col-xs-12">{{ child.title }}</h3>
+                <a class="btn-xs btn-gray btn margin-bottom margin-left">
+                    Ajouté le :
+                    <time datetime="{{ child.createdAt|formatTimeDate }}" pubdate="pubdate">
+                        {{ child.createdAt|formatLcdpDate }}
+                    </time>
+                </a>
+                <div class="hidden-lg hidden-md hidden-sm text-center margin-bottom">
+                    {% if child.image is not empty %}
+                        <img src="{{ fileUrl(child.image, 'NEWS', 'med') }}" width="220"/>
+                    {% else %}
+                        <img src="http://fakeimg.pl/230x180/" width="230"/>
+                    {% endif %}
+                </div>
                 <div class="col-xs-12">{{ child.intro|raw }}</div>
-                <a class="btn-xs btn-gray btn pull-left margin-top margin-left">Ajouté le : {{ child.createdAt|formatLcdpDate }}</a>
-                <a class="btn-xs btn-gray btn pull-right margin-top" href="{{ path('front_news', {'slug': child.slug}) }}">> En savoir plus...</a>
+                <a class="btn-xs btn-gray btn pull-right margin-top"
+                   href="{{ path('front_news', {'slug': child.slug}) }}">> En savoir plus...</a>
             </div>
             <div class="col-xs-12">
                 <span class="separator"></span>
             </div>
-        </div>
+        </article>
     {% endfor %}
 
     {{ include('LcdpFrontBundle:Components:paginate.html.twig') }}

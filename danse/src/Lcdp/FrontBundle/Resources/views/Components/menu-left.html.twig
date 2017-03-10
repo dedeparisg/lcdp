@@ -1,13 +1,29 @@
 <div class="row">
     <div class="menu-top col-xs-12">
-        <a href="/" class="rose">
+        <li class="dropdown hidden-md hidden-lg hidden-print">
+            <a href="#" class="rose dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-align-justify"></span>
+                <img src="{{ asset('bundles/lcdpfront/img/Picto_DANSE_BLANC_xs.png') }}"/>
+                LCDP DANSE
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="/">Actualités</a></li>
+                <li><a href="{{ path('front_events') }}">A vos agenda !</a></li>
+                <li><a class="hidden-sm" href="{{ path('front_albums_years') }}">LCDP en images</a></li>
+                {% for page in pages %}
+                    <li><a href="{{ path('front_page', {'slug': page.slug}) }}">{{ page.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+
+        <a href="/" class="rose hidden-xs hidden-sm">
             <img src="{{ asset('bundles/lcdpfront/img/Picto_DANSE_BLANC_xs.png') }}"/>
             LCDP DANSE
         </a>
     </div>
 </div>
 
-<div id="menu" class="bulle rose">
+<div id="menu" class="bulle rose hidden-xs hidden-sm">
     <div><a href="/">Actualités</a></div>
     {% for page in pages %}
         <div>
@@ -16,9 +32,10 @@
     {% endfor %}
 </div>
 
-<div id="pub" class="bulle rouge">
+<div id="pub" class="bulle rouge hidden-xs hidden-sm">
     <h2 class="text-center">PUBLICITE</h2>
     <a href="mailto:site.lcdp@gmail.com?subject=Espace publicitaire" class="text-center description">
-        <img src="{{ asset('bundles/lcdpfront/img/pub.png') }}"/>
+        <img src="{{ asset('bundles/lcdpfront/img/pub.png') }}" class="col-xs-12"/>
     </a>
+    <div class="row"></div>
 </div>

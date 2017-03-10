@@ -4,9 +4,9 @@
     <h2>Tous les albums</h2>
     <div class="row margin-bottom-lg news">
         {% for year, count in albums %}
-            <div class="col-xs-4 text-center">
+            <div class="col-xs-6 col-sm-4 text-center">
                 <a class="album-years col-xs-12" href="{{ path('front_albums', {'year': year}) }}">
-                    <div class="first">{{ year }}</div>
+                    <div class="first"><time datetime="{{ year }}">{{ year }}</time></div>
                     <div class="second">{{ count }}&nbsp;album{% if count > 1 %}s{% endif %}</div>
                 </a>
             </div>

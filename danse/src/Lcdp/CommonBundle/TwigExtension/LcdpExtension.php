@@ -22,6 +22,7 @@ class LcdpExtension extends \Twig_Extension
     {
         return array(
             'formatLcdpDate' => new \Twig_SimpleFilter('formatLcdpDate', array($this, 'formatLcdpDate')),
+            'formatTimeDate' => new \Twig_SimpleFilter('formatTimeDate', array($this, 'formatTimeDate')),
         );
     }
 
@@ -60,6 +61,20 @@ class LcdpExtension extends \Twig_Extension
         $return =  $days[$nom_jour] . ' ' . $jour . ' ' . $months[$mois] . ' ' . $annee;
 
         return $return;
+    }
+
+    /**
+     * Formatte correctement une date
+     * Affichera par exemple : "samedi 24 juin 2016"
+     *
+     * @param \DateTime $date La date à formater
+     * @return string
+     *
+     * @author André Tapia <atapia@webnet.fr>
+     */
+    public static function formatTimeDate(\DateTime $date)
+    {
+        return $date->format('Y-m-d\TH:i:s\+01:00');
     }
 
     /**

@@ -1,12 +1,51 @@
 body{
-    background-image: url('../img/body.png');
-    background-repeat: repeat-x;
+    background: url('../img/body.png') 0 0 repeat-x;
     cursor: default;
 }
+
+@media(max-width:1199px) {
+    .logo-home {
+        margin-top: 45px;
+    }
+}
+@media(max-width:767px) {
+    body {
+        background: url('../img/body.png') 0 -110px repeat-x;
+        cursor: default;
+    }
+}
+@media(max-width:991px) {
+    .col-xs-no-margin {
+        margin: 0;
+    }
+    .menu-top li {
+        list-style-type: none;
+    }
+    .menu-top li .dropdown-menu li {
+        min-height: 30px;
+        display: block;
+    }
+    .menu-top li .dropdown-menu li a{
+        width: 100%;
+        border-bottom: 1px dotted black;
+        border-radius: 0px;
+        margin: 10px 0 5px 0;
+    }
+    .menu-top li .glyphicon {
+        border: 1px solid #fff;
+        padding: 3px 5px 5px 5px;
+        border-radius: 5px;
+    }
+}
+.no-padding {
+    padding: 0px;
+}
+.no-padding-right {
+    padding-right: 0px;
+}
 #header, #main {
-    margin: 20px auto 15px;
+    margin: 20px auto 30px;
     max-width: 1400px;
-    min-height: 250px;
     position: relative;
 }
 .bulle {
@@ -91,15 +130,6 @@ body{
     background-color: #A3ACB3;
 }
 
-#header .intro {
-    background-image: url('../img/intro.jpg');
-    display: block;
-    height: 43px;
-    margin-bottom: 30px;
-    margin-left: 100px;
-    margin-top: 20px;
-    width: 800px;
-}
 #header a {
     height: 150px;
     display: block;
@@ -219,4 +249,7 @@ li {
     color: white;
     background: black;
     text-decoration: none;
+}
+#menu-bottom #social {
+    text-align: center;
 }
