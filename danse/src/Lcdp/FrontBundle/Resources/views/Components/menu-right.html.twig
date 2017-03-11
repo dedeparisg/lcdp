@@ -27,13 +27,16 @@
 <div id="benevol" class="bulle violet col-sm-6 col-md-12">
     <h2 class="text-center">Tous BÉNÉVOLES !</h2>
     <div class="row">
-        <img class="col-xs-6" src="{{ asset('bundles/lcdpfront/img/Picto_DISCUTION_VIOLET_xs.png') }}"/>
-        <ul class="col-xs-6">
+        <img class="col-xs-5" src="{{ asset('bundles/lcdpfront/img/Picto_DISCUTION_VIOLET_xs.png') }}"/>
+        <ul class="col-xs-7">
             {% for item in volunteers %}
                 <li>
                     <a href="{{ path('front_volunteer', {"slug": item.slug}) }}">{{ item.title }}</a>
                 </li>
             {% endfor %}
+            <li>
+                <a href="{{ path('front_news', {"slug": 'participer-a-la-vie-du-site'}) }}">Participez à la vie du site</a>
+            </li>
         </ul>
     </div>
 </div>
