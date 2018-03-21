@@ -7,7 +7,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Profile
- *
  * @ORM\Table(name="profile")
  * @ORM\Entity()
  *
@@ -20,8 +19,8 @@ class Profile
 
     /**
      * Id
-     * @var integer $id
      *
+     * @var integer $id
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -30,8 +29,8 @@ class Profile
 
     /**
      * Titre
-     * @var string $title
      *
+     * @var string $title
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Merci de renseigner ce champ.")
      */
@@ -39,16 +38,16 @@ class Profile
 
     /**
      * Permissions et droits associés des utilisateurs liés à ce profil
-     * @var ArrayCollection $permissions
      *
+     * @var ProfilePermission $permissions
      * @ORM\OneToMany(targetEntity="Lcdp\CommonBundle\Entity\ProfilePermission", mappedBy="profile", cascade={"all"})
      */
     private $permissions;
 
     /**
      * Utilisateurs utilisant ce profil de droit
-     * @var ArrayCollection $users
      *
+     * @var User $users
      * @ORM\ManyToMany(targetEntity="Lcdp\CommonBundle\Entity\User", mappedBy="profiles")
      */
     private $users;
@@ -68,14 +67,15 @@ class Profile
      */
     public function __construct()
     {
-        $this->permissions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->permissions = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     /**
      * Set permissions
      *
      * @param \Doctrine\Common\Collections\ArrayCollection $permissions
+     *
      * @return Profile
      */
     public function setPermissions($permissions)
@@ -93,9 +93,10 @@ class Profile
      * Add permissions
      *
      * @param \Lcdp\CommonBundle\Entity\ProfilePermission $permissions
+     *
      * @return Profile
      */
-    public function addPermission(\Lcdp\CommonBundle\Entity\ProfilePermission $permissions)
+    public function addPermission(ProfilePermission $permissions)
     {
         $this->permissions[] = $permissions;
 
@@ -107,7 +108,7 @@ class Profile
      *
      * @param \Lcdp\CommonBundle\Entity\ProfilePermission $permissions
      */
-    public function removePermission(\Lcdp\CommonBundle\Entity\ProfilePermission $permissions)
+    public function removePermission(ProfilePermission $permissions)
     {
         $this->permissions->removeElement($permissions);
     }
@@ -115,7 +116,7 @@ class Profile
     /**
      * Get permissions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection|ProfilePermission
      */
     public function getPermissions()
     {
@@ -126,9 +127,10 @@ class Profile
      * Add users
      *
      * @param \Lcdp\CommonBundle\Entity\User $users
+     *
      * @return Profile
      */
-    public function addUser(\Lcdp\CommonBundle\Entity\User $users)
+    public function addUser(User $users)
     {
         $this->users[] = $users;
 
@@ -140,7 +142,7 @@ class Profile
      *
      * @param \Lcdp\CommonBundle\Entity\User $users
      */
-    public function removeUser(\Lcdp\CommonBundle\Entity\User $users)
+    public function removeUser(User $users)
     {
         $this->users->removeElement($users);
     }
@@ -148,7 +150,7 @@ class Profile
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection|User
      */
     public function getUsers()
     {
@@ -159,7 +161,8 @@ class Profile
      * Set title
      *
      * @param string $title
-     * @return Ref
+     *
+     * @return Profile
      */
     public function setTitle($title)
     {
@@ -182,7 +185,6 @@ class Profile
      * Permet de lister tous les profils possible
      *
      * @return array
-     *
      * @author André Tapia <atapia@webnet.fr>
      */
     public function getAllProfiles()

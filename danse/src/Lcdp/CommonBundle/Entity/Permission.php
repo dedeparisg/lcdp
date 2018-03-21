@@ -99,7 +99,7 @@ class Permission
      * Set title
      *
      * @param string $title
-     * @return Ref
+     * @return Permission
      */
     public function setTitle($title)
     {
