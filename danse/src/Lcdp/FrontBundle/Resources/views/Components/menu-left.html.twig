@@ -1,7 +1,8 @@
 <div class="row">
     <div class="menu-top col-xs-12">
         <li class="dropdown hidden-md hidden-lg hidden-print">
-            <a href="#" class="rose dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="rose dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">
                 <span class="glyphicon glyphicon-align-justify"></span>
                 <img src="{{ asset('bundles/lcdpfront/img/Picto_DANSE_BLANC_xs.png') }}"/>
                 LCDP DANSE
@@ -30,6 +31,28 @@
             <a href="{{ path('front_page', {'slug': page.slug}) }}">{{ page.title }}</a>
         </div>
     {% endfor %}
+</div>
+
+<div id="social" class="bulle rouge hidden-xs hidden-sm">
+    <h2 class="text-center">Réseaux sociaux</h2>
+    <p>Retrouvez-nous sur les différents réseaux et n'hésitez pas à vous abonner pour ne rien manquer de la vie du club !</p>
+
+    <a target="_blank" href="https://www.twitter.com/lcdp_danse/">
+        <img src="{{ asset('bundles/lcdpfront/img/social/twitter.png') }}"
+             alt="lien twitter du compte LCDP" title="Suivez nous sur Twitter"/>
+    </a>
+    <a href="mailto:site.lcdp@gmail.com?subject=Espace publicitaire" class="text-center description">
+        <img src="{{ asset('bundles/lcdpfront/img/social/insta.png') }}"
+             alt="lien instagram du compte LCDP" title="Retrouvez nous sur Instagram"/>
+    </a>
+    <a target="_blank" href="https://www.youtube.com/channel/UCN25otU7SQ9_1Rklz12JwtQ">
+        <img src="{{ asset('bundles/lcdpfront/img/social/youtube.png') }}"
+             alt="lien YouTube de la chaine LCDP" title="Retrouvez l'ensemble de nos vidéos sur YouTube"/>
+    </a>
+    <a target="_blank" href="https://www.facebook.com/groups/199194096762978/">
+        <img src="{{ asset('bundles/lcdpfront/img/social/fb.png') }}"
+             alt="lien facebook de la page LCDP" title="Retrouvez nous sur Facebook"/>
+    </a>
 </div>
 
 <div id="pub" class="bulle rouge hidden-xs hidden-sm">
